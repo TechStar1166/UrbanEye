@@ -1,0 +1,7 @@
+{
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28/query?where=GEOID%3D%272472450%27&outFields=%2A&outSR=4326&returnGeometry=true&f=geojson",
+  "retrieved_at": "2026-09-18T23:29:36.065805+00:00",
+  "dataset": "U.S. Census Bureau TIGERweb Census 2020",
+  "boundary_vintage": "2020-01-01",
+  "data_date": "2020-04-01"
+}

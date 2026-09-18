@@ -1,0 +1,10 @@
+.git
+.venv
+**/node_modules
+frontend/dist
+**/__pycache__
+.env
+.env.*
+graphify-out
+frontend/test-results
+frontend/playwright-report

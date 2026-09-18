@@ -1,0 +1,26 @@
+:root { font-family: system-ui, sans-serif; color: #172c38; background: #f5f7fa; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header { padding: 18px 28px; background: #163e4c; color: white; }
+h1, header p { margin: 0 0 6px; }
+.notice { padding: 12px 28px; background: #fff1cb; margin: 0; }
+main { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(340px, 1fr); gap: 20px; padding: 20px; }
+.controls { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+label { display: block; font-weight: 600; }
+select, textarea, button { font: inherit; padding: 9px; border: 1px solid #8dabb8; border-radius: 5px; }
+select { display: block; max-width: 100%; }
+.map { height: 560px; width: 100%; border-radius: 8px; background: #e0e9e9; }
+aside { background: white; border-radius: 8px; padding: 20px; min-width: 0; }
+h2 { margin-top: 0; }
+dl { display: flex; gap: 30px; }
+dd { margin: 4px 0; font-size: 1.3rem; font-weight: bold; }
+.evidence { padding: 0; list-style: none; }
+.evidence li { border-left: 3px solid #087e8b; padding: 10px 12px; margin: 10px 0; background: #f5f7fa; overflow-wrap: anywhere; }
+.evidence p, .legend { font-size: .85rem; }
+a { color: #00626e; }
+textarea { width: 100%; min-height: 80px; margin: 8px 0; }
+button { background: #087e8b; color: white; cursor: pointer; }
+button:disabled { opacity: .55; cursor: wait; }
+.answer { white-space: pre-wrap; }
+li { margin-bottom: 6px; }
+@media (max-width: 850px) { main { grid-template-columns: 1fr; padding: 12px; } .map { height: 380px; } }
