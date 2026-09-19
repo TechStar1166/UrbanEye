@@ -47,7 +47,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     const isFiner = feature?.properties?.geography_type === 'block_group';
     return {
       className: `census-area area-${feature?.properties?.geo_id}`,
-      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#c2410c' : (strokes[metric] ?? '#087e8b'),
+      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#0f172a' : (strokes[metric] ?? '#087e8b'),
       weight: isSelected ? 3 : isHighlighted ? 4 : (isFiner ? 1.2 : 1),
       fillOpacity: hasData ? opacity * (isFiner ? 0.65 : 0) : 0.05,
       fillColor: isFiner ? areaColor(value, metric, scale) : '#d9dfdc',

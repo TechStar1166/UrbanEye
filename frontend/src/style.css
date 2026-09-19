@@ -443,7 +443,7 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 
 .map-actions { display: flex; align-items: center; gap: 8px; }
 .data-coverage ul { font-size: 12px; line-height: 1.5; padding-left: 18px; margin: 6px 0 10px; }
-.legend-swatch.highlight { background: #c2410c22; border: 2px solid #c2410c; }
+.legend-swatch.highlight { background: #0f172a22; border: 2px solid #0f172a; }
 .segmentation { margin-top: 18px; padding-top: 14px; border-top: 1px solid #c9d6cd; }
 .segmentation h3 { margin: 0 0 8px; }
 .segmentation select { width: 100%; }
