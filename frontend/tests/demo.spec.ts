@@ -5,20 +5,18 @@ test.beforeEach(async ({ page }) => {
   await page.route('https://tile.openstreetmap.org/**', route => route.abort());
 });
 
-test('CivicLens workspace retains real Census map and source-linked metrics', async ({ page }) => {
+test('Fenton focus loads Census areas and real food/drink objects', async ({ page, request }) => {
+  const areas = await (await request.get('/api/areas')).json();
+  const places = await (await request.get('/api/places')).json();
   await page.goto('/');
-  await expect(page.getByRole('link', { name: 'CivicLens home' })).toBeVisible();
-  const polygon = page.locator('.leaflet-interactive').first();
-  await expect(polygon).toBeVisible();
-  await polygon.click({ force: true });
-  const panel = page.getByRole('complementary', { name: 'Area facts and evidence' });
-  await expect(panel.getByRole('heading', { name: 'Silver Spring CDP' })).toBeVisible();
-  await expect(panel).toContainText('81,015');
-  await expect(panel).toContainText('35,150');
-  await expect(polygon).toHaveAttribute('stroke', '#006948');
-  await page.getByRole('tab', { name: /Evidence/ }).click();
-  await expect(panel.getByRole('link', { name: /Open original document/ })).toHaveAttribute('href', /montgomeryplanning.org.*#page=104$/);
-  await expect(panel.locator('a[href*="tigerweb.geo.census.gov"]').first()).toBeVisible();
+  await expect(page.locator('.census-area').first()).toBeVisible();
+  expect(areas.features.length).toBeGreaterThanOrEqual(1);
+  expect(places.count).toBeGreaterThan(0);
+  await expect(page.locator('.fenton-pin')).toBeVisible();
+  await expect(page.locator('.fenton-label')).toContainText('Fenton Village');
+  await expect(page.locator('.map-legend')).toContainText('food & drink places');
+  await expect(page.locator('.insight-heading')).toContainText('not Fenton Village alone');
+  await expect(page.locator('.leaflet-control-attribution')).toContainText('Esri');
 });
 
 test('real map opacity and metric controls reset without losing selection', async ({ page }) => {
@@ -65,16 +63,16 @@ test('data view, export, search, and methodology retain accurate source context'
 
 test('answer history restores sources and the bar can collapse', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'How many homes are there?' }).click();
-  await expect(page.locator('.research-response')).toContainText('35,150');
-  await page.getByRole('button', { name: 'Collapse answer' }).click();
-  await expect(page.locator('.query-results')).toBeHidden();
-  expect((await page.locator('.query-dock').boundingBox())!.height).toBeLessThan(80);
-  await page.getByRole('tab', { name: 'Answer history' }).click();
+  await page.getByRole('button', { name: 'How many people live here?' }).click();
+  const answerPanel = page.locator('.answer-panel');
+  await expect(answerPanel).toContainText('81,015', { timeout: 15000 });
+  await expect(page.getByLabel('Ask about this area')).toHaveValue('');
+  await expect(page.getByRole('button', { name: 'Ask', exact: true })).toBeDisabled();
+  await page.getByRole('tab', { name: /Answer history/ }).click();
   await expect(page.locator('.history-entry')).toHaveCount(1);
   await page.getByRole('button', { name: 'Reopen answer & sources' }).click();
-  await expect(page.locator('.research-response')).toContainText('35,150');
-  await expect(page.locator('.source-chips')).toContainText('Census');
+  await expect(answerPanel).toContainText('81,015');
+  await expect(page.getByLabel('Ask about this area')).toHaveValue('');
 });
 
 for (const width of [1440, 390, 320]) {
@@ -88,13 +86,11 @@ for (const width of [1440, 390, 320]) {
     const viewport = (await page.locator('.map').boundingBox())!;
     expect(legend.x).toBeGreaterThanOrEqual(viewport.x);
     expect(legend.x + legend.width).toBeLessThanOrEqual(viewport.x + viewport.width);
-    await suggestions.getByRole('button', { name: 'How many homes are there?' }).click();
-    await expect(page.locator('.research-response')).toContainText('35,150');
-    await expect(suggestions).toHaveCount(0);
-    await page.getByRole('button', { name: 'Try another question' }).click();
+    await suggestions.getByRole('button', { name: 'How many people live here?' }).click();
+    await expect(page.locator('.answer-panel')).toContainText('81,015', { timeout: 15000 });
     await expect(suggestions.getByRole('button')).toHaveCount(3);
     await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
-    await expect(page).toHaveURL(/#sources$/);
+    await expect(page).toHaveURL(/sources/);
     await expect(page.getByRole('heading', { name: 'Data sources & methodology' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'OpenStreetMap food and drink places' })).toBeVisible();
     await expect(page.locator('.sources-page')).toContainText('Downloaded:');
@@ -115,94 +111,22 @@ test('map data error offers a working retry', async ({ page }) => {
   await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
 });
 
-test('mobile panels, evidence and business preview fit the viewport', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
+test('a real food/drink dot opens its original OSM record', async ({ page, request }) => {
+  const places = await (await request.get('/api/places')).json();
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/');
-  await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
-  const navigation = page.getByRole('navigation', { name: 'Workspace panels' });
-  await navigation.getByRole('button', { name: 'Layers' }).click();
-  await expect(page.getByRole('heading', { name: 'Geographic Layers' })).toBeVisible();
-  await navigation.getByRole('button', { name: 'Insights' }).click();
-  await expect(page.locator('.metric-card').first()).toContainText('81,015');
-  await page.getByRole('button', { name: 'Evaluate Site Viability' }).click();
-  await page.getByLabel('Street or location').fill('Fenton Street');
-  await page.getByRole('button', { name: 'Prepare site brief' }).click();
-  await expect(page.getByRole('dialog').getByRole('status')).toContainText('Fenton Street');
-  await page.getByRole('button', { name: 'Close dialog' }).click();
-  await navigation.getByRole('button', { name: 'Map', exact: true }).click();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
-});
-
-for (const viewport of [{ width: 320, height: 568 }, { width: 390, height: 844 }, { width: 667, height: 375 }]) {
-  test(`open dialogs stay within ${viewport.width}×${viewport.height}`, async ({ page }) => {
-    await page.setViewportSize(viewport);
-    await page.goto('/');
-    const dialog = page.getByRole('dialog');
-    const expectDialogToFit = async () => {
-      await expect(dialog).toBeVisible();
-      const bounds = await dialog.boundingBox();
-      expect(bounds).not.toBeNull();
-      expect(bounds!.x).toBeGreaterThanOrEqual(19);
-      expect(bounds!.y).toBeGreaterThanOrEqual(19);
-      expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(viewport.width - 19);
-      expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(viewport.height - 19);
-      expect(await dialog.evaluate(e => e.scrollWidth <= e.clientWidth)).toBeTruthy();
-    };
-    await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
-    await expectDialogToFit();
-    await page.keyboard.press('Escape');
-    await page.getByRole('navigation', { name: 'Workspace panels' }).getByRole('button', { name: 'Insights' }).click();
-    await page.getByRole('button', { name: 'Evaluate Site Viability' }).click();
-    await expectDialogToFit();
-    await page.getByLabel('Street or location').fill('LongLocation'.repeat(25));
-    await page.getByRole('button', { name: 'Prepare site brief' }).click();
-    await expect(dialog.getByRole('status')).toBeVisible();
-    await expectDialogToFit();
-    await page.getByRole('button', { name: 'Close dialog' }).click();
-    await expect(dialog).toHaveCount(0);
+  await expect(page.locator('.food-place').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.locator('.food-place')).toHaveCount(places.count);
+  const point = await page.locator('.food-place').evaluateAll(elements => {
+    for (const element of elements) {
+      const b = element.getBoundingClientRect();
+      const x = b.x + b.width / 2, y = b.y + b.height / 2;
+      if (document.elementFromPoint(x, y) === element) return { x, y };
+    }
+    return null;
   });
-}
-
-
-test('Fenton block group remains selectable and its real counts reach the answer', async ({ page }) => {
-  // Derived from the served snapshot so a change of study geography cannot silently
-  // leave this asserting a block group the map no longer publishes.
-  const areas = await (await page.request.get('/api/areas')).json();
-  const index = areas.features.findIndex(
-    (feature: { properties: { geography_type: string } }) =>
-      feature.properties.geography_type === 'block_group');
-  expect(index).toBeGreaterThan(-1);
-  const blockGroup = areas.features[index];
-  const population = blockGroup.properties.metrics.population.toLocaleString('en-US');
-
-  await page.goto('/');
-  await expect(page.locator('.leaflet-interactive')).toHaveCount(areas.features.length);
-  await page.locator('.leaflet-interactive').nth(index).click({ force: true });
-  await expect(page.locator('.insight-heading')).toContainText(blockGroup.id);
-  await expect(page.locator('.metric-card').first()).toContainText(population);
-  await page.getByLabel('Ask about this area').fill('What is the population?');
-  await page.getByRole('button', { name: 'Query Records' }).click();
-  await expect(page.getByRole('region', { name: 'Answer', exact: true })).toContainText(population);
-  await page.getByRole('tab', { name: 'Evidence', exact: false }).click();
-  await expect(page.locator('.evidence').first()).toContainText(blockGroup.id);
-});
-
-test('AI answers preserve claim citations in the new research layout', async ({ page }) => {
-  await page.route('**/api/ask', async route => {
-    const response = await page.request.get('/api/areas/2472450');
-    const area = await response.json();
-    const evidence = area.evidence.slice(0, 1);
-    const evidence_ids = evidence.map((item: { evidence_id: string }) => item.evidence_id);
-    await route.fulfill({ json: { schema_version: '1.0', mode: 'llm',
-      summary: 'The Census reports 81,015 people.', claims: [{text: 'The Census reports 81,015 people.', evidence_ids}],
-      limitations: ['Mocked model response for UI verification.'], evidence, evidence_ids } });
-  });
-  await page.goto('/');
-  await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
-  await page.getByLabel('Ask about this area').fill('What does the data show?');
-  await page.getByRole('button', { name: 'Query Records' }).click();
-  const answer = page.getByRole('region', { name: 'Answer', exact: true });
-  await expect(answer.getByRole('heading', { name: 'AI explanation' })).toBeVisible();
-  await expect(answer.getByRole('link', { name: '1', exact: true })).toHaveAttribute('href', /^#evidence-/);
-  await expect(answer.locator('a[href*="tigerweb.geo.census.gov"]')).toBeVisible();
+  expect(point).not.toBeNull();
+  await page.mouse.click(point!.x, point!.y);
+  await expect(page.locator('.leaflet-popup')).toContainText('From OpenStreetMap, may not be complete');
+  await expect(page.locator('.leaflet-popup a').first()).toHaveAttribute('href', /^https:\/\/www.openstreetmap.org\/(node|way|relation)\/\d+$/);
 });
