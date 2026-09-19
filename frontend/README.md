@@ -97,3 +97,13 @@ using the existing CDP retrieval scope, while retaining the selected block group
 It never treats the plan boundary as the block group's boundary. Evidence combines
 unique cited records from the selected area and its answer history, counting repeat
 citations once. Historical Who lives here share links open Compare areas.
+
+## Address search
+
+The top search box still matches area names. For an address, choose the "Search address" row or press Enter
+when no area matches: the text is sent to OpenStreetMap's **Nominatim** geocoder (results limited to the map's
+coverage box and the US), and choosing a result drops a labeled pin, zooms to it, and selects the Census block
+group that contains it (block group preferred over the CDP). An address outside the covered area still gets a
+pin, with a note that no area was selected. To follow Nominatim's usage policy there is no search-as-you-type,
+requests are spaced at least 1.1 s apart, and repeat queries are cached. Typed text leaves the browser, and the
+dropdown says so first. Tests mock Nominatim. See [docs/plans/address-search.md](../docs/plans/address-search.md).
