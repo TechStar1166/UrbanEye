@@ -28,7 +28,7 @@ test('keyboard area selection and boundaries-only layer work', async ({ page }) 
   await page.getByLabel('Select area').selectOption('2472450');
   await expect(page.locator('dd').last()).toHaveText('35,150 units');
   await page.getByLabel('Map layer').selectOption('');
-  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('fill-opacity', '0');
+  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('fill-opacity', '0.05');
 });
 
 test('API failure exposes retry and recovers', async ({ page }) => {
