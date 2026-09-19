@@ -33,7 +33,10 @@ GEOGRAPHIES = {
     "1600000US2432025": "Germantown CDP",
 }
 
-TABLES = ["b19013", "b19301", "b25003", "b17001", "b01002"]
+TABLES = ["b19013", "b19301", "b25003", "b17001", "b01002",
+          # b01001 is fetched to derive an age 50+ share; b19083 (Gini) is published for
+          # places and larger only, so block groups are simply absent from that file.
+          "b01001", "b25010", "b19083"]
 
 # The standard 1-year release was never published for 2020; Census replaced it with
 # experimental estimates that are not comparable, so the year is simply absent.

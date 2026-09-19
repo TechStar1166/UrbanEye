@@ -66,3 +66,40 @@ def test_storefronts_are_attributed(db_ready):
 
 def test_unknown_history_geo_is_404(db_ready):
     assert client.get("/areas/not-real/history").status_code == 404
+
+
+def test_derived_metrics_are_present_and_bounded(db_ready):
+    catalog = client.get("/community").json()
+    for metric in ["age_50_plus_pct", "avg_household_size", "gini_index"]:
+        assert metric in catalog["metrics"]
+    age = client.get(f"/areas/{BLOCK}/history", params={"metric": "age_50_plus_pct"}).json()
+    assert age["series"], "block groups should have an age 50+ share"
+    for point in age["series"]:
+        assert 0 <= point["estimate"] <= 100
+
+
+def test_gini_is_place_level_only(db_ready):
+    # B19083 is not published for block groups; the series must be empty rather than invented.
+    assert client.get(f"/areas/{BLOCK}/history", params={"metric": "gini_index"}).json()["series"] == []
+    place = client.get(f"/areas/{PLACE}/history", params={"metric": "gini_index"}).json()
+    assert place["series"]
+    assert all(0 <= point["estimate"] <= 1 for point in place["series"])
+
+
+def test_zoning_overlay_carries_no_statistics(db_ready):
+    overlays = client.get("/overlays").json()
+    assert overlays["features"]
+    feature = overlays["features"][0]
+    assert feature["properties"]["carries_statistics"] is False
+    assert feature["geometry"]["type"] in {"Polygon", "MultiPolygon"}
+    assert "Montgomery County Planning" in overlays["attribution"]
+
+
+def test_transit_is_labelled_under_construction(db_ready):
+    transit = client.get("/transit").json()
+    assert transit["status"] == "under_construction"
+    assert transit["license"] == "ODbL"
+    assert transit["features"]
+    assert all(f["geometry"]["type"] == "LineString" for f in transit["features"])
+    assert all(len(f["geometry"]["coordinates"]) >= 2 for f in transit["features"])
+    assert any("not operating" in item.lower() for item in transit["limitations"])

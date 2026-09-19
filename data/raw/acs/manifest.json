@@ -1,5 +1,5 @@
 {
-  "retrieved_at": "2026-09-19T08:28:45.877412+00:00",
+  "retrieved_at": "2026-09-19T14:11:58.069624+00:00",
   "dataset": "U.S. Census Bureau, American Community Survey",
   "license": "Public domain (U.S. Government work)",
   "note": "Filtered from the national table-based summary files. Estimates carry a margin of error at the 90% confidence level. 5-year periods overlap and consecutive vintages must not be compared; 1-year estimates are independent samples.",
@@ -46,6 +46,21 @@
       "geographies": 6,
       "cached": true
     },
+    "acs1y2018_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/1YRData/acsdt1y2018-b01001.dat",
+      "sha256": "c0d60cd8092fc75b2d8bcf004f52bfed9669bf4904ff5a5edca833cdffe944f0",
+      "geographies": 6
+    },
+    "acs1y2018_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/1YRData/acsdt1y2018-b25010.dat",
+      "sha256": "6c7f7f29968ec32977c4bacb7998301ceb5f8f78ba6fd1c27998f96a76e74710",
+      "geographies": 6
+    },
+    "acs1y2018_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/1YRData/acsdt1y2018-b19083.dat",
+      "sha256": "4804f56773d0e4ee9071a44ddc7b9e7f242db7f39c551f57a1e1b1a2b8a6bc77",
+      "geographies": 6
+    },
     "acs1y2019_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/1YRData/acsdt1y2019-b19013.dat",
       "sha256": "b796d7c3cd821edad5efd491b925c355e6bb2dd21d59dde29c6627e47bbfbdae",
@@ -75,6 +90,21 @@
       "sha256": "de0dc7082b01dee925aacc0e8cdb645a011e1f9e0c397705c1383e0da2764204",
       "geographies": 6,
       "cached": true
+    },
+    "acs1y2019_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/1YRData/acsdt1y2019-b01001.dat",
+      "sha256": "6e199ca8ad93120ed2ae5ea0817966b9c64c84a52f5fb1b4d2790b43d3d80146",
+      "geographies": 6
+    },
+    "acs1y2019_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/1YRData/acsdt1y2019-b25010.dat",
+      "sha256": "2d21a2023ca5aefdeffd022f6e0eb06cdd0b0542b0cd6c0c56d60513cc4e832c",
+      "geographies": 6
+    },
+    "acs1y2019_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/1YRData/acsdt1y2019-b19083.dat",
+      "sha256": "d5272c8a6479f4bfdf81061e6e38a6bb6df6a95f6d85b7ea680710df77f7200c",
+      "geographies": 6
     },
     "acs1y2021_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/1YRData/acsdt1y2021-b19013.dat",
@@ -106,6 +136,21 @@
       "geographies": 7,
       "cached": true
     },
+    "acs1y2021_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/1YRData/acsdt1y2021-b01001.dat",
+      "sha256": "ca0a2eb0c23ddcceefa8dd36ab2279a9eec370d8bf428ea3c5758e9b9f396ee6",
+      "geographies": 7
+    },
+    "acs1y2021_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/1YRData/acsdt1y2021-b25010.dat",
+      "sha256": "6602679a836c1ab69419cdc39c5df7addd1c1fa14f7fde03110ed3cb732b9a95",
+      "geographies": 7
+    },
+    "acs1y2021_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/1YRData/acsdt1y2021-b19083.dat",
+      "sha256": "17ee470db9fb982e6006173e9a5307ddafd9cc818f4b3b461eb1b991f4ceb56b",
+      "geographies": 7
+    },
     "acs1y2022_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/1YRData/acsdt1y2022-b19013.dat",
       "sha256": "73d7bdcbc545be7f82423526bf874e081968e019ff0a8f137431802075233cce",
@@ -135,6 +180,21 @@
       "sha256": "3e51d7a974418e1c1951d1d483f45e8a00fd5da920dc7ca38029afe24ec0a749",
       "geographies": 7,
       "cached": true
+    },
+    "acs1y2022_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/1YRData/acsdt1y2022-b01001.dat",
+      "sha256": "e271e79ea9455cb83ac13e996b046176a713c6f8e213b3685b3d0a137b21ea34",
+      "geographies": 7
+    },
+    "acs1y2022_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/1YRData/acsdt1y2022-b25010.dat",
+      "sha256": "d156daad61280928b9b0ae2050ebb5e86ccad958570957f24e39d0cb334bbecf",
+      "geographies": 7
+    },
+    "acs1y2022_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/1YRData/acsdt1y2022-b19083.dat",
+      "sha256": "9a02462e25f3476a1463b88019c5bd6cef56c525193f8069f705b16c4cb2ec9c",
+      "geographies": 7
     },
     "acs1y2023_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/1YRData/acsdt1y2023-b19013.dat",
@@ -166,6 +226,21 @@
       "geographies": 7,
       "cached": true
     },
+    "acs1y2023_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/1YRData/acsdt1y2023-b01001.dat",
+      "sha256": "45e485daac1bc9d4b95f74349d7abbd4b000493d82a1dabc990dfc4e526c12be",
+      "geographies": 7
+    },
+    "acs1y2023_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/1YRData/acsdt1y2023-b25010.dat",
+      "sha256": "2afe8fa4ca560797f2a9f98d91c72c05fd54e739096589828e33f587afe93a2a",
+      "geographies": 7
+    },
+    "acs1y2023_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/1YRData/acsdt1y2023-b19083.dat",
+      "sha256": "e2367d3e91bdb1ab4c3a0e5fb39671c950c73bb04be86bb418561e9915ffb70b",
+      "geographies": 7
+    },
     "acs1y2024_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b19013.dat",
       "sha256": "5cfb88bb05dba4fee34b54014278f22c82248dad41641afbf19495af7ce115ca",
@@ -195,6 +270,21 @@
       "sha256": "b973279db8d5f089216dbd9c7330e153980cc8ae1898b9f1e52a8a14d1bf22bf",
       "geographies": 7,
       "cached": true
+    },
+    "acs1y2024_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b01001.dat",
+      "sha256": "cd0d1e4d12b667db408ee06b9192c6ea5e7c2a43c698e20aeeb38f47410c52a3",
+      "geographies": 7
+    },
+    "acs1y2024_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b25010.dat",
+      "sha256": "88976a79e8ce225e1c2c5425f352e04d382b958391b059a2da0efadf597b24c9",
+      "geographies": 7
+    },
+    "acs1y2024_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/1YRData/acsdt1y2024-b19083.dat",
+      "sha256": "34e81bbe5c09fcb0382edecfbe2e0e4a17ec59605417603229975dca5d2f953e",
+      "geographies": 7
     },
     "acs5y2018_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/5YRData/acsdt5y2018-b19013.dat",
@@ -226,6 +316,21 @@
       "geographies": 9,
       "cached": true
     },
+    "acs5y2018_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/5YRData/acsdt5y2018-b01001.dat",
+      "sha256": "889ec4f0bdf8c0d145a3bfe4af394a7fae13999717173a3730c5a7c0c06f589b",
+      "geographies": 9
+    },
+    "acs5y2018_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/5YRData/acsdt5y2018-b25010.dat",
+      "sha256": "af5ca1a8e91dfb8d45dd1f9dd79f15d4ca80617113d7ebb8684ebf16f5ce35ac",
+      "geographies": 9
+    },
+    "acs5y2018_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2018/prototype/5YRData/acsdt5y2018-b19083.dat",
+      "sha256": "e444baf42d5421f39d351f3bff149d437f267e73190a5ba682462eff7f183dcd",
+      "geographies": 7
+    },
     "acs5y2019_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b19013.dat",
       "sha256": "408945b9ce3fb0a15259b4847aa2d7134f92b11193207f63bd4ad3ee447a2701",
@@ -256,6 +361,21 @@
       "geographies": 9,
       "cached": true
     },
+    "acs5y2019_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b01001.dat",
+      "sha256": "ac84886a1521eb615f69197bb7d71f81bd8ac084d4c35a81f07b6d040c952951",
+      "geographies": 9
+    },
+    "acs5y2019_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b25010.dat",
+      "sha256": "c5cb60ee4e2c26b93f6789c095ce64454cde0019c47ed9b80d7ba80279234978",
+      "geographies": 9
+    },
+    "acs5y2019_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2019/prototype/5YRData/acsdt5y2019-b19083.dat",
+      "sha256": "dfec9d28d69072744351a9a05e82e0c619cec10816efa68ff304c6b360871e6b",
+      "geographies": 7
+    },
     "acs5y2020_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b19013.dat",
       "sha256": "a4aa63ca376120f3b211f5148bc15e3d5f6c74c5df4b6611e3f8706b19ba2116",
@@ -265,122 +385,221 @@
     "acs5y2020_b19301.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b19301.dat",
       "sha256": "6ae1e69d0ed7b2798ca414fc5c4ff04a7aafbed8bb8e7cdc3df8191aa5155f80",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2020_b25003.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b25003.dat",
       "sha256": "dc3fbc7175a64c3cc906bfa485138b3d94c9802f0384a7e49cfb3811cea7849c",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2020_b17001.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b17001.dat",
       "sha256": "026df90976f9b817b42695839a3bf5da02fbd0b609f552c8dcc25bb56ad1785b",
-      "geographies": 7
+      "geographies": 7,
+      "cached": true
     },
     "acs5y2020_b01002.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b01002.dat",
       "sha256": "c7afa43b326fcef03822071af2c8f12fc09f027aea22af1c90e77a79bd9c26af",
+      "geographies": 10,
+      "cached": true
+    },
+    "acs5y2020_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b01001.dat",
+      "sha256": "b598e62874d11f25c89844902e2aac301470dd4eb922b17b96678cbea1332611",
       "geographies": 10
+    },
+    "acs5y2020_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b25010.dat",
+      "sha256": "ef4db575d69def24017d208095e423ce45d9621f5f4c1b711ddf18bf0f18aaa8",
+      "geographies": 10
+    },
+    "acs5y2020_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2020/prototype/5YRData/acsdt5y2020-b19083.dat",
+      "sha256": "681999d62e97137a558f40e463ea08ec2460df08c8086d9c0b5c098b61cd5c13",
+      "geographies": 7
     },
     "acs5y2021_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b19013.dat",
       "sha256": "bddef5b14b438fdef168ac745e82f3730cd021d6fc518a951d571914e7482847",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2021_b19301.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b19301.dat",
       "sha256": "a2b9d3c634672cb4a2cf3aa8dfbbf695b59bd582cd0ff4205e188bf66f80d052",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2021_b25003.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b25003.dat",
       "sha256": "dbb8ac4a0f05144d7785f11563212664770daf386171b94cbd5b9eee7b1c269a",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2021_b17001.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b17001.dat",
       "sha256": "dba938395ab047b88fb3a2904260823d039492d1db078b13ed0182a16052c049",
-      "geographies": 7
+      "geographies": 7,
+      "cached": true
     },
     "acs5y2021_b01002.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b01002.dat",
       "sha256": "593fb9459745cd331813fea4cbc020b8255b68f6a61fa56b78cd7452b92dd08d",
+      "geographies": 10,
+      "cached": true
+    },
+    "acs5y2021_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b01001.dat",
+      "sha256": "f5d8898c6fb37f021e4c14cc644a9e6ba49cdc87a3e06103696196561905cf4c",
       "geographies": 10
+    },
+    "acs5y2021_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b25010.dat",
+      "sha256": "e7cc7627e36e9f442fad5f54d8810565893c33e44c435bab68f65a5e0e400789",
+      "geographies": 10
+    },
+    "acs5y2021_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2021/table-based-SF/data/5YRData/acsdt5y2021-b19083.dat",
+      "sha256": "01cf17b636574061b188ce2097cf33a19d2a04cb5d028e859f89218eba995a4d",
+      "geographies": 7
     },
     "acs5y2022_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b19013.dat",
       "sha256": "a3dfed01f683c130239198cb1499f28ea8e3c217fc55b80d87d5c9d3982e35e8",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2022_b19301.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b19301.dat",
       "sha256": "cd7a74261a21e502bdcfa4190353b565f76d11054ff66c7e552cd60e3bbffa28",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2022_b25003.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b25003.dat",
       "sha256": "89ef750531c4c8f273b2c15707104016194e9940f84a765daf20df91b35e7e08",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2022_b17001.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b17001.dat",
       "sha256": "43d4f3fc686f900d009133acd99f087e10b0ed8ded8744557045df5a739c20b3",
-      "geographies": 7
+      "geographies": 7,
+      "cached": true
     },
     "acs5y2022_b01002.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b01002.dat",
       "sha256": "49e8c9d3fb6755392d8450cf18ea460b563ae940e13d00bc078f5ce6c638e077",
+      "geographies": 10,
+      "cached": true
+    },
+    "acs5y2022_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b01001.dat",
+      "sha256": "f419c4be81a70e2b2e215f11b0befa8574154a12872064c5cf57f0dc0dda8067",
       "geographies": 10
+    },
+    "acs5y2022_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b25010.dat",
+      "sha256": "ddf2fef2a918d31bf20ecd316da0a4b37700cdaf82d21e1ddb1f94278cddd539",
+      "geographies": 10
+    },
+    "acs5y2022_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2022/table-based-SF/data/5YRData/acsdt5y2022-b19083.dat",
+      "sha256": "2d6fecf6b1a679c20cc3e491aba47de8f4250cdecc6f6eb1a71f4c96b85fdc65",
+      "geographies": 7
     },
     "acs5y2023_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b19013.dat",
       "sha256": "f761aad45b059372ea1fc41fb9d817caa33cc45676ddff26f4c4ee6da22764cb",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2023_b19301.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b19301.dat",
       "sha256": "0145733316b68a6c0b2df5423ca955378e3e1f213e51e310c9815fa3c9011934",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2023_b25003.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b25003.dat",
       "sha256": "d606284b719c337ae270ff0c029f3af2299e179c75f2a9a4190094a8ea127fa1",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2023_b17001.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b17001.dat",
       "sha256": "21e03cb91a49dd11de5cc25672db37ce8fa5c5c845de9e69f8b3a9e17a33860a",
-      "geographies": 7
+      "geographies": 7,
+      "cached": true
     },
     "acs5y2023_b01002.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b01002.dat",
       "sha256": "fd889201f74f5897e3f3895fd0aec167a29c234c3511b88c45dbbb8f880cf308",
+      "geographies": 10,
+      "cached": true
+    },
+    "acs5y2023_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b01001.dat",
+      "sha256": "fbfc12285a2b3ee464641c43739a6e58aa195427e59f92a9711ef4a796b960da",
       "geographies": 10
+    },
+    "acs5y2023_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b25010.dat",
+      "sha256": "0877572b996d5dc648db7398734a35470c59c2a98737b969ba614ef619fd5b07",
+      "geographies": 10
+    },
+    "acs5y2023_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b19083.dat",
+      "sha256": "7983263ae3bece3111cc456d037ecb48d9d32b671334a5b02f781155bc414e8e",
+      "geographies": 7
     },
     "acs5y2024_b19013.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19013.dat",
       "sha256": "45186311ec3dd78fd895e11129ab003a458d565eae0f16ae302b2334844840ff",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2024_b19301.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19301.dat",
       "sha256": "f046752c01a65d524d58754eea1e99d839ae93e48469132fc4f2d4a20fe2fc7e",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2024_b25003.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
       "sha256": "f4d2ecadd2839ea5fdd8ce0ec6062c8eeb830fc877455bf2dd1e12b90f13f145",
-      "geographies": 10
+      "geographies": 10,
+      "cached": true
     },
     "acs5y2024_b17001.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b17001.dat",
       "sha256": "02ec48edaef313994e582ccb042f7c49150743addf67a9315584cbae7f77854c",
-      "geographies": 7
+      "geographies": 7,
+      "cached": true
     },
     "acs5y2024_b01002.json": {
       "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01002.dat",
       "sha256": "921c999d56fa7faba611203ac7976ecba54450eb2b3e401829a6fe953d5379cc",
+      "geographies": 10,
+      "cached": true
+    },
+    "acs5y2024_b01001.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01001.dat",
+      "sha256": "34983ccb123f9d1cfd61f667002287e6d62daacda6f7422e344b715437ab1cbc",
       "geographies": 10
+    },
+    "acs5y2024_b25010.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25010.dat",
+      "sha256": "c81e9af1e3bbbf7b2d1f6c82d81e8bc57e180cbbdbd8ac61f558ed83c4366cf0",
+      "geographies": 10
+    },
+    "acs5y2024_b19083.json": {
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b19083.dat",
+      "sha256": "adff69b377d3b032ed5af46ea930d75fab7410a90e022cc33c202255bdee2cf7",
+      "geographies": 7
     }
   }
 }

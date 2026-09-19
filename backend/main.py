@@ -6,7 +6,8 @@ from backend.data import LAYERS, ROOT, load_areas, load_chunks
 from backend import community as community_data
 from backend.schemas import (
     Answer, Area, Areas, AskRequest, BusinessResponse, ChangeResponse, CommunityCatalog,
-    CompareResponse, HistoryResponse, Layer, SegmentRequest, SegmentResponse, DataPoint,
+    CompareResponse, HistoryResponse, Layer, OverlayResponse, SegmentRequest, SegmentResponse,
+    DataPoint, TransitResponse,
 )
 from backend.services import answer
 from backend.rag.retrieve import DocumentIndex
@@ -78,6 +79,22 @@ def get_compare(geo_ids: str, year: int = 2024, metrics: str = "median_household
     if len(ids) < 2:
         raise HTTPException(422, "Provide at least two comma-separated geo_ids")
     return community_data.compare(ids, year, [item.strip() for item in metrics.split(",") if item.strip()], span)
+
+
+@app.get("/overlays", response_model=OverlayResponse)
+def get_overlays():
+    payload = community_data.overlays()
+    if payload is None:
+        raise HTTPException(404, "No overlay boundaries are cached")
+    return payload
+
+
+@app.get("/transit", response_model=TransitResponse)
+def get_transit():
+    payload = community_data.transit()
+    if payload is None:
+        raise HTTPException(404, "No transit alignment is cached")
+    return payload
 
 
 @app.get("/community", response_model=CommunityCatalog)

@@ -253,6 +253,71 @@ class BusinessResponse(Contract):
     limitations: list[str]
 
 
+class MapLineGeometry(Contract):
+    type: Literal["LineString", "MultiLineString"]
+    coordinates: list
+
+
+class OverlayProperties(Contract):
+    name: str
+    kind: str
+    legal_definition: str | None = None
+    carries_statistics: bool = False
+
+
+class OverlayFeature(Contract):
+    type: Literal["Feature"] = "Feature"
+    id: str
+    geometry: Geometry
+    properties: OverlayProperties
+
+
+class OverlayResponse(Contract):
+    type: Literal["FeatureCollection"] = "FeatureCollection"
+    schema_version: Literal["1.0"] = "1.0"
+    attribution: str
+    license: str
+    source_url: str
+    retrieved_at: str
+    limitations: list[str]
+    features: list[OverlayFeature]
+
+
+class TransitProperties(Contract):
+    name: str
+    status: str
+    mode: str | None = None
+    opening_date: str | None = None
+    tunnel: bool = False
+    bridge: bool = False
+
+
+class TransitFeature(Contract):
+    type: Literal["Feature"] = "Feature"
+    id: str
+    geometry: MapLineGeometry
+    properties: TransitProperties
+
+
+class TransitRoute(Contract):
+    osm_id: int
+    name: str | None = None
+
+
+class TransitResponse(Contract):
+    type: Literal["FeatureCollection"] = "FeatureCollection"
+    schema_version: Literal["1.0"] = "1.0"
+    name: str
+    status: str
+    attribution: str
+    license: str
+    copyright_url: str
+    retrieved_at: str
+    routes: list[TransitRoute]
+    limitations: list[str]
+    features: list[TransitFeature]
+
+
 class CommunityGeography(Contract):
     geo_id: str
     name: str

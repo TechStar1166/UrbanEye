@@ -140,6 +140,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/overlays": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Overlays */
+        get: operations["get_overlays_overlays_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/transit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Transit */
+        get: operations["get_transit_transit_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/community": {
         parameters: {
             query?: never;
@@ -613,6 +647,70 @@ export interface components {
             /** Description */
             description: string;
         };
+        /** MapLineGeometry */
+        MapLineGeometry: {
+            /**
+             * Type
+             * @enum {string}
+             */
+            type: "LineString" | "MultiLineString";
+            /** Coordinates */
+            coordinates: unknown[];
+        };
+        /** OverlayFeature */
+        OverlayFeature: {
+            /**
+             * Type
+             * @default Feature
+             * @constant
+             */
+            type: "Feature";
+            /** Id */
+            id: string;
+            geometry: components["schemas"]["Geometry"];
+            properties: components["schemas"]["OverlayProperties"];
+        };
+        /** OverlayProperties */
+        OverlayProperties: {
+            /** Name */
+            name: string;
+            /** Kind */
+            kind: string;
+            /** Legal Definition */
+            legal_definition?: string | null;
+            /**
+             * Carries Statistics
+             * @default false
+             */
+            carries_statistics: boolean;
+        };
+        /** OverlayResponse */
+        OverlayResponse: {
+            /**
+             * Type
+             * @default FeatureCollection
+             * @constant
+             */
+            type: "FeatureCollection";
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Attribution */
+            attribution: string;
+            /** License */
+            license: string;
+            /** Source Url */
+            source_url: string;
+            /** Retrieved At */
+            retrieved_at: string;
+            /** Limitations */
+            limitations: string[];
+            /** Features */
+            features: components["schemas"]["OverlayFeature"][];
+        };
         /** SegmentRequest */
         SegmentRequest: {
             /** Geo Ids */
@@ -642,6 +740,80 @@ export interface components {
             explanation: string;
             /** Data Points */
             data_points: components["schemas"]["DataPoint"][];
+        };
+        /** TransitFeature */
+        TransitFeature: {
+            /**
+             * Type
+             * @default Feature
+             * @constant
+             */
+            type: "Feature";
+            /** Id */
+            id: string;
+            geometry: components["schemas"]["MapLineGeometry"];
+            properties: components["schemas"]["TransitProperties"];
+        };
+        /** TransitProperties */
+        TransitProperties: {
+            /** Name */
+            name: string;
+            /** Status */
+            status: string;
+            /** Mode */
+            mode?: string | null;
+            /** Opening Date */
+            opening_date?: string | null;
+            /**
+             * Tunnel
+             * @default false
+             */
+            tunnel: boolean;
+            /**
+             * Bridge
+             * @default false
+             */
+            bridge: boolean;
+        };
+        /** TransitResponse */
+        TransitResponse: {
+            /**
+             * Type
+             * @default FeatureCollection
+             * @constant
+             */
+            type: "FeatureCollection";
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Name */
+            name: string;
+            /** Status */
+            status: string;
+            /** Attribution */
+            attribution: string;
+            /** License */
+            license: string;
+            /** Copyright Url */
+            copyright_url: string;
+            /** Retrieved At */
+            retrieved_at: string;
+            /** Routes */
+            routes: components["schemas"]["TransitRoute"][];
+            /** Limitations */
+            limitations: string[];
+            /** Features */
+            features: components["schemas"]["TransitFeature"][];
+        };
+        /** TransitRoute */
+        TransitRoute: {
+            /** Osm Id */
+            osm_id: number;
+            /** Name */
+            name?: string | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -883,6 +1055,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_overlays_overlays_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OverlayResponse"];
+                };
+            };
+        };
+    };
+    get_transit_transit_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TransitResponse"];
                 };
             };
         };

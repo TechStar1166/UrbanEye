@@ -42,8 +42,9 @@ Primary ZIP Code Tabulation Area for these three block groups is **20910**.
 offline after refreshing caches:
 
 ```bash
-python -m scripts.fetch_acs          # ACS summary files; skip files already cached
+python -m scripts.fetch_acs          # ACS summary files; skips files already cached
 python -m scripts.fetch_osm          # OpenStreetMap storefronts in the FV bbox
+python -m scripts.fetch_transit      # Purple Line alignment from OpenStreetMap
 python -m scripts.build_community_db # writes urbaneye.db plus JSON exports
 ```
 
@@ -56,9 +57,28 @@ JSON mirrors for inspection: `processed/income_history.json`,
 | Block-group snapshots | ACS **5-year** | 2018–2024. Consecutive vintages **overlap**; do not chart them as annual change |
 
 Metrics: median household income, per capita income, renter-occupied %, poverty
-rate, median age. Dollar series include a 2024-dollar companion using BLS CPI-U
-(`raw/bls/cpi_u_annual.json`). Estimates with MOE > 30% of the estimate are flagged
-`low_reliability`.
+rate, median age, age 50+ share, average household size, Gini index. Dollar series
+include a 2024-dollar companion using BLS CPI-U (`raw/bls/cpi_u_annual.json`).
+Estimates with MOE > 30% of the estimate are flagged `low_reliability`.
+
+Two metrics are not published for every level. **Poverty rate** (B17001) and the
+**Gini index** (B19083) exist for places and larger only; block-group series come
+back empty rather than estimated. **Age 50+** is derived by summing the relevant
+B01001 cells for both sexes, combining their MOEs as the root sum of squares.
+
+## Map overlays that carry no statistics
+
+Two layers are geometry only and must never be clicked through to counts:
+
+| Layer | Source | Caveat |
+| --- | --- | --- |
+| Fenton Village (FV) Overlay Zone | Montgomery County Planning | Zoning boundary, `carries_statistics: false` |
+| Purple Line alignment | OpenStreetMap, ODbL | Tagged `route=construction`; **not** operating service |
+
+Fetch and rebuild them with `python -m scripts.fetch_transit` followed by
+`python -m scripts.build_community_db`. Outputs are `processed/overlays.geojson`
+and `processed/transit.geojson`. Proximity to the Purple Line alignment does not
+establish current transit access.
 
 Peer places in the database (trend rows, not map polygons): Bethesda, Rockville,
 Gaithersburg, Germantown, Montgomery County, Maryland.
@@ -74,3 +94,5 @@ API (does not replace `/areas`):
 - `GET /areas/{geo_id}/changes?from_year=2021&to_year=2024`
 - `GET /compare?geo_ids=2472450,24031&year=2024`
 - `GET /pois` and `GET /areas/{geo_id}/businesses`
+- `GET /overlays` — Fenton Village zoning boundary
+- `GET /transit` — Purple Line alignment under construction

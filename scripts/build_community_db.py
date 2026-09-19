@@ -142,6 +142,26 @@ def row_pair(columns, row, table, number) -> tuple[float | None, float | None]:
     return estimate, moe
 
 
+# B01001 is "sex by age". Cells 16-25 are males 50 and over, 40-49 females 50 and over.
+AGE_50_PLUS_CELLS = list(range(16, 26)) + list(range(40, 50))
+
+
+def sum_cells(columns, row, table, numbers) -> tuple[float | None, float | None]:
+    """Aggregate estimates; combine their MOEs as the root sum of squares."""
+    total, variance, seen = 0.0, 0.0, False
+    for number in numbers:
+        estimate, moe = row_pair(columns, row, table, number)
+        if estimate is None:
+            continue
+        seen = True
+        total += estimate
+        if moe is not None:
+            variance += moe ** 2
+    if not seen:
+        return None, None
+    return total, math.sqrt(variance) if variance else None
+
+
 def ratio_moe(num, num_moe, den, den_moe) -> float | None:
     """Census approximation for a derived proportion, returned as percentage points."""
     if None in (num, den) or den == 0:
@@ -272,6 +292,18 @@ def metric_from_table(table: str, columns: list[str], row: list[str]):
         poor, poor_moe = row_pair(columns, row, table, 2)
         pct = None if None in (poor, total) or total == 0 else 100.0 * poor / total
         yield "poverty_rate", pct, ratio_moe(poor, poor_moe, total, total_moe), "percent"
+    elif table == "B01001":
+        total, total_moe = row_pair(columns, row, table, 1)
+        older, older_moe = sum_cells(columns, row, table, AGE_50_PLUS_CELLS)
+        pct = None if None in (older, total) or total == 0 else 100.0 * older / total
+        yield "age_50_plus_pct", pct, ratio_moe(older, older_moe, total, total_moe), "percent"
+    elif table == "B25010":
+        estimate, moe = row_pair(columns, row, table, 1)
+        yield "avg_household_size", estimate, moe, "people per household"
+    elif table == "B19083":
+        # Published for places and larger only; block groups are absent from the file.
+        estimate, moe = row_pair(columns, row, table, 1)
+        yield "gini_index", estimate, moe, "index 0-1"
 
 
 def load_acs(db, cpi: dict[int, float]):
@@ -355,6 +387,83 @@ def load_osm(db):
     return count
 
 
+def write_geometry_exports():
+    """Map overlays that carry no statistics: a zoning boundary and a rail alignment."""
+    out = ROOT / "data/processed"
+
+    boundary_raw = json.loads((ROOT / "data/raw/fenton_village_overlay.geojson").read_text())
+    boundary_source = json.loads((ROOT / "data/raw/fenton_village_boundary_source.json").read_text())
+    overlays = {
+        "type": "FeatureCollection",
+        "schema_version": "1.0",
+        "attribution": "Montgomery County Planning Department",
+        "license": "Public data, Montgomery County Planning Department",
+        "source_url": boundary_source["url"],
+        "retrieved_at": boundary_source["retrieved_at"],
+        "limitations": [
+            "The Fenton Village (FV) Overlay Zone is a zoning boundary, not a statistical area.",
+            "It carries no population, housing or income values and must not be clicked through "
+            "to counts. Block group values describe whole block groups, not this boundary.",
+        ],
+        "features": [{
+            "type": "Feature",
+            "id": "fenton-village-overlay",
+            "geometry": feature["geometry"],
+            "properties": {
+                "name": "Fenton Village (FV) Overlay Zone",
+                "kind": "zoning_overlay",
+                "legal_definition": boundary_source.get("legal_definition"),
+                "carries_statistics": False,
+            },
+        } for feature in boundary_raw["features"]],
+    }
+    (out / "overlays.geojson").write_text(json.dumps(overlays, indent=2) + "\n")
+
+    transit_path = ROOT / "data/raw/osm/purple_line.json"
+    if not transit_path.exists():
+        return len(overlays["features"]), 0
+    transit_raw = json.loads(transit_path.read_text())
+    transit_source = json.loads((ROOT / "data/raw/osm/transit_source.json").read_text())
+    features = []
+    for way in transit_raw.get("ways", []):
+        coordinates = [[point["lon"], point["lat"]] for point in way.get("geometry", [])]
+        if len(coordinates) < 2:
+            continue
+        tags = way.get("tags") or {}
+        features.append({
+            "type": "Feature",
+            "id": f"way/{way['id']}",
+            "geometry": {"type": "LineString", "coordinates": coordinates},
+            "properties": {
+                "name": tags.get("name", "Purple Line"),
+                "status": "under_construction" if tags.get("railway") == "construction" else tags.get("railway"),
+                "mode": tags.get("construction", tags.get("railway")),
+                "opening_date": tags.get("opening_date"),
+                "tunnel": tags.get("tunnel") == "yes",
+                "bridge": tags.get("bridge") == "yes",
+            },
+        })
+    transit = {
+        "type": "FeatureCollection",
+        "schema_version": "1.0",
+        "name": "Purple Line alignment",
+        "status": "under_construction",
+        "attribution": "© OpenStreetMap contributors",
+        "license": "ODbL",
+        "copyright_url": "https://www.openstreetmap.org/copyright",
+        "retrieved_at": transit_source["retrieved_at"],
+        "routes": [{"osm_id": relation["id"], "name": (relation.get("tags") or {}).get("name")}
+                   for relation in transit_raw.get("relations", [])],
+        "limitations": [
+            "OpenStreetMap tags this alignment route=construction. It is not operating service.",
+            "Proximity to the alignment does not establish current transit access.",
+        ],
+        "features": features,
+    }
+    (out / "transit.geojson").write_text(json.dumps(transit, indent=2) + "\n")
+    return len(overlays["features"]), len(features)
+
+
 def write_json_exports(db):
     history = []
     for row in db.execute(
@@ -407,6 +516,7 @@ def build():
     load_acs(db, cpi)
     pois = load_osm(db)
     write_json_exports(db)
+    n_overlays, n_transit = write_geometry_exports()
     db.commit()
     n_geo = db.execute("SELECT COUNT(*) FROM geographies").fetchone()[0]
     n_ts = db.execute("SELECT COUNT(*) FROM time_series").fetchone()[0]
@@ -415,6 +525,7 @@ def build():
     digest = hashlib.sha256(DB_PATH.read_bytes()).hexdigest()
     print(f"Wrote {DB_PATH.relative_to(ROOT)} ({n_geo} geographies, {n_ts} time-series rows, "
           f"{n_biz} businesses; sha256 {digest[:12]}…)")
+    print(f"Wrote {n_overlays} zoning overlay feature(s) and {n_transit} transit segment(s)")
     if pois == 0:
         print("Business table empty until OSM is fetched.")
 

@@ -1,6 +1,7 @@
 """SQLite-backed community history, comparison and storefront queries. Offline."""
 from __future__ import annotations
 
+import json
 import sqlite3
 from functools import lru_cache
 from pathlib import Path
@@ -238,6 +239,23 @@ def businesses_for(geo_id: str | None = None) -> dict | None:
         }
     finally:
         db.close()
+
+
+def _load_geometry_export(name: str) -> dict | None:
+    path = ROOT / "data/processed" / name
+    if not path.exists():
+        return None
+    return json.loads(path.read_text())
+
+
+def overlays() -> dict | None:
+    """Zoning boundaries drawn on the map. These carry no statistics."""
+    return _load_geometry_export("overlays.geojson")
+
+
+def transit() -> dict | None:
+    """Rail alignment under construction. Not operating service."""
+    return _load_geometry_export("transit.geojson")
 
 
 def catalog() -> dict:

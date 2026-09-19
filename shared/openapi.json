@@ -361,6 +361,42 @@
         }
       }
     },
+    "/overlays": {
+      "get": {
+        "summary": "Get Overlays",
+        "operationId": "get_overlays_overlays_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverlayResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transit": {
+      "get": {
+        "summary": "Get Transit",
+        "operationId": "get_transit_transit_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransitResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/community": {
       "get": {
         "summary": "Get Community Catalog",
@@ -1686,6 +1722,150 @@
         ],
         "title": "Layer"
       },
+      "MapLineGeometry": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LineString",
+              "MultiLineString"
+            ],
+            "title": "Type"
+          },
+          "coordinates": {
+            "items": {},
+            "type": "array",
+            "title": "Coordinates"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "coordinates"
+        ],
+        "title": "MapLineGeometry"
+      },
+      "OverlayFeature": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Feature",
+            "title": "Type",
+            "default": "Feature"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/OverlayProperties"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "geometry",
+          "properties"
+        ],
+        "title": "OverlayFeature"
+      },
+      "OverlayProperties": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "legal_definition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Definition"
+          },
+          "carries_statistics": {
+            "type": "boolean",
+            "title": "Carries Statistics",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "kind"
+        ],
+        "title": "OverlayProperties"
+      },
+      "OverlayResponse": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "FeatureCollection",
+            "title": "Type",
+            "default": "FeatureCollection"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "title": "Retrieved At"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/OverlayFeature"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "attribution",
+          "license",
+          "source_url",
+          "retrieved_at",
+          "limitations",
+          "features"
+        ],
+        "title": "OverlayResponse"
+      },
       "SegmentRequest": {
         "properties": {
           "geo_ids": {
@@ -1770,6 +1950,185 @@
           "data_points"
         ],
         "title": "SegmentResponse"
+      },
+      "TransitFeature": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Feature",
+            "title": "Type",
+            "default": "Feature"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/MapLineGeometry"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/TransitProperties"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "geometry",
+          "properties"
+        ],
+        "title": "TransitFeature"
+      },
+      "TransitProperties": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "mode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode"
+          },
+          "opening_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Opening Date"
+          },
+          "tunnel": {
+            "type": "boolean",
+            "title": "Tunnel",
+            "default": false
+          },
+          "bridge": {
+            "type": "boolean",
+            "title": "Bridge",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "status"
+        ],
+        "title": "TransitProperties"
+      },
+      "TransitResponse": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "FeatureCollection",
+            "title": "Type",
+            "default": "FeatureCollection"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "copyright_url": {
+            "type": "string",
+            "title": "Copyright Url"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "title": "Retrieved At"
+          },
+          "routes": {
+            "items": {
+              "$ref": "#/components/schemas/TransitRoute"
+            },
+            "type": "array",
+            "title": "Routes"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/TransitFeature"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "status",
+          "attribution",
+          "license",
+          "copyright_url",
+          "retrieved_at",
+          "routes",
+          "limitations",
+          "features"
+        ],
+        "title": "TransitResponse"
+      },
+      "TransitRoute": {
+        "properties": {
+          "osm_id": {
+            "type": "integer",
+            "title": "Osm Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "osm_id"
+        ],
+        "title": "TransitRoute"
       },
       "ValidationError": {
         "properties": {

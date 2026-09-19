@@ -1,0 +1,25 @@
+{
+  "url": "https://overpass-api.de/api/interpreter",
+  "queries": {
+    "relations": "[out:json][timeout:180];relation[\"name\"~\"Purple Line\",i](38.95,-77.15,39.05,-76.88);out tags;",
+    "geometry": "[out:json][timeout:180];relation[\"name\"~\"Purple Line\",i](38.95,-77.15,39.05,-76.88);way(r);out geom;"
+  },
+  "bbox": {
+    "south": 38.95,
+    "west": -77.15,
+    "north": 39.05,
+    "east": -76.88
+  },
+  "retrieved_at": "2026-09-19T14:11:36.490217+00:00",
+  "dataset": "OpenStreetMap Overpass API",
+  "license": "ODbL",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "copyright_url": "https://www.openstreetmap.org/copyright",
+  "route_values": [
+    "construction"
+  ],
+  "status_note": "OSM tags these relations route=construction. Present the alignment as under construction; it is not operating transit service and implies no current transit access.",
+  "relation_count": 2,
+  "way_count": 62,
+  "raw_sha256": "f661edab596c1cfafc34cfe64f038ae9ddf53f1040b4702b88fac6dfab659c31"
+}

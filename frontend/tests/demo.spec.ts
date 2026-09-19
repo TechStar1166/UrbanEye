@@ -129,16 +129,26 @@ for (const viewport of [{ width: 320, height: 568 }, { width: 390, height: 844 }
 
 
 test('Fenton block group remains selectable and its real counts reach the answer', async ({ page }) => {
+  // Derived from the served snapshot so a change of study geography cannot silently
+  // leave this asserting a block group the map no longer publishes.
+  const areas = await (await page.request.get('/api/areas')).json();
+  const index = areas.features.findIndex(
+    (feature: { properties: { geography_type: string } }) =>
+      feature.properties.geography_type === 'block_group');
+  expect(index).toBeGreaterThan(-1);
+  const blockGroup = areas.features[index];
+  const population = blockGroup.properties.metrics.population.toLocaleString('en-US');
+
   await page.goto('/');
-  await expect(page.locator('.leaflet-interactive')).toHaveCount(3);
-  await page.locator('.leaflet-interactive').nth(1).click({ force: true });
-  await expect(page.locator('.insight-heading')).toContainText('240317025011');
-  await expect(page.locator('.metric-card').first()).toContainText('2,866');
+  await expect(page.locator('.leaflet-interactive')).toHaveCount(areas.features.length);
+  await page.locator('.leaflet-interactive').nth(index).click({ force: true });
+  await expect(page.locator('.insight-heading')).toContainText(blockGroup.id);
+  await expect(page.locator('.metric-card').first()).toContainText(population);
   await page.getByLabel('Ask about this area').fill('What is the population?');
   await page.getByRole('button', { name: 'Query Records' }).click();
-  await expect(page.getByRole('region', { name: 'Answer', exact: true })).toContainText('2,866');
+  await expect(page.getByRole('region', { name: 'Answer', exact: true })).toContainText(population);
   await page.getByRole('tab', { name: 'Evidence', exact: false }).click();
-  await expect(page.locator('.evidence').first()).toContainText('240317025011');
+  await expect(page.locator('.evidence').first()).toContainText(blockGroup.id);
 });
 
 test('AI answers preserve claim citations in the new research layout', async ({ page }) => {
