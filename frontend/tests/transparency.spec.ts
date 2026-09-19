@@ -73,7 +73,7 @@ test('the Overview states what the dataset cannot tell you', async ({ page }) =>
   const card = page.getByRole('region', { name: 'Data coverage' });
   await expect(card).toContainText('population: 81,015');
   await expect(card).toContainText('housing units: 35,150');
-  for (const missing of ['Competitor locations', 'Rent and lease prices', 'Foot traffic', 'Business revenue']) {
+  for (const missing of ['Complete, verified competitor coverage', 'Rent and lease prices', 'Foot traffic', 'Business revenue']) {
     await expect(card).toContainText(missing);
   }
   await expect(card).not.toContainText('Median household income'); // not claimed missing; it may be added

@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { api, type Answer, type Area, type Areas } from './services/api';
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { api, type Answer, type Area, type Areas, type Storefronts } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { Icon } from './components/Icon';
+import { StorefrontSummary } from './components/StorefrontSummary';
+import { ALL_GROUPS, GROUPS, groupOf, type GroupId } from './lib/storefronts';
 import { DataCoverage } from './components/DataCoverage';
 import { areasToCsv } from './lib/csv';
 import { readView, writeView } from './lib/urlState';
@@ -51,6 +53,9 @@ export default function App() {
   const [siteType, setSiteType] = useState('Café & bakery');
   const [siteSaved, setSiteSaved] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+  const [storefronts, setStorefronts] = useState<Storefronts>();
+  const [storefrontsFailed, setStorefrontsFailed] = useState(false);
+  const [groups, setGroups] = useState<GroupId[]>(ALL_GROUPS);
   const [copied, setCopied] = useState('');
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -63,6 +68,7 @@ export default function App() {
     try {
       const data = await api.areas();
       setAreas(data);
+      api.storefronts().then(setStorefronts).catch(() => setStorefrontsFailed(true)); // optional layer; never blocks the map
       setSelected(current => data.features.find(f => f.id === (current?.geo_id ?? readView().area))?.properties ?? data.features[0]?.properties);
     } catch { setError('Unable to load the map. Check the backend connection and try again.'); }
     finally { setLoading(false); }
@@ -97,7 +103,7 @@ export default function App() {
     setSearch(''); setSearchOpen(false); setSubmitted(''); setTab('Overview');
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
-  const reset = () => { setLayers(defaultLayers); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
+  const reset = () => { setGroups(ALL_GROUPS); setLayers(defaultLayers); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
   const ask = async (event: FormEvent) => {
     event.preventDefault();
     if (!question.trim() || !selected || busy) return;
@@ -115,6 +121,9 @@ export default function App() {
   };
   const number = (key: string) => selected?.metrics[key] == null ? '—' : selected.metrics[key]!.toLocaleString();
   const activeCount = Object.values(layers).filter(Boolean).length;
+  const visibleStorefronts = useMemo(() => layers.storefronts && storefronts
+    ? storefronts.storefronts.filter(item => groups.includes(groupOf(item))) : [], [layers.storefronts, storefronts, groups]);
+  const toggleGroup = (id: GroupId) => setGroups(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
   const comparativeScale = areas ? [...scalesByType(areas.features, metric).values()].some(scale => scale.comparative) : false;
   const searchResults = areas?.features.filter(f => (f.properties.name + ' ' + f.id).toLowerCase().includes(search.toLowerCase())) ?? [];
   const exportData = () => {
@@ -168,7 +177,10 @@ export default function App() {
             <SectionHeading detail="Layer catalog">Housing & Commercial</SectionHeading>
             {layerRow('housing', 'Housing Units', 'Census 2020', 'blue')}
             {layerRow('zoning', 'Fenton Overlay Zoning', undefined, 'amber', true)}
-            {layerRow('storefronts', 'Storefront Locations', undefined, '', true)}
+            {layerRow('storefronts', 'Storefront Locations', storefronts ? storefronts.storefronts.length + ' · OSM' : 'OSM')}
+            {layers.storefronts && storefronts && <div className="group-chips" role="group" aria-label="Storefront categories">{GROUPS.map(group =>
+              <label key={group.id} className="group-chip"><input type="checkbox" checked={groups.includes(group.id)} onChange={() => toggleGroup(group.id)} />
+                <i style={{ background: group.color }} />{group.label}<small>{storefronts.storefronts.filter(item => groupOf(item) === group.id).length}</small></label>)}</div>}
             {layerRow('transit', 'Purple Line Alignment', undefined, 'blue', true)}
             <p className="micro-note">Preview layers are not plotted on the map.</p>
           </section>
@@ -185,12 +197,12 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <>
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} highlightIds={highlightIds} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} highlightIds={highlightIds} storefronts={visibleStorefronts} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>GEOGRAPHIC FOCUS</small><strong>{selected?.name ?? 'Select an area'}</strong></span></div><div className="map-actions"><button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button><button className="icon-button" aria-label="Copy link to this view" onClick={() => void copyLink()}><Icon name="external" /></button>{copied && <span role="status" className="micro-note">{copied}</span>}</div></div>
           {selected && <div className="map-selection-card"><div className="selection-title"><i className="status-dot" /><strong>{selected.name}</strong><span className="tag">Selected</span></div><div className="selection-metrics"><div><span>POPULATION</span><strong>{number('population')}</strong></div><div><span>HOUSING UNITS</span><strong>{number('housing_units')}</strong></div></div><div className="selection-footer"><span>2020 Census · {selected.geo_id}</span><button onClick={() => openTab('Evidence')}>View sources <Icon name="arrow" /></button></div></div>}
-          <div className="map-legend"><span className="eyebrow">Map Legend</span><div><i className={'legend-swatch ' + (metric === 'housing_units' ? 'purple' : '')} /><span>{metric === 'population' ? 'Population' : metric === 'housing_units' ? 'Housing units' : 'Geographic boundaries'}</span></div><div><i className="legend-swatch selected" /><span>Selected geography</span></div>{highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>High in both compared layers</span></div>}<p>{comparativeScale ? 'Within each geography type, darker fill means a higher value.' : 'Color identifies the layer; not a comparative scale.'}</p></div>
+          <div className="map-legend"><span className="eyebrow">Map Legend</span><div><i className={'legend-swatch ' + (metric === 'housing_units' ? 'purple' : '')} /><span>{metric === 'population' ? 'Population' : metric === 'housing_units' ? 'Housing units' : 'Geographic boundaries'}</span></div><div><i className="legend-swatch selected" /><span>Selected geography</span></div>{highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>High in both compared layers</span></div>}{visibleStorefronts.length > 0 && GROUPS.filter(group => groups.includes(group.id)).map(group => <div key={group.id}><i className="legend-dot" style={{ background: group.color }} /><span>{group.label}</span></div>)}<p>{comparativeScale ? 'Within each geography type, darker fill means a higher value.' : 'Color identifies the layer; not a comparative scale.'}{visibleStorefronts.length > 0 && ' Storefronts: OpenStreetMap-mapped.'}</p></div>
         </> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Housing units</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{f.properties.name}<small>{f.id}</small></button></td><td>{f.properties.metrics.population?.toLocaleString() ?? 'No data'}</td><td>{f.properties.metrics.housing_units?.toLocaleString() ?? 'No data'}</td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button><button className="secondary" disabled={!areas} onClick={exportCsv}><Icon name="download" />Export all areas (CSV)</button></div>}
         <div className="query-dock"><form onSubmit={ask}><span className="query-symbol"><Icon name="sparkles" /></span><input ref={questionRef} aria-label="Ask about this area" value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask about planning, housing, or community data…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Query Records'}<Icon name="arrow" /></button></form><div className="suggestions"><span>Suggested:</span>{prompts.map(prompt => <button key={prompt} onClick={() => { setQuestion(prompt); questionRef.current?.focus(); }}>{prompt}</button>)}</div><span className="query-preview">Evidence-backed research · selected geographic area</span></div>
       </section>
@@ -202,6 +214,7 @@ export default function App() {
           {tab === 'Overview' && <>
             <section className="insight-section"><SectionHeading detail="Census 2020">Ground-Truth Core Metrics</SectionHeading><div className="metrics-grid"><MetricCard label="POPULATION" value={number('population')} detail="Whole selected geography" note="Census" /><MetricCard label="HOUSING UNITS" value={number('housing_units')} detail="Sourced Census count" tone="blue" /></div><div className="sample-heading"><span>Extended community profile</span><Preview /></div><div className="metrics-grid"><MetricCard label="MEDIAN HH INCOME" value="—" detail="Not connected yet" tone="green" /><MetricCard label="AGE 50+ COHORT" value="—" detail="Not connected yet" tone="amber" /></div></section>
             <section className="insight-section"><SectionHeading detail="Not connected">Housing Tenure and Age Distribution</SectionHeading><p className="body-muted">These charts will appear when tenure and age data are added to the dataset. No values are shown until then.</p></section>
+            {selected && <StorefrontSummary area={selected} data={storefronts} failed={storefrontsFailed} shown={layers.storefronts} onShow={() => setLayers(previous => ({ ...previous, storefronts: true }))} />}
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>Inspect source <Icon name="arrow" /></button></blockquote><p className="micro-note">Planning-area context; the plan boundary is not the Silver Spring CDP boundary.</p></section>
             <section className="insight-section"><SectionHeading detail="Source-linked">Data Provenance</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>Population and housing units for the selected geography.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>{selected && <DataCoverage area={selected} />}
           </>}
