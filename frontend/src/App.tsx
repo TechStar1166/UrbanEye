@@ -42,7 +42,7 @@ export default function App() {
 
   return <>
     <header><h1>UrbanEye</h1><p>Silver Spring community intelligence · shared starter</p></header>
-    <p className="notice">Real 2020 Census data for the whole Silver Spring CDP. This is broader than Fenton Village.</p>
+    <p className="notice">Real 2020 Census data for the Silver Spring CDP and Fenton Village study block groups.</p>
     {error && <div role="alert" className="notice">{error} {!areas && <button onClick={() => void load()}>Retry</button>}</div>}
     {loading && <p role="status">Loading community data…</p>}
     {areas && <main>
@@ -56,7 +56,7 @@ export default function App() {
         </select></label></div>
         <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={id => void select(id)} />
         <p className="legend">{layers.find(layer => layer.id === metric)?.description ?? 'Geographic boundaries; no metric fill.'}
-          {' '}One area is available; fill color identifies the layer, not a comparative scale.</p>
+          {' '}{areas.features.length === 1 ? 'One area is available;' : `${areas.features.length} areas across ${new Set(areas.features.map(f => f.properties.geography_type)).size} geographic levels;`} fill color identifies the layer, not a comparative scale.</p>
       </section>
       <aside aria-label="Area facts and evidence">
         {!selected ? <p>Select an area to inspect its values and sources.</p> : <>
@@ -65,9 +65,16 @@ export default function App() {
             <dd>{selected.metrics[layer.id] == null ? 'No data' : selected.metrics[layer.id]!.toLocaleString()} {layer.unit}</dd></div>)}</dl>
           <h3>Data sources</h3><EvidenceList items={selected.evidence} />
           <form onSubmit={ask}><label htmlFor="question">Ask about this area</label>
+            <div className="quick-prompts" aria-label="Sample questions">
+              <button type="button" className="quick-prompt-btn" onClick={() => setQuestion('What is the population?')}>Population</button>
+              <button type="button" className="quick-prompt-btn" onClick={() => setQuestion('How many housing units are there?')}>Housing units</button>
+              <button type="button" className="quick-prompt-btn" onClick={() => setQuestion('How does the plan preserve affordable housing?')}>Affordable housing</button>
+              <button type="button" className="quick-prompt-btn" onClick={() => setQuestion('What do planning documents say about housing in this area?')}>Housing in area</button>
+            </div>
             <textarea id="question" value={question} onChange={e => setQuestion(e.target.value)} maxLength={1000} required />
             <button disabled={busy || !question.trim()}>{busy ? 'Answering…' : 'Ask'}</button>
           </form>
+          {busy && <p role="status">Retrieving grounded evidence…</p>}
           {answer && <section aria-label="Answer" aria-live="polite"><h3>{answer.mode === 'llm' ? 'AI explanation' : answer.mode === 'facts' ? 'Cited data answer' : answer.mode === 'retrieval' ? 'Retrieved passages' : 'Available evidence'}</h3>
             {answer.mode === 'llm' && answer.claims?.length ? answer.claims.map((claim, i) => <div key={i}>
               <p>{claim.text}</p><small>Sources: {claim.evidence_ids.map((id, j) => <span key={id}>
@@ -75,7 +82,7 @@ export default function App() {
               </span>)}</small>
             </div>) : <p className="answer">{answer.summary}</p>}
             <EvidenceList items={answer.evidence} />
-            <ul>{answer.limitations.map(item => <li key={item}>{item}</li>)}</ul>
+            {answer.limitations?.length > 0 && <ul className="limitations">{answer.limitations.map(item => <li key={item}>{item}</li>)}</ul>}
           </section>}
         </>}
       </aside>

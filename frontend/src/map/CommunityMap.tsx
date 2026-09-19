@@ -28,27 +28,43 @@ export function CommunityMap({ areas, metric, selectedId, onSelect }: {
       style: (feature) => {
         const hasData = metric && feature?.properties?.metrics?.[metric] != null;
         const isSelected = feature?.properties?.geo_id === selectedId;
+        const isFiner = feature?.properties?.geography_type === 'block_group';
         return {
           color: isSelected ? '#ffcc00' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
-          weight: isSelected ? 5 : 3,
-          fillOpacity: hasData ? 0.35 : 0.05,
-          dashArray: hasData ? '' : '5, 5'
+          weight: isSelected ? 5 : (isFiner ? 2.5 : 3),
+          fillOpacity: hasData ? (isFiner ? 0.45 : 0.25) : 0.05,
+          dashArray: hasData ? '' : '5, 5',
         };
       },
       onEachFeature: (feature, layer) => {
         const name = document.createElement('span');
-        name.textContent = feature.properties.name;
+        const typeLabel = feature.properties.geography_type
+          ? ` (${feature.properties.geography_type.replace(/_/g, ' ')})`
+          : '';
+        name.textContent = `${feature.properties.name}${typeLabel}`;
         layer.bindTooltip(name);
-        layer.on('click', () => select.current(feature.properties.geo_id));
+        layer.on('click', (e) => {
+          L.DomEvent.stopPropagation(e);
+          select.current(feature.properties.geo_id);
+        });
       },
     }).addTo(map.current);
-    
+
+    polygons.eachLayer((layer: any) => {
+      if (layer.feature?.properties?.geography_type === 'block_group') {
+        layer.bringToFront();
+      }
+      if (layer.feature?.properties?.geo_id === selectedId) {
+        layer.bringToFront();
+      }
+    });
+
     if (lastAreas.current !== areas) {
       const bounds = polygons.getBounds();
       if (bounds.isValid()) map.current.fitBounds(bounds, { padding: [25, 25] });
       lastAreas.current = areas;
     }
-    
+
     return () => { polygons.remove(); };
   }, [areas, metric, selectedId]);
   return <div ref={container} className="map" aria-label="Interactive Silver Spring map" />;

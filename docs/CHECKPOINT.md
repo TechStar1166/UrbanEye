@@ -12,16 +12,16 @@
 
 ## Presentable MVP — not yet complete
 
-- [ ] Verified Fenton Village study geography and finer geographic units
-- [ ] Two real, useful layers for that geography with dates and source metadata
+- [x] Verified Fenton Village study geography and finer geographic units
+- [x] Two real, useful layers for that geography with dates and source metadata
 - [x] Actual public planning document parsed/chunked/indexed (three reviewed housing passages from the 2022 Silver Spring plan)
 - [x] Retrieval returns a relevant passage with exact source/page or section (printed pages 92/94; PDF pages 104/106)
 - [x] A model receives retrieved evidence and produces a validated grounded answer
 - [x] Answer claims and evidence IDs reviewed for geographic scope and support
 - [x] UI shows the answer, passage, source and limitations
 - [x] Unsupported question and API/model failure cases work
-- [ ] Fresh-clone demo passes without editing code or fetching data at startup
-- [ ] Preserve stable `checkpoint-demo` tag after all above pass
+- [x] Fresh-clone demo passes without editing code or fetching data at startup
+- [x] Preserve stable `checkpoint-demo` tag after all above pass
 
 Do not call the deterministic starter an AI/RAG demo. Do not tag it as the completed
 checkpoint. After this gate, add layers and segmentation/correlation; then consider
