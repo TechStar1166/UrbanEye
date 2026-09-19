@@ -98,8 +98,8 @@
 | --- | --- | --- | --- |
 | D1 | Run full smoke check from fresh clone after each A/B/C merge | — | `[ ]` |
 | D2 | Help A verify geographic joins are correct end-to-end | `data/processed/`, `backend/data.py` | `[ ]` |
-| D3 | Agree `/segment` contract with all owners; stub schema in `schemas.py` (no impl yet) | `backend/schemas.py` | `[ ]` |
-| D4 | Ensure `tests/test_api.py` covers A's new area ID and the full `/ask` path | `tests/test_api.py` | `[ ]` |
+| D3 | Agree `/segment` contract with all owners; stub schema in `schemas.py` (no impl yet) | `backend/schemas.py` | `[x]` |
+| D4 | Ensure `tests/test_api.py` covers A's new area ID and the full `/ask` path | `tests/test_api.py` | `[x]` |
 | D5 | Track checkpoint completion in `docs/CHECKPOINT.md` | `docs/CHECKPOINT.md` | `[ ]` |
 | D6 | Once ≥2 comparable areas exist: implement two-variable thresholds in `backend/analysis/` | `backend/analysis/` | `[ ]` |
 | D7 | Implement Pearson correlation with undefined/insufficient-data handling; association-only explanation | `backend/analysis/` | `[ ]` |

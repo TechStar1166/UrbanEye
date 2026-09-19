@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
 from backend.data import LAYERS, load_areas, load_chunks
-from backend.schemas import Answer, Area, Areas, AskRequest, Layer
+from backend.schemas import Answer, Area, Areas, AskRequest, Layer, SegmentRequest, SegmentResponse
 from backend.services import answer
 
 app = FastAPI(title="UrbanEye", version="0.1.0", description="Evidence-first community intelligence starter")
@@ -36,3 +36,8 @@ def get_layers():
 @app.post("/ask", response_model=Answer)
 def ask(request: AskRequest):
     return answer(request.question, get_area(request.geo_id), chunks)
+
+
+@app.post("/segment", response_model=SegmentResponse)
+def segment(request: SegmentRequest):
+    raise HTTPException(501, "Segmentation correlation is waiting on Task D6/D7 (Sprint 2)")
