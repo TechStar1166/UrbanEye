@@ -1,8 +1,8 @@
 """Facts/retrieval orchestration; deliberately separate from future AI interpretation."""
 import re
 
-from backend.rag.retrieve import retrieve
-from backend.schemas import Answer, Area, Evidence
+from backend.rag.retrieve import DocumentIndex
+from backend.schemas import Answer, Area
 
 LIMITATIONS = [
     "Starter answers are deterministic facts or document excerpts, not AI-generated explanations.",
@@ -10,7 +10,7 @@ LIMITATIONS = [
 ]
 
 
-def answer(question: str, area: Area, chunks: list[Evidence]) -> Answer:
+def answer(question: str, area: Area, index: DocumentIndex) -> Answer:
     # A deliberately narrow intent allowlist prevents unrelated or analytical
     # questions from receiving a misleading canned population answer.
     normalized = re.sub(r"[?.!]", "", question.lower()).strip()
@@ -27,14 +27,19 @@ def answer(question: str, area: Area, chunks: list[Evidence]) -> Answer:
             return Answer(mode="facts", summary=f"{area.name}: {fact.value:,.0f} {fact.unit} ({fact.date}).",
                           limitations=LIMITATIONS, evidence_ids=[fact.evidence_id], evidence=[fact])
     if not metric:
-        evidence = retrieve(question, area.geo_id, chunks)
+        evidence = index.retrieve(question, area.geo_id)
         if evidence:
-            return Answer(mode="retrieval", summary="Retrieved passages:\n" + "\n".join(
-                f"[{e.evidence_id}] {e.excerpt}" for e in evidence), limitations=LIMITATIONS,
+            scope_notes = list(dict.fromkeys(e.document_scope.note for e in evidence if e.document_scope))
+            return Answer(mode="retrieval",
+                summary="Related passages from the indexed public planning document are shown below.",
+                limitations=LIMITATIONS + scope_notes + [
+                    "Keyword retrieval finds related excerpts; it does not produce an AI answer or establish current policy.",
+                    "Only three reviewed housing passages are indexed, not the full plan.",
+                ],
                 evidence_ids=[e.evidence_id for e in evidence], evidence=evidence)
     return Answer(mode="insufficient_evidence",
                   summary="The available evidence is insufficient to answer this question.",
                   limitations=LIMITATIONS + [
                       "Try ‘What is the population?’ or ‘How many housing units are there?’.",
-                      "No public planning document is bundled yet; document RAG remains a team task.",
+                      "The small document index covers housing diversity, affordable-housing preservation, and housing near transit.",
                   ], evidence_ids=[], evidence=[])

@@ -2691,7 +2691,9 @@
             "unit": "people",
             "excerpt": null,
             "page": null,
-            "section": null
+            "section": null,
+            "page_label": null,
+            "document_scope": null
           },
           {
             "evidence_id": "census2020:2472450:housing_units",
@@ -2706,7 +2708,9 @@
             "unit": "units",
             "excerpt": null,
             "page": null,
-            "section": null
+            "section": null,
+            "page_label": null,
+            "document_scope": null
           }
         ]
       }

@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "evidence_id": "silver-spring-dac-2022:housing-diversity:d7fda56f3303",
+    "type": "document",
+    "title": "Silver Spring Downtown and Adjacent Communities Plan",
+    "source": "Montgomery Planning / M-NCPPC",
+    "url": "https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=104",
+    "date": "2022-06",
+    "geo_id": "plan:silver-spring-dac-2022",
+    "metric": null,
+    "value": null,
+    "unit": null,
+    "excerpt": "This Plan recommends prioritizing providing a range of unit types for a diversity of households, including families, seniors, and persons with disabilities, to allow more diverse households to take advantage of Silver Spring’s amenities.",
+    "page": 104,
+    "section": "3.3 Housing",
+    "page_label": "92",
+    "document_scope": {
+      "name": "Silver Spring Downtown and Adjacent Communities Plan area",
+      "context_geo_ids": [
+        "2472450"
+      ],
+      "relationship": "partial_overlap",
+      "note": "Related planning-area context only: the 2022 plan boundary is not the Silver Spring CDP boundary. These recommendations do not describe every location in the selected CDP or establish current housing conditions."
+    }
+  },
+  {
+    "evidence_id": "silver-spring-dac-2022:housing-preservation:982d1ba72d67",
+    "type": "document",
+    "title": "Silver Spring Downtown and Adjacent Communities Plan",
+    "source": "Montgomery Planning / M-NCPPC",
+    "url": "https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=104",
+    "date": "2022-06",
+    "geo_id": "plan:silver-spring-dac-2022",
+    "metric": null,
+    "value": null,
+    "unit": null,
+    "excerpt": "This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing, which will result in the creation of new Moderately Priced Dwelling Units (MPDUs). The Plan seeks to achieve this through rezoning select properties or by supporting future applications for Floating Zones that prioritize the replacement of existing naturally occurring affordable housing with new income-restricted affordable housing.",
+    "page": 104,
+    "section": "3.3 Housing",
+    "page_label": "92",
+    "document_scope": {
+      "name": "Silver Spring Downtown and Adjacent Communities Plan area",
+      "context_geo_ids": [
+        "2472450"
+      ],
+      "relationship": "partial_overlap",
+      "note": "Related planning-area context only: the 2022 plan boundary is not the Silver Spring CDP boundary. These recommendations do not describe every location in the selected CDP or establish current housing conditions."
+    }
+  },
+  {
+    "evidence_id": "silver-spring-dac-2022:housing-transit:b2d7852e7d4b",
+    "type": "document",
+    "title": "Silver Spring Downtown and Adjacent Communities Plan",
+    "source": "Montgomery Planning / M-NCPPC",
+    "url": "https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=106",
+    "date": "2022-06",
+    "geo_id": "plan:silver-spring-dac-2022",
+    "metric": null,
+    "value": null,
+    "unit": null,
+    "excerpt": "Build the majority of new housing in transit-oriented locations and near jobs and employment centers.",
+    "page": 106,
+    "section": "3.3.1 Goals",
+    "page_label": "94",
+    "document_scope": {
+      "name": "Silver Spring Downtown and Adjacent Communities Plan area",
+      "context_geo_ids": [
+        "2472450"
+      ],
+      "relationship": "partial_overlap",
+      "note": "Related planning-area context only: the 2022 plan boundary is not the Silver Spring CDP boundary. These recommendations do not describe every location in the selected CDP or establish current housing conditions."
+    }
+  }
+]

@@ -8,6 +8,14 @@ class Contract(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
 
 
+class DocumentScope(Contract):
+    """Reviewed contextual applicability; never a replacement for source geography."""
+    name: str = Field(min_length=1)
+    context_geo_ids: list[str] = Field(min_length=1)
+    relationship: Literal["partial_overlap", "broader_context"]
+    note: str = Field(min_length=1)
+
+
 class Evidence(Contract):
     evidence_id: str
     type: Literal["structured_data", "document"]
@@ -22,6 +30,8 @@ class Evidence(Contract):
     excerpt: str | None = None
     page: int | None = Field(default=None, ge=1)
     section: str | None = None
+    page_label: str | None = None
+    document_scope: DocumentScope | None = None
 
     @model_validator(mode="after")
     def require_content(self):
@@ -29,6 +39,10 @@ class Evidence(Contract):
             raise ValueError("Structured evidence requires metric and unit")
         if self.type == "document" and not self.excerpt:
             raise ValueError("Document evidence requires an excerpt")
+        if self.type == "structured_data" and self.document_scope is not None:
+            raise ValueError("Document scope cannot broaden structured metric geography")
+        if self.geo_id.startswith("plan:") and self.document_scope is None:
+            raise ValueError("Planning-area evidence requires explicit contextual geography")
         return self
 
 
@@ -93,6 +107,11 @@ class AskRequest(Contract):
     geo_id: str = Field(min_length=1)
 
 
+class Claim(Contract):
+    text: str = Field(min_length=1, max_length=1000, pattern=r"\S")
+    evidence_ids: list[str] = Field(min_length=1, max_length=10)
+
+
 class Answer(Contract):
     schema_version: Literal["1.0"] = "1.0"
     mode: Literal["facts", "retrieval", "insufficient_evidence", "llm"]
@@ -100,6 +119,7 @@ class Answer(Contract):
     limitations: list[str]
     evidence_ids: list[str]
     evidence: list[Evidence]
+    claims: list[Claim] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def valid_citations(self):
@@ -107,6 +127,10 @@ class Answer(Contract):
             raise ValueError("Answer citations must match returned evidence")
         if self.mode != "insufficient_evidence" and not self.evidence:
             raise ValueError("An answer needs evidence")
+        if self.mode == "llm":
+            cited = {eid for claim in self.claims for eid in claim.evidence_ids}
+            if not self.claims or cited != set(self.evidence_ids):
+                raise ValueError("Each AI claim must cite returned evidence")
         return self
 
 

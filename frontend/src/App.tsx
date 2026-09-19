@@ -66,10 +66,15 @@ export default function App() {
           <h3>Data sources</h3><EvidenceList items={selected.evidence} />
           <form onSubmit={ask}><label htmlFor="question">Ask about this area</label>
             <textarea id="question" value={question} onChange={e => setQuestion(e.target.value)} maxLength={1000} required />
-            <button disabled={busy || !question.trim()}>{busy ? 'Retrieving…' : 'Ask'}</button>
+            <button disabled={busy || !question.trim()}>{busy ? 'Answering…' : 'Ask'}</button>
           </form>
-          {answer && <section aria-label="Answer" aria-live="polite"><h3>{answer.mode === 'facts' ? 'Cited data answer' : answer.mode === 'retrieval' ? 'Retrieved passages' : 'Available evidence'}</h3>
-            <p className="answer">{answer.summary}</p><EvidenceList items={answer.evidence} />
+          {answer && <section aria-label="Answer" aria-live="polite"><h3>{answer.mode === 'llm' ? 'AI explanation' : answer.mode === 'facts' ? 'Cited data answer' : answer.mode === 'retrieval' ? 'Retrieved passages' : 'Available evidence'}</h3>
+            {answer.mode === 'llm' && answer.claims?.length ? answer.claims.map((claim, i) => <div key={i}>
+              <p>{claim.text}</p><small>Sources: {claim.evidence_ids.map((id, j) => <span key={id}>
+                {j > 0 && ', '}<a href={`#evidence-${id}`}>{answer.evidence_ids.indexOf(id) + 1}</a>
+              </span>)}</small>
+            </div>) : <p className="answer">{answer.summary}</p>}
+            <EvidenceList items={answer.evidence} />
             <ul>{answer.limitations.map(item => <li key={item}>{item}</li>)}</ul>
           </section>}
         </>}

@@ -1,4 +1,5 @@
 """Load and validate the committed snapshot; no network calls during startup."""
+import hashlib
 import json
 from pathlib import Path
 
@@ -12,8 +13,12 @@ def load_areas() -> Areas:
 
 
 def load_chunks() -> list[Evidence]:
-    chunks = [Evidence.model_validate(c) for c in json.loads(
-        (ROOT / "documents/processed/chunks.json").read_text())]
+    path = ROOT / "documents/processed/chunks.json"
+    raw = path.read_bytes()
+    manifest = json.loads((path.parent / "manifest.json").read_text())
+    if hashlib.sha256(raw).hexdigest() != manifest["chunks_sha256"]:
+        raise ValueError("Document chunks differ from their ingestion manifest; rebuild and review")
+    chunks = [Evidence.model_validate(c) for c in json.loads(raw)]
     if any(c.type != "document" for c in chunks):
         raise ValueError("The document corpus may only contain document evidence")
     if len({c.evidence_id for c in chunks}) != len(chunks):

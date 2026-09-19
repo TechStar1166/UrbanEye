@@ -131,6 +131,8 @@ export interface components {
             evidence_ids: string[];
             /** Evidence */
             evidence: components["schemas"]["Evidence"][];
+            /** Claims */
+            claims?: components["schemas"]["Claim"][];
         };
         /** Area */
         Area: {
@@ -176,6 +178,13 @@ export interface components {
             /** Geo Id */
             geo_id: string;
         };
+        /** Claim */
+        Claim: {
+            /** Text */
+            text: string;
+            /** Evidence Ids */
+            evidence_ids: string[];
+        };
         /** DataPoint */
         DataPoint: {
             /** Geo Id */
@@ -184,6 +193,23 @@ export interface components {
             x_value: number | null;
             /** Y Value */
             y_value: number | null;
+        };
+        /**
+         * DocumentScope
+         * @description Reviewed contextual applicability; never a replacement for source geography.
+         */
+        DocumentScope: {
+            /** Name */
+            name: string;
+            /** Context Geo Ids */
+            context_geo_ids: string[];
+            /**
+             * Relationship
+             * @enum {string}
+             */
+            relationship: "partial_overlap" | "broader_context";
+            /** Note */
+            note: string;
         };
         /** Evidence */
         Evidence: {
@@ -219,6 +245,9 @@ export interface components {
             page?: number | null;
             /** Section */
             section?: string | null;
+            /** Page Label */
+            page_label?: string | null;
+            document_scope?: components["schemas"]["DocumentScope"] | null;
         };
         /** Feature */
         Feature: {
