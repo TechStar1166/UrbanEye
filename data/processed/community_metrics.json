@@ -9,7 +9,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 36.68239340147719,
-      "moe": 0.3169018242606025,
+      "moe": 0.316902,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -21,7 +21,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.48665785477983,
-      "moe": 0.13855450575331274,
+      "moe": 0.138555,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -153,7 +153,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 9.064895301168779,
-      "moe": 0.4114680769432331,
+      "moe": 0.411468,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -165,7 +165,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 9.448876835068978,
-      "moe": 0.18054910284677916,
+      "moe": 0.180549,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -177,7 +177,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 32.199089362262086,
-      "moe": 0.5567180963496174,
+      "moe": 0.556718,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -189,7 +189,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 32.390449476243035,
-      "moe": 0.2752793850722747,
+      "moe": 0.275279,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -201,7 +201,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 37.32302293413954,
-      "moe": 0.721118181320553,
+      "moe": 0.721118,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -213,7 +213,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.835908659795166,
-      "moe": 0.33569818230319604,
+      "moe": 0.335698,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -345,7 +345,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 7.374849806738151,
-      "moe": 0.912165026152547,
+      "moe": 0.912165,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -357,7 +357,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 7.450445779849843,
-      "moe": 0.3308104389720034,
+      "moe": 0.33081,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -369,7 +369,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 34.88710328116127,
-      "moe": 1.2840391114421166,
+      "moe": 1.284039,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -381,7 +381,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 34.70388736157858,
-      "moe": 0.5938288150810658,
+      "moe": 0.593829,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -393,7 +393,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.74869109947644,
-      "moe": 6.740592463272568,
+      "moe": 6.740593,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -453,7 +453,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 11.326860841423947,
-      "moe": 7.895425729501705,
+      "moe": 7.895426,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -465,7 +465,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 38.4789156626506,
-      "moe": 6.0442934649068984,
+      "moe": 6.044293,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -525,7 +525,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 2.375296912114014,
-      "moe": 3.9864503468779904,
+      "moe": 3.98645,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -537,7 +537,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 23.43980343980344,
-      "moe": 4.512013278362717,
+      "moe": 4.512013,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -597,7 +597,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 87.18291054739653,
-      "moe": 7.108452293184512,
+      "moe": 7.108452,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -609,7 +609,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 18.072289156626507,
-      "moe": 6.321462527043723,
+      "moe": 6.321463,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -669,7 +669,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 82.37623762376238,
-      "moe": 15.656564464680823,
+      "moe": 15.656564,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -681,7 +681,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 17.871576111360575,
-      "moe": 6.106690138271742,
+      "moe": 6.10669,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -753,7 +753,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 33.65735115431349,
-      "moe": 15.010379646618802,
+      "moe": 15.01038,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -813,7 +813,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 14.71264367816092,
-      "moe": 12.010746696023174,
+      "moe": 12.010747,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -825,7 +825,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 27.9796511627907,
-      "moe": 16.167032276597073,
+      "moe": 16.167032,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -885,7 +885,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 12.355212355212355,
-      "moe": 19.17375192139738,
+      "moe": 19.173752,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -897,7 +897,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 33.38722716248989,
-      "moe": 7.215325386482788,
+      "moe": 7.215325,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -957,7 +957,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 60.07751937984496,
-      "moe": 9.844711149276682,
+      "moe": 9.844711,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -969,7 +969,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 17.235345581802274,
-      "moe": 3.8721342779349945,
+      "moe": 3.872134,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1029,7 +1029,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.53488372093023,
-      "moe": 18.118098886137208,
+      "moe": 18.118099,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1041,7 +1041,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.512027491408936,
-      "moe": 9.447722371769494,
+      "moe": 9.447722,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1101,7 +1101,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 13.101604278074866,
-      "moe": 11.151609844402712,
+      "moe": 11.15161,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1113,7 +1113,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.976653696498055,
-      "moe": 5.49030040066132,
+      "moe": 5.4903,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1173,7 +1173,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 74.88372093023256,
-      "moe": 13.07682713753268,
+      "moe": 13.076827,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1185,7 +1185,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.32019115890083,
-      "moe": 5.076162899427565,
+      "moe": 5.076163,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1245,7 +1245,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 2.816901408450704,
-      "moe": 4.514968580130267,
+      "moe": 4.514969,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1257,7 +1257,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 38.47572218807621,
-      "moe": 22.43218322857282,
+      "moe": 22.432183,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1317,7 +1317,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 83.07952622673434,
-      "moe": 21.6746164980367,
+      "moe": 21.674616,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1329,7 +1329,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 17.98941798941799,
-      "moe": 8.406760489193715,
+      "moe": 8.406761,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1389,7 +1389,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 97.40634005763688,
-      "moe": 12.471818674408569,
+      "moe": 12.471819,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1401,7 +1401,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.80089485458613,
-      "moe": 12.668406666503666,
+      "moe": 12.668407,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1461,7 +1461,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 82.05128205128206,
-      "moe": 13.369543875101508,
+      "moe": 13.369544,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1473,7 +1473,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 10.147441457068517,
-      "moe": 3.217727860596214,
+      "moe": 3.217728,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1533,7 +1533,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 76.00849256900213,
-      "moe": 21.857175561436158,
+      "moe": 21.857176,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1545,7 +1545,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 20.66772655007949,
-      "moe": 8.215850248098544,
+      "moe": 8.21585,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1605,7 +1605,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 68.12749003984064,
-      "moe": 25.340036172981193,
+      "moe": 25.340036,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1617,7 +1617,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 34.746351633078525,
-      "moe": 18.326949307369834,
+      "moe": 18.326949,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1677,7 +1677,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 31.51658767772512,
-      "moe": 19.944380100596053,
+      "moe": 19.94438,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1689,7 +1689,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 18.15889029003783,
-      "moe": 3.7804337623170317,
+      "moe": 3.780434,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1749,7 +1749,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 53.06666666666667,
-      "moe": 13.63830617019939,
+      "moe": 13.638306,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1761,7 +1761,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 48.888888888888886,
-      "moe": 3.323550511233509,
+      "moe": 3.323551,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1821,7 +1821,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 35.52361396303901,
-      "moe": 16.033790396348724,
+      "moe": 16.03379,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1833,7 +1833,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.829699469652326,
-      "moe": 17.459660895719118,
+      "moe": 17.459661,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1893,7 +1893,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 49.312714776632305,
-      "moe": 18.84190082044689,
+      "moe": 18.841901,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1905,7 +1905,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 18.79854997410668,
-      "moe": 7.064870638545165,
+      "moe": 7.064871,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -1965,7 +1965,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 90.3420523138833,
-      "moe": 10.823621837832468,
+      "moe": 10.823622,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -1977,7 +1977,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.24914675767918,
-      "moe": 19.07737589671449,
+      "moe": 19.077376,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2037,7 +2037,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 11.650485436893204,
-      "moe": 18.080417135208563,
+      "moe": 18.080417,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2049,7 +2049,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 27.548005908419498,
-      "moe": 13.502828088113334,
+      "moe": 13.502828,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2109,7 +2109,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 7.346938775510204,
-      "moe": 5.706144577756107,
+      "moe": 5.706145,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2121,7 +2121,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 28.121353558926486,
-      "moe": 5.302988394892793,
+      "moe": 5.302988,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2181,7 +2181,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 0.0,
-      "moe": 4.761904761904762,
+      "moe": 4.761905,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2193,7 +2193,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 33.83458646616541,
-      "moe": 6.794370640975922,
+      "moe": 6.794371,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2253,7 +2253,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 15.15748031496063,
-      "moe": 10.528687969045004,
+      "moe": 10.528688,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2265,7 +2265,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 51.10356536502547,
-      "moe": 9.014928691476392,
+      "moe": 9.014929,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2325,7 +2325,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 6.741573033707865,
-      "moe": 10.369389053763618,
+      "moe": 10.369389,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2337,7 +2337,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.68686073957514,
-      "moe": 6.7985516669020685,
+      "moe": 6.798552,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2397,7 +2397,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 11.787819253438114,
-      "moe": 8.149425204967304,
+      "moe": 8.149425,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2409,7 +2409,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 29.32061978545888,
-      "moe": 6.870551026785212,
+      "moe": 6.870551,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2469,7 +2469,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 5.185185185185185,
-      "moe": 7.646844537600006,
+      "moe": 7.646845,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2481,7 +2481,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 27.099409895596914,
-      "moe": 5.592685455563202,
+      "moe": 5.592685,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2541,7 +2541,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 54.203539823008846,
-      "moe": 7.997778559713533,
+      "moe": 7.997779,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2553,7 +2553,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 8.794541319181198,
-      "moe": 5.112228985557637,
+      "moe": 5.112229,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2613,7 +2613,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 73.2620320855615,
-      "moe": 19.772060878438808,
+      "moe": 19.772061,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2625,7 +2625,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 30.835240274599542,
-      "moe": 4.315683250235758,
+      "moe": 4.315683,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2685,7 +2685,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 66.66666666666667,
-      "moe": 30.75011269506437,
+      "moe": 30.750113,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2697,7 +2697,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.2093023255814,
-      "moe": 10.809638970389738,
+      "moe": 10.809639,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2757,7 +2757,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 11.355311355311356,
-      "moe": 12.311363955082413,
+      "moe": 12.311364,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2769,7 +2769,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.70820353063344,
-      "moe": 5.440632924017401,
+      "moe": 5.440633,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2829,7 +2829,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 45.324532453245325,
-      "moe": 12.044412552937523,
+      "moe": 12.044413,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2841,7 +2841,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 41.05058365758755,
-      "moe": 7.069257989233535,
+      "moe": 7.069258,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2901,7 +2901,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 4.7091412742382275,
-      "moe": 4.9042363684767345,
+      "moe": 4.904236,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2913,7 +2913,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 38.58695652173913,
-      "moe": 3.236517460422923,
+      "moe": 3.236517,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -2973,7 +2973,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 14.884393063583815,
-      "moe": 7.319623021390945,
+      "moe": 7.319623,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -2985,7 +2985,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 29.088168801808592,
-      "moe": 19.075102155995715,
+      "moe": 19.075102,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3045,7 +3045,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 45.65217391304348,
-      "moe": 22.473180601041356,
+      "moe": 22.473181,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3057,7 +3057,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 27.41774675972084,
-      "moe": 10.568167878485276,
+      "moe": 10.568168,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3117,7 +3117,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 87.44710860366713,
-      "moe": 11.288883574435534,
+      "moe": 11.288884,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3129,7 +3129,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.01565898216616,
-      "moe": 9.925117460109522,
+      "moe": 9.925117,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3189,7 +3189,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 48.02904564315353,
-      "moe": 11.890584177422381,
+      "moe": 11.890584,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3201,7 +3201,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 13.189056757860351,
-      "moe": 6.181143168056124,
+      "moe": 6.181143,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3261,7 +3261,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 89.84145625366999,
-      "moe": 7.465900428950784,
+      "moe": 7.4659,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3273,7 +3273,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 31.38815207780725,
-      "moe": 13.72874814527158,
+      "moe": 13.728748,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3333,7 +3333,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 45.33132530120482,
-      "moe": 19.221825607383686,
+      "moe": 19.221826,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3345,7 +3345,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 32.32211803640375,
-      "moe": 13.18821026627409,
+      "moe": 13.18821,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3405,7 +3405,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 84.77064220183486,
-      "moe": 8.32686395123781,
+      "moe": 8.326864,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3417,7 +3417,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 15.463917525773196,
-      "moe": 16.94088830226322,
+      "moe": 16.940888,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3477,7 +3477,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 63.04347826086956,
-      "moe": 21.74809709858192,
+      "moe": 21.748097,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3489,7 +3489,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 34.585824081981215,
-      "moe": 14.245908494412422,
+      "moe": 14.245909,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3549,7 +3549,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 89.97326203208556,
-      "moe": 18.40049240117298,
+      "moe": 18.400492,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3561,7 +3561,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 12.576923076923077,
-      "moe": 5.810719371647637,
+      "moe": 5.810719,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3633,7 +3633,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 23.813169984686063,
-      "moe": 10.55058114875976,
+      "moe": 10.550581,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3693,7 +3693,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 43.956043956043956,
-      "moe": 17.400750320574033,
+      "moe": 17.40075,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3705,7 +3705,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.1566265060241,
-      "moe": 21.013781221055055,
+      "moe": 21.013781,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3777,7 +3777,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 16.454517230673705,
-      "moe": 7.630642187960199,
+      "moe": 7.630642,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3849,7 +3849,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 16.36141636141636,
-      "moe": 11.764365218430783,
+      "moe": 11.764365,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3909,7 +3909,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 98.4,
-      "moe": 31.14139422954598,
+      "moe": 31.141394,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3921,7 +3921,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 24.369747899159663,
-      "moe": 7.411729724468327,
+      "moe": 7.41173,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -3981,7 +3981,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 83.86581469648563,
-      "moe": 12.79421335086143,
+      "moe": 12.794213,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -3993,7 +3993,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 12.198685171658145,
-      "moe": 7.873179887978699,
+      "moe": 7.87318,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4065,7 +4065,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 15.706214689265536,
-      "moe": 5.224335413585377,
+      "moe": 5.224335,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4137,7 +4137,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 28.99009900990099,
-      "moe": 12.784502388603057,
+      "moe": 12.784502,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4197,7 +4197,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 35.48022598870057,
-      "moe": 14.74845569344679,
+      "moe": 14.748456,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4209,7 +4209,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 20.976176641487505,
-      "moe": 17.281250031114528,
+      "moe": 17.28125,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4269,7 +4269,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 65.42443064182194,
-      "moe": 45.77639463615477,
+      "moe": 45.776395,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4281,7 +4281,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 44.701348747591524,
-      "moe": 6.419620966706518,
+      "moe": 6.419621,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4341,7 +4341,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 0.0,
-      "moe": 4.011461318051576,
+      "moe": 4.011461,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4425,7 +4425,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 22.685435841905793,
-      "moe": 3.9462111067419983,
+      "moe": 3.946211,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4485,7 +4485,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 72.83464566929133,
-      "moe": 12.99698358324551,
+      "moe": 12.996984,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4497,7 +4497,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.413680781758956,
-      "moe": 3.3894401229482707,
+      "moe": 3.38944,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4557,7 +4557,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 11.956521739130435,
-      "moe": 9.491096617134257,
+      "moe": 9.491097,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4569,7 +4569,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 41.280708819975835,
-      "moe": 10.345682643795326,
+      "moe": 10.345683,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4629,7 +4629,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 9.62800875273523,
-      "moe": 5.987471818379851,
+      "moe": 5.987472,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4641,7 +4641,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 10.114503816793894,
-      "moe": 15.277112508488726,
+      "moe": 15.277113,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4713,7 +4713,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 3.274942878903275,
-      "moe": 5.849595093862958,
+      "moe": 5.849595,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4785,7 +4785,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 44.19889502762431,
-      "moe": 15.420183312306884,
+      "moe": 15.420183,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4845,7 +4845,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 6.600660066006601,
-      "moe": 10.275361213612081,
+      "moe": 10.275361,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4857,7 +4857,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 46.23728813559322,
-      "moe": 21.0663653697095,
+      "moe": 21.066365,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -4917,7 +4917,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 0.0,
-      "moe": 2.8282828282828283,
+      "moe": 2.828283,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4929,7 +4929,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 40.2555910543131,
-      "moe": 7.473053426329241,
+      "moe": 7.473053,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -4989,7 +4989,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 55.256410256410255,
-      "moe": 17.93639144681595,
+      "moe": 17.936391,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5001,7 +5001,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.94490358126722,
-      "moe": 9.107834665798688,
+      "moe": 9.107835,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5061,7 +5061,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.21052631578947,
-      "moe": 16.952882724438474,
+      "moe": 16.952883,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5073,7 +5073,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 32.432432432432435,
-      "moe": 26.079166985189698,
+      "moe": 26.079167,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5133,7 +5133,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 6.550218340611353,
-      "moe": 10.418670338544167,
+      "moe": 10.41867,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5145,7 +5145,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 28.03867403314917,
-      "moe": 6.021874738286128,
+      "moe": 6.021875,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5205,7 +5205,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 16.091954022988507,
-      "moe": 12.051981247876633,
+      "moe": 12.051981,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5217,7 +5217,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.26062322946176,
-      "moe": 4.842881313718493,
+      "moe": 4.842881,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5277,7 +5277,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 9.216589861751151,
-      "moe": 6.473461770672347,
+      "moe": 6.473462,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5289,7 +5289,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 45.3770197486535,
-      "moe": 7.229351627239595,
+      "moe": 7.229352,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5349,7 +5349,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 33.484162895927604,
-      "moe": 13.541143948923203,
+      "moe": 13.541144,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5361,7 +5361,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.70707892595606,
-      "moe": 17.280376672552933,
+      "moe": 17.280377,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5421,7 +5421,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 2.888888888888889,
-      "moe": 3.223819442366797,
+      "moe": 3.223819,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5433,7 +5433,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.45421245421245,
-      "moe": 17.221606071699085,
+      "moe": 17.221606,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5493,7 +5493,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 16.923076923076923,
-      "moe": 14.257720987304715,
+      "moe": 14.257721,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5505,7 +5505,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 54.752604166666664,
-      "moe": 13.73322341526339,
+      "moe": 13.733223,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5565,7 +5565,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 3.7117903930131004,
-      "moe": 3.6589573245642875,
+      "moe": 3.658957,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5577,7 +5577,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 50.594975760246804,
-      "moe": 15.621776669649588,
+      "moe": 15.621777,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5637,7 +5637,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 35.92039800995025,
-      "moe": 14.704032381287321,
+      "moe": 14.704032,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5649,7 +5649,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 53.80493033226152,
-      "moe": 5.933122760647176,
+      "moe": 5.933123,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5709,7 +5709,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 10.778443113772456,
-      "moe": 8.676308685761823,
+      "moe": 8.676309,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5721,7 +5721,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 12.835120643431635,
-      "moe": 5.433858278889214,
+      "moe": 5.433858,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -5793,7 +5793,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 31.219028741328046,
-      "moe": 5.156778245371878,
+      "moe": 5.156778,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5853,7 +5853,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 53.61552028218695,
-      "moe": 13.392933643001406,
+      "moe": 13.392934,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5865,7 +5865,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 24.7152226441146,
-      "moe": 3.994594137923247,
+      "moe": 3.994594,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5925,7 +5925,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 69.67471143756558,
-      "moe": 13.381400039170755,
+      "moe": 13.3814,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -5937,7 +5937,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 6.106870229007634,
-      "moe": 7.370347999915969,
+      "moe": 7.370348,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6009,7 +6009,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 37.602382725241995,
-      "moe": 6.7845234905153005,
+      "moe": 6.784523,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6069,7 +6069,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 75.66037735849056,
-      "moe": 17.57669666401477,
+      "moe": 17.576697,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6081,7 +6081,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.19824341279799,
-      "moe": 13.440090331484676,
+      "moe": 13.44009,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6141,7 +6141,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 60.68515497553018,
-      "moe": 22.40069887356319,
+      "moe": 22.400699,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6153,7 +6153,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 36.40141110197025,
-      "moe": 0.6732987852133262,
+      "moe": 0.673299,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6165,7 +6165,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 39.279795956597546,
-      "moe": 0.5842495019145211,
+      "moe": 0.58425,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6297,7 +6297,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 5.195097267513775,
-      "moe": 1.8578510384225146,
+      "moe": 1.857851,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6309,7 +6309,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 4.264767978566956,
-      "moe": 0.9392380252634406,
+      "moe": 0.939238,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6321,7 +6321,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 36.311819516024435,
-      "moe": 5.161996226184575,
+      "moe": 5.161996,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6333,7 +6333,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.041808354511936,
-      "moe": 1.7722374369173912,
+      "moe": 1.772237,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6345,7 +6345,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 39.293997850313964,
-      "moe": 4.336465422461297,
+      "moe": 4.336465,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6357,7 +6357,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 31.690655209452203,
-      "moe": 1.7163629619956629,
+      "moe": 1.716363,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6489,7 +6489,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 9.309748070812528,
-      "moe": 3.7264368302936264,
+      "moe": 3.726437,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6501,7 +6501,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 8.7553351020879,
-      "moe": 1.4360399153978567,
+      "moe": 1.43604,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6513,7 +6513,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 48.36995439641201,
-      "moe": 6.097312507841513,
+      "moe": 6.097313,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6525,7 +6525,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 49.216203631848515,
-      "moe": 2.608177813767995,
+      "moe": 2.608178,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6537,7 +6537,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 32.639321507809,
-      "moe": 5.210267782820306,
+      "moe": 5.210268,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6549,7 +6549,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 33.190401128760236,
-      "moe": 1.095959998041571,
+      "moe": 1.09596,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6681,7 +6681,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 10.909647310840793,
-      "moe": 4.6498080311293,
+      "moe": 4.649808,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6693,7 +6693,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 8.824404925967167,
-      "moe": 1.7329835946448227,
+      "moe": 1.732984,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6705,7 +6705,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 37.16870773167611,
-      "moe": 7.26535072590599,
+      "moe": 7.265351,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6717,7 +6717,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 32.75103682292321,
-      "moe": 2.1281242205014452,
+      "moe": 2.128124,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6729,7 +6729,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 37.30359413596036,
-      "moe": 3.7997616344570897,
+      "moe": 3.799762,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6741,7 +6741,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 36.829661154704375,
-      "moe": 1.8492675328510861,
+      "moe": 1.849268,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6873,7 +6873,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 6.05729312866577,
-      "moe": 2.9813682914856035,
+      "moe": 2.981368,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -6885,7 +6885,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 7.643521704011727,
-      "moe": 1.4538686424828633,
+      "moe": 1.453869,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6897,7 +6897,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 45.12346375014094,
-      "moe": 4.041430076336137,
+      "moe": 4.04143,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6909,7 +6909,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 47.36432384341637,
-      "moe": 2.3045203762882327,
+      "moe": 2.30452,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6921,7 +6921,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 30.9680819611019,
-      "moe": 0.5905509890329528,
+      "moe": 0.590551,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -6933,7 +6933,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 27.422601949375167,
-      "moe": 1.2313166914109932,
+      "moe": 1.231317,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -7065,7 +7065,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 10.680098811178015,
-      "moe": 4.154053203808012,
+      "moe": 4.154053,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": true
@@ -7077,7 +7077,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 10.642958223097274,
-      "moe": 1.7579875046993074,
+      "moe": 1.757988,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -7089,7 +7089,7 @@
       "year": 2024,
       "span": 1,
       "estimate": 60.5854860102318,
-      "moe": 5.000317903387393,
+      "moe": 5.000318,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false
@@ -7101,7 +7101,7 @@
       "year": 2024,
       "span": 5,
       "estimate": 61.72472637401436,
-      "moe": 1.985967199190778,
+      "moe": 1.985967,
       "estimate_2024_usd": null,
       "unit": "percent",
       "low_reliability": false

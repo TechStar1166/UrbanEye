@@ -170,6 +170,12 @@ def row_pair(columns, row, table, number) -> tuple[float | None, float | None]:
 AGE_50_PLUS_CELLS = list(range(16, 26)) + list(range(40, 50))
 
 
+def stable_moe(value: float) -> float:
+    """Margins of error come from sqrt and powers, and the last binary digit differs between platforms and
+    Python builds (CI regenerates this data and diffs it). Six decimals is far below any real precision."""
+    return round(value, 6)
+
+
 def sum_cells(columns, row, table, numbers) -> tuple[float | None, float | None]:
     """Aggregate estimates; combine their MOEs as the root sum of squares."""
     total, variance, seen = 0.0, 0.0, False
@@ -183,7 +189,7 @@ def sum_cells(columns, row, table, numbers) -> tuple[float | None, float | None]
             variance += moe ** 2
     if not seen:
         return None, None
-    return total, math.sqrt(variance) if variance else None
+    return total, stable_moe(math.sqrt(variance)) if variance else None
 
 
 def ratio_moe(num, num_moe, den, den_moe) -> float | None:
@@ -196,7 +202,7 @@ def ratio_moe(num, num_moe, den, den_moe) -> float | None:
     inner = num_moe ** 2 - (rate ** 2) * (den_moe ** 2)
     if inner < 0:
         inner = num_moe ** 2 + (rate ** 2) * (den_moe ** 2)
-    return 100.0 * math.sqrt(inner) / den
+    return stable_moe(100.0 * math.sqrt(inner) / den)
 
 
 def to_2024_dollars(value: float | None, year: int, cpi: dict[int, float]) -> float | None:
