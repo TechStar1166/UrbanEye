@@ -89,6 +89,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/segment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Segment */
+        post: operations["segment_segment_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -167,6 +184,15 @@ export interface components {
             text: string;
             /** Evidence Ids */
             evidence_ids: string[];
+        };
+        /** DataPoint */
+        DataPoint: {
+            /** Geo Id */
+            geo_id: string;
+            /** X Value */
+            x_value: number | null;
+            /** Y Value */
+            y_value: number | null;
         };
         /**
          * DocumentScope
@@ -261,6 +287,36 @@ export interface components {
             unit: string;
             /** Description */
             description: string;
+        };
+        /** SegmentRequest */
+        SegmentRequest: {
+            /** Geo Ids */
+            geo_ids: string[];
+            /** X Metric */
+            x_metric: string;
+            /** Y Metric */
+            y_metric: string;
+        };
+        /** SegmentResponse */
+        SegmentResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** X Metric */
+            x_metric: string;
+            /** Y Metric */
+            y_metric: string;
+            /** Correlation Coefficient */
+            correlation_coefficient: number | null;
+            /** Sample Size */
+            sample_size: number;
+            /** Explanation */
+            explanation: string;
+            /** Data Points */
+            data_points: components["schemas"]["DataPoint"][];
         };
         /** ValidationError */
         ValidationError: {
@@ -391,6 +447,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Answer"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    segment_segment_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SegmentRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SegmentResponse"];
                 };
             };
             /** @description Validation Error */

@@ -20,3 +20,4 @@ graphify-out/
 
 # Large source PDFs are fetched on demand; curated excerpts are committed.
 /documents/raw/*.pdf
+analysis-integration.md

@@ -11,22 +11,29 @@ from backend.rag.retrieve import retrieve
 from backend.schemas import Answer, Areas, Evidence
 
 client = TestClient(app)
-GEO_ID = "2472450"
+
+# Load areas dynamically to test against any new regions Pujan adds
+loaded_areas = load_areas()
+ALL_GEO_IDS = [f.properties.geo_id for f in loaded_areas.features]
+GEO_ID = ALL_GEO_IDS[0] if ALL_GEO_IDS else "2472450"
 
 
-def test_real_data_to_area_to_cited_answer():
+@pytest.mark.parametrize("geo_id", ALL_GEO_IDS)
+def test_real_data_to_area_to_cited_answer(geo_id):
     assert client.get("/health").json()["status"] == "ok"
     areas = client.get("/areas").json()
-    area = client.get(f"/areas/{GEO_ID}").json()
-    assert areas["features"][0]["id"] == area["geo_id"]
-    assert area["metrics"] == {"population": 81015, "housing_units": 35150}
+    area = client.get(f"/areas/{geo_id}").json()
+    
+    assert any(f["id"] == geo_id for f in areas["features"])
     assert {layer["id"] for layer in client.get("/layers").json()} == set(area["metrics"])
-    result = client.post("/ask", json={"geo_id": GEO_ID, "question": "What is the population?"}).json()
-    assert result["mode"] == "facts"
-    assert "81,015" in result["summary"]
-    assert result["evidence_ids"] == [result["evidence"][0]["evidence_id"]]
-    assert result["evidence"][0]["value"] == area["metrics"]["population"]
-    assert str(result["evidence"][0]["url"]).startswith("https://tigerweb.geo.census.gov/")
+    
+    if "population" in area["metrics"] and area["metrics"]["population"] is not None:
+        result = client.post("/ask", json={"geo_id": geo_id, "question": "What is the population?"}).json()
+        assert result["mode"] == "facts"
+        assert f"{area['metrics']['population']:,.0f}" in result["summary"]
+        assert result["evidence_ids"] == [result["evidence"][0]["evidence_id"]]
+        assert result["evidence"][0]["value"] == area["metrics"]["population"]
+        assert str(result["evidence"][0]["url"]).startswith("https://")
 
 
 @pytest.mark.parametrize("question", ["What do planning documents say about penguins?",

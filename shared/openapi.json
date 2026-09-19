@@ -138,6 +138,44 @@
           }
         }
       }
+    },
+    "/segment": {
+      "post": {
+        "summary": "Segment",
+        "operationId": "segment_segment_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SegmentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -340,6 +378,44 @@
           "evidence_ids"
         ],
         "title": "Claim"
+      },
+      "DataPoint": {
+        "properties": {
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "x_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "X Value"
+          },
+          "y_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Y Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "x_value",
+          "y_value"
+        ],
+        "title": "DataPoint"
       },
       "DocumentScope": {
         "properties": {
@@ -613,6 +689,91 @@
           "description"
         ],
         "title": "Layer"
+      },
+      "SegmentRequest": {
+        "properties": {
+          "geo_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 2,
+            "title": "Geo Ids"
+          },
+          "x_metric": {
+            "type": "string",
+            "minLength": 1,
+            "title": "X Metric"
+          },
+          "y_metric": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Y Metric"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_ids",
+          "x_metric",
+          "y_metric"
+        ],
+        "title": "SegmentRequest"
+      },
+      "SegmentResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "x_metric": {
+            "type": "string",
+            "title": "X Metric"
+          },
+          "y_metric": {
+            "type": "string",
+            "title": "Y Metric"
+          },
+          "correlation_coefficient": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correlation Coefficient"
+          },
+          "sample_size": {
+            "type": "integer",
+            "title": "Sample Size"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "data_points": {
+            "items": {
+              "$ref": "#/components/schemas/DataPoint"
+            },
+            "type": "array",
+            "title": "Data Points"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "x_metric",
+          "y_metric",
+          "correlation_coefficient",
+          "sample_size",
+          "explanation",
+          "data_points"
+        ],
+        "title": "SegmentResponse"
       },
       "ValidationError": {
         "properties": {

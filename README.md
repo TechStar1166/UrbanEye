@@ -11,7 +11,7 @@ need internet on the first build. Basemap tiles are online; polygons and facts s
 work when tiles are unavailable.
 
 ```bash
-git clone --branch nt/dev https://github.com/TechStar1166/UrbanEye.git
+git clone https://github.com/TechStar1166/UrbanEye.git
 cd UrbanEye
 docker compose up --build
 ```
