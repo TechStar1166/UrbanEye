@@ -1,0 +1,1779 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-19T05:37:25Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 459790883,
+      "lat": 38.996157,
+      "lon": -77.0266593,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "921",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "addr:unit": "E",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "cuisine": "thai",
+        "name": "Thai at Silver Spring",
+        "opening_hours": "Mo-Th 11:00-22:00; Fr-Sa 11:30-23:00; Su 11:30-22:00",
+        "phone": "+1 301-650-0666",
+        "website": "https://www.thaiatsilverspring.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460203558,
+      "lat": 38.9962903,
+      "lon": -77.0276627,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8541",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "fast_food",
+        "brand": "Panera Bread",
+        "brand:wikidata": "Q7130852",
+        "cuisine": "sandwich;bakery",
+        "name": "Panera Bread",
+        "opening_hours": "Mo-Sa 06:00-21:00; Su 07:00-21:00",
+        "phone": "+1 301-495-0860",
+        "short_name": "Panera",
+        "takeaway": "yes",
+        "website": "https://locations.panerabread.com/md/silver-spring/8541-georgia-avenue.html",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460203778,
+      "lat": 38.996264,
+      "lon": -77.0274611,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "name": "Roaming Rooster"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460207277,
+      "lat": 38.9962411,
+      "lon": -77.0263109,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "917",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "fast_food",
+        "brand": "Potbelly",
+        "brand:wikidata": "Q7234777",
+        "changing_table": "no",
+        "check_date": "2026-08-30",
+        "cuisine": "sandwich",
+        "delivery": "yes",
+        "drive_through": "no",
+        "highchair": "no",
+        "indoor_seating": "yes",
+        "name": "Potbelly",
+        "official_name": "Potbelly Sandwich Works",
+        "opening_hours": "Mo-Th,Su 10:00-22:00; Fr-Sa 10:00-23:00",
+        "outdoor_seating": "no",
+        "phone": "+1 301-562-9696",
+        "smoking": "outside",
+        "stroller": "yes",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:menstrual_products": "no",
+        "toilets:wheelchair": "no",
+        "website": "https://www.potbelly.com",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460211089,
+      "lat": 38.9909905,
+      "lon": -77.0296899,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "1302",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "East West Highway",
+        "amenity": "restaurant",
+        "cuisine": "italian",
+        "name": "Mamma Lucia",
+        "opening_hours": "Mo-Th 11:00-21:00; Fr-Sa 11:00-22:00; Su 11:00-21:00",
+        "website": "http://www.mammaluciarestaurants.com/",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460293000,
+      "lat": 38.9911789,
+      "lon": -77.0294874,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "1215",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "East West Highway",
+        "amenity": "restaurant",
+        "cuisine": "sushi",
+        "name": "Ikko Sushi",
+        "phone": "+1 301-562-9400",
+        "website": "http://www.ikkosushi.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460293018,
+      "lat": 38.9916926,
+      "lon": -77.0298737,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "deli",
+        "name": "NOAA Gourmet Deli"
+      }
+    },
+    {
+      "type": "node",
+      "id": 460293053,
+      "lat": 38.9933003,
+      "lon": -77.0311525,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "1329",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "East West Highway",
+        "amenity": "restaurant",
+        "name": "TS Grill",
+        "opening_hours": "Mo-Fr 07:00-14:30",
+        "phone": "+1 240-398-3124",
+        "website": "http://www.tsgrillus.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 480598902,
+      "lat": 38.9945086,
+      "lon": -77.0257065,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "944",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Wayne Avenue",
+        "amenity": "restaurant",
+        "contact:instagram": "https://www.instagram.com/selamgardengrill/",
+        "cuisine": "ethiopian",
+        "name": "Selam Garden Grill & Bar",
+        "start_date": "2025-09-06"
+      }
+    },
+    {
+      "type": "node",
+      "id": 565295456,
+      "lat": 38.9926041,
+      "lon": -77.0238944,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8233",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "alt_name": "Effoi Restaurant & Bar",
+        "amenity": "restaurant",
+        "bar": "yes",
+        "contact:instagram": "https://www.instagram.com/effoirestaurant/",
+        "cuisine": "ethiopian",
+        "name": "Effoi Restaurant",
+        "phone": "+1 443-407-0114",
+        "short_name": "Effoi",
+        "website": "https://effoirestaurant.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 565295460,
+      "lat": 38.9907043,
+      "lon": -77.0236094,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8107",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "fast_food",
+        "cuisine": "pizza",
+        "name": "Manny & Olga's Pizza",
+        "phone": "+1 301-608-8050",
+        "website": "https://mannyandolgas.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 565295463,
+      "lat": 38.9900841,
+      "lon": -77.0243442,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "918",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Sligo Avenue",
+        "amenity": "restaurant",
+        "cuisine": "chinese",
+        "name": "Dragon City",
+        "phone": "+1 301-565-8850",
+        "website": "http://www.dragoncitychineserestaurant.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 757602118,
+      "lat": 38.9917206,
+      "lon": -77.0272114,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8200",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "cuisine": "chinese",
+        "name": "Golden House",
+        "phone": "+1 301-495-8888",
+        "website": "goldenhouse.us"
+      }
+    },
+    {
+      "type": "node",
+      "id": 757602125,
+      "lat": 38.992077,
+      "lon": -77.026299,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8241",
+        "addr:postcode": "20910",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "cuisine": "guatemalan",
+        "name": "Odalis"
+      }
+    },
+    {
+      "type": "node",
+      "id": 757602131,
+      "lat": 38.9917602,
+      "lon": -77.0262726,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8251",
+        "addr:postcode": "20910",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "check_date": "2023-09-14",
+        "cuisine": "latin_american",
+        "name": "Betseb Ethiopian Restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076953103,
+      "lat": 38.9965853,
+      "lon": -77.0259072,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "907",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "fast_food",
+        "brand": "Chipotle",
+        "brand:wikidata": "Q465751",
+        "check_date": "2026-08-29",
+        "cuisine": "mexican",
+        "name": "Chipotle",
+        "official_name": "Chipotle Mexican Grill",
+        "opening_hours": "10:45-23:00",
+        "phone": "+1 301-608-3688",
+        "takeaway": "yes",
+        "website": "https://locations.chipotle.com/md/silver-spring/907-ellsworth-dr",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076953141,
+      "lat": 38.9964248,
+      "lon": -77.0260769,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "911",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "pub",
+        "check_date": "2026-07-12",
+        "contact:facebook": "https://www.facebook.com/Mcgintyspublichouse",
+        "name": "McGinty's Public House",
+        "opening_hours": "Mo-Th 16:00-24:00; Fr 11:00-25:00, Sa 10:00-25:00, Su 10:00-24:00",
+        "phone": "+1 301-587-1270",
+        "website": "https://www.mcgintyspublichouse.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076953149,
+      "lat": 38.9970982,
+      "lon": -77.0254322,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "825",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "addr:unit": "D1-A",
+        "amenity": "fast_food",
+        "branch": "Silver Spring In-Line",
+        "brand": "Chick-fil-A",
+        "brand:wikidata": "Q491516",
+        "check_date": "2023-08-09",
+        "cuisine": "chicken",
+        "delivery": "no",
+        "drive_through": "no",
+        "indoor_seating": "yes",
+        "name": "Chick-fil-A",
+        "opening_hours": "Mo-Sa 07:30-22:00; Su off",
+        "phone": "+1 301-588-2915",
+        "ref": "01683",
+        "takeaway": "yes",
+        "website": "https://www.chick-fil-a.com/locations/md/silver-spring-in-line",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076971239,
+      "lat": 38.9967955,
+      "lon": -77.0256799,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "903",
+        "addr:postcode": "20910",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "ice_cream",
+        "brand": "Ben & Jerry's",
+        "brand:wikidata": "Q816412",
+        "check_date": "2023-08-09",
+        "cuisine": "ice_cream",
+        "name": "Ben & Jerry's",
+        "opening_hours": "Mo-Th 12:00-22:00; Fr-Sa 12:00-23:00; Su 12:00-21:00",
+        "phone": "+1 301-589-8224",
+        "website": "https://www.benjerry.com/cityplace",
+        "wheelchair": "limited",
+        "wheelchair:description": "The entrance directly from outside isn't accessible, but the entrance through the mall is accessible."
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076971248,
+      "lat": 38.9936143,
+      "lon": -77.0248294,
+      "tags": {
+        "amenity": "restaurant",
+        "brand": "Noodles & Company",
+        "brand:wikidata": "Q7049673",
+        "cuisine": "pasta",
+        "name": "Noodles & Company",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1076971275,
+      "lat": 38.9972975,
+      "lon": -77.0252633,
+      "tags": {
+        "amenity": "ice_cream",
+        "brand": "Cold Stone Creamery",
+        "brand:wikidata": "Q1094923",
+        "cuisine": "ice_cream",
+        "name": "Cold Stone Creamery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1313335000,
+      "lat": 38.9942825,
+      "lon": -77.0270744,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8484",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "addr:unit": "110",
+        "amenity": "fast_food",
+        "brand": "Subway",
+        "brand:wikidata": "Q244457",
+        "check_date:opening_hours": "2026-08-14",
+        "cuisine": "sandwich",
+        "name": "Subway",
+        "opening_hours": "Mo-Fr 07:00-22:00; Sa 09:00-22:00; Su 10:00-20:00",
+        "phone": "+1 301-565-0161",
+        "takeaway": "yes",
+        "website": "https://restaurants.subway.com/united-states/md/silver-spring/8484-georgia-ave"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1417161166,
+      "lat": 38.9937978,
+      "lon": -77.0251728,
+      "tags": {
+        "addr:housenumber": "930",
+        "addr:street": "Bonifant Street",
+        "amenity": "restaurant",
+        "name": "Mandalay Restaurant & Caf\u00e9"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1419576666,
+      "lat": 38.9941064,
+      "lon": -77.0253468,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "939",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Bonifant Street",
+        "amenity": "restaurant",
+        "cuisine": "thai",
+        "name": "Kook Kais Thai Noodles",
+        "phone": "+1 301-589-5341",
+        "website": "https://www.kookkaisthainoodles.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1419577333,
+      "lat": 38.9940679,
+      "lon": -77.025462,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "941",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Bonifant Street",
+        "amenity": "restaurant",
+        "cuisine": "african",
+        "name": "Roger Miller",
+        "opening_hours": "Su-Th 11:00-23:00; Fr-Sa 11:00-02:00",
+        "phone": "+1-301-562-7050",
+        "website": "https://www.facebook.com/RogerMillerRestaurant/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1592076833,
+      "lat": 38.993527,
+      "lon": -77.026964,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8402",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "bar",
+        "delivery": "no",
+        "food": "yes",
+        "name": "The Republic Garden",
+        "old_name": "Piratz Tavern",
+        "outdoor_seating": "yes",
+        "phone": "+1 240-847-7921",
+        "website": "https://linasdiner.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1592078834,
+      "lat": 38.9965751,
+      "lon": -77.0247492,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8515",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "brand": "CAVA",
+        "brand:wikidata": "Q85751038",
+        "check_date": "2023-08-09",
+        "cuisine": "mediterranean",
+        "name": "CAVA",
+        "opening_hours": "10:45-22:00",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "phone": "+1 301-200-8666",
+        "website": "https://cava.com/locations/silver-spring-md",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1671377421,
+      "lat": 38.9935898,
+      "lon": -77.0269511,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8408",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "addr:unit": "A",
+        "amenity": "restaurant",
+        "cuisine": "thai",
+        "name": "Charm Thai Restaurant",
+        "phone": "+1 301-495-6300",
+        "website": "https://www.mycharmthai.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1671380853,
+      "lat": 38.9904199,
+      "lon": -77.0256281,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "959",
+        "addr:postcode": "20910",
+        "addr:street": "Sligo Avenue",
+        "amenity": "restaurant",
+        "cuisine": "italian",
+        "name": "Vicino Restaurante Italiano",
+        "phone": "+1 301 588-3372",
+        "website": "vicinoitaliano.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2786896446,
+      "lat": 38.9937618,
+      "lon": -77.0239625,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8311",
+        "addr:postcode": "20910",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "cuisine": "french",
+        "name": "Fenton Cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2865573701,
+      "lat": 38.9924181,
+      "lon": -77.0269169,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8226",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "cuisine": "steak_house",
+        "name": "Urban Butcher",
+        "phone": "+1 301-585-5800",
+        "website": "http://www.urbanbutcher.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3234919918,
+      "lat": 38.9930835,
+      "lon": -77.0263891,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8301",
+        "addr:postcode": "20910-4521",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "check_date": "2023-09-14",
+        "cuisine": "ethiopian",
+        "name": "Lucy Ethiopian Restaurant",
+        "phone": "+1 301-920-0196"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3492569211,
+      "lat": 38.9937515,
+      "lon": -77.0260305,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "963",
+        "addr:postcode": "20910-4515",
+        "addr:state": "MD",
+        "addr:street": "Bonifant Street",
+        "amenity": "cafe",
+        "name": "Kefa Cafe",
+        "phone": "+1 240-641-8023",
+        "website": "http://www.kefacafelove.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3956152096,
+      "lat": 38.9968428,
+      "lon": -77.0278347,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8626",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "amenity": "restaurant",
+        "cuisine": "ethiopian",
+        "name": "Abol Ethiopian Cuisine",
+        "phone": "+1-301-650-0061",
+        "website": "http://www.abolethiopiancuisine.com/amanu/index.php"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4494743768,
+      "lat": 38.9956334,
+      "lon": -77.0247557,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8504",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "fast_food",
+        "brand": "BurgerFi",
+        "brand:wikidata": "Q39045496",
+        "check_date": "2026-07-12",
+        "cuisine": "burger",
+        "name": "BurgerFi",
+        "opening_hours": "Mo-Th 11:00-22:00; Fr,Sa 11:00-24:00; Su 11:00-21:00",
+        "phone": "+1-301-565-2100",
+        "takeaway": "yes",
+        "website": "https://order.burgerfi.com/locations/MD/silver-spring/9765"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4719278718,
+      "lat": 38.9973534,
+      "lon": -77.0267869,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:country": "US",
+        "addr:housenumber": "8661",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "addr:unit": "Suite C-153",
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "delivery": "yes",
+        "name": "Not Your Average Joe's",
+        "opening_hours": "Mo 11:30-21:00, Tu-Th 11:30-22:00, Fr 11:30-23:00, Sa 12:00-23:00, Su 12:00-21:00",
+        "outdoor_seating": "yes",
+        "phone": "+1-240-839-3400",
+        "reservation": "yes",
+        "takeaway": "yes",
+        "website": "https://www.notyouraveragejoes.com/locations/maryland/silver-spring/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5244739305,
+      "lat": 38.9957022,
+      "lon": -77.0293,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8600",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "cuisine": "crepe",
+        "description": "Food truck",
+        "name": "Bonjour Waffles",
+        "opening_hours": "Mo-Th 07:00-20:00, Fr 07:00-21:00, Sa 09:00-21:00",
+        "takeaway": "only"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5244757027,
+      "lat": 38.9962836,
+      "lon": -77.0263634,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "921",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "addr:unit": "J",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "cuisine": "japanese;sushi;steak",
+        "name": "Masa Hibachi Steakhouse & Sushi",
+        "opening_hours": "Mo-Th,Su 12:00-21:00; Fr-Sa 12:00-22:00",
+        "phone": "+1 301-608-8989",
+        "website": "https://www.masajapanese.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5244858729,
+      "lat": 38.9968592,
+      "lon": -77.0257885,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8661",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "addr:unit": "B-159",
+        "amenity": "cafe",
+        "brand": "Kung Fu Tea",
+        "brand:wikidata": "Q66023886",
+        "check_date": "2023-08-09",
+        "cuisine": "bubble_tea",
+        "indoor_seating": "yes",
+        "internet_access:fee": "no",
+        "name": "Kung Fu Tea",
+        "note": "Inside Ellsworth Place.",
+        "opening_hours": "12:00-21:00",
+        "outdoor_seating": "no",
+        "phone": "+1 240-308-8868",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5665038232,
+      "lat": 38.9945968,
+      "lon": -77.0310941,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8401",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "alt_name": "Dunkin' Donuts",
+        "amenity": "fast_food",
+        "brand": "Dunkin'",
+        "brand:wikidata": "Q847743",
+        "cuisine": "donut;coffee_shop",
+        "drive_through": "no",
+        "name": "Dunkin'",
+        "opening_hours": "Mo-Fr 05:00-19:00; Sa 05:00-18:00; Su 06:00-19:00",
+        "phone": "+1 301-326-2980",
+        "ref": "350786",
+        "takeaway": "yes",
+        "website": "https://locations.dunkindonuts.com/en/md/silver-spring/8401-colesville-rd/350786"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5691358788,
+      "lat": 38.9973047,
+      "lon": -77.0259364,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8535",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "cuisine": "deli;sandwich",
+        "delivery": "no",
+        "name": "Lebanese Taverna",
+        "opening_hours": "Mo-Th 11:00-20:30; Fr-Sa 11:00-21:00; Su 11:00-20:00",
+        "outdoor_seating": "no",
+        "phone": "+1 301-588-1192",
+        "smoking": "no",
+        "source": "local knowledge;survey",
+        "takeaway": "yes",
+        "website": "https://www.lebanesetaverna.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5809054854,
+      "lat": 38.9915027,
+      "lon": -77.0257357,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "918",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Silver Spring Avenue",
+        "amenity": "cafe",
+        "cuisine": "coffee_shop;tea",
+        "name": "Kaldi\u2019s Social House",
+        "phone": "+1 301-557-9990",
+        "website": "https://www.kaldissocial.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6356743585,
+      "lat": 38.9949683,
+      "lon": -77.031233,
+      "tags": {
+        "addr:housenumber": "8401",
+        "addr:postcode": "20910",
+        "addr:street": "Colesville Road",
+        "addr:unit": "150",
+        "amenity": "pub",
+        "check_date": "2026-05-14",
+        "cuisine": "american",
+        "name": "Silver Branch Brewing Company",
+        "opening_hours": "Mo-Th 11:30-22:00; Fr 11:30-23:00; Sa 12:00-23:00; Su 12:00-21:00",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "phone": "+1-301-264-7111",
+        "website": "https://www.silverbranchbrewing.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6515747106,
+      "lat": 38.993587,
+      "lon": -77.0263765,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8401",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "bar",
+        "delivery": "yes",
+        "level": "-1",
+        "name": "Quarry House Tavern",
+        "opening_hours": "Su-Th 16:00-01:00; Fr-Sa 16:00-02:00",
+        "phone": "+1 301-844-5504",
+        "takeaway": "yes",
+        "website": "https://www.quarryhousetavern.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6551304792,
+      "lat": 38.9970956,
+      "lon": -77.026753,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8661",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "addr:unit": "E102",
+        "amenity": "restaurant",
+        "brand": "Dave & Buster's",
+        "brand:wikidata": "Q5228205",
+        "check_date": "2023-08-09",
+        "cuisine": "american",
+        "leisure": "amusement_arcade",
+        "name": "Dave & Buster's",
+        "opening_hours": "Mo-Th,Su 10:00-24:00, Fr-Sa 10:00-25:00",
+        "phone": "+1 301-273-2700",
+        "website": "https://www.daveandbusters.com/us/en/about/locations/silver-spring"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068505,
+      "lat": 38.9955503,
+      "lon": -77.0270584,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "935",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "cuisine": "asian",
+        "name": "BibBop",
+        "opening_hours": "Mo-Sa 10:30-21:30; Su 11:00-20:00",
+        "phone": "+1 301-337-9422",
+        "website": "https://bibibop.com/locations/silver-spring"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068506,
+      "lat": 38.9954638,
+      "lon": -77.0267999,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "928",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "name": "Copper Canyon Grill",
+        "opening_hours": "Mo-Th,Su 11:30-21:00; Fr-Sa 11:30-22:00",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "phone": "+1 301-589-1330",
+        "website": "https://ccgrill.com/silverspring"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068510,
+      "lat": 38.9956396,
+      "lon": -77.0266132,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "924",
+        "addr:postcode": "20910",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "restaurant",
+        "branch": "Peri Peri Chicken",
+        "brand": "Nando's",
+        "brand:wikidata": "Q3472954",
+        "check_date": "2026-08-09",
+        "check_date:diet:vegetarian": "2026-08-09",
+        "cuisine": "chicken;portuguese",
+        "diet:vegetarian": "yes",
+        "indoor_seating": "yes",
+        "name": "Nando's",
+        "opening_hours": "Mo 10:30-21:30; Tu-Fr 10:30-22:00; Sa 10:30-23:00; Su 12:00-21:15",
+        "outdoor_seating": "yes",
+        "phone": "+1 301-588-7280",
+        "website": "https://www.nandosperiperi.com/find/silver-spring"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068516,
+      "lat": 38.9947906,
+      "lon": -77.0252185,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "930",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Wayne Avenue",
+        "amenity": "restaurant",
+        "cuisine": "chinese",
+        "name": "Yu Noodles",
+        "phone": "+1-301-585-1111",
+        "website": "https://www.yunoodles.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068523,
+      "lat": 38.9911732,
+      "lon": -77.0262803,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8123",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "bar",
+        "name": "Golf Ultra Lounge",
+        "phone": "+1 301-448-1515",
+        "website": "https://www.gulflounge.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7802068531,
+      "lat": 38.9919675,
+      "lon": -77.0263014,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8211",
+        "addr:postcode": "20910-4520",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "bar",
+        "check_date": "2023-09-14",
+        "name": "Palisades Lounge",
+        "phone": "+1 301-755-6457",
+        "website": "http://palisadeslounge.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7821495143,
+      "lat": 38.9968186,
+      "lon": -77.0246306,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8519",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "check_date": "2023-08-09",
+        "name": "Locavino Wine Cafe",
+        "opening_hours": "Mo-Sa 11:00-22:00; Su 11:00-21:00",
+        "phone": "+1 301-448-1819",
+        "website": "https://www.locavino.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144897,
+      "lat": 38.9928644,
+      "lon": -77.0263599,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8241",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "addr:unit": "Suite 200",
+        "amenity": "bar",
+        "check_date": "2023-09-14",
+        "name": "Mix Bar and Grille"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144903,
+      "lat": 38.9945345,
+      "lon": -77.0246693,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "911",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Bonifant Street",
+        "amenity": "cafe",
+        "name": "Lewi Cafe",
+        "phone": "+1 240-531-2924",
+        "website": "https://www.lewicafe.com/silver-spring-maryland/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144904,
+      "lat": 38.9966987,
+      "lon": -77.0257683,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "905",
+        "addr:postcode": "20910",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "fast_food",
+        "check_date": "2023-08-09",
+        "cuisine": "chicken",
+        "name": "Don Pollo",
+        "opening_hours": "Mo-Su 10:30-21:30",
+        "phone": "+1 301-650-9111",
+        "website": "https://donpollogroup.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144905,
+      "lat": 38.9962525,
+      "lon": -77.0249839,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8512",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "fast_food",
+        "branch": "Downtown Silver Spring",
+        "check_date": "2023-08-09",
+        "cuisine": "asian",
+        "name": "Kusshi Sushi",
+        "opening_hours": "Su-Th 11:00-22:00; Fr,Sa 11:00-23:00",
+        "phone": "+1 301-238-7727",
+        "website": "https://www.kusshisushi.com/menu-downtown-silver-spring"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144909,
+      "lat": 38.9930917,
+      "lon": -77.0259629,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "965",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Thayer Avenue",
+        "amenity": "restaurant",
+        "changing_table": "yes",
+        "cuisine": "caribbean",
+        "name": "Negril The Jamaican Eatery",
+        "phone": "+1 301-585-3000",
+        "takeaway": "yes",
+        "toilets:access": "customers",
+        "website": "https://www.negrileats.com/",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7836144911,
+      "lat": 38.9928146,
+      "lon": -77.0269762,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8242",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Spice Street",
+        "phone": "+1-301-755-6144",
+        "website": "https://spicestreetmd.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9512604826,
+      "lat": 38.9928934,
+      "lon": -77.0242882,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8240",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "cafe",
+        "brand": "Black Lion Cafe",
+        "cuisine": "coffee_shop",
+        "name": "Black Lion Cafe",
+        "phone": "+1 301-866-7300",
+        "website": "https://blacklioncafe.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9558833155,
+      "lat": 38.9957735,
+      "lon": -77.0268303,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "933",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ellsworth Drive",
+        "amenity": "fast_food",
+        "brand": "Dog Haus",
+        "brand:wikidata": "Q105529843",
+        "check_date": "2023-08-09",
+        "contact:facebook": "https://www.facebook.com/doghaussilverspring",
+        "cuisine": "hot_dog",
+        "diet:meat": "yes",
+        "name": "Dog Haus",
+        "opening_hours": "Mo-We,Su 10:00-23:00, Th-Sa 10:00-26:00",
+        "phone": "+1 240-450-7000",
+        "takeaway": "yes",
+        "website": "https://doghaus.com/location/silver-spring-biergarten"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10110391437,
+      "lat": 38.9966931,
+      "lon": -77.0279311,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8606",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "amenity": "restaurant",
+        "cuisine": "seafood",
+        "name": "J. Hollinger's Waterman's Chophouse",
+        "opening_hours": "Tu-Th 17:00-21:00; Fr-Sa 17:00-21:30; Su 11:00-14:30, 17:00-21:00; Mo off",
+        "phone": "+1-301-328-0035",
+        "website": "https://jhollingers.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11910531642,
+      "lat": 38.9935527,
+      "lon": -77.0264536,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8401",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "fast_food",
+        "brand": "Popeyes",
+        "brand:wikidata": "Q1330910",
+        "cuisine": "chicken",
+        "delivery": "yes",
+        "drive_through": "no",
+        "indoor_seating": "yes",
+        "internet_access": "wlan",
+        "name": "Popeyes",
+        "official_name": "Popeyes Louisiana Kitchen",
+        "opening_hours": "10:00-24:00",
+        "phone": "+1 240-531-2935",
+        "takeaway": "yes",
+        "website": "https://www.popeyes.com/store-locator/store/restaurant_240504"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11923819365,
+      "lat": 38.9975264,
+      "lon": -77.0273835,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8662",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "amenity": "fast_food",
+        "brand": "Taco Bell",
+        "brand:wikidata": "Q111972226",
+        "cuisine": "tex-mex",
+        "name": "Taco Bell Cantina",
+        "phone": "+1 240-963-3724",
+        "takeaway": "yes",
+        "website": "https://locations.tacobell.com/md/silver-spring/8662-colesville-road.html"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12405213536,
+      "lat": 38.9940602,
+      "lon": -77.0277066,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "1010",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Wayne Ave",
+        "amenity": "cafe",
+        "cuisine": "coffee_shop",
+        "name": "Java Nation",
+        "opening_hours": "Su-Th 09:00-21:00; Fr-Sa 09:00-22:00",
+        "phone": "+1-240-705-7080",
+        "website": "https://java-nation.com/pageSilverSpring.html"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12610631434,
+      "lat": 38.9987954,
+      "lon": -77.0259044,
+      "tags": {
+        "addr:housenumber": "8737",
+        "addr:street": "Colesville Road",
+        "amenity": "cafe",
+        "name": "Lemon Slice Cafe",
+        "phone": "+1-240-756-1700",
+        "website": "https://www.lemonslicecafe.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12637047034,
+      "lat": 38.9938893,
+      "lon": -77.0237631,
+      "tags": {
+        "addr:housenumber": "818",
+        "addr:street": "Easley Street",
+        "amenity": "restaurant",
+        "cuisine": "ethiopian",
+        "name": "Arat Kilo Restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13021040594,
+      "lat": 38.9953504,
+      "lon": -77.0242101,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8455",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Fenton Street",
+        "amenity": "fast_food",
+        "brand": "&pizza",
+        "brand:wikidata": "Q21189222",
+        "cuisine": "pizza",
+        "drive_through": "no",
+        "name": "&pizza",
+        "opening_hours": "Mo,Tu,We,Th,Su 11:00-23:00; Fr-Sa 11:00-00:00",
+        "phone": "+1-240-594-9739",
+        "takeaway": "yes",
+        "website": "https://andpizza.com/locations/silver-spring-md/",
+        "website:menu": "https://order.thanx.com/andpizza"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13063944033,
+      "lat": 38.9920286,
+      "lon": -77.0262992,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8213",
+        "addr:postcode": "20910-4520",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "bar": "no",
+        "changing_table": "no",
+        "cuisine": "greek",
+        "name": "The Big Greek Cafe",
+        "opening_hours": "11:00-21:00",
+        "phone": "+1 301-587-4733",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:access": "customers",
+        "website": "https://www.biggreekcafe.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13094393901,
+      "lat": 38.9989788,
+      "lon": -77.0285743,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8710",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Cameron Street",
+        "amenity": "bar",
+        "cuisine": "smoothies",
+        "name": "Nips Juice House",
+        "phone": "+1 202-313-1117",
+        "website": "http://www.nipsjuicehouse.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13123538366,
+      "lat": 38.994258,
+      "lon": -77.0261489,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "962",
+        "addr:state": "MD",
+        "addr:street": "Wayne Avenue",
+        "amenity": "restaurant",
+        "cuisine": "korean",
+        "name": "Firepan Korean BBQ",
+        "opening_hours": "Fr-Sa 11:30-24:00; Su-Th 11:30-23:00",
+        "phone": "+1-240-641-5948",
+        "website": "https://www.firepankbbq.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13607444768,
+      "lat": 38.9928884,
+      "lon": -77.0253984,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "930",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Thayer Avenue",
+        "addr:unit": "C",
+        "amenity": "fast_food",
+        "cuisine": "coffee_shop",
+        "name": "Prime Coffee and Bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13607444769,
+      "lat": 38.9929068,
+      "lon": -77.0248256,
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "906",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Thayer Avenue",
+        "amenity": "restaurant",
+        "name": "Lamoon Thai",
+        "phone": "+1-301-328-5159",
+        "website": "https://www.lamoonsilverspring.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13825971963,
+      "lat": 38.9959387,
+      "lon": -77.0268866,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "tex-mex",
+        "name": "Chido's"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13825971964,
+      "lat": 38.9961926,
+      "lon": -77.0265205,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "american",
+        "name": "Matchbox"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14110983601,
+      "lat": 38.995497,
+      "lon": -77.0239491,
+      "tags": {
+        "addr:housenumber": "8455",
+        "addr:postcode": "20910",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "check_date": "2026-08-21",
+        "cuisine": "breakfast",
+        "name": "Easy Like Sunday"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14111099501,
+      "lat": 38.9975375,
+      "lon": -77.026391,
+      "tags": {
+        "addr:housenumber": "8555",
+        "addr:postcode": "20910",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "check_date": "2026-08-21",
+        "check_date:opening_hours": "2026-08-21",
+        "cuisine": "sushi",
+        "name": "Sushi Jin Next Door",
+        "opening_hours": "Mo-Fr 11:00-15:00,17:00-22:30; Sa 12:00-22:30; Su 12:00-21:30",
+        "website": "https://sushijinnextdoor.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14111099601,
+      "lat": 38.9975709,
+      "lon": -77.0264876,
+      "tags": {
+        "addr:housenumber": "8563",
+        "addr:postcode": "20910",
+        "addr:street": "Fenton Street",
+        "amenity": "ice_cream",
+        "check_date": "2026-08-21",
+        "check_date:opening_hours": "2026-08-21",
+        "name": "A Lil' Sumthin' Sweet",
+        "opening_hours": "Mo-Su 11:00-20:00",
+        "website": "https://alilsumthinsweet.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14118971901,
+      "lat": 38.9925641,
+      "lon": -77.0309487,
+      "tags": {
+        "addr:housenumber": "1317",
+        "addr:postcode": "20910",
+        "addr:street": "East-West Highway",
+        "amenity": "cafe",
+        "check_date": "2026-08-24",
+        "check_date:opening_hours": "2026-08-24",
+        "name": "'TIS Corner Cafe",
+        "opening_hours": "Tu-Th 07:00-15:00; Mo 07:00-14:30",
+        "website": "http://tiscornercafe.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 88456611,
+      "center": {
+        "lat": 38.9914912,
+        "lon": -77.0261545
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8131",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Ave",
+        "amenity": "pub",
+        "building": "yes",
+        "building:levels": "1",
+        "cuisine": "american",
+        "name": "Fire Station 1 Restaurant & Brewing Co.",
+        "phone": "+1 301-585-1370",
+        "website": "http://firestation-1.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 124560057,
+      "center": {
+        "lat": 38.9919367,
+        "lon": -77.0243071
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8200",
+        "addr:postcode": "20910",
+        "addr:street": "Fenton Street",
+        "amenity": "restaurant",
+        "building": "retail",
+        "cuisine": "ethiopian",
+        "name": "Lesaac Ethiopian Cafe",
+        "opening_hours": "08:00-01:00",
+        "phone": "+1-301-565-9595",
+        "website": "http://www.lesaacethiocafe.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 145889133,
+      "center": {
+        "lat": 38.996475,
+        "lon": -77.0299299
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8701",
+        "addr:postcode": "20910-3485",
+        "addr:state": "MD",
+        "addr:street": "Ramsey Avenue",
+        "amenity": "restaurant",
+        "building": "yes",
+        "check_date": "2024-02-05",
+        "cuisine": "mexican",
+        "name": "Mi Rancho",
+        "phone": "+1 301-588-4872",
+        "website": "http://www.miranchotexmexrestaurant.com"
+      }
+    },
+    {
+      "type": "way",
+      "id": 224682806,
+      "center": {
+        "lat": 38.9951327,
+        "lon": -77.0302187
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8507",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Colesville Road",
+        "amenity": "fast_food",
+        "brand": "McDonald's",
+        "brand:wikidata": "Q38076",
+        "building": "yes",
+        "cuisine": "burger",
+        "internet_access": "wlan",
+        "name": "McDonald's",
+        "opening_hours": "Mo-Th 06:00-24:00, Fr,Sa 06:00-01:00, Su 06:00-24:00",
+        "phone": "+1 301-588-3386",
+        "takeaway": "yes",
+        "website": "https://www.mcdonalds.com/us/en-us/location/19793.html",
+        "wheelchair": "yes",
+        "wheelchair:description": "Unlike other McDonald's locations in this county, this location has automatic doors. But, the employees who open in the morning don't always turn the doors on."
+      }
+    },
+    {
+      "type": "way",
+      "id": 287649404,
+      "center": {
+        "lat": 38.9938453,
+        "lon": -77.0289998
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8407",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ramsey Avenue",
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "american",
+        "name": "Buena Vida Restaurant",
+        "phone": "+1 301-755-6132",
+        "website": "https://www.buenavidarestaurant.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729743633,
+      "center": {
+        "lat": 38.9939536,
+        "lon": -77.0290016
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8407",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Ramsey Avenue",
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "mexican",
+        "name": "Tacos Tortas Tequila",
+        "phone": "+1 301-755-6132",
+        "website": "http://tttrestaurant.com"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729748493,
+      "center": {
+        "lat": 38.9923498,
+        "lon": -77.0261589
+      },
+      "tags": {
+        "amenity": "restaurant",
+        "building": "yes",
+        "check_date": "2023-09-14",
+        "cuisine": "ethiopian",
+        "name": "Abyssinia"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729748494,
+      "center": {
+        "lat": 38.9924096,
+        "lon": -77.0262884
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8213",
+        "addr:postcode": "20910-4520",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "greek",
+        "name": "The Big Greek Cafe",
+        "phone": "+1 301-587-4733",
+        "website": "https://www.biggreekcafe.com/",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729748495,
+      "center": {
+        "lat": 38.9924641,
+        "lon": -77.0262924
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8225",
+        "addr:postcode": "20910",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "cafe",
+        "building": "yes",
+        "name": "Zed's Cafe",
+        "phone": "+1 301-495-5614",
+        "website": "http://www.zedscafe.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729748497,
+      "center": {
+        "lat": 38.9925953,
+        "lon": -77.0261738
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "8229",
+        "addr:postcode": "20910-4520",
+        "addr:state": "MD",
+        "addr:street": "Georgia Avenue",
+        "amenity": "bar",
+        "brewery": "yes",
+        "building": "yes",
+        "name": "The Society Lounge",
+        "phone": "+1 301-565-8864",
+        "website": "https://www.societyss.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 729748499,
+      "center": {
+        "lat": 38.9927035,
+        "lon": -77.0261803
+      },
+      "tags": {
+        "amenity": "restaurant",
+        "building": "yes",
+        "cuisine": "pizza",
+        "name": "Underground Pizza Company"
+      }
+    },
+    {
+      "type": "way",
+      "id": 845858454,
+      "center": {
+        "lat": 38.9948063,
+        "lon": -77.024424
+      },
+      "tags": {
+        "addr:city": "Silver Spring",
+        "addr:housenumber": "900",
+        "addr:postcode": "20910-4428",
+        "addr:state": "MD",
+        "addr:street": "Wayne Avenue",
+        "amenity": "cafe",
+        "building:part": "yes",
+        "cuisine": "coffee_shop",
+        "name": "Bump N Grind",
+        "opening_hours:drive_through": "08:00-16:00",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "phone": "+1 301-588-8000",
+        "website": "https://bumpngrind.co/",
+        "wheelchair": "yes"
+      }
+    }
+  ]
+}

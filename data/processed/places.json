@@ -1,0 +1,733 @@
+{
+  "places": [
+    {
+      "id": "node/459790883",
+      "name": "Thai at Silver Spring",
+      "kind": "restaurant",
+      "lat": 38.996157,
+      "lon": -77.0266593,
+      "url": "https://www.openstreetmap.org/node/459790883"
+    },
+    {
+      "id": "node/460203558",
+      "name": "Panera Bread",
+      "kind": "fast_food",
+      "lat": 38.9962903,
+      "lon": -77.0276627,
+      "url": "https://www.openstreetmap.org/node/460203558"
+    },
+    {
+      "id": "node/460203778",
+      "name": "Roaming Rooster",
+      "kind": "restaurant",
+      "lat": 38.996264,
+      "lon": -77.0274611,
+      "url": "https://www.openstreetmap.org/node/460203778"
+    },
+    {
+      "id": "node/460207277",
+      "name": "Potbelly",
+      "kind": "fast_food",
+      "lat": 38.9962411,
+      "lon": -77.0263109,
+      "url": "https://www.openstreetmap.org/node/460207277"
+    },
+    {
+      "id": "node/460211089",
+      "name": "Mamma Lucia",
+      "kind": "restaurant",
+      "lat": 38.9909905,
+      "lon": -77.0296899,
+      "url": "https://www.openstreetmap.org/node/460211089"
+    },
+    {
+      "id": "node/460293000",
+      "name": "Ikko Sushi",
+      "kind": "restaurant",
+      "lat": 38.9911789,
+      "lon": -77.0294874,
+      "url": "https://www.openstreetmap.org/node/460293000"
+    },
+    {
+      "id": "node/460293018",
+      "name": "NOAA Gourmet Deli",
+      "kind": "restaurant",
+      "lat": 38.9916926,
+      "lon": -77.0298737,
+      "url": "https://www.openstreetmap.org/node/460293018"
+    },
+    {
+      "id": "node/460293053",
+      "name": "TS Grill",
+      "kind": "restaurant",
+      "lat": 38.9933003,
+      "lon": -77.0311525,
+      "url": "https://www.openstreetmap.org/node/460293053"
+    },
+    {
+      "id": "node/480598902",
+      "name": "Selam Garden Grill & Bar",
+      "kind": "restaurant",
+      "lat": 38.9945086,
+      "lon": -77.0257065,
+      "url": "https://www.openstreetmap.org/node/480598902"
+    },
+    {
+      "id": "node/565295456",
+      "name": "Effoi Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9926041,
+      "lon": -77.0238944,
+      "url": "https://www.openstreetmap.org/node/565295456"
+    },
+    {
+      "id": "node/565295460",
+      "name": "Manny & Olga's Pizza",
+      "kind": "fast_food",
+      "lat": 38.9907043,
+      "lon": -77.0236094,
+      "url": "https://www.openstreetmap.org/node/565295460"
+    },
+    {
+      "id": "node/565295463",
+      "name": "Dragon City",
+      "kind": "restaurant",
+      "lat": 38.9900841,
+      "lon": -77.0243442,
+      "url": "https://www.openstreetmap.org/node/565295463"
+    },
+    {
+      "id": "node/757602118",
+      "name": "Golden House",
+      "kind": "restaurant",
+      "lat": 38.9917206,
+      "lon": -77.0272114,
+      "url": "https://www.openstreetmap.org/node/757602118"
+    },
+    {
+      "id": "node/757602125",
+      "name": "Odalis",
+      "kind": "restaurant",
+      "lat": 38.992077,
+      "lon": -77.026299,
+      "url": "https://www.openstreetmap.org/node/757602125"
+    },
+    {
+      "id": "node/757602131",
+      "name": "Betseb Ethiopian Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9917602,
+      "lon": -77.0262726,
+      "url": "https://www.openstreetmap.org/node/757602131"
+    },
+    {
+      "id": "node/1076953103",
+      "name": "Chipotle",
+      "kind": "fast_food",
+      "lat": 38.9965853,
+      "lon": -77.0259072,
+      "url": "https://www.openstreetmap.org/node/1076953103"
+    },
+    {
+      "id": "node/1076953141",
+      "name": "McGinty's Public House",
+      "kind": "pub",
+      "lat": 38.9964248,
+      "lon": -77.0260769,
+      "url": "https://www.openstreetmap.org/node/1076953141"
+    },
+    {
+      "id": "node/1076953149",
+      "name": "Chick-fil-A",
+      "kind": "fast_food",
+      "lat": 38.9970982,
+      "lon": -77.0254322,
+      "url": "https://www.openstreetmap.org/node/1076953149"
+    },
+    {
+      "id": "node/1076971239",
+      "name": "Ben & Jerry's",
+      "kind": "ice_cream",
+      "lat": 38.9967955,
+      "lon": -77.0256799,
+      "url": "https://www.openstreetmap.org/node/1076971239"
+    },
+    {
+      "id": "node/1076971248",
+      "name": "Noodles & Company",
+      "kind": "restaurant",
+      "lat": 38.9936143,
+      "lon": -77.0248294,
+      "url": "https://www.openstreetmap.org/node/1076971248"
+    },
+    {
+      "id": "node/1076971275",
+      "name": "Cold Stone Creamery",
+      "kind": "ice_cream",
+      "lat": 38.9972975,
+      "lon": -77.0252633,
+      "url": "https://www.openstreetmap.org/node/1076971275"
+    },
+    {
+      "id": "node/1313335000",
+      "name": "Subway",
+      "kind": "fast_food",
+      "lat": 38.9942825,
+      "lon": -77.0270744,
+      "url": "https://www.openstreetmap.org/node/1313335000"
+    },
+    {
+      "id": "node/1417161166",
+      "name": "Mandalay Restaurant & Caf\u00e9",
+      "kind": "restaurant",
+      "lat": 38.9937978,
+      "lon": -77.0251728,
+      "url": "https://www.openstreetmap.org/node/1417161166"
+    },
+    {
+      "id": "node/1419576666",
+      "name": "Kook Kais Thai Noodles",
+      "kind": "restaurant",
+      "lat": 38.9941064,
+      "lon": -77.0253468,
+      "url": "https://www.openstreetmap.org/node/1419576666"
+    },
+    {
+      "id": "node/1419577333",
+      "name": "Roger Miller",
+      "kind": "restaurant",
+      "lat": 38.9940679,
+      "lon": -77.025462,
+      "url": "https://www.openstreetmap.org/node/1419577333"
+    },
+    {
+      "id": "node/1592076833",
+      "name": "The Republic Garden",
+      "kind": "bar",
+      "lat": 38.993527,
+      "lon": -77.026964,
+      "url": "https://www.openstreetmap.org/node/1592076833"
+    },
+    {
+      "id": "node/1592078834",
+      "name": "CAVA",
+      "kind": "restaurant",
+      "lat": 38.9965751,
+      "lon": -77.0247492,
+      "url": "https://www.openstreetmap.org/node/1592078834"
+    },
+    {
+      "id": "node/1671377421",
+      "name": "Charm Thai Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9935898,
+      "lon": -77.0269511,
+      "url": "https://www.openstreetmap.org/node/1671377421"
+    },
+    {
+      "id": "node/1671380853",
+      "name": "Vicino Restaurante Italiano",
+      "kind": "restaurant",
+      "lat": 38.9904199,
+      "lon": -77.0256281,
+      "url": "https://www.openstreetmap.org/node/1671380853"
+    },
+    {
+      "id": "node/2786896446",
+      "name": "Fenton Cafe",
+      "kind": "restaurant",
+      "lat": 38.9937618,
+      "lon": -77.0239625,
+      "url": "https://www.openstreetmap.org/node/2786896446"
+    },
+    {
+      "id": "node/2865573701",
+      "name": "Urban Butcher",
+      "kind": "restaurant",
+      "lat": 38.9924181,
+      "lon": -77.0269169,
+      "url": "https://www.openstreetmap.org/node/2865573701"
+    },
+    {
+      "id": "node/3234919918",
+      "name": "Lucy Ethiopian Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9930835,
+      "lon": -77.0263891,
+      "url": "https://www.openstreetmap.org/node/3234919918"
+    },
+    {
+      "id": "node/3492569211",
+      "name": "Kefa Cafe",
+      "kind": "cafe",
+      "lat": 38.9937515,
+      "lon": -77.0260305,
+      "url": "https://www.openstreetmap.org/node/3492569211"
+    },
+    {
+      "id": "node/3956152096",
+      "name": "Abol Ethiopian Cuisine",
+      "kind": "restaurant",
+      "lat": 38.9968428,
+      "lon": -77.0278347,
+      "url": "https://www.openstreetmap.org/node/3956152096"
+    },
+    {
+      "id": "node/4494743768",
+      "name": "BurgerFi",
+      "kind": "fast_food",
+      "lat": 38.9956334,
+      "lon": -77.0247557,
+      "url": "https://www.openstreetmap.org/node/4494743768"
+    },
+    {
+      "id": "node/4719278718",
+      "name": "Not Your Average Joe's",
+      "kind": "restaurant",
+      "lat": 38.9973534,
+      "lon": -77.0267869,
+      "url": "https://www.openstreetmap.org/node/4719278718"
+    },
+    {
+      "id": "node/5244739305",
+      "name": "Bonjour Waffles",
+      "kind": "restaurant",
+      "lat": 38.9957022,
+      "lon": -77.0293,
+      "url": "https://www.openstreetmap.org/node/5244739305"
+    },
+    {
+      "id": "node/5244757027",
+      "name": "Masa Hibachi Steakhouse & Sushi",
+      "kind": "restaurant",
+      "lat": 38.9962836,
+      "lon": -77.0263634,
+      "url": "https://www.openstreetmap.org/node/5244757027"
+    },
+    {
+      "id": "node/5244858729",
+      "name": "Kung Fu Tea",
+      "kind": "cafe",
+      "lat": 38.9968592,
+      "lon": -77.0257885,
+      "url": "https://www.openstreetmap.org/node/5244858729"
+    },
+    {
+      "id": "node/5665038232",
+      "name": "Dunkin'",
+      "kind": "fast_food",
+      "lat": 38.9945968,
+      "lon": -77.0310941,
+      "url": "https://www.openstreetmap.org/node/5665038232"
+    },
+    {
+      "id": "node/5691358788",
+      "name": "Lebanese Taverna",
+      "kind": "restaurant",
+      "lat": 38.9973047,
+      "lon": -77.0259364,
+      "url": "https://www.openstreetmap.org/node/5691358788"
+    },
+    {
+      "id": "node/5809054854",
+      "name": "Kaldi\u2019s Social House",
+      "kind": "cafe",
+      "lat": 38.9915027,
+      "lon": -77.0257357,
+      "url": "https://www.openstreetmap.org/node/5809054854"
+    },
+    {
+      "id": "node/6356743585",
+      "name": "Silver Branch Brewing Company",
+      "kind": "pub",
+      "lat": 38.9949683,
+      "lon": -77.031233,
+      "url": "https://www.openstreetmap.org/node/6356743585"
+    },
+    {
+      "id": "node/6515747106",
+      "name": "Quarry House Tavern",
+      "kind": "bar",
+      "lat": 38.993587,
+      "lon": -77.0263765,
+      "url": "https://www.openstreetmap.org/node/6515747106"
+    },
+    {
+      "id": "node/6551304792",
+      "name": "Dave & Buster's",
+      "kind": "restaurant",
+      "lat": 38.9970956,
+      "lon": -77.026753,
+      "url": "https://www.openstreetmap.org/node/6551304792"
+    },
+    {
+      "id": "node/7802068505",
+      "name": "BibBop",
+      "kind": "restaurant",
+      "lat": 38.9955503,
+      "lon": -77.0270584,
+      "url": "https://www.openstreetmap.org/node/7802068505"
+    },
+    {
+      "id": "node/7802068506",
+      "name": "Copper Canyon Grill",
+      "kind": "restaurant",
+      "lat": 38.9954638,
+      "lon": -77.0267999,
+      "url": "https://www.openstreetmap.org/node/7802068506"
+    },
+    {
+      "id": "node/7802068510",
+      "name": "Nando's",
+      "kind": "restaurant",
+      "lat": 38.9956396,
+      "lon": -77.0266132,
+      "url": "https://www.openstreetmap.org/node/7802068510"
+    },
+    {
+      "id": "node/7802068516",
+      "name": "Yu Noodles",
+      "kind": "restaurant",
+      "lat": 38.9947906,
+      "lon": -77.0252185,
+      "url": "https://www.openstreetmap.org/node/7802068516"
+    },
+    {
+      "id": "node/7802068523",
+      "name": "Golf Ultra Lounge",
+      "kind": "bar",
+      "lat": 38.9911732,
+      "lon": -77.0262803,
+      "url": "https://www.openstreetmap.org/node/7802068523"
+    },
+    {
+      "id": "node/7802068531",
+      "name": "Palisades Lounge",
+      "kind": "bar",
+      "lat": 38.9919675,
+      "lon": -77.0263014,
+      "url": "https://www.openstreetmap.org/node/7802068531"
+    },
+    {
+      "id": "node/7821495143",
+      "name": "Locavino Wine Cafe",
+      "kind": "restaurant",
+      "lat": 38.9968186,
+      "lon": -77.0246306,
+      "url": "https://www.openstreetmap.org/node/7821495143"
+    },
+    {
+      "id": "node/7836144897",
+      "name": "Mix Bar and Grille",
+      "kind": "bar",
+      "lat": 38.9928644,
+      "lon": -77.0263599,
+      "url": "https://www.openstreetmap.org/node/7836144897"
+    },
+    {
+      "id": "node/7836144903",
+      "name": "Lewi Cafe",
+      "kind": "cafe",
+      "lat": 38.9945345,
+      "lon": -77.0246693,
+      "url": "https://www.openstreetmap.org/node/7836144903"
+    },
+    {
+      "id": "node/7836144904",
+      "name": "Don Pollo",
+      "kind": "fast_food",
+      "lat": 38.9966987,
+      "lon": -77.0257683,
+      "url": "https://www.openstreetmap.org/node/7836144904"
+    },
+    {
+      "id": "node/7836144905",
+      "name": "Kusshi Sushi",
+      "kind": "fast_food",
+      "lat": 38.9962525,
+      "lon": -77.0249839,
+      "url": "https://www.openstreetmap.org/node/7836144905"
+    },
+    {
+      "id": "node/7836144909",
+      "name": "Negril The Jamaican Eatery",
+      "kind": "restaurant",
+      "lat": 38.9930917,
+      "lon": -77.0259629,
+      "url": "https://www.openstreetmap.org/node/7836144909"
+    },
+    {
+      "id": "node/7836144911",
+      "name": "Spice Street",
+      "kind": "restaurant",
+      "lat": 38.9928146,
+      "lon": -77.0269762,
+      "url": "https://www.openstreetmap.org/node/7836144911"
+    },
+    {
+      "id": "node/9512604826",
+      "name": "Black Lion Cafe",
+      "kind": "cafe",
+      "lat": 38.9928934,
+      "lon": -77.0242882,
+      "url": "https://www.openstreetmap.org/node/9512604826"
+    },
+    {
+      "id": "node/9558833155",
+      "name": "Dog Haus",
+      "kind": "fast_food",
+      "lat": 38.9957735,
+      "lon": -77.0268303,
+      "url": "https://www.openstreetmap.org/node/9558833155"
+    },
+    {
+      "id": "node/10110391437",
+      "name": "J. Hollinger's Waterman's Chophouse",
+      "kind": "restaurant",
+      "lat": 38.9966931,
+      "lon": -77.0279311,
+      "url": "https://www.openstreetmap.org/node/10110391437"
+    },
+    {
+      "id": "node/11910531642",
+      "name": "Popeyes",
+      "kind": "fast_food",
+      "lat": 38.9935527,
+      "lon": -77.0264536,
+      "url": "https://www.openstreetmap.org/node/11910531642"
+    },
+    {
+      "id": "node/11923819365",
+      "name": "Taco Bell Cantina",
+      "kind": "fast_food",
+      "lat": 38.9975264,
+      "lon": -77.0273835,
+      "url": "https://www.openstreetmap.org/node/11923819365"
+    },
+    {
+      "id": "node/12405213536",
+      "name": "Java Nation",
+      "kind": "cafe",
+      "lat": 38.9940602,
+      "lon": -77.0277066,
+      "url": "https://www.openstreetmap.org/node/12405213536"
+    },
+    {
+      "id": "node/12610631434",
+      "name": "Lemon Slice Cafe",
+      "kind": "cafe",
+      "lat": 38.9987954,
+      "lon": -77.0259044,
+      "url": "https://www.openstreetmap.org/node/12610631434"
+    },
+    {
+      "id": "node/12637047034",
+      "name": "Arat Kilo Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9938893,
+      "lon": -77.0237631,
+      "url": "https://www.openstreetmap.org/node/12637047034"
+    },
+    {
+      "id": "node/13021040594",
+      "name": "&pizza",
+      "kind": "fast_food",
+      "lat": 38.9953504,
+      "lon": -77.0242101,
+      "url": "https://www.openstreetmap.org/node/13021040594"
+    },
+    {
+      "id": "node/13063944033",
+      "name": "The Big Greek Cafe",
+      "kind": "restaurant",
+      "lat": 38.9920286,
+      "lon": -77.0262992,
+      "url": "https://www.openstreetmap.org/node/13063944033"
+    },
+    {
+      "id": "node/13094393901",
+      "name": "Nips Juice House",
+      "kind": "bar",
+      "lat": 38.9989788,
+      "lon": -77.0285743,
+      "url": "https://www.openstreetmap.org/node/13094393901"
+    },
+    {
+      "id": "node/13123538366",
+      "name": "Firepan Korean BBQ",
+      "kind": "restaurant",
+      "lat": 38.994258,
+      "lon": -77.0261489,
+      "url": "https://www.openstreetmap.org/node/13123538366"
+    },
+    {
+      "id": "node/13607444768",
+      "name": "Prime Coffee and Bakery",
+      "kind": "fast_food",
+      "lat": 38.9928884,
+      "lon": -77.0253984,
+      "url": "https://www.openstreetmap.org/node/13607444768"
+    },
+    {
+      "id": "node/13607444769",
+      "name": "Lamoon Thai",
+      "kind": "restaurant",
+      "lat": 38.9929068,
+      "lon": -77.0248256,
+      "url": "https://www.openstreetmap.org/node/13607444769"
+    },
+    {
+      "id": "node/13825971963",
+      "name": "Chido's",
+      "kind": "restaurant",
+      "lat": 38.9959387,
+      "lon": -77.0268866,
+      "url": "https://www.openstreetmap.org/node/13825971963"
+    },
+    {
+      "id": "node/13825971964",
+      "name": "Matchbox",
+      "kind": "restaurant",
+      "lat": 38.9961926,
+      "lon": -77.0265205,
+      "url": "https://www.openstreetmap.org/node/13825971964"
+    },
+    {
+      "id": "node/14110983601",
+      "name": "Easy Like Sunday",
+      "kind": "restaurant",
+      "lat": 38.995497,
+      "lon": -77.0239491,
+      "url": "https://www.openstreetmap.org/node/14110983601"
+    },
+    {
+      "id": "node/14111099501",
+      "name": "Sushi Jin Next Door",
+      "kind": "restaurant",
+      "lat": 38.9975375,
+      "lon": -77.026391,
+      "url": "https://www.openstreetmap.org/node/14111099501"
+    },
+    {
+      "id": "node/14111099601",
+      "name": "A Lil' Sumthin' Sweet",
+      "kind": "ice_cream",
+      "lat": 38.9975709,
+      "lon": -77.0264876,
+      "url": "https://www.openstreetmap.org/node/14111099601"
+    },
+    {
+      "id": "node/14118971901",
+      "name": "'TIS Corner Cafe",
+      "kind": "cafe",
+      "lat": 38.9925641,
+      "lon": -77.0309487,
+      "url": "https://www.openstreetmap.org/node/14118971901"
+    },
+    {
+      "id": "way/88456611",
+      "name": "Fire Station 1 Restaurant & Brewing Co.",
+      "kind": "pub",
+      "lat": 38.9914912,
+      "lon": -77.0261545,
+      "url": "https://www.openstreetmap.org/way/88456611"
+    },
+    {
+      "id": "way/124560057",
+      "name": "Lesaac Ethiopian Cafe",
+      "kind": "restaurant",
+      "lat": 38.9919367,
+      "lon": -77.0243071,
+      "url": "https://www.openstreetmap.org/way/124560057"
+    },
+    {
+      "id": "way/145889133",
+      "name": "Mi Rancho",
+      "kind": "restaurant",
+      "lat": 38.996475,
+      "lon": -77.0299299,
+      "url": "https://www.openstreetmap.org/way/145889133"
+    },
+    {
+      "id": "way/224682806",
+      "name": "McDonald's",
+      "kind": "fast_food",
+      "lat": 38.9951327,
+      "lon": -77.0302187,
+      "url": "https://www.openstreetmap.org/way/224682806"
+    },
+    {
+      "id": "way/287649404",
+      "name": "Buena Vida Restaurant",
+      "kind": "restaurant",
+      "lat": 38.9938453,
+      "lon": -77.0289998,
+      "url": "https://www.openstreetmap.org/way/287649404"
+    },
+    {
+      "id": "way/729743633",
+      "name": "Tacos Tortas Tequila",
+      "kind": "restaurant",
+      "lat": 38.9939536,
+      "lon": -77.0290016,
+      "url": "https://www.openstreetmap.org/way/729743633"
+    },
+    {
+      "id": "way/729748493",
+      "name": "Abyssinia",
+      "kind": "restaurant",
+      "lat": 38.9923498,
+      "lon": -77.0261589,
+      "url": "https://www.openstreetmap.org/way/729748493"
+    },
+    {
+      "id": "way/729748494",
+      "name": "The Big Greek Cafe",
+      "kind": "restaurant",
+      "lat": 38.9924096,
+      "lon": -77.0262884,
+      "url": "https://www.openstreetmap.org/way/729748494"
+    },
+    {
+      "id": "way/729748495",
+      "name": "Zed's Cafe",
+      "kind": "cafe",
+      "lat": 38.9924641,
+      "lon": -77.0262924,
+      "url": "https://www.openstreetmap.org/way/729748495"
+    },
+    {
+      "id": "way/729748497",
+      "name": "The Society Lounge",
+      "kind": "bar",
+      "lat": 38.9925953,
+      "lon": -77.0261738,
+      "url": "https://www.openstreetmap.org/way/729748497"
+    },
+    {
+      "id": "way/729748499",
+      "name": "Underground Pizza Company",
+      "kind": "restaurant",
+      "lat": 38.9927035,
+      "lon": -77.0261803,
+      "url": "https://www.openstreetmap.org/way/729748499"
+    },
+    {
+      "id": "way/845858454",
+      "name": "Bump N Grind",
+      "kind": "cafe",
+      "lat": 38.9948063,
+      "lon": -77.024424,
+      "url": "https://www.openstreetmap.org/way/845858454"
+    }
+  ],
+  "source": {
+    "source": "OpenStreetMap contributors",
+    "url": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][timeout:45];nwr[\"amenity\"~\"^(restaurant|cafe|fast_food|bar|pub|ice_cream|food_court|biergarten)$\"](around:600,38.99487,-77.02489);out center tags;",
+    "downloaded_at": "2026-09-19T05:38:35.086394+00:00",
+    "license": "ODbL",
+    "scope": "600 m around challenge coordinate 38.99487, -77.02489; a study radius, not an official district boundary."
+  },
+  "count": 90
+}
