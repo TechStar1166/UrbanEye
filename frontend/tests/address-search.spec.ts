@@ -123,3 +123,39 @@ test('Clear pin removes the marker', async ({ page }) => {
   await page.getByRole('button', { name: 'Clear pin' }).click();
   await expect(page.locator('.address-pin')).toHaveCount(0);
 });
+
+test('an address result stays selectable when a pointer press outlasts input blur', async ({ page }) => {
+  await answerWith(page, [{ display_name: 'Pin Street, Silver Spring', lat: '38.99', lon: '-77.03' }]);
+  await page.goto('/#area=2472450&tab=Overview');
+  await expect(page.locator('.census-area').first()).toBeVisible();
+  await box(page).fill('Pin Street');
+  await box(page).press('Enter');
+  const row = page.locator('.address-row', { hasText: 'Pin Street' });
+  await row.hover();
+  await page.mouse.down();
+  // A deliberate slow press exposes the old 150 ms blur timer before click fires.
+  await page.waitForTimeout(300);
+  await expect(row).toBeVisible();
+  await page.mouse.up();
+  await expect(page.locator('.address-pin')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Clear pin' }).click();
+  await expect(page.locator('.address-pin')).toHaveCount(0);
+});
+
+test('keyboard focus stays in address results and closes search when it leaves', async ({ page }) => {
+  await answerWith(page, [{ display_name: 'Keyboard Street, Silver Spring', lat: '38.99', lon: '-77.03' }]);
+  await page.goto('/#area=2472450&tab=Overview');
+  await expect(page.locator('.census-area').first()).toBeVisible();
+  await box(page).fill('Keyboard Street');
+  await box(page).press('Enter');
+  const row = page.locator('.address-row', { hasText: 'Keyboard Street' });
+  await expect(row).toBeVisible();
+  await box(page).press('Tab');
+  await expect(row).toBeFocused();
+  await row.press('Enter');
+  await expect(page.locator('.address-pin')).toHaveCount(1);
+  await box(page).fill('Another Street');
+  await expect(page.locator('.search-results')).toBeVisible();
+  await page.getByRole('button', { name: 'Data', exact: true }).focus();
+  await expect(page.locator('.search-results')).toHaveCount(0);
+});

@@ -223,7 +223,10 @@ export default function App() {
     <header className="app-header">
       <a className="brand" href="/" aria-label="UrbanEye home"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="9" fill="#006948" /><path d="M24 36a12 12 0 1 1 12-12M32 32l7 7" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" /><circle cx="24" cy="24" r="5" fill="#85f8c4" /><path d="M16 24h4m4-8v4" stroke="white" strokeWidth="2" /></svg><span>UrbanEye</span></a>
       <div className="pilot"><i className="status-dot" /><span>Bay Hacks 2026</span></div>
-      <div className="global-search"><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); geoVersion.current++; setGeo({ state: 'idle', results: [] }); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter') { if (searchResults[0]) select(searchResults[0].id); else void runAddressSearch(); } }} onBlur={() => setTimeout(() => setSearchOpen(false), 150)} />
+      <div className="global-search" onBlur={event => {
+        // Moving focus to a result must keep it mounted until its click/Enter runs.
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setSearchOpen(false);
+      }}><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); geoVersion.current++; setGeo({ state: 'idle', results: [] }); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter') { if (searchResults[0]) select(searchResults[0].id); else void runAddressSearch(); } }} />
         {searchOpen && <div className="search-results"><span className="eyebrow">Places on this map</span>{searchResults.length ? searchResults.map(f => <button key={f.id} onClick={() => select(f.id)}><Icon name="pin" /><span>{areaName(f.properties)}</span><Icon name="arrow" /></button>) : <p>No matching place on the map.</p>}
           {search.trim().length >= 3 && <div className="address-search">
             <span className="eyebrow">Addresses</span>
