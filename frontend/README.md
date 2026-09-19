@@ -20,6 +20,14 @@ boundaries, selected-area state, and Census evidence are retained.
   displays loading/errors, deterministic facts, retrieved passages, and Gemini
   claims with source links and limitations. Changing areas clears old answers.
 - Preview state is in memory only. Site briefs are not stored or sent anywhere.
+- The Overview ends with a **data coverage** card: the values the dataset has for the
+  selected area and what is not in it at all (competitors, rent, foot traffic, revenue).
+- The selected area and tab are kept in the URL hash (`#area=<geo_id>&tab=<Tab>`), so a
+  view can be bookmarked or shared; the map's copy-link button copies it. Unknown values
+  are ignored. Layer and opacity are not in the URL.
+- The Data view has **Export all areas (CSV)**: one row per area and metric with its source,
+  date and URL. Text cells that could run as spreadsheet formulas are escaped. See
+  [docs/plans/transparency-and-sharing.md](../docs/plans/transparency-and-sharing.md).
 
 The app uses three panes on desktop, two panes with a layer drawer on tablet,
 and a bottom navigation bar for map/layers/insights on phones. Header search
