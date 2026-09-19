@@ -5,23 +5,25 @@ test.beforeEach(async ({ page }) => {
   await page.route('https://tile.openstreetmap.org/**', route => route.abort());
 });
 
-test('Fenton focus loads Census areas and real food/drink objects', async ({ page, request }) => {
+test('Fenton focus loads Census areas and real storefront objects', async ({ page, request }) => {
   const areas = await (await request.get('/api/areas')).json();
-  const places = await (await request.get('/api/places')).json();
+  const places = await (await request.get('/api/storefronts')).json();
   await page.goto('/');
   await expect(page.locator('.census-area').first()).toBeVisible();
   expect(areas.features.length).toBeGreaterThanOrEqual(1);
-  expect(places.count).toBeGreaterThan(0);
+  expect(places.storefronts.length).toBeGreaterThan(0);
   await expect(page.locator('.fenton-pin')).toBeVisible();
   await expect(page.locator('.fenton-label')).toContainText('Fenton Village');
-  await expect(page.locator('.map-legend')).toContainText('food & drink places');
-  await expect(page.locator('.insight-heading')).toContainText('not Fenton Village alone');
+  await expect(page.getByRole('group', { name: 'Storefront categories' })).toContainText('Food & drink');
+  await expect(page.locator('.food-place')).toHaveCount(0);
+  await expect(page.locator('.fenton-overlay')).toHaveCount(1);
+  await expect(page.locator('.insight-heading')).toContainText('Fenton study area B');
   await expect(page.locator('.leaflet-control-attribution')).toContainText('Esri');
 });
 
 test('real map opacity and metric controls reset without losing selection', async ({ page }) => {
   await page.goto('/');
-  const polygon = page.locator('.leaflet-interactive').first();
+  const polygon = page.locator('.area-240317025021');
   await expect(polygon).toBeVisible();
   await page.getByLabel('Transparency').fill('70');
   await expect(page.getByLabel('Transparency')).toHaveValue('70');
@@ -39,7 +41,7 @@ test('live count query and segmentation preview coexist', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'How many people live here?', exact: true }).click();
   await expect(page.locator('.user-question')).toContainText('How many people live here?');
-  await expect(page.locator('.research-response')).toContainText('81,015');
+  await expect(page.locator('.research-response')).toContainText('1,731');
   await page.getByRole('tab', { name: 'Compare areas' }).click();
   const panel = page.getByRole('region', { name: 'Segmentation' });
   await expect(panel).toContainText('Comparing 80 block groups');
@@ -52,23 +54,23 @@ test('data view, export, search, and methodology retain accurate source context'
   await page.goto('/');
   await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
   await page.getByRole('button', { name: 'Data', exact: true }).click();
-  await expect(page.getByRole('table')).toContainText('81,015');
+  await expect(page.getByRole('table')).toContainText('1,731');
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export selected area' }).click();
-  expect((await download).suggestedFilename()).toBe('civiclens-2472450.json');
+  expect((await download).suggestedFilename()).toBe('civiclens-240317025021.json');
 });
 
 test('answer history restores sources and the bar can collapse', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'How many people live here?' }).click();
   const answerPanel = page.locator('.answer-panel');
-  await expect(answerPanel).toContainText('81,015', { timeout: 15000 });
+  await expect(answerPanel).toContainText('1,731', { timeout: 15000 });
   await expect(page.getByLabel('Ask about this area')).toHaveValue('');
   await expect(page.getByRole('button', { name: 'Ask', exact: true })).toBeDisabled();
   await page.getByRole('tab', { name: /Answer history/ }).click();
   await expect(page.locator('.history-entry')).toHaveCount(1);
   await page.getByRole('button', { name: 'Reopen answer & sources' }).click();
-  await expect(answerPanel).toContainText('81,015');
+  await expect(answerPanel).toContainText('1,731');
   await expect(page.getByLabel('Ask about this area')).toHaveValue('');
 });
 
@@ -84,12 +86,12 @@ for (const width of [1440, 390, 320]) {
     expect(legend.x).toBeGreaterThanOrEqual(viewport.x);
     expect(legend.x + legend.width).toBeLessThanOrEqual(viewport.x + viewport.width);
     await suggestions.getByRole('button', { name: 'How many people live here?' }).click();
-    await expect(page.locator('.answer-panel')).toContainText('81,015', { timeout: 15000 });
+    await expect(page.locator('.answer-panel')).toContainText('1,731', { timeout: 15000 });
     await expect(suggestions.getByRole('button')).toHaveCount(3);
     await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
     await expect(page).toHaveURL(/sources/);
     await expect(page.getByRole('heading', { name: 'Data sources & methodology' })).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'OpenStreetMap food and drink places' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'OpenStreetMap storefronts' })).toBeVisible();
     await expect(page.locator('.sources-page')).toContainText('Downloaded:');
     expect(await page.locator('body').evaluate(el => el.scrollWidth <= innerWidth)).toBeTruthy();
     await page.reload();
@@ -108,13 +110,13 @@ test('map data error offers a working retry', async ({ page }) => {
   await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
 });
 
-test('a real food/drink dot opens its original OSM record', async ({ page, request }) => {
-  const places = await (await request.get('/api/places')).json();
+test('a real storefront dot opens its original OSM record', async ({ page, request }) => {
+  const places = await (await request.get('/api/storefronts')).json();
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/');
-  await expect(page.locator('.food-place').first()).toBeVisible({ timeout: 10000 });
-  await expect(page.locator('.food-place')).toHaveCount(places.count);
-  const point = await page.locator('.food-place').evaluateAll(elements => {
+  await expect(page.locator('.leaflet-storefronts-pane path').first()).toBeVisible({ timeout: 10000 });
+  await expect(page.locator('.leaflet-storefronts-pane path')).toHaveCount(places.storefronts.length);
+  const point = await page.locator('.leaflet-storefronts-pane path').evaluateAll(elements => {
     for (const element of elements) {
       const b = element.getBoundingClientRect();
       const x = b.x + b.width / 2, y = b.y + b.height / 2;
@@ -124,6 +126,6 @@ test('a real food/drink dot opens its original OSM record', async ({ page, reque
   });
   expect(point).not.toBeNull();
   await page.mouse.click(point!.x, point!.y);
-  await expect(page.locator('.leaflet-popup')).toContainText('From OpenStreetMap, may not be complete');
+  await expect(page.locator('.leaflet-popup')).toContainText('OpenStreetMap-mapped');
   await expect(page.locator('.leaflet-popup a').first()).toHaveAttribute('href', /^https:\/\/www.openstreetmap.org\/(node|way|relation)\/\d+$/);
 });

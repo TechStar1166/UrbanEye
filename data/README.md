@@ -126,3 +126,19 @@ The storefront rebuild retains those two study groups even though the Census map
 loads 80 block groups. Other groups have no storefront coverage in this snapshot,
 not a verified count of zero businesses. The food/drink snapshot above uses a separate
 600 m radius and retrieval date; the two snapshots should not be added together.
+
+### Storefront count verification — September 19, 2026
+
+Rebuilding `storefronts_overpass.json` with `scripts.prepare_storefronts.build` reproduces
+the committed GeoJSON exactly: 255 returned OSM objects minus 12 unnamed objects gives
+243 unique named objects (not a mockup constant). The query box is
+38.977873, -77.034341, 38.997973, -77.018389 (south, west, north, east),
+around block groups 240317025011 and 240317025021 plus about 200 m.
+Retrieval: 2026-09-19 07:33:29 UTC; OSM timestamp: 07:31:49 UTC.
+Raw SHA-256: `0c491bcfab5cea825dab05b9b4de4d0b622907ccaf15eddf8d8e89634ec6f7be`.
+
+The current UI computes 61 of these point locations inside the official Fenton Village
+zoning overlay with point-in-polygon testing. It separately labels the two covered
+block-group counts (30 and 65). These scopes are not interchangeable, and mapped
+objects may not correspond one-to-one with businesses. The four category counts
+come from the same 243-object snapshot; the earlier 90-place layer is no longer drawn.

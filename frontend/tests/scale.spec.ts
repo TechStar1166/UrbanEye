@@ -9,7 +9,7 @@ test('block-group fill scales with value and the legend explains it', async ({ p
   await mockAreas(page, 4);
   await page.goto('/');
   await expect.poll(() => colors(page)).toEqual(population);
-  await expect(page.locator('.map-legend')).toContainText('Darker = higher values within block groups');
+  await expect(page.locator('.map-legend')).toContainText('Darker = higher values.');
 });
 
 test('a large CDP stays neutral and does not distort the block-group scale', async ({ page }) => {

@@ -25,7 +25,7 @@ const answerWith = (page: Page, body: unknown, log?: { url: string; at: number }
 test('typing an address sends nothing until the user asks, and says where the text goes', async ({ page }) => {
   const log: { url: string; at: number }[] = [];
   await answerWith(page, [], log);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('7720 Blair Road');
   await expect(page.getByRole('button', { name: /Search address for “7720 Blair Road”/ })).toBeVisible();
   await expect(page.locator('.address-search')).toContainText('Sends your text to OpenStreetMap');
@@ -37,7 +37,7 @@ test('Enter geocodes with the coverage box, US filter and limit, then a pin drop
   const point = await pointInsideBlockGroup(page);
   const log: { url: string; at: number }[] = [];
   await answerWith(page, [{ display_name: '8250 Georgia Avenue, Silver Spring, Maryland, United States', lat: String(point.lat), lon: String(point.lon) }], log);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('8250 Georgia Avenue');
   await box(page).press('Enter');
   const row = page.locator('.address-row', { hasText: '8250 Georgia Avenue' });
@@ -57,7 +57,7 @@ test('Enter geocodes with the coverage box, US filter and limit, then a pin drop
 
 test('an address outside the covered area gets a pin and an explanation, and changes no selection', async ({ page }) => {
   await answerWith(page, [{ display_name: 'Far Away Road, Elsewhere', lat: '40.5', lon: '-75.5' }]);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   const panel = page.locator('aside').last();
   await expect(panel).toContainText('Silver Spring area'); // the whole-area default selection
   await box(page).fill('Far Away Road');
@@ -71,7 +71,7 @@ test('an address outside the covered area gets a pin and an explanation, and cha
 
 test('empty results and a service failure are reported without breaking area search', async ({ page }) => {
   await answerWith(page, []);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('Nowhere Lane');
   await box(page).press('Enter');
   await expect(page.getByText('No matching address in the Silver Spring area.')).toBeVisible();
@@ -88,7 +88,7 @@ test('empty results and a service failure are reported without breaking area sea
 test('repeat queries are served from cache and different queries are spaced at least a second apart', async ({ page }) => {
   const log: { url: string; at: number }[] = [];
   await answerWith(page, [{ display_name: 'One Street, Silver Spring', lat: '38.99', lon: '-77.03' }], log);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('One Street');
   await box(page).press('Enter');
   await expect(page.locator('.address-row', { hasText: 'One Street' })).toBeVisible();
@@ -105,7 +105,7 @@ test('repeat queries are served from cache and different queries are spaced at l
 
 test('geocoder text is rendered as text, never as HTML', async ({ page }) => {
   await answerWith(page, [{ display_name: '<img src=x onerror="window.__pwned=1">, Silver Spring', lat: '38.99', lon: '-77.03' }]);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('anything');
   await box(page).press('Enter');
   await expect(page.locator('.address-label')).toContainText('<img src=x');
@@ -115,11 +115,47 @@ test('geocoder text is rendered as text, never as HTML', async ({ page }) => {
 
 test('Clear pin removes the marker', async ({ page }) => {
   await answerWith(page, [{ display_name: 'Pin Street, Silver Spring', lat: '38.99', lon: '-77.03' }]);
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await box(page).fill('Pin Street');
   await box(page).press('Enter');
   await page.locator('.address-row', { hasText: 'Pin Street' }).click();
   await expect(page.locator('.address-pin')).toHaveCount(1);
   await page.getByRole('button', { name: 'Clear pin' }).click();
   await expect(page.locator('.address-pin')).toHaveCount(0);
+});
+
+test('an address result stays selectable when a pointer press outlasts input blur', async ({ page }) => {
+  await answerWith(page, [{ display_name: 'Pin Street, Silver Spring', lat: '38.99', lon: '-77.03' }]);
+  await page.goto('/#area=2472450&tab=Overview');
+  await expect(page.locator('.census-area').first()).toBeVisible();
+  await box(page).fill('Pin Street');
+  await box(page).press('Enter');
+  const row = page.locator('.address-row', { hasText: 'Pin Street' });
+  await row.hover();
+  await page.mouse.down();
+  // A deliberate slow press exposes the old 150 ms blur timer before click fires.
+  await page.waitForTimeout(300);
+  await expect(row).toBeVisible();
+  await page.mouse.up();
+  await expect(page.locator('.address-pin')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Clear pin' }).click();
+  await expect(page.locator('.address-pin')).toHaveCount(0);
+});
+
+test('keyboard focus stays in address results and closes search when it leaves', async ({ page }) => {
+  await answerWith(page, [{ display_name: 'Keyboard Street, Silver Spring', lat: '38.99', lon: '-77.03' }]);
+  await page.goto('/#area=2472450&tab=Overview');
+  await expect(page.locator('.census-area').first()).toBeVisible();
+  await box(page).fill('Keyboard Street');
+  await box(page).press('Enter');
+  const row = page.locator('.address-row', { hasText: 'Keyboard Street' });
+  await expect(row).toBeVisible();
+  await box(page).press('Tab');
+  await expect(row).toBeFocused();
+  await row.press('Enter');
+  await expect(page.locator('.address-pin')).toHaveCount(1);
+  await box(page).fill('Another Street');
+  await expect(page.locator('.search-results')).toBeVisible();
+  await page.getByRole('button', { name: 'Data', exact: true }).focus();
+  await expect(page.locator('.search-results')).toHaveCount(0);
 });

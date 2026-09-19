@@ -98,7 +98,25 @@ def get_places():
 
 @app.get("/sources")
 def get_sources():
-    return json.loads((ROOT / "data/processed/sources.json").read_text())
+    sources = json.loads((ROOT / "data/processed/sources.json").read_text())
+    sources = [source for source in sources if source["name"] != "OpenStreetMap food and drink places"]
+    manifest = json.loads((ROOT / "data/processed/storefronts_manifest.json").read_text())
+    sources.insert(2, {
+        "name": "OpenStreetMap storefronts",
+        "url": "https://www.openstreetmap.org/copyright",
+        "pulled": manifest["retrieved_at"], "vintage": manifest["osm_data_timestamp"],
+        "use": "The single business-dot layer, category filters and scoped storefront counts.",
+        "note": f"{len(storefronts.storefronts)} named objects from {manifest['counts']['raw_features']} query results; "
+                f"{manifest['counts']['dropped_unnamed']} unnamed objects excluded. "
+                "Query box around study block groups 240317025011 and 240317025021 plus about 200 m. "
+                f"South, west, north, east: {manifest['bbox_south_west_north_east']}. "
+                "This is not the zoning overlay boundary or a complete business registry.",
+        "query": manifest["query"],
+    })
+    for source in sources:
+        if source["name"] == "Fenton Village challenge location":
+            source["note"] = "Challenge-provided point at 38.99487, -77.02489. The map draws the county zoning overlay, not an inferred circular district boundary."
+    return sources
 
 
 @app.get("/overlays", response_model=OverlayResponse)

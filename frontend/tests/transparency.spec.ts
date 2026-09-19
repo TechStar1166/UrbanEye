@@ -15,7 +15,7 @@ async function downloadCsv(page: import('@playwright/test').Page) {
 }
 
 test('CSV export lists every area and metric with its source', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   const csv = await downloadCsv(page);
   const lines = csv.trim().split('\r\n');
   expect(lines[0]).toBe('geo_id,name,geography_type,boundary_vintage,metric,value,unit,source,data_date,source_url');
@@ -37,7 +37,7 @@ test('CSV export quotes special characters and neutralizes spreadsheet formulas'
       }]
     }
   }));
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   const csv = await downloadCsv(page);
   expect(csv).toContain(`"'=HYPERLINK(""http://x"")"`);
   expect(csv).toContain('"Source, Inc"');
@@ -52,12 +52,12 @@ test('opening a shared link restores the area and tab', async ({ page }) => {
 
 test('an unknown area or tab in the link is ignored', async ({ page }) => {
   await page.goto('/#area=does-not-exist&tab=Bogus');
-  await expect(page.getByRole('complementary', { name: 'Area facts and evidence' }).getByRole('heading', { name: 'Silver Spring area' })).toBeVisible();
+  await expect(page.getByRole('complementary', { name: 'Area facts and evidence' }).getByRole('heading', { name: 'Fenton study area B' })).toBeVisible();
   await expect(page.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
 });
 
 test('the address bar follows the selected area and tab', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   await page.getByRole('textbox', { name: 'Search for a place' }).fill('240317025011');
   await page.getByRole('textbox', { name: 'Search for a place' }).press('Enter');
   await expect.poll(() => page.evaluate(() => location.hash)).toBe('#area=240317025011&tab=Overview');
@@ -76,7 +76,7 @@ test('copy link puts the current view URL on the clipboard', async ({ page, cont
 });
 
 test('the Overview states what the dataset cannot tell you', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/#area=2472450&tab=Overview');
   const card = page.getByRole('region', { name: 'Data coverage' });
   await expect(card).toContainText('population: 81,015');
   await expect(card).toContainText('housing units: 35,150');

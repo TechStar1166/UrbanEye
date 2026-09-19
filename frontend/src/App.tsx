@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { api, type Answer, type Area, type Areas, type EvaluateResponse, type OverlayResponse, type Places, type Storefronts, type TransitResponse } from './services/api';
+import { api, type Answer, type Area, type Areas, type EvaluateResponse, type OverlayResponse, type Storefronts, type TransitResponse } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { formatMetric, MetricValue } from './evidence/MetricValue';
@@ -7,7 +7,7 @@ import { colorScale, palettes } from './map/colors';
 import { AnswerCard } from './components/AnswerCard';
 import { SourcesPage } from './components/SourcesPage';
 import { StorefrontSummary } from './components/StorefrontSummary';
-import { ALL_GROUPS, GROUPS, groupOf, summarize, type GroupId } from './lib/storefronts';
+import { ALL_GROUPS, GROUPS, groupOf, type GroupId } from './lib/storefronts';
 import { DataCoverage } from './components/DataCoverage';
 import { areasToCsv } from './lib/csv';
 import { readView, writeView } from './lib/urlState';
@@ -30,10 +30,10 @@ const planUrl = 'https://montgomeryplanning.org/wp-content/uploads/2022/11/Silve
 const METRIC_OPTIONS = [
   { id: 'population', label: 'Population', note: 'The map shades each neighborhood by how many people live there.' },
   { id: 'housing_units', label: 'Homes', note: 'The map shades each neighborhood by how many homes it has.' },
-  { id: 'median_household_income', label: 'Median household income', note: 'ACS 5-year 2020–2024 median household income for whole block groups.' },
-  { id: 'age_50_plus_pct', label: 'Residents 50 and older', note: 'ACS 5-year 2020–2024 share of residents age 50 and over.' },
-  { id: 'avg_household_size', label: 'Average household size', note: 'ACS 5-year 2020–2024 average household size.' },
-  { id: 'renter_occupied_pct', label: 'Renter-occupied homes', note: 'ACS 5-year 2020–2024 share of occupied homes that are renter-occupied.' },
+  { id: 'median_household_income', label: 'Median household income', note: 'Census survey estimate, 2020–2024 median household income for whole block groups.' },
+  { id: 'age_50_plus_pct', label: 'Residents 50 and older', note: 'Census survey estimate, 2020–2024 share of residents age 50 and over.' },
+  { id: 'avg_household_size', label: 'Average household size', note: 'Census survey estimate, 2020–2024 average household size.' },
+  { id: 'renter_occupied_pct', label: 'Renter-occupied homes', note: 'Census survey estimate, 2020–2024 share of occupied homes that are renter-occupied.' },
 ];
 const METRIC_LABELS: Record<string, string> = Object.fromEntries(METRIC_OPTIONS.map(item => [item.id, item.label]));
 
@@ -46,8 +46,6 @@ function MetricCard({ label, value, detail, note, tone = '' }: { label: string; 
 
 export default function App() {
   const [sourcesPage, setSourcesPage] = useState(location.hash === '#sources');
-  const [places, setPlaces] = useState<Places>();
-  const [placesError, setPlacesError] = useState(false);
   const [history, setHistory] = useState<{ area: Area; question: string; answer: Answer; regional: boolean }[]>([]);
   const [areas, setAreas] = useState<Areas>();
   const [selected, setSelected] = useState<Area>();
@@ -76,8 +74,8 @@ export default function App() {
   const [resetKey, setResetKey] = useState(0);
   const [storefronts, setStorefronts] = useState<Storefronts>();
   const [storefrontsFailed, setStorefrontsFailed] = useState(false);
-  const [showStorefronts, setShowStorefronts] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
+  const [showStorefronts, setShowStorefronts] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(true);
   const [showTransit, setShowTransit] = useState(false);
   const [overlays, setOverlays] = useState<OverlayResponse>();
   const [transit, setTransit] = useState<TransitResponse>();
@@ -99,14 +97,13 @@ export default function App() {
     try {
       const data = await api.areas();
       setAreas(data);
-      setSelected(current => data.features.find(f => f.id === (current?.geo_id ?? readView().area))?.properties ?? data.features[0]?.properties);
+      setSelected(current => data.features.find(f => f.id === (current?.geo_id ?? readView().area))?.properties ?? containingArea(data, -77.02489, 38.99487)?.properties ?? data.features[0]?.properties);
     } catch { setError('Unable to load the map. Check the backend connection and try again.'); }
     finally { setLoading(false); }
   }
   useEffect(() => {
     void load();
     api.storefronts().then(setStorefronts).catch(() => setStorefrontsFailed(true));
-    api.places().then(setPlaces).catch(() => setPlacesError(true));
     api.overlays().then(setOverlays).catch(() => undefined);
     api.transit().then(setTransit).catch(() => undefined);
   }, []);
@@ -148,7 +145,7 @@ export default function App() {
     else { setAddressNote('That address is outside the Census coverage on this map, so no area was selected.'); setSearch(''); setSearchOpen(false); }
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
-  const reset = () => { setPin(undefined); setAddressNote(''); setShowStorefronts(false); setShowOverlay(false); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setBusinessType(''); setEvalResult(undefined); setEvalBusy(false); setEvalError(''); setResetKey(k => k + 1); };
+  const reset = () => { setPin(undefined); setAddressNote(''); setShowStorefronts(true); setShowOverlay(true); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setBusinessType(''); setEvalResult(undefined); setEvalBusy(false); setEvalError(''); setResetKey(k => k + 1); };
   const ask = async (text = question, regional = false) => {
     if (!text.trim() || !selected || busy) return;
     const version = ++queryVersion.current;
@@ -222,12 +219,14 @@ export default function App() {
     }
   };
   if (sourcesPage) return <SourcesPage />;
-  const nearby = selected && storefronts ? summarize(storefronts.storefronts, selected.geo_id) : undefined;
   return <div className="civic-app">
     <header className="app-header">
       <a className="brand" href="/" aria-label="UrbanEye home"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="9" fill="#006948" /><path d="M24 36a12 12 0 1 1 12-12M32 32l7 7" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" /><circle cx="24" cy="24" r="5" fill="#85f8c4" /><path d="M16 24h4m4-8v4" stroke="white" strokeWidth="2" /></svg><span>UrbanEye</span></a>
       <div className="pilot"><i className="status-dot" /><span>Bay Hacks 2026</span></div>
-      <div className="global-search"><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); geoVersion.current++; setGeo({ state: 'idle', results: [] }); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter') { if (searchResults[0]) select(searchResults[0].id); else void runAddressSearch(); } }} onBlur={() => setTimeout(() => setSearchOpen(false), 150)} />
+      <div className="global-search" onBlur={event => {
+        // Moving focus to a result must keep it mounted until its click/Enter runs.
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setSearchOpen(false);
+      }}><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); geoVersion.current++; setGeo({ state: 'idle', results: [] }); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter') { if (searchResults[0]) select(searchResults[0].id); else void runAddressSearch(); } }} />
         {searchOpen && <div className="search-results"><span className="eyebrow">Places on this map</span>{searchResults.length ? searchResults.map(f => <button key={f.id} onClick={() => select(f.id)}><Icon name="pin" /><span>{areaName(f.properties)}</span><Icon name="arrow" /></button>) : <p>No matching place on the map.</p>}
           {search.trim().length >= 3 && <div className="address-search">
             <span className="eyebrow">Addresses</span>
@@ -249,7 +248,7 @@ export default function App() {
         <div className="panel-heading"><h2><Icon name="layers" />What's on the map</h2><button className="text-button" onClick={reset}>Reset</button></div>
         <div className="panel-scroll">
           <section className="control-section">
-            <SectionHeading detail={metric.startsWith('median') || metric.endsWith('_pct') || metric === 'avg_household_size' ? 'ACS 2020–2024' : 'Census 2020'}>Map appearance</SectionHeading>
+            <SectionHeading detail={metric.startsWith('median') || metric.endsWith('_pct') || metric === 'avg_household_size' ? 'Census survey, 2020–2024' : 'Census 2020'}>Map appearance</SectionHeading>
             <label className="field-label" htmlFor="color-by">Show on map</label>
             <select id="color-by" value={metric} onChange={e => setMetric(e.target.value)}>
               {METRIC_OPTIONS.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
@@ -265,43 +264,37 @@ export default function App() {
             {showStorefronts && storefronts && <div className="group-chips" role="group" aria-label="Storefront categories">{GROUPS.map(group =>
               <label key={group.id} className="group-chip"><input type="checkbox" checked={groups.includes(group.id)} onChange={() => toggleGroup(group.id)} />
                 <i style={{ background: group.color }} />{group.label}<small>{storefronts.storefronts.filter(item => groupOf(item) === group.id).length}</small></label>)}</div>}
-            <p className="micro-note">Named businesses near the Fenton study areas. This snapshot has a different date and boundary from the orange food &amp; drink dots.</p>
+            <p className="micro-note">Named businesses in the query box around Fenton study areas A and B, plus about 200 m. {storefronts && `Downloaded ${storefronts.retrieved_at.slice(0, 10)}.`} From OpenStreetMap, may not be complete.</p>
           </section>
           <section className="control-section">
             <SectionHeading detail="Boundaries">Zoning and transit</SectionHeading>
-            <label className="layer-row"><input type="checkbox" checked={showOverlay} onChange={e => setShowOverlay(e.target.checked)} /><span>Fenton Village overlay</span><small>Zoning</small></label>
-            <label className="layer-row"><input type="checkbox" checked={showTransit} onChange={e => setShowTransit(e.target.checked)} /><span>Purple Line alignment</span><small>OSM</small></label>
-            <p className="micro-note">The overlay is a zoning boundary and carries no counts. The Purple Line is tagged under construction, not operating service.</p>
+            <label className="layer-row"><input type="checkbox" checked={showOverlay} onChange={e => setShowOverlay(e.target.checked)} /><i className="legend-swatch overlay" /><span>Fenton Village overlay</span><small>Zoning</small></label>
+            <label className="layer-row"><input type="checkbox" checked={showTransit} onChange={e => setShowTransit(e.target.checked)} /><i className="legend-line" /><span>Purple Line alignment</span><small>OSM</small></label>
+            <p className="micro-note">The zoning boundary does not come with Census counts. The Purple Line is tagged as under construction in OpenStreetMap.</p>
           </section>
           <section className="control-section overlap-section">
-            <SectionHeading detail="ACS 2020–2024"><span className="inline-icon"><Icon name="overlap" />Compare two things</span></SectionHeading>
+            <SectionHeading detail="Census survey, 2020–2024"><span className="inline-icon"><Icon name="overlap" />Compare two things</span></SectionHeading>
             <label className="field-label" htmlFor="cohort">Residents 50 and older</label><select id="cohort" value={cohort} onChange={e => { setCohort(e.target.value); setOverlapOn(false); }}><option value="25">Residents 50+ above 25%</option><option value="30">Residents 50+ above 30%</option><option value="35">Residents 50+ above 35%</option></select>
             <label className="field-label" htmlFor="economic">Household income</label><select id="economic" value={income} onChange={e => { setIncome(Number(e.target.value)); setOverlapOn(false); }}>{Array.from({ length: 24 }, (_, i) => 45 + i * 5).map(v => <option value={v} key={v}>Household income below ${v},000</option>)}</select>
-            <div className="overlap-result"><div><strong>Compare neighborhoods</strong></div><p>{overlapIds.length} block groups have residents 50+ above {cohort}% and median household income below ${income},000. Values are ACS 5-year 2020–2024 for whole block groups, not the overlay.</p><small>This shows where two things appear together, not that one causes the other.</small></div>
+            <div className="overlap-result"><div><strong>Compare neighborhoods</strong></div><p>{overlapIds.length} block groups have residents 50+ above {cohort}% and median household income below ${income},000. Values are Census survey estimate, 2020–2024 for whole block groups, not the overlay.</p><small>This shows where two things appear together, not that one causes the other.</small></div>
             <button className="primary full-width" disabled={!overlapIds.length} onClick={() => { setOverlapOn(on => !on); setPane('map'); setView('map'); }}><Icon name="focus" />{overlapOn ? 'Hide overlap' : 'Show where these overlap'}<Icon name="arrow" /></button>
           </section>
         </div>
-        <div className="place-summary"><i className="fb-dot" />{places ? `${places.count} food & drink places` : placesError ? 'Places could not load' : 'Loading places…'}<p>From OpenStreetMap, may not be complete.</p><p>Dashed blue outline: 600 m study area, not an official district boundary.</p><p>Census boundaries may differ from local neighborhood names.</p></div>
         <div className="sidebar-footer"><i className="status-dot" /><span>{areas ? 'Map ready' : 'Loading the map…'}</span><Icon name="database" /></div>
       </aside>
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <div className="map-viewport">
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} pin={pin} answerGeoId={answer?.mode === 'facts' && answer.evidence.length ? selected?.geo_id : undefined} overlays={overlays} transit={transit} showOverlay={showOverlay} showTransit={showTransit} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} storefronts={visibleStorefronts} highlightIds={highlightIds} pin={pin} answerGeoId={answer?.mode === 'facts' && answer.evidence.length ? selected?.geo_id : undefined} overlays={overlays} transit={transit} showOverlay={showOverlay} showTransit={showTransit} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
           {pin && <div className="address-note" role="status"><span>{addressNote || 'Pinned: ' + pin.label.split(',').slice(0, 2).join(',')}</span>
             <button className="text-button" onClick={() => { setPin(undefined); setAddressNote(''); }}>Clear pin</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>Area you’re viewing</small><strong>{areaName(selected)}</strong></span></div><div className="map-actions"><button className="icon-button" aria-label="Copy link to this view" onClick={() => void copyLink()}><Icon name="external" /></button>{copied && <span role="status" className="micro-note">{copied}</span>}<button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div></div>
           <div className="map-legend"><span className="eyebrow">{metric ? (METRIC_LABELS[metric] ?? metric) : 'Boundaries only'}</span>
-            {metric && palettes[metric] && <><div className="choropleth-ramp">{palettes[metric].map(color => <i key={color} style={{ background: color }} />)}</div><div className="gradient-labels"><span>{formatMetric(metric, scale.min)}</span><span>{formatMetric(metric, scale.max)}</span></div><p>{scale.n >= 2 && scale.max > scale.min ? 'Darker = higher values within block groups. The larger Census place stays neutral.' : 'Color identifies the layer; not a comparative scale.'}</p></>}
+            {metric && palettes[metric] && <><div className="choropleth-ramp">{palettes[metric].map(color => <i key={color} style={{ background: color }} />)}</div><div className="gradient-labels"><span>{formatMetric(metric, scale.min)}</span><span>{formatMetric(metric, scale.max)}</span></div><p>{scale.n >= 2 && scale.max > scale.min ? 'Darker = higher values.' : 'Color identifies the layer; not a comparative scale.'}</p></>}
             <div><i className="legend-swatch selected" /><span>Selected area</span></div>
-            <div><i className="fb-dot" /><span>{places ? places.count : '…'} food &amp; drink places</span></div><p>From OpenStreetMap, may not be complete. Within the dashed 600 m study area.</p>
-            {showOverlay && <div><i className="legend-swatch overlay" /><span>Fenton Village overlay</span></div>}
-            {showTransit && <div><i className="legend-line" /><span>Purple Line (construction)</span></div>}
-            {highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>{overlapOn ? 'Age and income overlap' : 'High in both compared layers'}</span></div>}
-            {visibleStorefronts.length > 0 && <><p>OpenStreetMap-mapped storefronts</p>{GROUPS.filter(group => groups.includes(group.id)).map(group => <div key={group.id}><i className="legend-dot" style={{ background: group.color }} /><span>{group.label}</span></div>)}</>}
-            {answer?.mode === 'facts' && answer.evidence.length ? <div><i className="answer-swatch" /><span>Area in this answer</span></div> : null}
+
           </div>
         </div> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 and ACS 5-year · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th>{metricKeys.map(key => <th key={key}>{METRIC_LABELS[key] ?? key.replaceAll('_', ' ')}</th>)}</tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{areaName(f.properties)}</button></td>{metricKeys.map(key => <td key={key}><MetricValue area={f.properties} metric={key} /></td>)}</tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button><button className="secondary" disabled={!areas} onClick={exportCsv}><Icon name="download" />Export all areas (CSV)</button></div>}
         {view === 'map' && <div className="query-dock">
@@ -313,7 +306,7 @@ export default function App() {
       </section>
 
       <aside className="insights-panel" aria-label="Area facts and evidence">
-        <div className="insight-heading"><div><Icon name="pin" /><h2>{areaName(selected)}</h2><span className="tag">Selected</span></div><p>{selected?.geography_type === 'census_designated_place' ? 'Whole Silver Spring Census area · not Fenton Village alone' : 'Whole Census block group · not the Fenton district total'} · <button className="text-button" onClick={() => openTab('Evidence')}>See details</button></p></div>
+        <div className="insight-heading"><div><Icon name="pin" /><h2>{areaName(selected)}</h2><span className="tag">Selected</span></div><p>{selected?.geography_type === 'census_designated_place' ? 'Whole Silver Spring Census area · not Fenton Village alone' : 'Whole Census block group · counts extend beyond the zoning boundary'} · <button className="text-button" onClick={() => openTab('Evidence')}>See details</button></p></div>
         <div className="insight-tabs" role="tablist" aria-label="Community insights">{(['Overview', 'Compare areas', 'Answer history', 'Evidence'] as Tab[]).map(item => <button role="tab" aria-selected={tab === item} aria-controls="insight-content" id={'tab-' + item.replaceAll(' ', '-')} key={item} onClick={() => setTab(item)}>{item}{item === 'Answer history' && history.length > 0 && <span className="count-badge">{history.length}</span>}{item === 'Evidence' && <span className="count-badge">{evidenceCount}</span>}</button>)}</div>
         <div ref={insightRef} className="panel-scroll insight-content" id="insight-content" role="tabpanel" aria-labelledby={'tab-' + tab.replaceAll(' ', '-')}>
           {tab === 'Overview' && <>
@@ -326,16 +319,9 @@ export default function App() {
               {answer && <button className="secondary full-width answer-map-button" onClick={() => setPane('map')}>Back to the map<Icon name="map" /></button>}
             </section>}
             {businessOpen && selected && <section className="insight-section" aria-label="Business planning">
-              <SectionHeading detail="Mapped businesses + ACS">Business site brief</SectionHeading>
-              <p className="body-muted">This is community context for {areaName(selected)}, not a recommendation. Mapped storefronts are incomplete; rents, leases and foot traffic are not in this dataset.</p>
-              <div className="metrics-grid">
-                <MetricCard label="People" value={number('population')} detail="Census 2020 count" />
-                <MetricCard label="Median income" value={number('median_household_income')} detail="ACS 5-year 2020–2024" tone="blue" />
-                <MetricCard label="Renters" value={number('renter_occupied_pct')} detail="Of occupied homes" />
-                <MetricCard label="Mapped storefronts" value={nearby?.total ?? 0} detail="OpenStreetMap-mapped in this area" tone="blue" />
-              </div>
-              {nearby && nearby.top.length > 0 && <p className="micro-note">Most common mapped categories: {nearby.top.map(([name, count]) => `${name} (${count})`).join(', ')}.</p>}
-              <p className="micro-note">Whole published Census unit. Overlay proximity is not a count. Purple Line alignment is under construction.</p>
+              <SectionHeading detail="Mapped businesses + Census survey">Business site brief</SectionHeading>
+              <p className="body-muted">Community context for {areaName(selected)}, not a recommendation.</p>
+              <p className="micro-note">Use the sourced community figures below. The Purple Line is tagged as under construction in OpenStreetMap.</p>
               <div className="evaluate-form">
                 <label htmlFor="business-type-input" className="eyebrow">Business type</label>
                 <div className="evaluate-input-row">
@@ -354,21 +340,21 @@ export default function App() {
                 <p className="micro-note eval-disclaimer">Not a professional recommendation. {evalResult.limitations[0]}</p>
               </div>}
             </section>}
-            <section className="insight-section"><SectionHeading detail="Census 2020">Census counts</SectionHeading><div className="metrics-grid"><MetricCard label="Population" value={number('population')} detail="Everyone in this area" note="Census" /><MetricCard label="Homes" value={number('housing_units')} detail="Occupied and vacant homes" tone="blue" /></div></section>
-            <section className="insight-section"><SectionHeading detail="ACS 5-year 2020–2024">Community profile</SectionHeading>
+            <section className="insight-section"><SectionHeading>Census counts</SectionHeading><p className="micro-note">{selected?.geography_type === 'block_group' ? "This is the whole Census block group. The zoning boundary doesn’t come with counts." : "These figures cover the whole Silver Spring Census area."}</p><div className="metrics-grid"><MetricCard label="Population" value={number('population')} detail="Everyone in this area" /><MetricCard label="Homes" value={number('housing_units')} detail="Occupied and vacant homes" tone="blue" /></div></section>
+            <section className="insight-section"><SectionHeading detail="Census survey estimate, 2020–2024">Community profile</SectionHeading>
               <div className="metrics-grid">
-                <MetricCard label="Median household income" value={number('median_household_income')} detail="Whole published unit" note="ACS" />
+                <MetricCard label="Median household income" value={number('median_household_income')} detail="Household income in this area" />
                 <MetricCard label="Age 50+" value={number('age_50_plus_pct')} detail="Share of residents" tone="blue" />
                 <MetricCard label="Household size" value={number('avg_household_size')} detail="People per household" />
                 <MetricCard label="Renter-occupied" value={number('renter_occupied_pct')} detail="Of occupied homes" tone="blue" />
               </div>
-              <p className="micro-note">ACS 5-year estimates include a 90% margin of error. Consecutive 5-year vintages overlap and are not year-to-year change. These values describe the whole Census area, not the Fenton Village overlay.</p>
+              <p className="micro-note">Survey estimates include a 90% margin of error. Consecutive 5-year vintages overlap and are not year-to-year change. These values describe the whole Census area, not the Fenton Village overlay.</p>
             </section>
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>See the original <Icon name="arrow" /></button></blockquote><p className="micro-note">The plan covers a different area than the Census count.</p></section>
             <section className="insight-section"><SectionHeading>Where this comes from</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>People, homes and ACS estimates in this area.</small></span><span className="source-date">2020 / 2024</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
-            {selected && <><StorefrontSummary area={selected} data={storefronts} failed={storefrontsFailed} shown={showStorefronts} onShow={() => setShowStorefronts(true)} /><DataCoverage area={selected} /></>}
+            {selected && <><StorefrontSummary area={selected} data={storefronts} overlays={overlays} failed={storefrontsFailed} shown={showStorefronts} onShow={() => setShowStorefronts(true)} /><DataCoverage area={selected} /></>}
           </>}
-          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Sources for this area and its answers. Repeated citations are counted once.</p>{selected && <><details><summary>See details</summary><p>{selected.name} · {selected.geography_type.replaceAll('_', ' ')} · Geographic ID {selected.geo_id}</p><p>2020 Census TIGERweb: POP100 (people) and HU100 (housing units, occupied and vacant). These are decennial counts, not ACS sample estimates; a survey sampling margin of error does not apply. Counts can still have coverage and other errors. ACS 5-year 2020–2024 estimates include their published margins of error in each record.</p><p>Map colors compare block groups using equal intervals; the larger CDP is neutral. Counts are not densities. Loaded areas: {areas?.features.length}.</p></details><EvidenceList items={evidence} /></>}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
+          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Sources for this area and its answers. Repeated citations are counted once.</p>{selected && <><details><summary>See details</summary><p>{selected.name} · {selected.geography_type.replaceAll('_', ' ')} · Geographic ID {selected.geo_id}</p><p>2020 Census TIGERweb: POP100 (people) and HU100 (housing units, occupied and vacant). These are decennial counts, not ACS sample estimates; a survey sampling margin of error does not apply. Counts can still have coverage and other errors. Census survey estimate, 2020–2024 estimates include their published margins of error in each record.</p><p>Map colors compare block groups using equal intervals; the larger CDP is neutral. Counts are not densities. Loaded areas: {areas?.features.length}.</p></details><EvidenceList items={evidence} /></>}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
           {tab === 'Compare areas' && <section className="insight-section"><SectionHeading detail="Census 2020 and ACS">Compare two things</SectionHeading><p className="body-muted">Compare two sourced layers across whole Census areas of the same type. Association is not causation.</p><div className="info-note"><Icon name="info" /><span>This shows where two things appear together, not that one causes the other.</span></div>{areas && <SegmentationPanel areas={areas} onHighlight={setSegmentHighlights} />}</section>}
           {tab === 'Answer history' && <section className="insight-section"><SectionHeading>Answer history</SectionHeading><p className="body-muted">This session only · {history.length} answers</p>{!history.length && <p>Ask a question on the map to start your history.</p>}{history.map((entry, i) => <article className="history-entry" key={i}><h3>{entry.question}</h3><p>{areaName(entry.area)}</p><p>{entry.answer.summary}</p><button className="secondary" onClick={() => { queryVersion.current++; setBusy(false); setSelected(entry.area); setAnswer(entry.answer); setSubmitted(entry.question); setQuestion(''); setQueryError(''); setAnswerRegional(entry.regional); setTab('Overview'); setPane('insights'); if (insightRef.current) insightRef.current.scrollTop = 0; setView('map'); }}>Reopen answer &amp; sources</button></article>)}</section>}
 
