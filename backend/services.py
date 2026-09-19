@@ -18,7 +18,7 @@ def answer(question: str, area: Area, index: DocumentIndex) -> Answer:
     metric = None
     if re.fullmatch(r"(what is the population|how many people live)( here| in this area)?", normalized):
         metric = "population"
-    elif re.fullmatch(r"(how many (housing units|homes)( are there)?|what is the housing unit count)( here| in this area)?", normalized):
+    elif re.fullmatch(r"(how many housing units( are there)?|what is the housing unit count)( here| in this area)?", normalized):
         metric = "housing_units"
     if metric:
         evidence = [e for e in area.evidence if e.metric == metric and e.value is not None]

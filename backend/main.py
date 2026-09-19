@@ -1,4 +1,3 @@
-import json
 from fastapi import Depends, FastAPI, HTTPException
 from dotenv import load_dotenv
 
@@ -83,13 +82,3 @@ def segment(request: SegmentRequest):
         explanation=explanation,
         data_points=data_points
     )
-
-
-@app.get("/places")
-def get_places():
-    return json.loads((ROOT / "data/processed/places.json").read_text())
-
-
-@app.get("/sources")
-def get_sources():
-    return json.loads((ROOT / "data/processed/sources.json").read_text())

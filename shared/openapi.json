@@ -176,38 +176,6 @@
           }
         }
       }
-    },
-    "/places": {
-      "get": {
-        "summary": "Get Places",
-        "operationId": "get_places_places_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/sources": {
-      "get": {
-        "summary": "Get Sources",
-        "operationId": "get_sources_sources_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {

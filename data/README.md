@@ -18,31 +18,20 @@ values. To deliberately refresh the raw snapshot, download the exact manifest UR
 verify the payload and update the retrieval timestamp; review the resulting diff.
 Do not add a live download to application startup.
 
-## Expanded block-group coverage
+## Fenton Village Study Geography (Block Groups)
 
-The active snapshot now includes all **80 Maryland 2020 block groups intersecting
-or touching the official Silver Spring CDP polygon**, plus the unchanged CDP.
-See `raw/silver_spring_blockgroups_source.json` for the exact spatial query,
-returned IDs, and download time. Whole geometries and whole counts are retained;
-boundary-touching groups may extend beyond the CDP. Do not sum them with the CDP.
-The former two-group snapshot is retained as historical raw input, not loaded.
-The irregular CDP geometry is unchanged from the official Census snapshot and is
-not a local neighborhood or municipal boundary.
+Fenton Village is represented by whole 2020 Census Block Groups:
+- **Block Group 1, Census Tract 7025.01** (GEOID `240317025011`): Population 2,866, Housing Units 1,924.
+- **Block Group 1, Census Tract 7025.02** (GEOID `240317025021`): Population 1,731, Housing Units 1,316.
 
-## Fenton Village and food/drink places
+- Official source: U.S. Census Bureau TIGERweb Census 2020, Layer 8 (`Census Block Groups`).
+- Source metadata and query URL: `data/raw/fenton_village_source.json`.
+- Cached raw boundaries: `data/raw/fenton_village_blockgroups_census2020.geojson`.
+- Processed output: `data/processed/areas.geojson` and `data/processed/manifest.json`.
 
-The challenge coordinate is 38.99487, -77.02489. A labeled pin and a **600 m study
-radius** mark the focus. The circle is not presented as an official district boundary.
-`raw/fenton_osm_food.json` caches an Overpass query for restaurant, cafe, fast_food,
-bar, pub, ice_cream, food_court and biergarten objects within that radius.
-`raw/fenton_osm_source.json` records its query, timestamp and ODbL attribution.
-The snapshot contains **90 mapped OSM objects**. Nodes use their coordinates;
-ways and relations use their centers. Centers beyond 600 m are excluded.
-IDs are unique, but separate OSM objects could refer to the same establishment.
-The count is not a verified business census. From OpenStreetMap, may not be complete.
+## Geographic limitations and next handoff
 
-Refresh deliberately with `python -m scripts.download_map_data`, then rebuild
-with `python -m scripts.prepare_data`. The latter deterministically rebuilds
-areas, places and the source catalog without a network connection. App startup
-and map data do not require Census or Overpass availability; basemap tiles still
-require network access. Sources are inspectable at `/#sources`.
+The Silver Spring CDP is broader than Fenton Village. The Fenton Village block groups
+lie inside the Silver Spring CDP polygon; their counts must describe each block group,
+not the clipped study boundary, and should never be added to CDP totals. No within-area
+density or distribution is inferred. Rebuild anytime with `python -m scripts.prepare_data`.

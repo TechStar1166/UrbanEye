@@ -51,16 +51,16 @@ def prepare():
         features.append(build_feature(props, feature["geometry"], source,
                                       "census_designated_place", props["NAME"]))
 
-    # Complete intersecting block-group snapshot; retain full geometries and counts.
-    # The raw source manifest records the exact spatial query and returned IDs.
-    bg_path = ROOT / "data/raw/silver_spring_blockgroups_census2020.geojson"
-    bg_source = json.loads((ROOT / "data/raw/silver_spring_blockgroups_source.json").read_text())
+    # Fenton Village study area. These are whole block groups selected by geocoded
+    # address, not a clip of the district boundary; see data/raw/fenton_village_source.json.
+    bg_path = ROOT / "data/raw/fenton_village_blockgroups_census2020.geojson"
+    bg_source = json.loads((ROOT / "data/raw/fenton_village_source.json").read_text())
     bg_raw = json.loads(bg_path.read_text())
-    expected = set(bg_source["geoids"])
+    expected = {"240317025011", "240317025021"}
     if bg_raw.get("exceededTransferLimit"):
         raise ValueError("Incomplete block group response")
     if {str(f["properties"]["GEOID"]) for f in bg_raw["features"]} != expected:
-        raise ValueError("Unexpected Silver Spring block group IDs")
+        raise ValueError("Unexpected Fenton Village block group IDs")
     for feature in bg_raw["features"]:
         props = feature["properties"]
         # TIGER names every block group "Block Group 1"; qualify it so the map and
@@ -76,16 +76,14 @@ def prepare():
         "geography_scope": "Silver Spring CDP, Maryland; not Fenton Village",
         "fields": {"population": "POP100", "housing_units": "HU100"},
         "transform": "scripts/prepare_data.py; no boundary simplification; negative counts become null",
-        "silver_spring_block_groups": {
+        "fenton_village_block_groups": {
             **bg_source, "raw_sha256": hashlib.sha256(bg_path.read_bytes()).hexdigest(),
-            "geography_scope": "Whole 2020 block groups intersecting the Silver Spring CDP; "
+            "geography_scope": "Whole 2020 block groups covering the Fenton Village District; "
                                "counts describe each block group, not the district boundary",
-            "contains_cdp_overlap": "Groups can cross or touch the CDP boundary. "
+            "contains_cdp_overlap": "These block groups lie inside the Silver Spring CDP polygon. "
                                     "Never add their counts to the CDP totals.",
         },
     }, indent=2) + "\n")
-    from scripts.prepare_map_context import build
-    build()
     levels = {f.properties.geography_type for f in features}
     print(f"Validated {len(features)} real area(s) across {len(levels)} geographic level(s), "
           "two sourced metrics each.")
