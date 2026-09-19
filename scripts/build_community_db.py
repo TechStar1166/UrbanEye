@@ -498,6 +498,13 @@ def round_metric(metric: str, value: float | None) -> float | None:
     return value
 
 
+def stable_moe(value: float | None) -> float | None:
+    """Normalize derived MOEs so JSON exports are stable across platforms."""
+    if value is None:
+        return None
+    return round(value, 12)
+
+
 def attach_acs_to_areas(db: sqlite3.Connection) -> None:
     """Write the 2024 ACS 5-year snapshot onto each /areas feature with matching evidence.
 
@@ -583,8 +590,8 @@ def write_json_exports(db):
                FROM time_series ORDER BY geo_id, metric, span, year"""):
         history.append({
             "geo_id": row[0], "metric": row[1], "year": row[2], "span": row[3],
-            "period": row[4], "estimate": row[5], "moe": row[6],
-            "estimate_2024_usd": row[7], "moe_2024_usd": row[8],
+            "period": row[4], "estimate": row[5], "moe": stable_moe(row[6]),
+            "estimate_2024_usd": row[7], "moe_2024_usd": stable_moe(row[8]),
             "unit": row[9], "low_reliability": bool(row[10]),
         })
     out = ROOT / "data/processed"
@@ -603,7 +610,7 @@ def write_json_exports(db):
                ORDER BY t.geo_id, t.metric, t.span"""):
         snapshot.append({
             "geo_id": row[0], "name": row[1], "metric": row[2], "year": row[3],
-            "span": row[4], "estimate": row[5], "moe": row[6],
+            "span": row[4], "estimate": row[5], "moe": stable_moe(row[6]),
             "estimate_2024_usd": row[7], "unit": row[8],
             "low_reliability": bool(row[9]),
         })
