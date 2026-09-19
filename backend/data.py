@@ -51,4 +51,6 @@ LAYERS = [
           description="2020 Census total population (POP100); whole selected area."),
     Layer(id="housing_units", label="Housing units", unit="units",
           description="2020 Census housing units (HU100); not households or available homes."),
+    Layer(id="population_density", label="Population Density", unit="people/sqmi",
+          description="Derived 2020 population per square mile."),
 ]

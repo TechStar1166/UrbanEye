@@ -33,6 +33,22 @@ def build_feature(props, geometry, source, geography_type, name):
             metric=metric, value=value, unit=unit,
             retrieved_at=source.get("retrieved_at") or source.get("downloaded_at"),
         ))
+        
+    # Derived rate metric: population density (people per sq mile)
+    pop = props.get("POP100")
+    arealand = props.get("AREALAND")
+    if pop is not None and arealand and float(arealand) > 0:
+        sq_mi = float(arealand) / 2589988.11
+        density = round(float(pop) / sq_mi, 1)
+        metrics["population_density"] = density
+        evidence.append(Evidence(
+            evidence_id=f"census2020:{geo_id}:population_density", type="structured_data",
+            title=f"2020 Census Derived Density — {name}", source=source["dataset"],
+            url=source["url"], date=source["data_date"], geo_id=geo_id,
+            metric="population_density", value=density, unit="people per sq mi",
+            retrieved_at=source.get("retrieved_at") or source.get("downloaded_at"),
+        ))
+
     return Feature(id=geo_id, geometry=Geometry.model_validate(geometry),
         properties=Area(geo_id=geo_id, name=name, geography_type=geography_type,
             boundary_vintage=source["boundary_vintage"], metrics=metrics, evidence=evidence))

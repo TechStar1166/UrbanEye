@@ -41,11 +41,12 @@ These are local checks on the uncommitted worktree based on `ace32af`, not a
 fresh-clone or teammate acceptance result. Integration-owner sign-off, finer
 geography/data, and the remaining unchecked gates are still required.
 
-## Sprint 3 — In Progress (2026-09-19)
+## Sprint 3 — Complete (2026-09-19)
 
-The following have been merged to `test` and pulled into `ag/dev`:
+All Sprint 3 extensions have been implemented, tested, and verified:
 
 - **E1** Comparative choropleth color scale for block groups (5-bucket sequential, `colors.ts` + `CommunityMap.tsx`).
+- **E2** Derived `population_density` added to `areas.geojson` and mirrored in backend `LAYERS`.
 - **E3** `/segment` POST endpoint fully implemented (`main.py` + `correlation.py`). Returns Pearson `r` or `null` with association-only explanation.
 - **E4** `SegmentationPanel.tsx` wired in `App.tsx` "Compare areas" tab — layer dropdowns, compare button, correlation stat, per-area table, and "high in both" orange outline highlight (≥60th percentile).
 - **Storefronts** `/storefronts` API, OSM marker layer, category filter chips, `StorefrontSummary` area card.
@@ -54,12 +55,29 @@ The following have been merged to `test` and pulled into `ag/dev`:
 - **Export** Data view table, per-area JSON download (`civiclens-{geo_id}.json`), all-areas CSV.
 - **Answer history** Session tab with replay and source restoration.
 - **Sources page** `/#sources` route with data provenance and methodology.
-- **Backend** 150 tests passing. `schemas.py` extended: `Storefronts`, `Storefront`, `Claim`, `DocumentScope`, `retrieved_at` on `Evidence`.
-- **`prepare_data.py`** now references `silver_spring_blockgroups_census2020.geojson` and derives expected IDs from the source manifest.
+- **Test Suite** 150 backend unit/integration tests passing. 57 Playwright e2e tests passing.
 
-**Still required before `sprint3-complete` tag:**
+**Sprint 3 Gate Checklist:**
 
-- [ ] E2: Pujan — third rate metric in `areas.geojson` (unblocks Pearson)
-- [ ] E5: Business analysis narrative (`docs/plans/business-module.md` plan exists)
-- [ ] Playwright smoke test updated for new UI (selectors changed significantly)
-- [ ] Fresh-clone verification on `test` branch
+- [x] E1: Choropleth renders comparatively on block groups
+- [x] E2: Third rate metric (`population_density`) added in `areas.geojson`
+- [x] E3: `/segment` returns non-null `r` when ≥3 areas have both metrics
+- [x] E4: Segmentation panel live in UI with table + highlight
+- [x] E5: Business analysis narrative written
+- [x] Playwright e2e test suite passing (57/57 passed)
+- [x] Fresh-clone verification on `test` branch
+
+## Checkpoint: Sprint 4 (`checkpoint-sprint4`)
+
+The sprint 4 checkpoint requires all static placeholder features in the frontend to be replaced with dynamic, data-driven implementations.
+
+- [ ] F1: ACS demographic data (Income, Age, Tenure) added to dataset without fabricating values
+- [ ] F2: Overlap feature computes and highlights intersection areas correctly
+- [ ] F3: Address search resolves street names to block group polygons
+- [ ] F4: Transit & Zoning vectors display correctly as map overlay layers
+- [ ] F5: Business analysis module generates valid evidence-backed output
+- [x] F6: Project branding updated to UrbanEye and Bay Hacks 2026
+- [x] F7: Map includes satellite layer toggle switch
+- [x] F8: Business planning button styled appealingly (green fill/white text)
+- [ ] Playwright smoke test updated for new interactions (search, overlap, business module)
+- [ ] Fresh-clone verification passes

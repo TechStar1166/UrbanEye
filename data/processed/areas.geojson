@@ -2675,7 +2675,8 @@
         "boundary_vintage": "2020-01-01",
         "metrics": {
           "population": 81015.0,
-          "housing_units": 35150.0
+          "housing_units": 35150.0,
+          "population_density": 10278.0
         },
         "evidence": [
           {
@@ -2708,6 +2709,24 @@
             "metric": "housing_units",
             "value": 35150.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:2472450:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Silver Spring CDP",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28/query?where=GEOID%3D%272472450%27&outFields=%2A&outSR=4326&returnGeometry=true&f=geojson",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-18T23:29:36.065805+00:00",
+            "geo_id": "2472450",
+            "metric": "population_density",
+            "value": 10278.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -3042,7 +3061,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2146.0,
-          "housing_units": 777.0
+          "housing_units": 777.0,
+          "population_density": 4946.9
         },
         "evidence": [
           {
@@ -3075,6 +3095,24 @@
             "metric": "housing_units",
             "value": 777.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317028002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7028.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317028002",
+            "metric": "population_density",
+            "value": 4946.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -3973,7 +4011,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2254.0,
-          "housing_units": 1131.0
+          "housing_units": 1131.0,
+          "population_density": 3950.7
         },
         "evidence": [
           {
@@ -4006,6 +4045,24 @@
             "metric": "housing_units",
             "value": 1131.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317051002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7051.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317051002",
+            "metric": "population_density",
+            "value": 3950.7,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -4444,7 +4501,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1942.0,
-          "housing_units": 581.0
+          "housing_units": 581.0,
+          "population_density": 9794.2
         },
         "evidence": [
           {
@@ -4477,6 +4535,24 @@
             "metric": "housing_units",
             "value": 581.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317020003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7020.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317020003",
+            "metric": "population_density",
+            "value": 9794.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -4659,7 +4735,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1938.0,
-          "housing_units": 572.0
+          "housing_units": 572.0,
+          "population_density": 27996.1
         },
         "evidence": [
           {
@@ -4692,6 +4769,24 @@
             "metric": "housing_units",
             "value": 572.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021013:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7021.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021013",
+            "metric": "population_density",
+            "value": 27996.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -5294,7 +5389,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1291.0,
-          "housing_units": 327.0
+          "housing_units": 327.0,
+          "population_density": 4553.7
         },
         "evidence": [
           {
@@ -5327,6 +5423,24 @@
             "metric": "housing_units",
             "value": 327.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021014:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7021.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021014",
+            "metric": "population_density",
+            "value": 4553.7,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -6321,7 +6435,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1335.0,
-          "housing_units": 450.0
+          "housing_units": 450.0,
+          "population_density": 2926.9
         },
         "evidence": [
           {
@@ -6354,6 +6469,24 @@
             "metric": "housing_units",
             "value": 450.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317041003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7041.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317041003",
+            "metric": "population_density",
+            "value": 2926.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -6848,7 +6981,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 985.0,
-          "housing_units": 358.0
+          "housing_units": 358.0,
+          "population_density": 2905.3
         },
         "evidence": [
           {
@@ -6881,6 +7015,24 @@
             "metric": "housing_units",
             "value": 358.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317023022:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7023.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317023022",
+            "metric": "population_density",
+            "value": 2905.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -7103,7 +7255,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1572.0,
-          "housing_units": 477.0
+          "housing_units": 477.0,
+          "population_density": 13866.7
         },
         "evidence": [
           {
@@ -7136,6 +7289,24 @@
             "metric": "housing_units",
             "value": 477.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317023012:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7023.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317023012",
+            "metric": "population_density",
+            "value": 13866.7,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -7450,7 +7621,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1310.0,
-          "housing_units": 846.0
+          "housing_units": 846.0,
+          "population_density": 11838.9
         },
         "evidence": [
           {
@@ -7483,6 +7655,24 @@
             "metric": "housing_units",
             "value": 846.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7026.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026021",
+            "metric": "population_density",
+            "value": 11838.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -7909,7 +8099,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2354.0,
-          "housing_units": 982.0
+          "housing_units": 982.0,
+          "population_density": 29172.3
         },
         "evidence": [
           {
@@ -7942,6 +8133,24 @@
             "metric": "housing_units",
             "value": 982.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338059061:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 8059.06",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338059061",
+            "metric": "population_density",
+            "value": 29172.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -8072,7 +8281,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 875.0,
-          "housing_units": 773.0
+          "housing_units": 773.0,
+          "population_density": 48690.3
         },
         "evidence": [
           {
@@ -8105,6 +8315,24 @@
             "metric": "housing_units",
             "value": 773.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025032:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7025.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025032",
+            "metric": "population_density",
+            "value": 48690.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -8295,7 +8523,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 785.0,
-          "housing_units": 278.0
+          "housing_units": 278.0,
+          "population_density": 7522.3
         },
         "evidence": [
           {
@@ -8328,6 +8557,24 @@
             "metric": "housing_units",
             "value": 278.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317022002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7022.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317022002",
+            "metric": "population_density",
+            "value": 7522.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -8550,7 +8797,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1796.0,
-          "housing_units": 480.0
+          "housing_units": 480.0,
+          "population_density": 28022.0
         },
         "evidence": [
           {
@@ -8583,6 +8831,24 @@
             "metric": "housing_units",
             "value": 480.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317016022:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7016.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317016022",
+            "metric": "population_density",
+            "value": 28022.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -8857,7 +9123,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1495.0,
-          "housing_units": 502.0
+          "housing_units": 502.0,
+          "population_density": 2733.9
         },
         "evidence": [
           {
@@ -8890,6 +9157,24 @@
             "metric": "housing_units",
             "value": 502.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317015091:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7015.09",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317015091",
+            "metric": "population_density",
+            "value": 2733.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -9396,7 +9681,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 931.0,
-          "housing_units": 346.0
+          "housing_units": 346.0,
+          "population_density": 6283.6
         },
         "evidence": [
           {
@@ -9429,6 +9715,24 @@
             "metric": "housing_units",
             "value": 346.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317024011:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7024.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317024011",
+            "metric": "population_density",
+            "value": 6283.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -10067,7 +10371,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1791.0,
-          "housing_units": 716.0
+          "housing_units": 716.0,
+          "population_density": 7431.2
         },
         "evidence": [
           {
@@ -10100,6 +10405,24 @@
             "metric": "housing_units",
             "value": 716.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317024012:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7024.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317024012",
+            "metric": "population_density",
+            "value": 7431.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -10230,7 +10553,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 888.0,
-          "housing_units": 555.0
+          "housing_units": 555.0,
+          "population_density": 14638.0
         },
         "evidence": [
           {
@@ -10263,6 +10587,24 @@
             "metric": "housing_units",
             "value": 555.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317024022:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7024.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317024022",
+            "metric": "population_density",
+            "value": 14638.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -10569,7 +10911,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2515.0,
-          "housing_units": 983.0
+          "housing_units": 983.0,
+          "population_density": 12664.2
         },
         "evidence": [
           {
@@ -10602,6 +10945,24 @@
             "metric": "housing_units",
             "value": 983.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317024023:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7024.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317024023",
+            "metric": "population_density",
+            "value": 12664.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -10864,7 +11225,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 792.0,
-          "housing_units": 289.0
+          "housing_units": 289.0,
+          "population_density": 5083.1
         },
         "evidence": [
           {
@@ -10897,6 +11259,24 @@
             "metric": "housing_units",
             "value": 289.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317022004:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7022.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317022004",
+            "metric": "population_density",
+            "value": 5083.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -11371,7 +11751,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1355.0,
-          "housing_units": 511.0
+          "housing_units": 511.0,
+          "population_density": 7986.4
         },
         "evidence": [
           {
@@ -11404,6 +11785,24 @@
             "metric": "housing_units",
             "value": 511.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021011:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7021.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021011",
+            "metric": "population_density",
+            "value": 7986.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -11710,7 +12109,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 997.0,
-          "housing_units": 357.0
+          "housing_units": 357.0,
+          "population_density": 35626.6
         },
         "evidence": [
           {
@@ -11743,6 +12143,24 @@
             "metric": "housing_units",
             "value": 357.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026022:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7026.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026022",
+            "metric": "population_density",
+            "value": 35626.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -11985,7 +12403,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1979.0,
-          "housing_units": 961.0
+          "housing_units": 961.0,
+          "population_density": 17994.8
         },
         "evidence": [
           {
@@ -12018,6 +12437,24 @@
             "metric": "housing_units",
             "value": 961.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317023011:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7023.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317023011",
+            "metric": "population_density",
+            "value": 17994.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -12576,7 +13013,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1547.0,
-          "housing_units": 563.0
+          "housing_units": 563.0,
+          "population_density": 4603.0
         },
         "evidence": [
           {
@@ -12609,6 +13047,24 @@
             "metric": "housing_units",
             "value": 563.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317029002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7029.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317029002",
+            "metric": "population_density",
+            "value": 4603.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -12811,7 +13267,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2128.0,
-          "housing_units": 769.0
+          "housing_units": 769.0,
+          "population_density": 18104.1
         },
         "evidence": [
           {
@@ -12844,6 +13301,24 @@
             "metric": "housing_units",
             "value": 769.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317016011:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7016.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317016011",
+            "metric": "population_density",
+            "value": 18104.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -13298,7 +13773,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1740.0,
-          "housing_units": 585.0
+          "housing_units": 585.0,
+          "population_density": 7412.6
         },
         "evidence": [
           {
@@ -13331,6 +13807,24 @@
             "metric": "housing_units",
             "value": 585.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317022001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7022.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317022001",
+            "metric": "population_density",
+            "value": 7412.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -13541,7 +14035,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1362.0,
-          "housing_units": 306.0
+          "housing_units": 306.0,
+          "population_density": 11768.2
         },
         "evidence": [
           {
@@ -13574,6 +14069,24 @@
             "metric": "housing_units",
             "value": 306.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317016024:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7016.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317016024",
+            "metric": "population_density",
+            "value": 11768.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -13780,7 +14293,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1215.0,
-          "housing_units": 447.0
+          "housing_units": 447.0,
+          "population_density": 8987.4
         },
         "evidence": [
           {
@@ -13813,6 +14327,24 @@
             "metric": "housing_units",
             "value": 447.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317018003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7018.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317018003",
+            "metric": "population_density",
+            "value": 8987.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -14519,7 +15051,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2362.0,
-          "housing_units": 926.0
+          "housing_units": 926.0,
+          "population_density": 5165.9
         },
         "evidence": [
           {
@@ -14552,6 +15085,24 @@
             "metric": "housing_units",
             "value": 926.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317040002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7040.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317040002",
+            "metric": "population_density",
+            "value": 5165.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -14786,7 +15337,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1492.0,
-          "housing_units": 510.0
+          "housing_units": 510.0,
+          "population_density": 25715.5
         },
         "evidence": [
           {
@@ -14819,6 +15371,24 @@
             "metric": "housing_units",
             "value": 510.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338059072:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 8059.07",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338059072",
+            "metric": "population_density",
+            "value": 25715.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -15097,7 +15667,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 850.0,
-          "housing_units": 433.0
+          "housing_units": 433.0,
+          "population_density": 11159.6
         },
         "evidence": [
           {
@@ -15130,6 +15701,24 @@
             "metric": "housing_units",
             "value": 433.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317019003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7019.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317019003",
+            "metric": "population_density",
+            "value": 11159.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -15484,7 +16073,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1329.0,
-          "housing_units": 379.0
+          "housing_units": 379.0,
+          "population_density": 12905.3
         },
         "evidence": [
           {
@@ -15517,6 +16107,24 @@
             "metric": "housing_units",
             "value": 379.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317020002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7020.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317020002",
+            "metric": "population_density",
+            "value": 12905.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -15995,7 +16603,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2310.0,
-          "housing_units": 606.0
+          "housing_units": 606.0,
+          "population_density": 8181.3
         },
         "evidence": [
           {
@@ -16028,6 +16637,24 @@
             "metric": "housing_units",
             "value": 606.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317016021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7016.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317016021",
+            "metric": "population_density",
+            "value": 8181.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -16614,7 +17241,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1096.0,
-          "housing_units": 366.0
+          "housing_units": 366.0,
+          "population_density": 4003.1
         },
         "evidence": [
           {
@@ -16647,6 +17275,24 @@
             "metric": "housing_units",
             "value": 366.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317027003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7027.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317027003",
+            "metric": "population_density",
+            "value": 4003.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -16869,7 +17515,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1284.0,
-          "housing_units": 610.0
+          "housing_units": 610.0,
+          "population_density": 6997.2
         },
         "evidence": [
           {
@@ -16902,6 +17549,24 @@
             "metric": "housing_units",
             "value": 610.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317028001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7028.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317028001",
+            "metric": "population_density",
+            "value": 6997.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -17456,7 +18121,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1055.0,
-          "housing_units": 401.0
+          "housing_units": 401.0,
+          "population_density": 8382.0
         },
         "evidence": [
           {
@@ -17489,6 +18155,24 @@
             "metric": "housing_units",
             "value": 401.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317017031:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7017.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317017031",
+            "metric": "population_density",
+            "value": 8382.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -18523,7 +19207,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2416.0,
-          "housing_units": 973.0
+          "housing_units": 973.0,
+          "population_density": 5107.6
         },
         "evidence": [
           {
@@ -18556,6 +19241,24 @@
             "metric": "housing_units",
             "value": 973.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317027005:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 5, Census Tract 7027.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317027005",
+            "metric": "population_density",
+            "value": 5107.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -18854,7 +19557,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1262.0,
-          "housing_units": 552.0
+          "housing_units": 552.0,
+          "population_density": 11149.6
         },
         "evidence": [
           {
@@ -18887,6 +19591,24 @@
             "metric": "housing_units",
             "value": 552.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317024021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7024.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317024021",
+            "metric": "population_density",
+            "value": 11149.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -19129,7 +19851,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2254.0,
-          "housing_units": 1481.0
+          "housing_units": 1481.0,
+          "population_density": 20847.9
         },
         "evidence": [
           {
@@ -19162,6 +19885,24 @@
             "metric": "housing_units",
             "value": 1481.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025033:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7025.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025033",
+            "metric": "population_density",
+            "value": 20847.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -19872,7 +20613,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2274.0,
-          "housing_units": 1062.0
+          "housing_units": 1062.0,
+          "population_density": 10823.9
         },
         "evidence": [
           {
@@ -19905,6 +20647,24 @@
             "metric": "housing_units",
             "value": 1062.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317017021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7017.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317017021",
+            "metric": "population_density",
+            "value": 10823.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -20747,7 +21507,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 884.0,
-          "housing_units": 335.0
+          "housing_units": 335.0,
+          "population_density": 3149.5
         },
         "evidence": [
           {
@@ -20780,6 +21541,24 @@
             "metric": "housing_units",
             "value": 335.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317052001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7052.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317052001",
+            "metric": "population_density",
+            "value": 3149.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -21354,7 +22133,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1784.0,
-          "housing_units": 620.0
+          "housing_units": 620.0,
+          "population_density": 3576.2
         },
         "evidence": [
           {
@@ -21387,6 +22167,24 @@
             "metric": "housing_units",
             "value": 620.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317051001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7051.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317051001",
+            "metric": "population_density",
+            "value": 3576.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -21749,7 +22547,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1720.0,
-          "housing_units": 841.0
+          "housing_units": 841.0,
+          "population_density": 13180.5
         },
         "evidence": [
           {
@@ -21782,6 +22581,24 @@
             "metric": "housing_units",
             "value": 841.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317018001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7018.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317018001",
+            "metric": "population_density",
+            "value": 13180.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -22012,7 +22829,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1818.0,
-          "housing_units": 589.0
+          "housing_units": 589.0,
+          "population_density": 32014.7
         },
         "evidence": [
           {
@@ -22045,6 +22863,24 @@
             "metric": "housing_units",
             "value": 589.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317019001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7019.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317019001",
+            "metric": "population_density",
+            "value": 32014.7,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -22179,7 +23015,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 885.0,
-          "housing_units": 549.0
+          "housing_units": 549.0,
+          "population_density": 27989.4
         },
         "evidence": [
           {
@@ -22212,6 +23049,24 @@
             "metric": "housing_units",
             "value": 549.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025031:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7025.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025031",
+            "metric": "population_density",
+            "value": 27989.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -22518,7 +23373,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 879.0,
-          "housing_units": 303.0
+          "housing_units": 303.0,
+          "population_density": 4390.6
         },
         "evidence": [
           {
@@ -22551,6 +23407,24 @@
             "metric": "housing_units",
             "value": 303.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317029001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7029.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317029001",
+            "metric": "population_density",
+            "value": 4390.6,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -22773,7 +23647,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1359.0,
-          "housing_units": 731.0
+          "housing_units": 731.0,
+          "population_density": 10697.8
         },
         "evidence": [
           {
@@ -22806,6 +23681,24 @@
             "metric": "housing_units",
             "value": 731.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317029004:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7029.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317029004",
+            "metric": "population_density",
+            "value": 10697.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -23224,7 +24117,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 634.0,
-          "housing_units": 255.0
+          "housing_units": 255.0,
+          "population_density": 3722.9
         },
         "evidence": [
           {
@@ -23257,6 +24151,24 @@
             "metric": "housing_units",
             "value": 255.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317029005:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 5, Census Tract 7029.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317029005",
+            "metric": "population_density",
+            "value": 3722.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -23579,7 +24491,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 817.0,
-          "housing_units": 306.0
+          "housing_units": 306.0,
+          "population_density": 3597.1
         },
         "evidence": [
           {
@@ -23612,6 +24525,24 @@
             "metric": "housing_units",
             "value": 306.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317030001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7030.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317030001",
+            "metric": "population_density",
+            "value": 3597.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -24046,7 +24977,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1012.0,
-          "housing_units": 372.0
+          "housing_units": 372.0,
+          "population_density": 5247.2
         },
         "evidence": [
           {
@@ -24079,6 +25011,24 @@
             "metric": "housing_units",
             "value": 372.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317030002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7030.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317030002",
+            "metric": "population_density",
+            "value": 5247.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -24573,7 +25523,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1462.0,
-          "housing_units": 443.0
+          "housing_units": 443.0,
+          "population_density": 8154.4
         },
         "evidence": [
           {
@@ -24606,6 +25557,24 @@
             "metric": "housing_units",
             "value": 443.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317017033:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7017.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317017033",
+            "metric": "population_density",
+            "value": 8154.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -24836,7 +25805,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2167.0,
-          "housing_units": 549.0
+          "housing_units": 549.0,
+          "population_density": 28008.0
         },
         "evidence": [
           {
@@ -24869,6 +25839,24 @@
             "metric": "housing_units",
             "value": 549.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317020001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7020.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317020001",
+            "metric": "population_density",
+            "value": 28008.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -25059,7 +26047,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2866.0,
-          "housing_units": 1924.0
+          "housing_units": 1924.0,
+          "population_density": 32461.2
         },
         "evidence": [
           {
@@ -25092,6 +26081,24 @@
             "metric": "housing_units",
             "value": 1924.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025011:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7025.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025011",
+            "metric": "population_density",
+            "value": 32461.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -25738,7 +26745,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2191.0,
-          "housing_units": 811.0
+          "housing_units": 811.0,
+          "population_density": 2888.0
         },
         "evidence": [
           {
@@ -25771,6 +26779,24 @@
             "metric": "housing_units",
             "value": 811.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317015053:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7015.05",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317015053",
+            "metric": "population_density",
+            "value": 2888.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -26289,7 +27315,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1906.0,
-          "housing_units": 846.0
+          "housing_units": 846.0,
+          "population_density": 12626.8
         },
         "evidence": [
           {
@@ -26322,6 +27349,24 @@
             "metric": "housing_units",
             "value": 846.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317023023:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7023.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317023023",
+            "metric": "population_density",
+            "value": 12626.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -26572,7 +27617,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1020.0,
-          "housing_units": 552.0
+          "housing_units": 552.0,
+          "population_density": 6506.8
         },
         "evidence": [
           {
@@ -26605,6 +27651,24 @@
             "metric": "housing_units",
             "value": 552.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317029003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7029.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317029003",
+            "metric": "population_density",
+            "value": 6506.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -26771,7 +27835,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1908.0,
-          "housing_units": 567.0
+          "housing_units": 567.0,
+          "population_density": 19897.2
         },
         "evidence": [
           {
@@ -26804,6 +27869,24 @@
             "metric": "housing_units",
             "value": 567.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338057001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 8057.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338057001",
+            "metric": "population_density",
+            "value": 19897.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -27082,7 +28165,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1731.0,
-          "housing_units": 1316.0
+          "housing_units": 1316.0,
+          "population_density": 11690.4
         },
         "evidence": [
           {
@@ -27115,6 +28199,24 @@
             "metric": "housing_units",
             "value": 1316.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7025.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025021",
+            "metric": "population_density",
+            "value": 11690.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -27473,7 +28575,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2834.0,
-          "housing_units": 904.0
+          "housing_units": 904.0,
+          "population_density": 12500.1
         },
         "evidence": [
           {
@@ -27506,6 +28609,24 @@
             "metric": "housing_units",
             "value": 904.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317027001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7027.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317027001",
+            "metric": "population_density",
+            "value": 12500.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -28016,7 +29137,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1325.0,
-          "housing_units": 512.0
+          "housing_units": 512.0,
+          "population_density": 4536.3
         },
         "evidence": [
           {
@@ -28049,6 +29171,24 @@
             "metric": "housing_units",
             "value": 512.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317041001:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7041.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317041001",
+            "metric": "population_density",
+            "value": 4536.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -28355,7 +29495,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 727.0,
-          "housing_units": 363.0
+          "housing_units": 363.0,
+          "population_density": 14011.5
         },
         "evidence": [
           {
@@ -28388,6 +29529,24 @@
             "metric": "housing_units",
             "value": 363.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317019002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7019.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317019002",
+            "metric": "population_density",
+            "value": 14011.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -28606,7 +29765,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1322.0,
-          "housing_units": 350.0
+          "housing_units": 350.0,
+          "population_density": 7060.4
         },
         "evidence": [
           {
@@ -28639,6 +29799,24 @@
             "metric": "housing_units",
             "value": 350.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317016023:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7016.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317016023",
+            "metric": "population_density",
+            "value": 7060.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -28857,7 +30035,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1543.0,
-          "housing_units": 568.0
+          "housing_units": 568.0,
+          "population_density": 14414.8
         },
         "evidence": [
           {
@@ -28890,6 +30069,24 @@
             "metric": "housing_units",
             "value": 568.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317023021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7023.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317023021",
+            "metric": "population_density",
+            "value": 14414.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -28996,7 +30193,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 620.0,
-          "housing_units": 418.0
+          "housing_units": 418.0,
+          "population_density": 33646.8
         },
         "evidence": [
           {
@@ -29029,6 +30227,24 @@
             "metric": "housing_units",
             "value": 418.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317028003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7028.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317028003",
+            "metric": "population_density",
+            "value": 33646.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -29339,7 +30555,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2462.0,
-          "housing_units": 1138.0
+          "housing_units": 1138.0,
+          "population_density": 50768.3
         },
         "evidence": [
           {
@@ -29372,6 +30589,24 @@
             "metric": "housing_units",
             "value": 1138.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026023:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7026.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026023",
+            "metric": "population_density",
+            "value": 50768.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -29558,7 +30793,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1572.0,
-          "housing_units": 1023.0
+          "housing_units": 1023.0,
+          "population_density": 53471.2
         },
         "evidence": [
           {
@@ -29591,6 +30827,24 @@
             "metric": "housing_units",
             "value": 1023.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026042:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7026.04",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026042",
+            "metric": "population_density",
+            "value": 53471.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -29797,7 +31051,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 976.0,
-          "housing_units": 316.0
+          "housing_units": 316.0,
+          "population_density": 5615.1
         },
         "evidence": [
           {
@@ -29830,6 +31085,24 @@
             "metric": "housing_units",
             "value": 316.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317018002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7018.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317018002",
+            "metric": "population_density",
+            "value": 5615.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -30108,7 +31381,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 0.0,
-          "housing_units": 0.0
+          "housing_units": 0.0,
+          "population_density": 0.0
         },
         "evidence": [
           {
@@ -30141,6 +31415,24 @@
             "metric": "housing_units",
             "value": 0.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317027004:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7027.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317027004",
+            "metric": "population_density",
+            "value": 0.0,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -30435,7 +31727,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1034.0,
-          "housing_units": 412.0
+          "housing_units": 412.0,
+          "population_density": 7003.3
         },
         "evidence": [
           {
@@ -30468,6 +31761,24 @@
             "metric": "housing_units",
             "value": 412.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317027002:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7027.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317027002",
+            "metric": "population_density",
+            "value": 7003.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -30666,7 +31977,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1249.0,
-          "housing_units": 736.0
+          "housing_units": 736.0,
+          "population_density": 20489.8
         },
         "evidence": [
           {
@@ -30699,6 +32011,24 @@
             "metric": "housing_units",
             "value": 736.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026041:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7026.04",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026041",
+            "metric": "population_density",
+            "value": 20489.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -30813,7 +32143,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1250.0,
-          "housing_units": 751.0
+          "housing_units": 751.0,
+          "population_density": 30963.5
         },
         "evidence": [
           {
@@ -30846,6 +32177,24 @@
             "metric": "housing_units",
             "value": 751.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317025012:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7025.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317025012",
+            "metric": "population_density",
+            "value": 30963.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -31072,7 +32421,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1437.0,
-          "housing_units": 482.0
+          "housing_units": 482.0,
+          "population_density": 13049.2
         },
         "evidence": [
           {
@@ -31105,6 +32455,24 @@
             "metric": "housing_units",
             "value": 482.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021012:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7021.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021012",
+            "metric": "population_density",
+            "value": 13049.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -31507,7 +32875,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2006.0,
-          "housing_units": 588.0
+          "housing_units": 588.0,
+          "population_density": 4825.9
         },
         "evidence": [
           {
@@ -31540,6 +32909,24 @@
             "metric": "housing_units",
             "value": 588.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338073051:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 8073.05",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338073051",
+            "metric": "population_density",
+            "value": 4825.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -31818,7 +33205,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1044.0,
-          "housing_units": 396.0
+          "housing_units": 396.0,
+          "population_density": 7275.8
         },
         "evidence": [
           {
@@ -31851,6 +33239,24 @@
             "metric": "housing_units",
             "value": 396.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317022003:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7022.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317022003",
+            "metric": "population_density",
+            "value": 7275.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -32101,7 +33507,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 2544.0,
-          "housing_units": 695.0
+          "housing_units": 695.0,
+          "population_density": 27472.4
         },
         "evidence": [
           {
@@ -32134,6 +33541,24 @@
             "metric": "housing_units",
             "value": 695.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338056013:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 8056.01",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338056013",
+            "metric": "population_density",
+            "value": 27472.4,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -32356,7 +33781,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1462.0,
-          "housing_units": 503.0
+          "housing_units": 503.0,
+          "population_density": 34040.2
         },
         "evidence": [
           {
@@ -32389,6 +33815,24 @@
             "metric": "housing_units",
             "value": 503.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240338059062:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 8059.06",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240338059062",
+            "metric": "population_density",
+            "value": 34040.2,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -33071,7 +34515,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1240.0,
-          "housing_units": 437.0
+          "housing_units": 437.0,
+          "population_density": 4383.8
         },
         "evidence": [
           {
@@ -33104,6 +34549,24 @@
             "metric": "housing_units",
             "value": 437.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021021:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7021.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021021",
+            "metric": "population_density",
+            "value": 4383.8,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -33374,7 +34837,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1065.0,
-          "housing_units": 374.0
+          "housing_units": 374.0,
+          "population_density": 6856.9
         },
         "evidence": [
           {
@@ -33407,6 +34871,24 @@
             "metric": "housing_units",
             "value": 374.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317021023:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 3, Census Tract 7021.02",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317021023",
+            "metric": "population_density",
+            "value": 6856.9,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -33541,7 +35023,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 979.0,
-          "housing_units": 635.0
+          "housing_units": 635.0,
+          "population_density": 39981.1
         },
         "evidence": [
           {
@@ -33574,6 +35057,24 @@
             "metric": "housing_units",
             "value": 635.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026031:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 1, Census Tract 7026.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026031",
+            "metric": "population_density",
+            "value": 39981.1,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -33640,7 +35141,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1214.0,
-          "housing_units": 892.0
+          "housing_units": 892.0,
+          "population_density": 116639.3
         },
         "evidence": [
           {
@@ -33673,6 +35175,24 @@
             "metric": "housing_units",
             "value": 892.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317028004:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 4, Census Tract 7028.00",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317028004",
+            "metric": "population_density",
+            "value": 116639.3,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
@@ -33779,7 +35299,8 @@
         "boundary_vintage": "Census 2020",
         "metrics": {
           "population": 1207.0,
-          "housing_units": 721.0
+          "housing_units": 721.0,
+          "population_density": 64772.5
         },
         "evidence": [
           {
@@ -33812,6 +35333,24 @@
             "metric": "housing_units",
             "value": 721.0,
             "unit": "units",
+            "excerpt": null,
+            "page": null,
+            "section": null,
+            "page_label": null,
+            "document_scope": null
+          },
+          {
+            "evidence_id": "census2020:240317026032:population_density",
+            "type": "structured_data",
+            "title": "2020 Census Derived Density — Block Group 2, Census Tract 7026.03",
+            "source": "U.S. Census Bureau TIGERweb Census 2020",
+            "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+            "date": "2020-04-01",
+            "retrieved_at": "2026-09-19T05:38:33.805674+00:00",
+            "geo_id": "240317026032",
+            "metric": "population_density",
+            "value": 64772.5,
+            "unit": "people per sq mi",
             "excerpt": null,
             "page": null,
             "section": null,
