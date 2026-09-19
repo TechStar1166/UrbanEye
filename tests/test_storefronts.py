@@ -86,3 +86,10 @@ def test_storefront_scope_stays_fenton_when_census_coverage_expands():
     assert {f["properties"]["geo_id"] for f in study["features"]} == ps.STUDY_AREA_IDS
     source = json.loads(ps.SOURCE.read_text())
     assert list(ps.bounding_box(study)) == source["bbox_south_west_north_east"]
+
+
+def test_frontend_storefront_coverage_matches_the_snapshot_scope():
+    import re
+    source = (ps.ROOT / "frontend/src/lib/storefronts.ts").read_text()
+    listed = re.search(r"STOREFRONT_STUDY_AREAS = \[([^\]]*)\]", source).group(1)
+    assert set(re.findall(r"'(\d+)'", listed)) == ps.STUDY_AREA_IDS
