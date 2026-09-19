@@ -14,3 +14,4 @@ vector_store/*
 !vector_store/README.md
 graphify-out/
 .DS_Store
+analysis-integration.md

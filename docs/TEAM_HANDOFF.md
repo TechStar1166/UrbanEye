@@ -7,10 +7,10 @@ verify each person's clone access. Everyone starts from the same published commi
 
 | Slot | Owner | Branch | First integrated deliverable |
 | --- | --- | --- | --- |
-| A — data/GIS | Pending username | `work/data-first-layer` | First finer-grained real area, metrics, source and geography metadata |
-| B — map/frontend | Pending username | `work/map-evidence` | Render A's feature, click it, show matching values/source without hardcoded IDs |
-| C — backend + RAG/AI | Pending username | `work/backend-rag` | Index one verified public document; answer the agreed question using evidence |
-| D — analysis + integration | Pending username | `work/analysis-integration` | Keep contract and smoke path working; prepare segmentation after comparable areas arrive |
+| A — data/GIS | Pujan | `work/data-first-layer` | First finer-grained real area, metrics, source and geography metadata |
+| B — map/frontend | Jackson | `work/map-evidence` | Render A's feature, click it, show matching values/source without hardcoded IDs |
+| C — backend + RAG/AI | Nick | `work/backend-rag` | Index one verified public document; answer the agreed question using evidence |
+| D — analysis + integration | Amrit | `work/analysis-integration` | Keep contract and smoke path working; prepare segmentation after comparable areas arrive |
 
 Each person clones the starter, runs it, creates their branch, and opens small PRs
 against `nt/dev` (the shared integration branch for this starter). Rebase/update
@@ -85,7 +85,7 @@ explanation. Coordinate the controls with B.
 
 | Slot | GitHub username | Can clone | Starter smoke passes | Commit tested |
 | --- | --- | --- | --- | --- |
-| A | Pending | Pending | Pending | Pending |
-| B | Pending | Pending | Pending | Pending |
-| C | Pending | Pending | Pending | Pending |
-| D | Pending | Pending | Pending | Pending |
+| A | Pujan | Pending | Pending | Pending |
+| B | Jackson | Pending | Pending | Pending |
+| C | Nick | Pending | Pending | Pending |
+| D | Amrit | Pending | Pending | Pending |

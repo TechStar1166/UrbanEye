@@ -7,6 +7,27 @@ from backend.schemas import Area, Areas, Evidence, Feature, Geometry
 
 ROOT = Path(__file__).resolve().parents[1]
 
+METRIC_FIELDS = [("population", "POP100", "people"), ("housing_units", "HU100", "units")]
+
+def build_feature(props, geometry, source, geography_type, name):
+    """One validated feature. Counts always describe the whole unit, never a clipped area."""
+    geo_id = str(props["GEOID"])
+    metrics, evidence = {}, []
+    for metric, field, unit in METRIC_FIELDS:
+        value = props.get(field)
+        # Null stays null; negative Census sentinels are missing, never zero.
+        value = None if value is None or float(value) < 0 else float(value)
+        metrics[metric] = value
+        evidence.append(Evidence(
+            evidence_id=f"census2020:{geo_id}:{metric}", type="structured_data",
+            title=f"2020 Census {field} — {name}", source=source["dataset"],
+            url=source["url"], date=source["data_date"], geo_id=geo_id,
+            metric=metric, value=value, unit=unit,
+        ))
+    return Feature(id=geo_id, geometry=Geometry.model_validate(geometry),
+        properties=Area(geo_id=geo_id, name=name, geography_type=geography_type,
+            boundary_vintage=source["boundary_vintage"], metrics=metrics, evidence=evidence))
+
 
 def prepare():
     raw_path = ROOT / "data/raw/silver_spring_census2020.geojson"
@@ -17,25 +38,29 @@ def prepare():
     features = []
     for feature in raw["features"]:
         props = feature["properties"]
-        geo_id = str(props["GEOID"])
-        if geo_id != "2472450":
+        ge
+        if str(props["GEOID"]) != "2472450":
             raise ValueError("Unexpected geographic ID")
-        metrics, evidence = {}, []
-        for metric, field, unit in [("population", "POP100", "people"),
-                                    ("housing_units", "HU100", "units")]:
-            value = props.get(field)
-            # Null stays null; negative Census sentinels are missing, never zero.
-            value = None if value is None or float(value) < 0 else float(value)
-            metrics[metric] = value
-            evidence.append(Evidence(
-                evidence_id=f"census2020:{geo_id}:{metric}", type="structured_data",
-                title=f"2020 Census {field} — {props['NAME']}", source=source["dataset"],
-                url=source["url"], date=source["data_date"], geo_id=geo_id,
-                metric=metric, value=value, unit=unit,
-            ))
-        features.append(Feature(id=geo_id, geometry=Geometry.model_validate(feature["geometry"]),
-            properties=Area(geo_id=geo_id, name=props["NAME"], geography_type="census_designated_place",
-                boundary_vintage=source["boundary_vintage"], metrics=metrics, evidence=evidence)))
+        features.append(build_feature(props, feature["geometry"], source,
+                                      "census_designated_place", props["NAME"]))
+
+    # Fenton Village study area. These are whole block groups selected by geocoded
+    # address, not a clip of the district boundary; see data/raw/fenton_village_source.json.
+    bg_path = ROOT / "data/raw/fenton_village_blockgroups_census2020.geojson"
+    bg_source = json.loads((ROOT / "data/raw/fenton_village_source.json").read_text())
+    bg_raw = json.loads(bg_path.read_text())
+    expected = {"240317025011", "240317025021"}
+    if bg_raw.get("exceededTransferLimit"):
+        raise ValueError("Incomplete block group response")
+    if {str(f["properties"]["GEOID"]) for f in bg_raw["features"]} != expected:
+        raise ValueError("Unexpected Fenton Village block group IDs")
+    for feature in bg_raw["features"]:
+        props = feature["properties"]
+        # TIGER names every block group "Block Group 1"; qualify it so the map and
+        # evidence panel cannot show two areas with the same label.
+        name = f"Block Group {props['BLKGRP']}, Census Tract {tract_label(props)}"
+        features.append(build_feature(props, feature["geometry"], bg_source, "block_group", name))
+
     output = ROOT / "data/processed"
     output.mkdir(parents=True, exist_ok=True)
     (output / "areas.geojson").write_text(Areas(features=features).model_dump_json(indent=2) + "\n")
@@ -44,9 +69,14 @@ def prepare():
         "geography_scope": "Silver Spring CDP, Maryland; not Fenton Village",
         "fields": {"population": "POP100", "housing_units": "HU100"},
         "transform": "scripts/prepare_data.py; no boundary simplification; negative counts become null",
+        "fenton_village_block_groups": {
+            **bg_source, "raw_sha256": hashlib.sha256(bg_path.read_bytes()).hexdigest(),
+            "geography_scope": "Whole 2020 block groups covering the Fenton Village District; "
+                               "counts describe each block group, not the district boundary",
+            "contains_cdp_overlap": "These block groups lie inside the Silver Spring CDP polygon. "
+                                    "Never add their counts to the CDP totals.",
+        },
     }, indent=2) + "\n")
-    print(f"Validated {len(features)} real area(s), two sourced metrics each.")
-
-
-if __name__ == "__main__":
-    prepare()
+    levels = {f.properties.geography_type for f in features}
+    print(f"Validated {len(features)} real area(s) across {len(levels)} geographic level(s), "
+          "two sourced metrics each.")

@@ -54,7 +54,7 @@ export default function App() {
           <option value="">Choose an area or click the map</option>
           {areas.features.map(f => <option key={f.id} value={f.id}>{f.properties.name}</option>)}
         </select></label></div>
-        <CommunityMap areas={areas} metric={metric} onSelect={id => void select(id)} />
+        <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={id => void select(id)} />
         <p className="legend">{layers.find(layer => layer.id === metric)?.description ?? 'Geographic boundaries; no metric fill.'}
           {' '}One area is available; fill color identifies the layer, not a comparative scale.</p>
       </section>

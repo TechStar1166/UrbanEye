@@ -108,3 +108,25 @@ class Answer(Contract):
         if self.mode != "insufficient_evidence" and not self.evidence:
             raise ValueError("An answer needs evidence")
         return self
+
+
+class SegmentRequest(Contract):
+    geo_ids: list[str] = Field(min_length=2)
+    x_metric: str = Field(min_length=1)
+    y_metric: str = Field(min_length=1)
+
+
+class DataPoint(Contract):
+    geo_id: str
+    x_value: float | None
+    y_value: float | None
+
+
+class SegmentResponse(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    x_metric: str
+    y_metric: str
+    correlation_coefficient: float | None
+    sample_size: int
+    explanation: str
+    data_points: list[DataPoint]
