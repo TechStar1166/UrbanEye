@@ -116,7 +116,7 @@ def test_plain_language_plan_question_has_reviewed_evidence():
 
 def test_acs_snapshot_is_on_every_area_with_matching_evidence():
     expected = {
-        "population", "housing_units", "median_household_income",
+        "population", "housing_units", "population_density", "median_household_income",
         "age_50_plus_pct", "avg_household_size", "renter_occupied_pct",
     }
     assert {layer["id"] for layer in client.get("/layers").json()} == expected

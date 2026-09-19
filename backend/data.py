@@ -51,6 +51,8 @@ LAYERS = [
           description="2020 Census total population (POP100); whole selected area."),
     Layer(id="housing_units", label="Housing units", unit="units",
           description="2020 Census housing units (HU100); not households or available homes."),
+    Layer(id="population_density", label="Population Density", unit="people/sqmi",
+          description="Derived 2020 population per square mile."),
     Layer(id="median_household_income", label="Median household income", unit="USD",
           description="ACS 5-year 2020-2024 median household income; whole published unit, not the Fenton Village overlay."),
     Layer(id="age_50_plus_pct", label="Residents age 50+", unit="percent",
