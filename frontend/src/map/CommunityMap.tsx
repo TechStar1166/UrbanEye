@@ -79,7 +79,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
       maxZoom: 19,
     });
     basemapLight.addTo(instance);
-    L.control.layers({ "Street Map": basemapLight, "Satellite": basemapSatellite }, undefined, { position: 'topleft' }).addTo(instance);
+    L.control.layers({ "Street Map": basemapLight, "Satellite": basemapSatellite }, undefined, { position: 'bottomright' }).addTo(instance);
     instance.createPane('places');
     instance.getPane('places')!.style.zIndex = '460';
     instance.createPane('fenton');
