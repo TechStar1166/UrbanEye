@@ -103,9 +103,11 @@ def prepare():
     }, indent=2) + "\n")
     from scripts.prepare_map_context import build
     build()
+    from scripts.build_community_db import build as build_community_db
+    build_community_db()
     levels = {f.properties.geography_type for f in features}
     print(f"Validated {len(features)} real area(s) across {len(levels)} geographic level(s), "
-          "two sourced metrics each.")
+          "with Census base metrics and offline community enrichment.")
 
 if __name__ == "__main__":
     prepare()

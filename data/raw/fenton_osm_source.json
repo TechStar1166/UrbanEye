@@ -1,0 +1,8 @@
+{
+  "source": "OpenStreetMap contributors",
+  "url": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:45];nwr[\"amenity\"~\"^(restaurant|cafe|fast_food|bar|pub|ice_cream|food_court|biergarten)$\"](around:600,38.99487,-77.02489);out center tags;",
+  "downloaded_at": "2026-09-19T05:38:35.086394+00:00",
+  "license": "ODbL",
+  "scope": "600 m around challenge coordinate 38.99487, -77.02489; a study radius, not an official district boundary."
+}
