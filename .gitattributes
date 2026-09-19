@@ -1,0 +1,2 @@
+# Preserve byte-stable evidence hashes across Windows/macOS/Linux clones.
+/documents/processed/*.json text eol=lf

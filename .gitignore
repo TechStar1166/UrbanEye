@@ -14,3 +14,9 @@ vector_store/*
 !vector_store/README.md
 graphify-out/
 .DS_Store
+
+# Local role checklists (not shared through Git).
+/docs/role-checklists/
+
+# Large source PDFs are fetched on demand; curated excerpts are committed.
+/documents/raw/*.pdf

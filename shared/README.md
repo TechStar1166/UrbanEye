@@ -55,10 +55,22 @@ Keep evidence IDs stable, unique and traceable to the source, e.g.
 `census2020:2472450:population`. URLs point to actual source material.
 
 Document chunks are `Evidence` objects in `documents/processed/chunks.json`.
-The starter retriever matches **exact geographic IDs** and scores lexical overlap;
-the empty list means no documents have been ingested. A CDP-scoped document must not
-be silently relabeled as tract-scoped: add explicit geographic applicability to the
-contract before introducing broader-scope retrieval.
+Retrieval uses an in-memory BM25 index built from those chunks at startup.
+The additive optional `document_scope` field describes reviewed contextual
+applicability: `name`, `context_geo_ids`, `relationship` (`partial_overlap` or
+`broader_context`), and a required explanatory `note`.
+
+`geo_id` always remains the source geography. For example, the housing passages
+use `plan:silver-spring-dac-2022`, with Silver Spring CDP (`2472450`) explicitly
+listed as related context. They are not relabeled as CDP-wide facts. The UI displays
+the source geography and scope note. Other tracts/block groups receive no passages
+until their applicability is explicitly reviewed and mapped. Structured metrics
+cannot use document scope to broaden their geographic applicability.
+
+For PDFs, `page` is the one-based physical PDF page used in `#page=` links;
+optional `page_label` is the printed page (for example, PDF page 104 is printed
+page 92). These fields are backward-compatible additions to v1; generated frontend
+types are updated alongside the backend.
 
 ## Routes
 
@@ -74,8 +86,13 @@ Unknown areas return 404; malformed requests return 422. `/segment` and
 `/business/evaluate` are not implemented and should not appear in the primary demo.
 
 `Answer` includes `mode`, `summary`, `limitations`, `evidence_ids`, and `evidence`.
+It also includes `claims` (empty outside model explanations), each with `text` and
+`evidence_ids`. Gemini explanations require at least one cited claim. The union of
+claim IDs must match the returned evidence IDs, and the adapter verifies every ID
+against the evidence supplied to the model. The server constructs `summary` from
+those claims; the UI links each claim to its original source card.
 Modes distinguish deterministic facts, retrieved passages, insufficient evidence
-and future LLM explanations. Every cited ID resolves to returned evidence. UI
+and Gemini LLM explanations. Every cited ID resolves to returned evidence. UI
 displays sources independently of the explanation. Model output validation must
 add a check against the *input* evidence bundle, not just internally valid IDs.
 

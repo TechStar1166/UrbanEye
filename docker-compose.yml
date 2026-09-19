@@ -1,5 +1,9 @@
 services:
   backend:
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_ENABLED: ${GEMINI_ENABLED:-true}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.6-flash}
     build:
       context: .
       dockerfile: backend/Dockerfile

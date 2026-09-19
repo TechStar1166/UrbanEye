@@ -8,3 +8,4 @@ frontend/dist
 graphify-out
 frontend/test-results
 frontend/playwright-report
+documents/raw/*.pdf
