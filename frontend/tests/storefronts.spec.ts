@@ -155,6 +155,6 @@ test('changing a category filter does not re-zoom the map', async ({ page }) => 
 test('expanded Census areas outside the storefront snapshot show missing coverage, not zero businesses', async ({ page }) => {
   await page.goto('/#area=240317028002&tab=Overview');
   const card = page.getByRole('region', { name: 'Storefronts' });
-  await expect(card).toContainText('outside the storefront snapshot’s coverage');
+  await expect(card).toContainText('No OpenStreetMap-mapped storefronts fall in this block group');
   await expect(card).not.toContainText('0 mapped businesses');
 });

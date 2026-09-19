@@ -590,8 +590,11 @@ def write_json_exports(db):
                FROM time_series ORDER BY geo_id, metric, span, year"""):
         history.append({
             "geo_id": row[0], "metric": row[1], "year": row[2], "span": row[3],
-            "period": row[4], "estimate": row[5], "moe": stable_moe(row[6]),
-            "estimate_2024_usd": row[7], "moe_2024_usd": stable_moe(row[8]),
+            "period": row[4],
+            "estimate": round(row[5], 5) if row[5] is not None else None,
+            "moe": round(row[6], 5) if row[6] is not None else None,
+            "estimate_2024_usd": round(row[7], 5) if row[7] is not None else None,
+            "moe_2024_usd": round(row[8], 5) if row[8] is not None else None,
             "unit": row[9], "low_reliability": bool(row[10]),
         })
     out = ROOT / "data/processed"
@@ -610,8 +613,11 @@ def write_json_exports(db):
                ORDER BY t.geo_id, t.metric, t.span"""):
         snapshot.append({
             "geo_id": row[0], "name": row[1], "metric": row[2], "year": row[3],
-            "span": row[4], "estimate": row[5], "moe": stable_moe(row[6]),
-            "estimate_2024_usd": row[7], "unit": row[8],
+            "span": row[4],
+            "estimate": round(row[5], 5) if row[5] is not None else None,
+            "moe": round(row[6], 5) if row[6] is not None else None,
+            "estimate_2024_usd": round(row[7], 5) if row[7] is not None else None,
+            "unit": row[8],
             "low_reliability": bool(row[9]),
         })
     (out / "community_metrics.json").write_text(json.dumps({

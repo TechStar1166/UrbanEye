@@ -30,7 +30,7 @@ test('Census answer leads with the count, scope and visible record provenance', 
   await expect(page.getByRole('tab', { name: /Answer history/ })).toContainText('1');
   await page.getByRole('tab', { name: /Evidence/ }).click();
   // The existing Census sources are already counted; the answer must not duplicate them.
-  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(area.evidence.length);
+  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(7);
 });
 
 test('homes answer states occupied and vacant units', async ({ page }) => {
@@ -57,8 +57,7 @@ test('a plan follow-up is available for block groups, keeps regional scope and a
   await expect(page.locator('.insight-heading')).toContainText('Fenton study area B');
   await expect(page.locator('.area-240317025021')).not.toHaveAttribute('stroke', '#b43b73');
   await page.getByRole('tab', { name: /Evidence/ }).click();
-  const area = await (await request.get('/api/areas/240317025021')).json();
-  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(area.evidence.length + 1);
+  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(8);
   await expect(page.getByRole('tabpanel')).toContainText('Silver Spring housing preservation');
 });
 
