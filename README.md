@@ -1,7 +1,7 @@
 # UrbanEye
 
-**Evidence-first community intelligence for Silver Spring, Maryland**, with Fenton Village as the focus.
-Built at Bay Hacks 2026 for the UX University Challenge.
+Community intelligence for Silver Spring, Maryland, with Fenton Village as the focus. Every number on
+screen links to its source. Built at Bay Hacks 2026 for the UX University Challenge.
 
 Public information about a neighborhood is scattered across Census tables, county planning
 documents and business listings, on different boundaries and dates. UrbanEye puts it on one
@@ -10,32 +10,40 @@ it may only explain evidence the platform retrieved, and it must cite it.
 
 ## What it does
 
-- **Real Census geography.** The 2020 Census Silver Spring area and its 80 block groups: population,
-  housing units, population density.
-- **Community profile.** American Community Survey 5-year (2020 to 2024): median household income,
+- Real Census geography: the 2020 Census Silver Spring area and its 80 block groups (population,
+  housing units, population density).
+- Community profile: American Community Survey 5-year estimates (2020 to 2024) for median household income,
   share of residents 50 and older, average household size, renter-occupied share. Values with a large
   margin of error are flagged "low reliability".
-- **Cited answers.** Ask about a selected area. BM25 retrieval over the 2022 Silver Spring plan finds
+- Cited answers: ask about a selected area. BM25 retrieval over the 2022 Silver Spring plan finds
   passages, and Gemini 3.6 Flash (optional) explains only those, with page-level citations. If the
   evidence does not support a question, it says so instead of guessing.
-- **Real businesses.** OpenStreetMap-mapped storefronts and food and drink places around the Fenton
+- Real businesses: OpenStreetMap-mapped storefronts and food and drink places around the Fenton
   study area, labeled as volunteer-mapped data, not an official registry.
-- **Compare layers.** Compare any two Census layers across block groups, with sample size and a
+- Compare layers: compare any two Census layers across block groups, with sample size and a
   reminder that association is not causation.
-- **Business site brief and address search.** Community context for an area (not a recommendation),
+- Business site brief and address search: community context for an area (not a recommendation),
   and a street address that pins the map and selects its Census block group. An experimental AI site
   evaluation is included; it is grounded in supplied evidence and is not a professional or investment
   recommendation.
-- **Transparency.** Data-coverage card, a Data Sources and Methodology page, shareable links, and CSV
+- Transparency: a data-coverage card, a Data Sources and Methodology page, shareable links, and CSV
   export with sources.
 
 Every dataset is a committed snapshot with a provenance manifest (source URL, retrieval time, SHA-256,
 transformation, limitations). The app never downloads data at startup.
 
-**Limits, stated plainly:** counts are for Census units, not for Fenton Village alone. Survey estimates
+Limits: counts are for Census units, not for Fenton Village alone. Survey estimates
 carry a margin of error. OpenStreetMap data is incomplete. Rent, foot traffic and revenue are not in
 the data. The planning document has its own boundary. See [data provenance](data/README.md) and
 [document provenance](documents/README.md).
+
+## Screenshots
+
+![Fenton Village on the map](docs/screenshots/01-fenton-village-map.png)
+
+![A block group with Census counts and the ACS community profile](docs/screenshots/02-block-group-profile.png)
+
+![Business site brief: community context and mapped storefronts](docs/screenshots/03-business-site-brief.png)
 
 ## Data credits
 
@@ -140,6 +148,7 @@ CORS configuration or hardcoded browser backend address to keep in sync.
 | `documents/raw`, `documents/processed` | Public documents and source-bearing chunks |
 | `shared/openapi.json` | Generated API contract; frontend types derive from it |
 | `scripts`, `tests` | Reproducible normalization, contract export and integration checks |
+| `docs` | Feature plans (`docs/plans`), demo script, progress tracker, original MVP plan (`docs/planning`) |
 
 The [shared data contract](shared/README.md) explains how these pieces connect.
 
