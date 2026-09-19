@@ -20,6 +20,14 @@ boundaries, selected-area state, and Census evidence are retained.
   displays loading/errors, deterministic facts, retrieved passages, and Gemini
   claims with source links and limitations. Changing areas clears old answers.
 - Preview state is in memory only. Site briefs are not stored or sent anywhere.
+- **Storefront Locations** is a real layer, off by default: OpenStreetMap-mapped businesses from
+  `GET /storefronts`, colored by four groups with per-group filters. A marker's popup shows its name,
+  category, address and the number of other same-category businesses within 300 m. Turning the layer on
+  zooms to the markers. The Overview shows a per-block-group summary with attribution and the caveat that
+  OSM is volunteer-mapped and not a business registry. See
+  [docs/plans/storefront-layer.md](../docs/plans/storefront-layer.md).
+- Map performance: area shapes are built once and restyled in place, so selection, metric and opacity changes
+  cause no DOM churn even with 243 markers on (covered by `tests/storefronts.spec.ts`).
 
 The app uses three panes on desktop, two panes with a layer drawer on tablet,
 and a bottom navigation bar for map/layers/insights on phones. Header search

@@ -55,6 +55,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/storefronts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Storefronts */
+        get: operations["get_storefronts_storefronts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/layers": {
         parameters: {
             query?: never;
@@ -318,6 +335,54 @@ export interface components {
             /** Data Points */
             data_points: components["schemas"]["DataPoint"][];
         };
+        /** Storefront */
+        Storefront: {
+            /** Osm Id */
+            osm_id: string;
+            /** Name */
+            name: string;
+            /**
+             * Category Key
+             * @enum {string}
+             */
+            category_key: "shop" | "amenity";
+            /** Category */
+            category: string;
+            /** Address */
+            address: string | null;
+            /** Block Group Id */
+            block_group_id: string | null;
+            /** Lon */
+            lon: number;
+            /** Lat */
+            lat: number;
+        };
+        /**
+         * Storefronts
+         * @description OpenStreetMap-mapped businesses. Volunteer-mapped: not a business registry.
+         */
+        Storefronts: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Source */
+            source: string;
+            /** License */
+            license: string;
+            /** Attribution */
+            attribution: string;
+            /** Retrieved At */
+            retrieved_at: string;
+            /** Osm Data Timestamp */
+            osm_data_timestamp: string | null;
+            /** Limitations */
+            limitations: string;
+            /** Storefronts */
+            storefronts: components["schemas"]["Storefront"][];
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -403,6 +468,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_storefronts_storefronts_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Storefronts"];
                 };
             };
         };

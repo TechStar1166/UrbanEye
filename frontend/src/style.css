@@ -318,3 +318,15 @@ td small { display: block; font: 8px var(--mono); color: var(--muted); margin-to
 .answer { white-space: pre-wrap; line-height: 1.5; }
 .limitations { font-size: 11px; line-height: 1.6; color: #596b60; background: #fffbe6; padding: 12px 12px 12px 26px; border-radius: 4px; border: 1px solid #ffe58f; overflow-wrap: anywhere; }
 .research-response h3 { font: 600 15px var(--heading); margin-bottom: 12px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #fff; box-shadow: 0 0 0 1px #0002; flex-shrink: 0; }
+.group-chips { display: grid; gap: 4px; margin: 4px 0 8px 22px; }
+.group-chip { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 400; }
+.group-chip i { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.group-chip small { margin-left: auto; color: var(--muted); }
+.storefront-total { margin: 4px 0 8px; font-size: 13px; }
+.storefront-total strong { font-size: 22px; }
+.store-bars { display: grid; gap: 6px; margin-bottom: 10px; }
+.store-bars > div { display: grid; grid-template-columns: 96px 1fr 26px; align-items: center; gap: 8px; font-size: 11px; }
+.store-bars b { text-align: right; }
+.store-bars .bar-track { height: 8px; background: #e3ebe6; border-radius: 4px; overflow: hidden; }
+.store-bars .bar-track i { display: block; height: 100%; border-radius: 4px; }
