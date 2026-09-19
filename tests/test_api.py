@@ -143,3 +143,16 @@ def test_expanded_census_coverage_preserves_snapshot_and_place_provenance():
     sources = client.get('/sources').json()
     assert len(sources) == 6
     assert all(s['pulled'] for s in sources[:4])
+
+
+def test_storefront_source_catalog_describes_the_actual_map_snapshot():
+    sources = client.get('/sources').json()
+    assert not any(s['name'] == 'OpenStreetMap food and drink places' for s in sources)
+    source = next(s for s in sources if s['name'] == 'OpenStreetMap storefronts')
+    snapshot = client.get('/storefronts').json()
+    assert source['pulled'] == snapshot['retrieved_at']
+    assert f"{len(snapshot['storefronts'])} named objects" in source['note']
+    assert '255 query results' in source['note']
+    assert '12 unnamed objects excluded' in source['note']
+    assert '240317025011' in source['note']
+    assert '[out:json]' in source['query']

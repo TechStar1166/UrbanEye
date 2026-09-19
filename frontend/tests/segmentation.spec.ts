@@ -91,7 +91,7 @@ test('outline toggle marks areas at or above the 60th percentile in both layers,
   await panel.getByLabel(OUTLINE).check();
   await expect(panel).toContainText('2 of 4 block groups are at or above the 60th percentile');
   await expect.poll(() => strokes(page)).toEqual([SELECTED, TEAL, HIGH, HIGH]);
-  await expect(page.locator('.map-legend')).toContainText('High in both compared layers');
+  await expect(panel).toContainText('2 of 4 block groups');
   await panel.getByLabel(OUTLINE).uncheck();
   await expect.poll(() => strokes(page)).toEqual([SELECTED, TEAL, TEAL, TEAL]);
 });

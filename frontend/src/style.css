@@ -474,7 +474,7 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 .query-dock form input { flex-basis: auto; }
 .query-dock .suggestions { gap: 4px; margin-bottom: 8px; }
 .query-dock .suggestions button { padding: 6px 9px; font-size: 13px; }
-.map-legend { top: auto; right: auto; bottom: 30px; left: 12px; width: 165px; max-height: 42%; overflow-y: auto; }
+.map-legend { top: auto; right: auto; bottom: 30px; left: 12px; width: 165px; max-height: none; overflow: visible; }
 .leaflet-top.leaflet-right { top: 75px; right: 5px; }
 .insights-panel .insight-content { flex: 1; min-height: 0; }
 .insight-tabs { flex-wrap: wrap; }
@@ -498,7 +498,7 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 @media (max-width: 760px) {
   .map-workspace > .query-dock { padding: 8px 12px; }
   .query-dock .query-heading { display: block; font-size: 14px; }
-  .map-legend { top: auto; bottom: 24px; left: 10px; right: auto; width: 150px; max-height: 35%; }
+  .map-legend { top: auto; bottom: 24px; left: 10px; right: auto; width: 150px; max-height: none; }
   .answer-map-button { display: flex; }
   .answer-number { font-size: 48px; }
 }
@@ -515,3 +515,11 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 .address-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
 .address-note { position: absolute; z-index: 1100; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center;
   max-width: min(560px, 88%); padding: 8px 12px; background: #fffffff2; border: 1px solid #1d4ed8; border-radius: 6px; font-size: 12px; box-shadow: 0 2px 8px #162c3a22; }
+
+/* One color key in the scrollable sidebar; the map legend stays compact. */
+.group-chip { font-size: 14px; line-height: 1.5; }
+.group-chip i, .layer-row > i { flex-shrink: 0; }
+.metric-range { display: block; margin-top: 5px; font: 600 14px/1.5 'Hanken Grotesk', sans-serif; color: #243e30; }
+.metrics-grid > *, .metric-card { min-width: 0; overflow-wrap: anywhere; }
+.section-heading { flex-wrap: wrap; gap: 6px; }
+.section-heading > span { font-size: 12px; }

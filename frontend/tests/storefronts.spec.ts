@@ -28,15 +28,14 @@ async function selectByBlockGroup(page: Page, id: string) {
   await expect.poll(() => page.evaluate(() => location.hash)).toContain(`area=${id}`);
 }
 
-test('storefronts are off by default and the real snapshot loads when turned on', async ({ page, request }) => {
+test('storefronts are on by default and use the sidebar as their color key', async ({ page, request }) => {
   const total = (await (await request.get('/api/storefronts')).json()).storefronts.length;
   await page.goto('/');
   await expect(page.locator('.census-area')).toHaveCount(81);
-  await expect(page.locator(MARKERS)).toHaveCount(0);
-  await toggleStorefronts(page).check();
+  await expect(toggleStorefronts(page)).toBeChecked();
   await expect(page.locator(MARKERS)).toHaveCount(total);
-  await expect(page.locator('.map-legend')).toContainText('Food & drink');
-  await expect(page.locator('.map-legend')).toContainText('OpenStreetMap-mapped');
+  await expect(page.getByRole('group', { name: 'Storefront categories' })).toContainText('Food & drink');
+  await expect(page.locator('.map-legend')).not.toContainText('Food & drink');
 });
 
 test('category filters change the visible markers to match their counts', async ({ page }) => {
@@ -69,6 +68,7 @@ test('the block group card summarizes its storefronts with attribution and can s
   const inside = all.filter(item => item.block_group_id === BLOCK_GROUP).length;
   await page.goto('/');
   await selectByBlockGroup(page, BLOCK_GROUP);
+  await toggleStorefronts(page).uncheck();
   const card = page.getByRole('region', { name: 'Storefronts' });
   await expect(card).toContainText(`${inside} mapped businesses in this block group`);
   await expect(card).toContainText('© OpenStreetMap contributors');
@@ -80,8 +80,8 @@ test('the block group card summarizes its storefronts with attribution and can s
 });
 
 test('the CDP card explains that storefront data covers the block groups only', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.getByRole('region', { name: 'Storefronts' })).toContainText('Select one to see its businesses');
+  await page.goto('/#area=2472450&tab=Overview');
+  await expect(page.getByRole('region', { name: 'Storefronts' })).toContainText('no area-wide business total is shown');
 });
 
 test('a storefront API failure does not break the map and is stated in the card', async ({ page }) => {
@@ -108,7 +108,7 @@ test('business names are rendered as text, never as HTML', async ({ page }) => {
 test('dragging the opacity slider or changing selection does not rebuild map shapes', async ({ page }) => {
   await page.goto('/');
   await toggleStorefronts(page).check();
-  await expect(page.locator(MARKERS).first()).toBeVisible();
+  await expect(page.locator(MARKERS + ':visible').first()).toBeVisible();
   await page.evaluate(() => {
     const w = window as unknown as { __churn: number };
     w.__churn = 0;
@@ -122,10 +122,10 @@ test('dragging the opacity slider or changing selection does not rebuild map sha
   await page.getByLabel('Search for a place').press('Enter');
   await page.waitForTimeout(300);
   expect(await page.evaluate(() => (window as unknown as { __churn: number }).__churn)).toBe(0);
-  await expect(page.locator(MARKERS).first()).toBeVisible();
+  await expect(page.locator(MARKERS + ':visible').first()).toBeVisible();
 });
 
-test('turning storefronts on zooms the map so the markers are spread out and visible', async ({ page }) => {
+test('storefronts are spread out in the initial Fenton view', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   await toggleStorefronts(page).check();
@@ -155,6 +155,6 @@ test('changing a category filter does not re-zoom the map', async ({ page }) => 
 test('expanded Census areas outside the storefront snapshot show missing coverage, not zero businesses', async ({ page }) => {
   await page.goto('/#area=240317028002&tab=Overview');
   const card = page.getByRole('region', { name: 'Storefronts' });
-  await expect(card).toContainText('outside the storefront snapshot’s coverage');
+  await expect(card).toContainText('outside the storefront snapshot’s full coverage');
   await expect(card).not.toContainText('0 mapped businesses');
 });

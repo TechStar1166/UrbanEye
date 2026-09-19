@@ -9,7 +9,7 @@ test('Overview shows sourced ACS profile values, not sample placeholders', async
   const panel = page.getByRole('complementary', { name: 'Area facts and evidence' });
   await expect(panel.getByRole('heading', { name: 'Census counts' })).toBeVisible();
   await expect(panel.getByRole('heading', { name: 'Community profile' })).toBeVisible();
-  await expect(panel).toContainText('ACS 5-year 2020–2024');
+  await expect(panel).toContainText('Census survey estimate, 2020–2024');
   for (const invented of ['$68,400', '58% of County', '27.1%', '74%', '26%', '18.2%', '33.4%']) {
     await expect(panel).not.toContainText(invented);
   }

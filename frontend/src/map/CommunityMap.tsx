@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
-import type { Areas, OverlayResponse, Places, Storefront, TransitResponse } from '../services/api';
+import type { Areas, OverlayResponse, Storefront, TransitResponse } from '../services/api';
 import { groupColor, groupOf, nearbySame, prettyCategory } from '../lib/storefronts';
 import { areaColor, colorScale, strokes } from './colors';
 import 'leaflet/dist/leaflet.css';
@@ -19,12 +19,13 @@ function popupFor(item: Storefront, all: Storefront[]): HTMLElement {
   const n = nearbySame(all, item);
   near.textContent = `${n} other ${prettyCategory(item.category)} within 300 m (OpenStreetMap-mapped)`;
   root.append(near);
+  const link = document.createElement('a'); link.href = `https://www.openstreetmap.org/${item.osm_id}`; link.target = '_blank'; link.rel = 'noreferrer'; link.textContent = 'See this place on OpenStreetMap'; root.append(link);
   return root;
 }
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places, overlays, transit, showOverlay = false, showTransit = false, pin }: {
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, overlays, transit, showOverlay = false, showTransit = false, pin }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
-  opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[]; answerGeoId?: string; places?: Places;
+  opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[]; answerGeoId?: string;
   overlays?: OverlayResponse; transit?: TransitResponse; showOverlay?: boolean; showTransit?: boolean;
   pin?: { lat: number; lon: number; label: string };
 }) {
@@ -32,7 +33,6 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   const map = useRef<L.Map | null>(null);
   const polygons = useRef<L.GeoJSON | null>(null);
   const markers = useRef<L.FeatureGroup | null>(null);
-  const hadMarkers = useRef(false);
   const select = useRef(onSelect);
   select.current = onSelect;
 
@@ -65,7 +65,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     instance.createPane('zoning').style.zIndex = '430';
     instance.createPane('transit').style.zIndex = '435';
     instance.createPane('pin').style.zIndex = '490'; // the searched address stays on top
-    instance.createPane('storefronts').style.zIndex = '470'; // above area shapes and the food/drink dots
+    instance.createPane('storefronts').style.zIndex = '470'; // above area shapes
     const observer = new ResizeObserver(() => instance.invalidateSize());
     observer.observe(container.current!);
     const basemapLight = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
@@ -80,15 +80,10 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     });
     basemapLight.addTo(instance);
     L.control.layers({ "Street Map": basemapLight, "Satellite": basemapSatellite }, undefined, { position: 'bottomright' }).addTo(instance);
-    instance.createPane('places');
-    instance.getPane('places')!.style.zIndex = '460';
-    instance.createPane('fenton');
-    instance.getPane('fenton')!.style.zIndex = '450';
-    const outline = L.circle([38.99487, -77.02489], { radius: 600, pane: 'fenton', color: '#25479b', weight: 2, dashArray: '7 6', fill: false, interactive: false }).addTo(instance);
     const pin = L.marker([38.99487, -77.02489], { title: 'Fenton Village', icon: L.divIcon({ className: 'fenton-pin', html: '<span aria-hidden="true">●</span>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(instance);
     pin.bindTooltip('Fenton Village', { permanent: true, direction: 'top', className: 'fenton-label' });
-    pin.bindPopup('Fenton Village · challenge location. Dashed outline: 600 m study area, not an official district boundary.');
-    return () => { outline.remove(); pin.remove(); observer.disconnect(); instance.remove(); map.current = null; polygons.current = null; markers.current = null; };
+    pin.bindPopup('Fenton Village · challenge location. The zoning overlay is shown separately from Census block groups.');
+    return () => { pin.remove(); observer.disconnect(); instance.remove(); map.current = null; polygons.current = null; markers.current = null; };
   }, []);
 
   // Build the area shapes once per dataset.
@@ -127,18 +122,33 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     if (bounds.isValid()) map.current.fitBounds(bounds, { paddingTopLeft: [35, 80], paddingBottomRight: [35, 35], maxZoom: 16, animate: false });
   }, [areas, answerGeoId]);
 
-  // Recenter on request (not on first render).
+  // Frame the official zoning boundary and challenge pin, rather than an inferred radius.
+  const focusFenton = () => {
+    if (!map.current) return;
+    const bounds = overlays?.features.length ? L.geoJSON(overlays as unknown as GeoJsonObject).getBounds() : undefined;
+    if (bounds?.isValid()) {
+      bounds.extend([38.99487, -77.02489]);
+      map.current.fitBounds(bounds, { paddingTopLeft: [24, 80], paddingBottomRight: [24, 24], maxZoom: 16, animate: false });
+    } else map.current.setView([38.99487, -77.02489], 16, { animate: false });
+  };
+  const initiallyFocused = useRef(false);
+  useEffect(() => {
+    if (!initiallyFocused.current && overlays?.features.length) {
+      initiallyFocused.current = true;
+      if (!answerGeoId && !pin) focusFenton();
+    }
+  }, [overlays, answerGeoId, pin]);
   const lastReset = useRef(resetKey);
   useEffect(() => {
     if (lastReset.current === resetKey) return;
     lastReset.current = resetKey;
-    map.current?.setView([38.99487, -77.02489], 16);
+    focusFenton();
   }, [resetKey]);
 
   // Storefront markers: rebuilt only when the visible set changes, never for selection or opacity.
   useEffect(() => {
     if (!map.current) return;
-    if (storefronts.length === 0) { hadMarkers.current = false; return; }
+    if (storefronts.length === 0) return;
     const group = L.featureGroup();
     for (const item of storefronts) {
       const color = groupColor(groupOf(item));
@@ -150,38 +160,15 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     }
     group.addTo(map.current);
     markers.current = group;
-    // At the default zoom the markers would be a tiny clump; zoom in when the layer first appears.
-    // Not animated: Leaflet silently drops an animated fitBounds while another zoom animation is running.
-    if (!hadMarkers.current) {
-      const bounds = group.getBounds();
-      map.current.invalidateSize();
-      if (bounds.isValid()) map.current.fitBounds(bounds, { padding: [40, 40], maxZoom: 17, animate: false });
-    }
-    hadMarkers.current = true;
     return () => { group.remove(); markers.current = null; };
   }, [storefronts]);
-
-  useEffect(() => {
-    if (!map.current || !places) return;
-    const points = L.layerGroup().addTo(map.current);
-    for (const place of places.places) {
-      const dot = L.circleMarker([place.lat, place.lon], { className: 'food-place', pane: 'places', radius: 5, color: '#713100', weight: 1.5, fillColor: '#ed761c', fillOpacity: 0.95 }).addTo(points);
-      dot.bindTooltip(place.name);
-      const content = document.createElement('div');
-      const title = document.createElement('strong'); title.textContent = place.name; content.append(title);
-      const text = document.createElement('p'); text.textContent = place.kind.replaceAll('_', ' ') + ' · From OpenStreetMap, may not be complete'; content.append(text);
-      const link = document.createElement('a'); link.href = place.url; link.target = '_blank'; link.rel = 'noreferrer'; link.textContent = 'See this place on OpenStreetMap'; content.append(link);
-      dot.bindPopup(content);
-    }
-    return () => { points.remove(); };
-  }, [places]);
 
   useEffect(() => {
     if (!map.current || !showOverlay || !overlays?.features.length) return;
     const layer = L.geoJSON(overlays as unknown as GeoJsonObject, {
       pane: 'zoning',
       interactive: false,
-      style: { color: '#c2410c', weight: 2.5, dashArray: '4 3', fill: false },
+      style: { className: 'fenton-overlay', color: '#c2410c', weight: 2.5, dashArray: '4 3', fill: false },
     }).addTo(map.current);
     layer.bindTooltip('Fenton Village Overlay Zone · zoning boundary, not a count area');
     return () => { layer.remove(); };
@@ -194,7 +181,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
       interactive: false,
       style: { color: '#6b21a8', weight: 3, opacity: 0.85 },
     }).addTo(map.current);
-    layer.bindTooltip('Purple Line · under construction, not operating service');
+    layer.bindTooltip('Purple Line · tagged as under construction in OpenStreetMap');
     return () => { layer.remove(); };
   }, [transit, showTransit]);
 

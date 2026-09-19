@@ -7,30 +7,28 @@ boundaries, selected-area state, and Census evidence are retained.
 ## Current integration
 
 - `GET /api/areas` supplies the map polygons, population, housing counts, and
-  original evidence. The first area is selected on load; polygon clicks and search
+  original evidence. The block group containing the Fenton challenge pin is selected on load (unless a shared URL selects another area); polygon clicks and search
   change the selection. Data view and JSON export use these actual source objects.
 - Population/housing layer controls, opacity, zoom, and recenter affect Leaflet.
   Fenton block groups render above the containing CDP so they remain clickable.
   CDP and block-group totals describe different geographic levels; do not sum them.
-- Income, age, tenure and related tools are marked Coming next. Unbuilt actions
-  are disabled and the future-data catalog is collapsed. Food/drink dots are real OSM objects.
-- Individual counts link to their source, with hover/focus citations. The current
-  fields POP100/HU100 are decennial counts, not ACS survey estimates. The UI says
-  Official 2020 count; See details explains sampling versus other errors.
-- Age/income overlap criteria and business analysis are unavailable. No fabricated analytical answer or
-  correlation result is presented as live output. The age/income comparison states
-  Not enough data yet; technical sample-size details remain in Evidence.
+- Income, age, household size and tenure use sourced Census survey estimates for 2020–2024.
+  Each figure links to its source; published 90% margins of error appear as “Give or take …”.
+  Missing margins are labeled unavailable, never inferred from reliability flags. Decennial
+  counts retain a single “Official 2020 count” label, since survey sampling errors do not apply.
+- The business brief uses the same community cards as the Overview, without repeating counts.
+  It keeps the existing `/evaluate` flow and distinguishes community context from a recommendation.
 - The query form calls `/ask` with the selected geographic ID. The answer appears at the top of the right panel and
   displays loading/errors, deterministic facts, retrieved passages, and Gemini
   claims with source chips and limitations. A magenta outline marks the area a Census count covers; planning answers explicitly state their regional scope. Changing areas clears old answers.
 - Three wrapped suggestions run in one tap and remain below each answer.
-  Address search is not available; place names and IDs remain searchable.
+  Place names and IDs remain searchable; address search runs only when explicitly requested.
 - Answer history is held in memory for the current session. The Answer history badge updates after each answer.
-- The map opens at 38.99487, -77.02489, zoom 16 with Esri Light Gray. The labeled
-  pin marks Fenton Village; the dashed 600 m circle is a study radius, not an official boundary.
-- `/places` supplies 90 cached OSM objects; `/sources` supplies the provenance catalog
+- The map opens around 38.99487, -77.02489 with Esri Light Gray and frames the zoning overlay plus the pin. The labeled
+  pin marks Fenton Village. The official county zoning overlay is enabled by default; the old 600 m circle is removed.
+- `/storefronts` supplies the single business-dot layer; the older `/places` data is not rendered. `/sources` supplies the provenance catalog
   rendered at `/#sources`, including download timestamps, links, uses and limitations.
-- Preview state is in memory only. Site briefs are not stored or sent anywhere.
+- Site evaluation requests send the selected area and business type to the backend; brief state is held in memory.
 
 - The Compare areas tab also has a live **Compare two Census layers** panel. It calls
   `/segment` and shows the correlation, sample size, association-only note and
@@ -38,10 +36,9 @@ boundaries, selected-area state, and Census evidence are retained.
   compared with block groups), and at least 3 are required; otherwise the panel
   explains why it cannot compare. An optional dark slate map outline marks areas at or
   above the 60th percentile in both layers (a ranking, not a statistical test).
-- **Storefront Locations** is a real layer, off by default: OpenStreetMap-mapped businesses from
+- **Storefront Locations** is a real layer, on by default: OpenStreetMap-mapped businesses from
   `GET /storefronts`, colored by four groups with per-group filters. A marker's popup shows its name,
-  category, address and the number of other same-category businesses within 300 m. Turning the layer on
-  zooms to the markers. The Overview shows a per-block-group summary with attribution and the caveat that
+  category, address, original OSM link and the number of other same-category businesses within 300 m. Category toggles keep the map position stable. The sidebar filters are the dot color key; the map legend only explains shading and the selected outline. The Overview distinguishes the query-box total, points inside the zoning overlay, and covered block-group counts, with attribution and the caveat that
   OSM is volunteer-mapped and not a business registry. See
   [docs/plans/storefront-layer.md](../docs/plans/storefront-layer.md).
 - Map performance: area shapes are built once and restyled in place, so selection, metric and opacity changes
@@ -78,7 +75,7 @@ complement the UI tests, which verify live count queries and mocked AI rendering
 Fonts use Google Fonts with local sans-serif/monospace fallbacks. All interface
 icons are local SVG components; there is no Tailwind CDN or remote script dependency.
 
-Count source verification: [TIGERweb Census 2020 places](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28) and [block groups](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8) expose POP100 and HU100. [ACS sampling guidance](https://www.census.gov/programs-surveys/acs/methodology/sample-size-and-data-quality/sample-size-definitions.html) describes margins of error for sample estimates. Official counts can still have [coverage error](https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html). Future ACS estimates should show their published uncertainty, such as “Estimate, could be off by about ±X.”
+Count source verification: [TIGERweb Census 2020 places](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28) and [block groups](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8) expose POP100 and HU100. [ACS sampling guidance](https://www.census.gov/programs-surveys/acs/methodology/sample-size-and-data-quality/sample-size-definitions.html) describes margins of error for sample estimates. Official counts can still have [coverage error](https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html). ACS estimates show their published uncertainty as “Give or take … (90% confidence)”.
 
 ## Answer experience
 
