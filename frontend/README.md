@@ -12,7 +12,9 @@ boundaries, selected-area state, and Census evidence are retained.
 - Population/housing layer controls, opacity, zoom, and recenter affect Leaflet.
   Fenton block groups render above the containing CDP so they remain clickable.
   CDP and block-group totals describe different geographic levels; do not sum them.
-- Income, age, and housing-tenure charts are labeled design previews.
+- Income, age, and housing-tenure are not connected to the dataset. The Overview shows
+  `—` and a not-connected note instead of sample values, and the income/Gini layer rows
+  carry a Preview label. See [docs/plans/remove-placeholder-data.md](../docs/plans/remove-placeholder-data.md).
 - Additional layer controls, overlap criteria and the business
   planning dialog are frontend previews. No fabricated analytical answer or
   correlation result is presented as live output.
