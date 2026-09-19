@@ -73,5 +73,8 @@ The sprint 4 checkpoint requires all static placeholder features in the frontend
 - [ ] F3: Address search resolves street names to block group polygons
 - [ ] F4: Transit & Zoning vectors display correctly as map overlay layers
 - [ ] F5: Business analysis module generates valid evidence-backed output
+- [ ] F6: Project branding updated to UrbanEye and Bay Hacks 2026
+- [ ] F7: Map includes satellite layer toggle switch
+- [ ] F8: Business planning button styled appealingly (green fill/white text)
 - [ ] Playwright smoke test updated for new interactions (search, overlap, business module)
 - [ ] Fresh-clone verification passes

@@ -182,10 +182,14 @@
 | F3 | Address Search: Integrate Nominatim geocoding to resolve street addresses | Jackson | `[ ]` |
 | F4 | Transit & Zoning Layers: Add Purple Line and zoning overlay vectors | Pujan | `[ ]` |
 | F5 | Business Analysis: Implement backend `/evaluate` endpoint (Option B) | Nick | `[ ]` |
+| F6 | UI Polish: Update to UrbanEye/Bay Hacks 2026 branding | All | `[ ]` |
+| F7 | Map Controls: Add satellite layer toggle button | Jackson | `[ ]` |
+| F8 | UI Polish: Style business planning button (green fill/white text) | Nick | `[ ]` |
 
 > **Sprint 4 Notes:**
 > - F1: We must derive or download offline demographic data to fulfill the "Coming next" labels without fabricating data.
 > - F5: We will proceed with **Option B** (LLM-powered backend endpoint) for the Business Analysis module.
+> - F6-F8: Incorporating the requested branding and UI polish from `frontend/future_features.md`.
 
 ---
 
