@@ -37,7 +37,7 @@ boundaries, selected-area state, and Census evidence are retained.
   `/segment` and shows the correlation, sample size, association-only note and
   per-area values. Only areas of the same geography type are compared (a CDP is never
   compared with block groups), and at least 3 are required; otherwise the panel
-  explains why it cannot compare. An optional orange map outline marks areas at or
+  explains why it cannot compare. An optional dark slate map outline marks areas at or
   above the 60th percentile in both layers (a ranking, not a statistical test).
 - **Storefront Locations** is a real layer, off by default: OpenStreetMap-mapped businesses from
   `GET /storefronts`, colored by four groups with per-group filters. A marker's popup shows its name,

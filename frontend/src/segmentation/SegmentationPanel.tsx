@@ -63,7 +63,7 @@ export function SegmentationPanel({ areas, onHighlight }: { areas: Areas; onHigh
     <label className="check"><input type="checkbox" checked={highlight} disabled={!!blocked} onChange={e => setHighlight(e.target.checked)} />
       Outline areas that are high in both layers on the map</label>
     {active && <p role="status" className="body-muted">{high.ids.length} of {high.compared} {unitName}s are at or above the 60th percentile in both layers
-      (orange outline). This ranks the areas shown; it is not a statistical test.</p>}
+      (dark outline). This ranks the areas shown; it is not a statistical test.</p>}
     {error && <p role="alert">{error}</p>}
     {result && <div aria-live="polite">
       <p className="stat">Correlation: <strong>{result.correlation_coefficient == null ? 'Undefined' : result.correlation_coefficient.toFixed(2)}</strong>
