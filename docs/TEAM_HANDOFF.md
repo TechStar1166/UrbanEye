@@ -88,4 +88,4 @@ explanation. Coordinate the controls with B.
 | A | Pujan | Pending | Pending | Pending |
 | B | Jackson | Pending | Pending | Pending |
 | C | Nick | Pending | Pending | Pending |
-| D | Amrit | Pending | Pending | Pending |
+| D | Amrit | Yes | Yes | Yes |

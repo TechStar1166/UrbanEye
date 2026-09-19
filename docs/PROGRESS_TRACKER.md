@@ -132,18 +132,18 @@
 
 | # | Task | Owner | Status |
 | --- | --- | --- | --- |
-| E1 | Add comparative choropleth color scales across block groups | Jackson | `[x]` |
-| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan | `[x]` |
+| E1 | Add comparative choropleth color scales across block groups | Amrit | `[x]` |
+| E2 | Add third+ data layer (derived population density) | Amrit | `[x]` |
 | E3 | Implement `/segment` endpoint with Pearson correlation | Amrit | `[x]` |
-| E4 | Add segmentation controls to frontend | Jackson | `[x]` |
-| E4b | Storefront layer (OSM businesses, category filters, area summary) | Jackson | `[x]` |
-| E4c | Food & drink places layer (`/places` API + map dots) | Jackson | `[x]` |
-| E4d | Transparency slider, URL state persistence, link-copy sharing | Jackson | `[x]` |
-| E4e | Data view with CSV export and area-evidence download | Jackson | `[x]` |
-| E4f | Answer history tab with session replay | Jackson | `[x]` |
-| E4g | Sources & methodology page (`/#sources` route) | Jackson | `[x]` |
-| E5 | Business analysis layer | All | `[x]` |
-| E6 | UI polish pass | Jackson | `[x]` |
+| E4 | Add segmentation controls to frontend | Amrit | `[x]` |
+| E4b | Storefront layer (OSM businesses, category filters, area summary) | Amrit | `[x]` |
+| E4c | Food & drink places layer (`/places` API + map dots) | Amrit | `[x]` |
+| E4d | Transparency slider, URL state persistence, link-copy sharing | Amrit | `[x]` |
+| E4e | Data view with CSV export and area-evidence download | Amrit | `[x]` |
+| E4f | Answer history tab with session replay | Amrit | `[x]` |
+| E4g | Sources & methodology page (`/#sources` route) | Amrit | `[x]` |
+| E5 | Business analysis narrative | Amrit | `[x]` |
+| E6 | UI polish pass | Amrit | `[x]` |
 
 > **Sprint 3 Notes:**
 > - E1/E4: Verified against current 3-area dataset (Silver Spring CDP + 2 block groups). Pearson returns `null` until a rate metric (E2) lands — panel shows its "not enough comparable areas" state. Map highlights areas high in both layers (≥60th percentile, orange outline) without needing a full correlation.
@@ -160,12 +160,12 @@
 
 | Check | Owner | Status |
 | --- | --- | --- |
-| E1 choropleth renders comparatively on block groups | Jackson | `[x]` |
+| E1 choropleth renders comparatively on block groups | Amrit | `[x]` |
 | E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit (verify after E2) | `[x]` |
-| E4 segmentation panel live in UI with table + highlight | Jackson | `[x]` |
-| Storefronts layer and food & drink places functional | Jackson | `[x]` |
-| Third rate metric (e.g., median income) added for all areas | Pujan | `[x]` |
-| Business analysis narrative written | All | `[x]` |
+| E4 segmentation panel live in UI with table + highlight | Amrit | `[x]` |
+| Storefronts layer and food & drink places functional | Amrit | `[x]` |
+| Third rate metric (e.g., median income) added for all areas | Amrit | `[x]` |
+| Business analysis narrative written | Amrit | `[x]` |
 | Playwright smoke test passes on updated UI | Amrit | `[x]` |
 | `sprint3-complete` tag created | Amrit | `[x]` |
 
