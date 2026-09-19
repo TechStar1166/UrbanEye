@@ -3,6 +3,8 @@ import { api, type Answer, type Area, type Areas } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { Icon } from './components/Icon';
+import { SegmentationPanel } from './segmentation/SegmentationPanel';
+import { scalesByType } from './map/scale';
 
 type Tab = 'Overview' | 'Segmentation' | 'Ask CivicLens' | 'Evidence';
 type MobilePane = 'layers' | 'map' | 'insights';
@@ -46,6 +48,7 @@ export default function App() {
   const [siteType, setSiteType] = useState('Café & bakery');
   const [siteSaved, setSiteSaved] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+  const [highlightIds, setHighlightIds] = useState<string[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const questionRef = useRef<HTMLInputElement>(null);
@@ -106,6 +109,7 @@ export default function App() {
   };
   const number = (key: string) => selected?.metrics[key] == null ? '—' : selected.metrics[key]!.toLocaleString();
   const activeCount = Object.values(layers).filter(Boolean).length;
+  const comparativeScale = areas ? [...scalesByType(areas.features, metric).values()].some(scale => scale.comparative) : false;
   const searchResults = areas?.features.filter(f => (f.properties.name + ' ' + f.id).toLowerCase().includes(search.toLowerCase())) ?? [];
   const exportData = () => {
     if (!selected) return;
@@ -164,12 +168,12 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <>
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} highlightIds={highlightIds} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>GEOGRAPHIC FOCUS</small><strong>{selected?.name ?? 'Select an area'}</strong></span></div><button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div>
           {selected && <div className="map-selection-card"><div className="selection-title"><i className="status-dot" /><strong>{selected.name}</strong><span className="tag">Selected</span></div><div className="selection-metrics"><div><span>POPULATION</span><strong>{number('population')}</strong></div><div><span>HOUSING UNITS</span><strong>{number('housing_units')}</strong></div></div><div className="selection-footer"><span>2020 Census · {selected.geo_id}</span><button onClick={() => openTab('Evidence')}>View sources <Icon name="arrow" /></button></div></div>}
-          <div className="map-legend"><span className="eyebrow">Map Legend</span><div><i className={'legend-swatch ' + (metric === 'housing_units' ? 'purple' : '')} /><span>{metric === 'population' ? 'Population' : metric === 'housing_units' ? 'Housing units' : 'Geographic boundaries'}</span></div><div><i className="legend-swatch selected" /><span>Selected geography</span></div><p>Color identifies the layer; not a comparative scale.</p></div>
+          <div className="map-legend"><span className="eyebrow">Map Legend</span><div><i className={'legend-swatch ' + (metric === 'housing_units' ? 'purple' : '')} /><span>{metric === 'population' ? 'Population' : metric === 'housing_units' ? 'Housing units' : 'Geographic boundaries'}</span></div><div><i className="legend-swatch selected" /><span>Selected geography</span></div>{highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>High in both compared layers</span></div>}<p>{comparativeScale ? 'Within each geography type, darker fill means a higher value.' : 'Color identifies the layer; not a comparative scale.'}</p></div>
         </> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Housing units</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{f.properties.name}<small>{f.id}</small></button></td><td>{f.properties.metrics.population?.toLocaleString() ?? 'No data'}</td><td>{f.properties.metrics.housing_units?.toLocaleString() ?? 'No data'}</td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button></div>}
         <div className="query-dock"><form onSubmit={ask}><span className="query-symbol"><Icon name="sparkles" /></span><input ref={questionRef} aria-label="Ask about this area" value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask about planning, housing, or community data…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Query Records'}<Icon name="arrow" /></button></form><div className="suggestions"><span>Suggested:</span>{prompts.map(prompt => <button key={prompt} onClick={() => { setQuestion(prompt); questionRef.current?.focus(); }}>{prompt}</button>)}</div><span className="query-preview">Evidence-backed research · selected geographic area</span></div>
       </section>
@@ -185,7 +189,7 @@ export default function App() {
             <section className="insight-section"><SectionHeading detail="Source-linked">Data Provenance</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>Population and housing units for the selected geography.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
           </>}
           {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Inspect the source behind each map metric.</p>{selected && <EvidenceList items={selected.evidence} />}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
-          {tab === 'Segmentation' && <section className="insight-section"><SectionHeading detail="Preview">Community Overlap</SectionHeading><div className="tab-hero"><Icon name="overlap" /><h3>Find the common ground.</h3><p>Explore how demographic and economic characteristics overlap across communities.</p></div><div className="criteria-card"><span>COHORT</span><strong>Age 50+ share above {cohort}%</strong><span>ECONOMIC</span><strong>Household income below ${income},000</strong></div><p className="body-muted">Your comparison is ready. Matched areas and correlation results will appear here when these datasets are connected.</p><div className="info-note"><Icon name="info" /><span>Whole Census areas are the unit of comparison. Association does not establish causation.</span></div></section>}
+          {tab === 'Segmentation' && <section className="insight-section"><SectionHeading detail="Preview">Community Overlap</SectionHeading><div className="tab-hero"><Icon name="overlap" /><h3>Find the common ground.</h3><p>Explore how demographic and economic characteristics overlap across communities.</p></div><div className="criteria-card"><span>COHORT</span><strong>Age 50+ share above {cohort}%</strong><span>ECONOMIC</span><strong>Household income below ${income},000</strong></div><p className="body-muted">Your comparison is ready. Matched areas and correlation results will appear here when these datasets are connected.</p><div className="info-note"><Icon name="info" /><span>Whole Census areas are the unit of comparison. Association does not establish causation.</span></div>{areas && <SegmentationPanel areas={areas} onHighlight={setHighlightIds} />}</section>}
           {tab === 'Ask CivicLens' && <section className="insight-section"><SectionHeading detail="Source-linked">Community Research</SectionHeading><div className="tab-hero"><Icon name="sparkles" /><h3>Ask your community.</h3><p>Planning documents and public data, in one conversation.</p></div>
             {submitted && <div className="user-question">{submitted}</div>}
             {busy && <p role="status">Retrieving grounded evidence…</p>}

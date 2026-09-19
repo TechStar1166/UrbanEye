@@ -318,3 +318,12 @@ td small { display: block; font: 8px var(--mono); color: var(--muted); margin-to
 .answer { white-space: pre-wrap; line-height: 1.5; }
 .limitations { font-size: 11px; line-height: 1.6; color: #596b60; background: #fffbe6; padding: 12px 12px 12px 26px; border-radius: 4px; border: 1px solid #ffe58f; overflow-wrap: anywhere; }
 .research-response h3 { font: 600 15px var(--heading); margin-bottom: 12px; }
+
+.legend-swatch.highlight { background: #c2410c22; border: 2px solid #c2410c; }
+.segmentation { margin-top: 18px; padding-top: 14px; border-top: 1px solid #c9d6cd; }
+.segmentation h3 { margin: 0 0 8px; }
+.segmentation select { width: 100%; }
+.segmentation .check { display: flex; gap: 8px; align-items: center; font-weight: 400; margin: 10px 0; font-size: 12px; }
+.segmentation .stat { margin: 10px 0 4px; }
+.segmentation table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.segmentation th, .segmentation td { text-align: left; padding: 5px 6px; border-bottom: 1px solid #c9d6cd; }

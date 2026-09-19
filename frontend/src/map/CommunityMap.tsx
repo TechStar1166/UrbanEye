@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
 import type { Areas } from '../services/api';
+import { scalesByType } from './scale';
 import 'leaflet/dist/leaflet.css';
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0 }: {
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, highlightIds = [] }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
-  opacity?: number; resetKey?: number;
+  opacity?: number; resetKey?: number; highlightIds?: string[];
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
@@ -30,15 +31,19 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   
   useEffect(() => {
     if (!map.current) return;
+    const scales = scalesByType(areas.features, metric);
     const polygons = L.geoJSON(areas as unknown as GeoJsonObject, {
       style: (feature) => {
-        const hasData = metric && feature?.properties?.metrics?.[metric] != null;
+        const value: number | null | undefined = metric ? feature?.properties?.metrics?.[metric] : null;
+        const hasData = value != null;
         const isSelected = feature?.properties?.geo_id === selectedId;
+        const isHighlighted = highlightIds.includes(feature?.properties?.geo_id);
         const isFiner = feature?.properties?.geography_type === 'block_group';
+        const scale = scales.get(feature?.properties?.geography_type);
         return {
-          color: isSelected ? '#006948' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
-          weight: isSelected ? 5 : (isFiner ? 2.5 : 3),
-          fillOpacity: hasData ? opacity * (isFiner ? 0.45 : 0.25) : 0.05,
+          color: isSelected ? '#006948' : isHighlighted ? '#c2410c' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
+          weight: isSelected ? 5 : isHighlighted ? 4 : (isFiner ? 2.5 : 3),
+          fillOpacity: hasData ? opacity * (scale?.comparative ? scale.opacity(value) : (isFiner ? 0.45 : 0.25)) : 0.05,
           fillColor: metric === 'housing_units' ? '#8f4bb8' : '#087e8b',
           dashArray: hasData ? '' : '5, 5'
         };
@@ -70,6 +75,6 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     }
     
     return () => { polygons.remove(); };
-  }, [areas, metric, selectedId, opacity, resetKey]);
+  }, [areas, metric, selectedId, opacity, resetKey, highlightIds]);
   return <div ref={container} className="map" aria-label="Interactive Silver Spring map" />;
 }
