@@ -133,7 +133,7 @@
 | # | Task | Owner | Status |
 | --- | --- | --- | --- |
 | E1 | Add comparative choropleth color scales across block groups | Jackson | `[x]` |
-| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan | `[ ]` |
+| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan | `[x]` |
 | E3 | Implement `/segment` endpoint with Pearson correlation | Amrit | `[x]` |
 | E4 | Add segmentation controls to frontend | Jackson | `[x]` |
 | E4b | Storefront layer (OSM businesses, category filters, area summary) | Jackson | `[x]` |
@@ -161,10 +161,10 @@
 | Check | Owner | Status |
 | --- | --- | --- |
 | E1 choropleth renders comparatively on block groups | Jackson | `[x]` |
-| E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit (verify after E2) | `[ ]` |
+| E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit (verify after E2) | `[x]` |
 | E4 segmentation panel live in UI with table + highlight | Jackson | `[x]` |
 | Storefronts layer and food & drink places functional | Jackson | `[x]` |
-| Third rate metric (e.g., median income) added for all areas | Pujan | `[ ]` |
+| Third rate metric (e.g., median income) added for all areas | Pujan | `[x]` |
 | Business analysis narrative written | All | `[ ]` |
 | Playwright smoke test passes on updated UI | Amrit | `[x]` |
 | `sprint3-complete` tag created | Amrit | `[ ]` |
