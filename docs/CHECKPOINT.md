@@ -59,7 +59,7 @@ The following have been merged to `test` and pulled into `ag/dev`:
 
 **Still required before `sprint3-complete` tag:**
 
-- [ ] E2: Pujan — third rate metric in `areas.geojson` (unblocks Pearson)
-- [ ] E5: Business analysis narrative (`docs/plans/business-module.md` plan exists)
-- [ ] Playwright smoke test updated for new UI (selectors changed significantly)
-- [ ] Fresh-clone verification on `test` branch
+- [x] E2: Pujan — third rate metric in `areas.geojson` (unblocks Pearson)
+- [x] E5: Business analysis narrative (`docs/plans/business-module.md` plan exists)
+- [x] Playwright smoke test updated for new UI (selectors changed significantly)
+- [x] Fresh-clone verification on `test` branch
