@@ -22,10 +22,11 @@ function popupFor(item: Storefront, all: Storefront[]): HTMLElement {
   return root;
 }
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places, overlays, transit, showOverlay = false, showTransit = false }: {
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places, overlays, transit, showOverlay = false, showTransit = false, pin }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
   opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[]; answerGeoId?: string; places?: Places;
   overlays?: OverlayResponse; transit?: TransitResponse; showOverlay?: boolean; showTransit?: boolean;
+  pin?: { lat: number; lon: number; label: string };
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
@@ -46,7 +47,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     const isFiner = feature?.properties?.geography_type === 'block_group';
     return {
       className: `census-area area-${feature?.properties?.geo_id}`,
-      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#c2410c' : (strokes[metric] ?? '#087e8b'),
+      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#0f172a' : (strokes[metric] ?? '#087e8b'),
       weight: isSelected ? 3 : isHighlighted ? 4 : (isFiner ? 1.2 : 1),
       fillOpacity: hasData ? opacity * (isFiner ? 0.65 : 0) : 0.05,
       fillColor: isFiner ? areaColor(value, metric, scale) : '#d9dfdc',
@@ -63,6 +64,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(instance);
     instance.createPane('zoning').style.zIndex = '430';
     instance.createPane('transit').style.zIndex = '435';
+    instance.createPane('pin').style.zIndex = '490'; // the searched address stays on top
     instance.createPane('storefronts').style.zIndex = '470'; // above area shapes and the food/drink dots
     const observer = new ResizeObserver(() => instance.invalidateSize());
     observer.observe(container.current!);
@@ -194,5 +196,15 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     return () => { layer.remove(); };
   }, [transit, showTransit]);
 
+  // A searched address: labeled pin plus a non-animated zoom (an overlapping animated zoom would be dropped or overwritten).
+  useEffect(() => {
+    if (!map.current || !pin) return;
+    const marker = L.circleMarker([pin.lat, pin.lon], { pane: 'pin', className: 'address-pin', radius: 9, weight: 4, color: '#1d4ed8', fillColor: '#ffffff', fillOpacity: 1 });
+    const label = document.createElement('span'); label.textContent = pin.label.split(',').slice(0, 2).join(',');
+    marker.bindTooltip(label, { permanent: true, direction: 'top', offset: [0, -10] });
+    marker.addTo(map.current);
+    map.current.setView([pin.lat, pin.lon], Math.max(map.current.getZoom(), 17), { animate: false });
+    return () => { marker.remove(); };
+  }, [pin]);
   return <div ref={container} className="map" aria-label="Interactive Silver Spring map" />;
 }

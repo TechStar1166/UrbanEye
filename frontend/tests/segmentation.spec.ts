@@ -4,8 +4,8 @@ import { mockAreas, openSegmentation } from './fixtures';
 const strokes = (page: import('@playwright/test').Page) =>
   page.locator('.census-area').evaluateAll(els => els.map(el => el.getAttribute('stroke')));
 const OUTLINE = 'Outline areas that are high in both layers';
-// bg1 is selected by default (dark green); high areas get the orange outline.
-const TEAL = '#087e8b', SELECTED = '#006948', HIGH = '#c2410c';
+// bg1 is selected by default (dark green); high areas get the dark slate outline (distinct from the orange food and drink dots).
+const TEAL = '#087e8b', SELECTED = '#006948', HIGH = '#0f172a';
 
 test('segmentation is blocked with fewer than 3 comparable areas and sends no request', async ({ page }) => {
   await mockAreas(page, 1);

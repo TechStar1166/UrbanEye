@@ -36,7 +36,7 @@ boundaries, selected-area state, and Census evidence are retained.
   `/segment` and shows the correlation, sample size, association-only note and
   per-area values. Only areas of the same geography type are compared (a CDP is never
   compared with block groups), and at least 3 are required; otherwise the panel
-  explains why it cannot compare. An optional orange map outline marks areas at or
+  explains why it cannot compare. An optional dark slate map outline marks areas at or
   above the 60th percentile in both layers (a ranking, not a statistical test).
 - **Storefront Locations** is a real layer, off by default: OpenStreetMap-mapped businesses from
   `GET /storefronts`, colored by four groups with per-group filters. A marker's popup shows its name,
@@ -95,3 +95,13 @@ using the existing CDP retrieval scope, while retaining the selected block group
 It never treats the plan boundary as the block group's boundary. Evidence combines
 unique cited records from the selected area and its answer history, counting repeat
 citations once. Historical Who lives here share links open Compare areas.
+
+## Address search
+
+The top search box still matches area names. For an address, choose the "Search address" row or press Enter
+when no area matches: the text is sent to OpenStreetMap's **Nominatim** geocoder (results limited to the map's
+coverage box and the US), and choosing a result drops a labeled pin, zooms to it, and selects the Census block
+group that contains it (block group preferred over the CDP). An address outside the covered area still gets a
+pin, with a note that no area was selected. To follow Nominatim's usage policy there is no search-as-you-type,
+requests are spaced at least 1.1 s apart, and repeat queries are cached. Typed text leaves the browser, and the
+dropdown says so first. Tests mock Nominatim. See [docs/plans/address-search.md](../docs/plans/address-search.md).

@@ -170,7 +170,7 @@
 | --- | --- | --- | --- |
 | F1 | Extended Community Profile: Fetch/derive ACS demographic data (Income, Age, Tenure) | Pujan | `[ ]` |
 | F2 | Overlap Feature: Implement multi-criteria spatial filtering in map view | Jackson | `[ ]` |
-| F3 | Address Search: Integrate Nominatim geocoding to resolve street addresses | Jackson | `[ ]` |
+| F3 | Address Search: Integrate Nominatim geocoding to resolve street addresses | Jackson | `[x]` |
 | F4 | Transit & Zoning Layers: Add Purple Line and zoning overlay vectors | Pujan | `[ ]` |
 | F5 | Business Analysis: Implement backend `/evaluate` endpoint (Option B) | Nick | `[ ]` |
 | F6 | UI Polish: Update to UrbanEye/Bay Hacks 2026 branding | All | `[x]` |

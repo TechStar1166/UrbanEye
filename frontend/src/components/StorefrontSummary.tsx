@@ -1,5 +1,5 @@
 import type { Area, Storefronts } from '../services/api';
-import { summarize } from '../lib/storefronts';
+import { STOREFRONT_STUDY_AREAS, summarize } from '../lib/storefronts';
 
 export function StorefrontSummary({ area, data, failed, shown, onShow }: {
   area: Area; data?: Storefronts; failed: boolean; shown: boolean; onShow: () => void;
@@ -10,6 +10,10 @@ export function StorefrontSummary({ area, data, failed, shown, onShow }: {
   if (area.geography_type !== 'block_group') {
     return <section className="insight-section" aria-label="Storefronts">{head}
       <p className="body-muted">Storefront data covers the Fenton Village block groups. Select one to see its businesses.</p></section>;
+  }
+  if (!STOREFRONT_STUDY_AREAS.includes(area.geo_id)) {
+    return <section className="insight-section" aria-label="Storefronts">{head}
+      <p className="body-muted">This block group is outside the storefront snapshot’s coverage, so no business count is shown. Storefront data covers the two Fenton study block groups only.</p></section>;
   }
   const { total, groups, top } = summarize(data.storefronts, area.geo_id);
   if (total === 0) {

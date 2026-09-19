@@ -443,7 +443,7 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 
 .map-actions { display: flex; align-items: center; gap: 8px; }
 .data-coverage ul { font-size: 12px; line-height: 1.5; padding-left: 18px; margin: 6px 0 10px; }
-.legend-swatch.highlight { background: #c2410c22; border: 2px solid #c2410c; }
+.legend-swatch.highlight { background: #0f172a22; border: 2px solid #0f172a; }
 .segmentation { margin-top: 18px; padding-top: 14px; border-top: 1px solid #c9d6cd; }
 .segmentation h3 { margin: 0 0 8px; }
 .segmentation select { width: 100%; }
@@ -497,4 +497,8 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 
 .business-btn { background: #006948 !important; color: white !important; border-color: #004d34 !important; opacity: 1 !important; }
 .business-btn:disabled { opacity: 0.8 !important; cursor: not-allowed; }
-
+.address-search { border-top: 1px solid #c9d6cd; margin-top: 6px; padding-top: 6px; }
+.address-row small { display: block; font-size: 10px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+.address-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+.address-note { position: absolute; z-index: 1100; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 10px; align-items: center;
+  max-width: min(560px, 88%); padding: 8px 12px; background: #fffffff2; border: 1px solid #1d4ed8; border-radius: 6px; font-size: 12px; box-shadow: 0 2px 8px #162c3a22; }
