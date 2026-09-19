@@ -2,8 +2,14 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  use: { baseURL: 'http://127.0.0.1:5173', browserName: 'chromium' },
+  use: {
+    baseURL: 'http://127.0.0.1:5173',
+    channel: 'chrome',
+  },
   webServer: {
-    command: 'npm run dev', url: 'http://127.0.0.1:5173', reuseExistingServer: !process.env.CI,
+    command: 'npm run dev',
+    url: 'http://127.0.0.1:5173',
+    reuseExistingServer: !process.env.CI,
+    env: { VITE_API_BASE: 'http://127.0.0.1:8000' },
   },
 });

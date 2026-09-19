@@ -40,3 +40,26 @@ build. See [review details and reproduction commands](AI_REVIEW.md).
 These are local checks on the uncommitted worktree based on `ace32af`, not a
 fresh-clone or teammate acceptance result. Integration-owner sign-off, finer
 geography/data, and the remaining unchecked gates are still required.
+
+## Sprint 3 — In Progress (2026-09-19)
+
+The following have been merged to `test` and pulled into `ag/dev`:
+
+- **E1** Comparative choropleth color scale for block groups (5-bucket sequential, `colors.ts` + `CommunityMap.tsx`).
+- **E3** `/segment` POST endpoint fully implemented (`main.py` + `correlation.py`). Returns Pearson `r` or `null` with association-only explanation.
+- **E4** `SegmentationPanel.tsx` wired in `App.tsx` "Compare areas" tab — layer dropdowns, compare button, correlation stat, per-area table, and "high in both" orange outline highlight (≥60th percentile).
+- **Storefronts** `/storefronts` API, OSM marker layer, category filter chips, `StorefrontSummary` area card.
+- **Places** `/places` API (OSM food & drink), orange dot layer with OSM source popups.
+- **Sharing** URL state (`readView/writeView`), link-copy button, opacity slider, map recenter.
+- **Export** Data view table, per-area JSON download (`civiclens-{geo_id}.json`), all-areas CSV.
+- **Answer history** Session tab with replay and source restoration.
+- **Sources page** `/#sources` route with data provenance and methodology.
+- **Backend** 150 tests passing. `schemas.py` extended: `Storefronts`, `Storefront`, `Claim`, `DocumentScope`, `retrieved_at` on `Evidence`.
+- **`prepare_data.py`** now references `silver_spring_blockgroups_census2020.geojson` and derives expected IDs from the source manifest.
+
+**Still required before `sprint3-complete` tag:**
+
+- [ ] E2: Pujan — third rate metric in `areas.geojson` (unblocks Pearson)
+- [ ] E5: Business analysis narrative (`docs/plans/business-module.md` plan exists)
+- [ ] Playwright smoke test updated for new UI (selectors changed significantly)
+- [ ] Fresh-clone verification on `test` branch

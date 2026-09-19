@@ -1,8 +1,46 @@
 # UrbanEye Command Ledger
 
-# 2026-09-19: Data pipeline & Frontend wiring
+# --- Backend ---
+# Activate venv
+source .venv/bin/activate
+
+# Run backend server
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+
+# Run all backend tests (150 expected)
+python -m pytest tests/ -v
+
+# Regenerate processed data (uses new silver_spring_blockgroups_census2020.geojson)
 python -m scripts.prepare_data
+
+# Rebuild storefronts processed file
+python -m scripts.prepare_storefronts
+
+# Rebuild map context (places.json, sources.json)
+python -m scripts.prepare_map_context
+
+# Smoke test live Gemini endpoint (requires .env with GOOGLE_API_KEY)
+python -m scripts.smoke_gemini
+
+# --- Frontend ---
+# Install deps
+npm install --prefix frontend
+
+# Regenerate API types from backend OpenAPI schema
 npm run generate:types --prefix frontend
-pytest
+
+# Dev server
+npm run dev --prefix frontend
+
+# Production build
 npm run build --prefix frontend
-npx playwright test tests/demo.spec.ts --prefix frontend
+
+# Playwright smoke tests (Chrome channel — headless)
+# NOTE: demo.spec.ts selectors have changed significantly in Sprint 3.
+# Tests reference new UI elements (.census-area, .food-place, .fenton-pin, etc.)
+cd frontend && npx playwright test --project=chromium
+
+# --- Git ---
+# Standard PR flow: ag/dev → test → nt/dev → main
+git push origin ag/dev
+# Branches: ag/dev, test, nt/dev, main, ag/frontend-fixes
