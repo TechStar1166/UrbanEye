@@ -19,7 +19,7 @@ boundaries, selected-area state, and Census evidence are retained.
 - Individual counts link to their source, with hover/focus citations. The current
   fields POP100/HU100 are decennial counts, not ACS survey estimates. The UI says
   Official 2020 count; See details explains sampling versus other errors.
-- Overlap criteria and business analysis are unavailable. No fabricated analytical answer or
+- Age/income overlap criteria and business analysis are unavailable. No fabricated analytical answer or
   correlation result is presented as live output. The age/income comparison states
   Not enough data yet; technical sample-size details remain in Evidence.
 - The query form calls `/ask` with the selected geographic ID. The query dock replaces suggestions with answers and
@@ -33,6 +33,29 @@ boundaries, selected-area state, and Census evidence are retained.
   pin marks Fenton Village; the dashed 600 m circle is a study radius, not an official boundary.
 - `/places` supplies 90 cached OSM objects; `/sources` supplies the provenance catalog
   rendered at `/#sources`, including download timestamps, links, uses and limitations.
+
+- The Who lives here tab also has a live **Compare two Census layers** panel. It calls
+  `/segment` and shows the correlation, sample size, association-only note and
+  per-area values. Only areas of the same geography type are compared (a CDP is never
+  compared with block groups), and at least 3 are required; otherwise the panel
+  explains why it cannot compare. An optional orange map outline marks areas at or
+  above the 60th percentile in both layers (a ranking, not a statistical test).
+- **Storefront Locations** is a real layer, off by default: OpenStreetMap-mapped businesses from
+  `GET /storefronts`, colored by four groups with per-group filters. A marker's popup shows its name,
+  category, address and the number of other same-category businesses within 300 m. Turning the layer on
+  zooms to the markers. The Overview shows a per-block-group summary with attribution and the caveat that
+  OSM is volunteer-mapped and not a business registry. See
+  [docs/plans/storefront-layer.md](../docs/plans/storefront-layer.md).
+- Map performance: area shapes are built once and restyled in place, so selection, metric and opacity changes
+  cause no DOM churn even with the storefront markers on (covered by `tests/storefronts.spec.ts`).
+- The Overview ends with a **data coverage** card: the values the dataset has for the
+  selected area and what is not in it at all (complete verified competitor coverage, rent, foot traffic, revenue).
+- The selected area and tab are kept in the URL hash (`#area=<geo_id>&tab=<Tab>`), so a
+  view can be bookmarked or shared; the map's copy-link button copies it. Unknown values
+  are ignored. Layer and opacity are not in the URL.
+- The Data view has **Export all areas (CSV)**: one row per area and metric with its source,
+  date and URL. Text cells that could run as spreadsheet formulas are escaped. See
+  [docs/plans/transparency-and-sharing.md](../docs/plans/transparency-and-sharing.md).
 
 The app uses three panes on desktop, two panes with a layer drawer on tablet,
 and a bottom navigation bar for map/layers/insights on phones. Header search
@@ -51,6 +74,7 @@ The browser suite checks real map selection/evidence, opacity and metric
 controls, disabled placeholders, data export, answer history, sources-page navigation,
 wrapped questions and viewport bounds.
 It blocks map tiles to verify the committed polygons still render without them.
+The comparison tests also use mocked same-type areas to exercise insufficient-data and error cases.
 The optional `LIVE_GEMINI=1` test checks the existing backend API directly to
 complement the UI tests, which verify live count queries and mocked AI rendering.
 

@@ -46,3 +46,26 @@ with `python -m scripts.prepare_data`. The latter deterministically rebuilds
 areas, places and the source catalog without a network connection. App startup
 and map data do not require Census or Overpass availability; basemap tiles still
 require network access. Sources are inspectable at `/#sources`.
+
+## Storefronts (OpenStreetMap)
+
+Named shops and food, drink, bank and pharmacy amenities around the two original Fenton
+Village block groups (`240317025011` and `240317025021`), for the storefront layer and competitor context. See
+[docs/plans/storefront-layer.md](../docs/plans/storefront-layer.md).
+
+- Source: OpenStreetMap via the Overpass API. Data (c) OpenStreetMap contributors, ODbL 1.0.
+- Query, bounding box (block groups plus about 200 m), retrieval time and OSM data timestamp:
+  `raw/storefronts_source.json`. Original response: `raw/storefronts_overpass.json`.
+- Processed points: `processed/storefronts.geojson`. Each has `category`, an address when OSM
+  has one, and the `block_group_id` it falls inside (`null` when only nearby context).
+  Provenance, counts and limitations: `processed/storefronts_manifest.json`.
+- Rebuild offline from the cached response with `python -m scripts.prepare_storefronts`.
+  `--refresh` downloads a new snapshot first; review the resulting diff. Never download at startup.
+- Limits: volunteer-mapped, incomplete, possibly stale, inconsistently categorized, and not an
+  official business registry. Counts describe mapped features, not all businesses, and do not
+  correspond to the challenge brief's 240+ figure (different boundary and source).
+
+The storefront rebuild retains those two study groups even though the Census map now
+loads 80 block groups. Other groups have no storefront coverage in this snapshot,
+not a verified count of zero businesses. The food/drink snapshot above uses a separate
+600 m radius and retrieval date; the two snapshots should not be added together.

@@ -1,0 +1,15 @@
+{
+  "dataset": "OpenStreetMap via the Overpass API",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:60];\n(\n  nwr[\"shop\"](38.977873,-77.034341,38.997973,-77.018389);\n  nwr[\"amenity\"~\"^(restaurant|cafe|fast_food|bar|pub|pharmacy|bank|ice_cream|food_court)$\"](38.977873,-77.034341,38.997973,-77.018389);\n);\nout center tags;\n",
+  "bbox_south_west_north_east": [
+    38.977873,
+    -77.034341,
+    38.997973,
+    -77.018389
+  ],
+  "retrieved_at": "2026-09-19T07:33:29.894478+00:00",
+  "osm_data_timestamp": "2026-09-19T07:31:49Z",
+  "license": "ODbL 1.0",
+  "attribution": "(c) OpenStreetMap contributors"
+}

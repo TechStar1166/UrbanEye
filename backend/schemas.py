@@ -154,3 +154,26 @@ class SegmentResponse(Contract):
     sample_size: int
     explanation: str
     data_points: list[DataPoint]
+
+
+class Storefront(Contract):
+    osm_id: str = Field(min_length=1)
+    name: str = Field(min_length=1)
+    category_key: Literal["shop", "amenity"]
+    category: str = Field(min_length=1)
+    address: str | None
+    block_group_id: str | None
+    lon: float
+    lat: float
+
+
+class Storefronts(Contract):
+    """OpenStreetMap-mapped businesses. Volunteer-mapped: not a business registry."""
+    schema_version: Literal["1.0"] = "1.0"
+    source: str
+    license: str
+    attribution: str
+    retrieved_at: str
+    osm_data_timestamp: str | None
+    limitations: str
+    storefronts: list[Storefront]

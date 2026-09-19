@@ -79,6 +79,24 @@
         }
       }
     },
+    "/storefronts": {
+      "get": {
+        "summary": "Get Storefronts",
+        "operationId": "get_storefronts_storefronts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Storefronts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/layers": {
       "get": {
         "summary": "Get Layers",
@@ -806,6 +824,137 @@
           "data_points"
         ],
         "title": "SegmentResponse"
+      },
+      "Storefront": {
+        "properties": {
+          "osm_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Osm Id"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "category_key": {
+            "type": "string",
+            "enum": [
+              "shop",
+              "amenity"
+            ],
+            "title": "Category Key"
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Category"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address"
+          },
+          "block_group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Block Group Id"
+          },
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "osm_id",
+          "name",
+          "category_key",
+          "category",
+          "address",
+          "block_group_id",
+          "lon",
+          "lat"
+        ],
+        "title": "Storefront"
+      },
+      "Storefronts": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "retrieved_at": {
+            "type": "string",
+            "title": "Retrieved At"
+          },
+          "osm_data_timestamp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Osm Data Timestamp"
+          },
+          "limitations": {
+            "type": "string",
+            "title": "Limitations"
+          },
+          "storefronts": {
+            "items": {
+              "$ref": "#/components/schemas/Storefront"
+            },
+            "type": "array",
+            "title": "Storefronts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source",
+          "license",
+          "attribution",
+          "retrieved_at",
+          "osm_data_timestamp",
+          "limitations",
+          "storefronts"
+        ],
+        "title": "Storefronts",
+        "description": "OpenStreetMap-mapped businesses. Volunteer-mapped: not a business registry."
       },
       "ValidationError": {
         "properties": {

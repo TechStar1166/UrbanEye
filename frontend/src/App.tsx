@@ -1,10 +1,16 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { api, type Answer, type Area, type Areas, type Places } from './services/api';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { api, type Answer, type Area, type Areas, type Places, type Storefronts } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { MetricValue } from './evidence/MetricValue';
 import { colorScale, palettes } from './map/colors';
 import { SourcesPage } from './components/SourcesPage';
+import { StorefrontSummary } from './components/StorefrontSummary';
+import { ALL_GROUPS, GROUPS, groupOf, type GroupId } from './lib/storefronts';
+import { DataCoverage } from './components/DataCoverage';
+import { areasToCsv } from './lib/csv';
+import { readView, writeView } from './lib/urlState';
+import { SegmentationPanel } from './segmentation/SegmentationPanel';
 import { Icon } from './components/Icon';
 
 type Tab = 'Overview' | 'Who lives here' | 'Answer history' | 'Evidence';
@@ -35,7 +41,7 @@ export default function App() {
   const [opacity, setOpacity] = useState(75);
   const [income, setIncome] = useState(75);
   const [cohort, setCohort] = useState('25');
-  const [tab, setTab] = useState<Tab>('Overview');
+  const [tab, setTab] = useState<Tab>(() => readView().tab ?? 'Overview');
   const [pane, setPane] = useState<MobilePane>('map');
   const [view, setView] = useState<'map' | 'data'>('map');
   const [search, setSearch] = useState('');
@@ -48,6 +54,12 @@ export default function App() {
   const [queryError, setQueryError] = useState('');
   const queryVersion = useRef(0);
   const [resetKey, setResetKey] = useState(0);
+  const [storefronts, setStorefronts] = useState<Storefronts>();
+  const [storefrontsFailed, setStorefrontsFailed] = useState(false);
+  const [showStorefronts, setShowStorefronts] = useState(false);
+  const [groups, setGroups] = useState<GroupId[]>(ALL_GROUPS);
+  const [copied, setCopied] = useState('');
+  const [highlightIds, setHighlightIds] = useState<string[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
   const questionRef = useRef<HTMLInputElement>(null);
 
@@ -56,11 +68,11 @@ export default function App() {
     try {
       const data = await api.areas();
       setAreas(data);
-      setSelected(current => data.features.find(f => f.id === current?.geo_id)?.properties ?? data.features[0]?.properties);
+      setSelected(current => data.features.find(f => f.id === (current?.geo_id ?? readView().area))?.properties ?? data.features[0]?.properties);
     } catch { setError('Unable to load the map. Check the backend connection and try again.'); }
     finally { setLoading(false); }
   }
-  useEffect(() => { void load(); api.places().then(setPlaces).catch(() => setPlacesError(true)); }, []);
+  useEffect(() => { void load(); api.storefronts().then(setStorefronts).catch(() => setStorefrontsFailed(true)); api.places().then(setPlaces).catch(() => setPlacesError(true)); }, []);
   useEffect(() => { const update = () => setSourcesPage(location.hash === '#sources'); window.addEventListener('hashchange', update); return () => window.removeEventListener('hashchange', update); }, []);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -72,6 +84,8 @@ export default function App() {
   }, []);
 
 
+  useEffect(() => { if (selected && !sourcesPage && location.hash !== '#sources') writeView({ area: selected.geo_id, tab }); }, [selected?.geo_id, tab, sourcesPage]);
+
   const select = (id: string) => {
     queryVersion.current++;
     setAnswer(undefined); setBusy(false); setQueryError(''); setShowSuggestions(true); setCollapsed(false);
@@ -79,7 +93,7 @@ export default function App() {
     setSearch(''); setSearchOpen(false); setSubmitted(''); setTab('Overview');
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
-  const reset = () => { setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
+  const reset = () => { setShowStorefronts(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
   const ask = async (text = question) => {
     if (!text.trim() || !selected || busy) return;
     const version = ++queryVersion.current;
@@ -94,6 +108,8 @@ export default function App() {
       if (version === queryVersion.current) setBusy(false);
     }
   };
+  const visibleStorefronts = useMemo(() => showStorefronts && storefronts ? storefronts.storefronts.filter(item => groups.includes(groupOf(item))) : [], [showStorefronts, storefronts, groups]);
+  const toggleGroup = (id: GroupId) => setGroups(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
   const number = (key: string) => <MetricValue area={selected} metric={key} />;
   const scale = areas ? colorScale(areas, metric) : { min: 0, max: 0, n: 0 };
   const searchResults = areas?.features.filter(f => (areaName(f.properties) + ' ' + f.properties.name + ' ' + f.id).toLowerCase().includes(search.toLowerCase())) ?? [];
@@ -102,6 +118,17 @@ export default function App() {
     const url = URL.createObjectURL(new Blob([JSON.stringify(selected, null, 2)], { type: 'application/json' }));
     const a = document.createElement('a'); a.href = url; a.download = 'civiclens-' + selected.geo_id + '.json'; a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const exportCsv = () => {
+    if (!areas) return;
+    const url = URL.createObjectURL(new Blob([areasToCsv(areas)], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a'); a.href = url; a.download = 'civiclens-areas.csv'; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(location.href); setCopied('Link copied'); }
+    catch { setCopied('Copy failed; use the address bar'); }
+    setTimeout(() => setCopied(''), 2500);
   };
   if (sourcesPage) return <SourcesPage />;
   return <div className="civic-app">
@@ -130,6 +157,14 @@ export default function App() {
             <button className="secondary full-width" onClick={() => { setResetKey(k => k + 1); setPane('map'); setView('map'); }}>Zoom to Fenton Village</button>
             <p className="micro-note">{metric === 'population' ? 'The map shades each neighborhood by how many people live there.' : metric === 'housing_units' ? 'The map shades each neighborhood by how many homes it has.' : 'The map shows area boundaries.'}</p>
           </section>
+          <section className="control-section">
+            <SectionHeading detail="OpenStreetMap">Local businesses</SectionHeading>
+            <label className="layer-row"><input type="checkbox" checked={showStorefronts} onChange={e => setShowStorefronts(e.target.checked)} /><span>Storefront Locations</span><small>{storefronts?.storefronts.length ?? '…'} · OSM</small></label>
+            {showStorefronts && storefronts && <div className="group-chips" role="group" aria-label="Storefront categories">{GROUPS.map(group =>
+              <label key={group.id} className="group-chip"><input type="checkbox" checked={groups.includes(group.id)} onChange={() => toggleGroup(group.id)} />
+                <i style={{ background: group.color }} />{group.label}<small>{storefronts.storefronts.filter(item => groupOf(item) === group.id).length}</small></label>)}</div>}
+            <p className="micro-note">Named businesses near the two Fenton study areas. This snapshot has a different date and boundary from the orange food &amp; drink dots.</p>
+          </section>
           <details className="control-section upcoming-catalog"><summary>More map data · Coming next</summary>
 
             <p>Age, income, household size and housing tenure</p><p>Zoning and Purple Line alignment</p>
@@ -149,17 +184,19 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <div className="map-viewport">
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} answerGeoId={answer?.evidence.length ? selected?.geo_id : undefined} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} answerGeoId={answer?.evidence.length ? selected?.geo_id : undefined} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
-          <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>Area you’re viewing</small><strong>{areaName(selected)}</strong></span></div><button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div>
+          <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>Area you’re viewing</small><strong>{areaName(selected)}</strong></span></div><div className="map-actions"><button className="icon-button" aria-label="Copy link to this view" onClick={() => void copyLink()}><Icon name="external" /></button>{copied && <span role="status" className="micro-note">{copied}</span>}<button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div></div>
           <div className="map-legend"><span className="eyebrow">{metric ? (metric === 'population' ? 'Population' : 'Homes') : 'Boundaries only'}</span>
-            {metric && <><div className="choropleth-ramp">{palettes[metric].map(color => <i key={color} style={{ background: color }} />)}</div><div className="gradient-labels"><span>{scale.min.toLocaleString()}</span><span>{scale.max.toLocaleString()}</span></div><p>Darker = more {metric === 'population' ? 'people' : 'homes'}</p></>}
+            {metric && <><div className="choropleth-ramp">{palettes[metric].map(color => <i key={color} style={{ background: color }} />)}</div><div className="gradient-labels"><span>{scale.min.toLocaleString()}</span><span>{scale.max.toLocaleString()}</span></div><p>{scale.n >= 2 && scale.max > scale.min ? `Darker = more ${metric === 'population' ? 'people' : 'homes'} within block groups.` : 'Color identifies the layer; not a comparative scale.'}</p></>}
             <div><i className="legend-swatch selected" /><span>Selected area</span></div>
             <div><i className="fb-dot" /><span>{places ? places.count : '…'} food &amp; drink places</span></div><p>From OpenStreetMap, may not be complete. Within the dashed 600 m study area.</p>
+            {highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>High in both compared layers</span></div>}
+            {visibleStorefronts.length > 0 && <><p>OpenStreetMap-mapped storefronts</p>{GROUPS.filter(group => groups.includes(group.id)).map(group => <div key={group.id}><i className="legend-dot" style={{ background: group.color }} /><span>{group.label}</span></div>)}</>}
             {answer?.evidence.length ? <div><i className="answer-swatch" /><span>Area in this answer</span></div> : null}
           </div>
-        </div> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Homes</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{areaName(f.properties)}</button></td><td><MetricValue area={f.properties} metric="population" /></td><td><MetricValue area={f.properties} metric="housing_units" /></td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button></div>}
+        </div> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Homes</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{areaName(f.properties)}</button></td><td><MetricValue area={f.properties} metric="population" /></td><td><MetricValue area={f.properties} metric="housing_units" /></td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button><button className="secondary" disabled={!areas} onClick={exportCsv}><Icon name="download" />Export all areas (CSV)</button></div>}
         {view === 'map' && <div className={'query-dock' + (collapsed ? ' collapsed' : '')}><div className="query-toolbar">{answer && <button className="text-button" onClick={() => setCollapsed(value => !value)}>{collapsed ? 'Show answer' : 'Collapse answer'}</button>}</div><label className="query-heading" hidden={collapsed} htmlFor="community-question">Ask about this community</label>
           <div className="query-results" hidden={collapsed} aria-live="polite">
             {busy && <p role="status">Finding an answer…</p>}
@@ -191,9 +228,10 @@ export default function App() {
             <section className="insight-section"><SectionHeading detail="Coming next">Extended community profile</SectionHeading><p className="body-muted">Income, age distribution and housing tenure will appear when sourced datasets are connected.</p></section>
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>See the original <Icon name="arrow" /></button></blockquote><p className="micro-note">The plan covers a different area than the Census count.</p></section>
             <section className="insight-section"><SectionHeading>Where this comes from</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>People and homes in this area.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
+            {selected && <><StorefrontSummary area={selected} data={storefronts} failed={storefrontsFailed} shown={showStorefronts} onShow={() => setShowStorefronts(true)} /><DataCoverage area={selected} /></>}
           </>}
           {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Inspect the source behind each map metric.</p>{selected && <><details><summary>See details</summary><p>{selected.name} · {selected.geography_type.replaceAll('_', ' ')} · Geographic ID {selected.geo_id}</p><p>2020 Census TIGERweb: POP100 (people) and HU100 (housing units, occupied and vacant). These are decennial counts, not ACS sample estimates; a survey sampling margin of error does not apply. Counts can still have coverage and other errors. ACS estimates will show their published margins of error when added.</p><p>Map colors compare block groups using equal intervals; the larger CDP is neutral. Counts are not densities. Loaded areas: {areas?.features.length}. Age/income correlation: n = 0 paired areas; at least 3 comparable areas are required.</p></details><EvidenceList items={selected.evidence} /></>}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
-          {tab === 'Who lives here' && <section className="insight-section"><SectionHeading detail="Coming next">Compare two things</SectionHeading><div className="tab-hero"><Icon name="overlap" /><h3>Find the common ground.</h3><p>Explore how demographic and economic characteristics overlap across communities.</p></div><div className="criteria-card"><span>RESIDENTS</span><strong>Residents 50 and older above {cohort}%</strong><span>INCOME</span><strong>Household income below ${income},000</strong></div><p className="body-muted">Not enough data yet. Age and income data are coming next.</p><div className="info-note"><Icon name="info" /><span>This shows where two things appear together, not that one causes the other.</span></div></section>}
+          {tab === 'Who lives here' && <section className="insight-section"><SectionHeading detail="Census 2020">Compare two things</SectionHeading><p className="body-muted">Compare people and homes across whole Census areas. Age and income data are coming next.</p><div className="info-note"><Icon name="info" /><span>This shows where two things appear together, not that one causes the other.</span></div>{areas && <SegmentationPanel areas={areas} onHighlight={setHighlightIds} />}</section>}
           {tab === 'Answer history' && <section className="insight-section"><SectionHeading>Answer history</SectionHeading><p className="body-muted">This session only · {history.length} answers</p>{!history.length && <p>Ask a question on the map to start your history.</p>}{history.map((entry, i) => <article className="history-entry" key={i}><h3>{entry.question}</h3><p>{areaName(entry.area)}</p><p>{entry.answer.summary}</p><button className="secondary" onClick={() => { queryVersion.current++; setBusy(false); setSelected(entry.area); setAnswer(entry.answer); setSubmitted(entry.question); setQuestion(entry.question); setShowSuggestions(false); setCollapsed(false); setPane('map'); setView('map'); }}>Reopen answer &amp; sources</button></article>)}</section>}
 
         </div>
