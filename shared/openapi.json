@@ -562,6 +562,45 @@
           }
         }
       }
+    },
+    "/evaluate": {
+      "post": {
+        "summary": "Evaluate",
+        "description": "Business site evaluation: LLM-generated strengths/concerns grounded in public evidence.",
+        "operationId": "evaluate_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1339,6 +1378,165 @@
         ],
         "title": "DocumentScope",
         "description": "Reviewed contextual applicability; never a replacement for source geography."
+      },
+      "EvaluateFinding": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Text"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Evidence Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "evidence_ids"
+        ],
+        "title": "EvaluateFinding",
+        "description": "A single cited finding from the business-site evaluation."
+      },
+      "EvaluateRequest": {
+        "properties": {
+          "geo_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Geo Id"
+          },
+          "business_type": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "\\S",
+            "title": "Business Type",
+            "description": "Type of business being considered, e.g. 'coffee shop'."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "business_type"
+        ],
+        "title": "EvaluateRequest",
+        "description": "Business site evaluation request. business_type is a short user-supplied label."
+      },
+      "EvaluateResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "area_name": {
+            "type": "string",
+            "title": "Area Name"
+          },
+          "business_type": {
+            "type": "string",
+            "title": "Business Type"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "evaluated",
+              "insufficient_evidence",
+              "llm_unavailable"
+            ],
+            "title": "Mode"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "strengths": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluateFinding"
+            },
+            "type": "array",
+            "title": "Strengths"
+          },
+          "concerns": {
+            "items": {
+              "$ref": "#/components/schemas/EvaluateFinding"
+            },
+            "type": "array",
+            "title": "Concerns"
+          },
+          "customer_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Context"
+          },
+          "competition_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Competition Context"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "area_name",
+          "business_type",
+          "mode",
+          "summary",
+          "evidence_ids",
+          "evidence",
+          "limitations"
+        ],
+        "title": "EvaluateResponse",
+        "description": "LLM-powered business site brief. Every claim cites supplied evidence."
       },
       "Evidence": {
         "properties": {

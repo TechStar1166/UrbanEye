@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { api, type Answer, type Area, type Areas, type OverlayResponse, type Places, type Storefronts, type TransitResponse } from './services/api';
+import { api, type Answer, type Area, type Areas, type EvaluateResponse, type OverlayResponse, type Places, type Storefronts, type TransitResponse } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { formatMetric, MetricValue } from './evidence/MetricValue';
@@ -86,6 +86,10 @@ export default function App() {
   const [segmentHighlights, setSegmentHighlights] = useState<string[]>([]);
   const [overlapOn, setOverlapOn] = useState(false);
   const [businessOpen, setBusinessOpen] = useState(false);
+  const [businessType, setBusinessType] = useState('');
+  const [evalResult, setEvalResult] = useState<EvaluateResponse>();
+  const [evalBusy, setEvalBusy] = useState(false);
+  const [evalError, setEvalError] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
   const insightRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLInputElement>(null);
@@ -144,7 +148,7 @@ export default function App() {
     else { setAddressNote('That address is outside the Census coverage on this map, so no area was selected.'); setSearch(''); setSearchOpen(false); }
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
-  const reset = () => { setPin(undefined); setAddressNote(''); setShowStorefronts(false); setShowOverlay(false); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setResetKey(k => k + 1); };
+  const reset = () => { setPin(undefined); setAddressNote(''); setShowStorefronts(false); setShowOverlay(false); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setBusinessType(''); setEvalResult(undefined); setEvalBusy(false); setEvalError(''); setResetKey(k => k + 1); };
   const ask = async (text = question, regional = false) => {
     if (!text.trim() || !selected || busy) return;
     const version = ++queryVersion.current;
@@ -202,7 +206,20 @@ export default function App() {
   };
   const openBusiness = () => {
     setBusinessOpen(true); setShowStorefronts(true); setTab('Overview'); setPane('insights');
+    setEvalResult(undefined); setEvalBusy(false); setEvalError('');
     if (insightRef.current) insightRef.current.scrollTop = 0;
+  };
+  const runEvaluate = async () => {
+    if (!selected || !businessType.trim() || evalBusy) return;
+    setEvalBusy(true); setEvalResult(undefined); setEvalError('');
+    try {
+      const result = await api.evaluate(selected.geo_id, businessType.trim());
+      setEvalResult(result);
+    } catch {
+      setEvalError('Could not complete the evaluation. Please try again.');
+    } finally {
+      setEvalBusy(false);
+    }
   };
   if (sourcesPage) return <SourcesPage />;
   const nearby = selected && storefronts ? summarize(storefronts.storefronts, selected.geo_id) : undefined;
@@ -319,6 +336,23 @@ export default function App() {
               </div>
               {nearby && nearby.top.length > 0 && <p className="micro-note">Most common mapped categories: {nearby.top.map(([name, count]) => `${name} (${count})`).join(', ')}.</p>}
               <p className="micro-note">Whole published Census unit. Overlay proximity is not a count. Purple Line alignment is under construction.</p>
+              <div className="evaluate-form">
+                <label htmlFor="business-type-input" className="eyebrow">Business type</label>
+                <div className="evaluate-input-row">
+                  <input id="business-type-input" className="evaluate-input" placeholder="e.g. coffee shop, bookstore…" value={businessType} onChange={e => setBusinessType(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') void runEvaluate(); }} disabled={evalBusy} />
+                  <button className="primary" id="evaluate-submit-button" onClick={() => void runEvaluate()} disabled={!businessType.trim() || evalBusy}>{evalBusy ? 'Analysing…' : 'Evaluate site'}</button>
+                </div>
+              </div>
+              {evalError && <p role="alert" className="eval-error">{evalError}<button className="secondary" onClick={() => void runEvaluate()}>Try again</button></p>}
+              {evalResult && <div className="eval-result">
+                <p className="body-muted eval-summary">{evalResult.summary}</p>
+                {(evalResult.strengths?.length ?? 0) > 0 && <><h4 className="eval-heading">Strengths</h4><ul className="eval-list">{evalResult.strengths!.map((f, i) => <li key={i}>{f.text}</li>)}</ul></>
+}
+                {(evalResult.concerns?.length ?? 0) > 0 && <><h4 className="eval-heading">Concerns</h4><ul className="eval-list">{evalResult.concerns!.map((f, i) => <li key={i}>{f.text}</li>)}</ul></>}
+                {evalResult.customer_context && <p className="micro-note"><strong>Customer context:</strong> {evalResult.customer_context}</p>}
+                {evalResult.competition_context && <p className="micro-note"><strong>Competition context:</strong> {evalResult.competition_context}</p>}
+                <p className="micro-note eval-disclaimer">Not a professional recommendation. {evalResult.limitations[0]}</p>
+              </div>}
             </section>}
             <section className="insight-section"><SectionHeading detail="Census 2020">Census counts</SectionHeading><div className="metrics-grid"><MetricCard label="Population" value={number('population')} detail="Everyone in this area" note="Census" /><MetricCard label="Homes" value={number('housing_units')} detail="Occupied and vacant homes" tone="blue" /></div></section>
             <section className="insight-section"><SectionHeading detail="ACS 5-year 2020–2024">Community profile</SectionHeading>

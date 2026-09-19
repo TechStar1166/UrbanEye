@@ -355,3 +355,43 @@ class CommunityCatalog(Contract):
     years: list[int]
     geographies: list[CommunityGeography]
     businesses: int
+
+
+class EvaluateRequest(Contract):
+    """Business site evaluation request. business_type is a short user-supplied label."""
+    geo_id: str = Field(min_length=1)
+    business_type: str = Field(min_length=1, max_length=100, pattern=r"\S",
+                               description="Type of business being considered, e.g. 'coffee shop'.")
+
+
+class EvaluateFinding(Contract):
+    """A single cited finding from the business-site evaluation."""
+    text: str = Field(min_length=1, max_length=500, pattern=r"\S")
+    evidence_ids: list[str] = Field(min_length=1, max_length=10)
+
+
+class EvaluateResponse(Contract):
+    """LLM-powered business site brief. Every claim cites supplied evidence."""
+    schema_version: Literal["1.0"] = "1.0"
+    geo_id: str
+    area_name: str
+    business_type: str
+    mode: Literal["evaluated", "insufficient_evidence", "llm_unavailable"]
+    summary: str
+    strengths: list[EvaluateFinding] = Field(default_factory=list)
+    concerns: list[EvaluateFinding] = Field(default_factory=list)
+    customer_context: str | None = None
+    competition_context: str | None = None
+    evidence_ids: list[str]
+    evidence: list[Evidence]
+    limitations: list[str]
+
+    @model_validator(mode="after")
+    def citations_match_evidence(self):
+        if set(self.evidence_ids) != {e.evidence_id for e in self.evidence}:
+            raise ValueError("EvaluateResponse evidence_ids must match returned evidence")
+        cited = {eid for f in self.strengths + self.concerns for eid in f.evidence_ids}
+        if self.mode == "evaluated" and self.evidence_ids and not cited.issubset(set(self.evidence_ids)):
+            raise ValueError("EvaluateFinding must only cite returned evidence")
+        return self
+
