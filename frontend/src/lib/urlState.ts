@@ -1,11 +1,12 @@
-export const TABS = ['Overview', 'Who lives here', 'Answer history', 'Evidence'] as const;
+export const TABS = ['Overview', 'Compare areas', 'Answer history', 'Evidence'] as const;
 export type UrlTab = typeof TABS[number];
 
 // The view is shared as #area=<geo_id>&tab=<Tab>. Anything unrecognized is ignored by the caller.
 export function readView(): { area?: string; tab?: UrlTab } {
   try {
     const params = new URLSearchParams(location.hash.slice(1));
-    const tab = TABS.find(item => item === params.get('tab'));
+    const requested = params.get('tab') === 'Who lives here' ? 'Compare areas' : params.get('tab');
+    const tab = TABS.find(item => item === requested);
     return { area: params.get('area') || undefined, tab };
   } catch { return {}; }
 }

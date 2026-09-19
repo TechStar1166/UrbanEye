@@ -22,19 +22,18 @@ boundaries, selected-area state, and Census evidence are retained.
 - Age/income overlap criteria and business analysis are unavailable. No fabricated analytical answer or
   correlation result is presented as live output. The age/income comparison states
   Not enough data yet; technical sample-size details remain in Evidence.
-- The query form calls `/ask` with the selected geographic ID. The query dock replaces suggestions with answers and
+- The query form calls `/ask` with the selected geographic ID. The answer appears at the top of the right panel and
   displays loading/errors, deterministic facts, retrieved passages, and Gemini
-  claims with source chips and limitations. A magenta outline marks the queried
-  area, with a reminder that planning sources can have a different scope. Changing areas clears old answers.
-- Three wrapped suggestions run in one tap. Try another question restores them.
+  claims with source chips and limitations. A magenta outline marks the area a Census count covers; planning answers explicitly state their regional scope. Changing areas clears old answers.
+- Three wrapped suggestions run in one tap and remain below each answer.
   Address search is not available; place names and IDs remain searchable.
-- Answer history is held in memory for the current session. The answer bar can collapse.
-- The map opens at 38.99487, -77.02489, zoom 15 with Esri Light Gray. The labeled
+- Answer history is held in memory for the current session. The Answer history badge updates after each answer.
+- The map opens at 38.99487, -77.02489, zoom 16 with Esri Light Gray. The labeled
   pin marks Fenton Village; the dashed 600 m circle is a study radius, not an official boundary.
 - `/places` supplies 90 cached OSM objects; `/sources` supplies the provenance catalog
   rendered at `/#sources`, including download timestamps, links, uses and limitations.
 
-- The Who lives here tab also has a live **Compare two Census layers** panel. It calls
+- The Compare areas tab also has a live **Compare two Census layers** panel. It calls
   `/segment` and shows the correlation, sample size, association-only note and
   per-area values. Only areas of the same geography type are compared (a CDP is never
   compared with block groups), and at least 3 are required; otherwise the panel
@@ -82,3 +81,19 @@ Fonts use Google Fonts with local sans-serif/monospace fallbacks. All interface
 icons are local SVG components; there is no Tailwind CDN or remote script dependency.
 
 Count source verification: [TIGERweb Census 2020 places](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28) and [block groups](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8) expose POP100 and HU100. [ACS sampling guidance](https://www.census.gov/programs-surveys/acs/methodology/sample-size-and-data-quality/sample-size-definitions.html) describes margins of error for sample estimates. Official counts can still have [coverage error](https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html). Future ACS estimates should show their published uncertainty, such as “Estimate, could be off by about ±X.”
+
+## Answer experience
+
+Questions occupy their own row below the map; answers never overlay its polygons.
+On phones, submitting opens Insights, with a Back to the map button. Census answers
+show a prominent count, a whole-area scope caveat, the exact TIGERweb field and
+geographic ID, and the source manifest's retrieval date. The source chip opens the
+original Census record filtered to that ID. Input clears on submission and the
+three follow-up buttons stay directly below the answer. The map fits the count's
+geography automatically; the legend sits opposite the zoom controls.
+
+The Silver Spring plan suggestion explicitly requests regional planning context
+using the existing CDP retrieval scope, while retaining the selected block group.
+It never treats the plan boundary as the block group's boundary. Evidence combines
+unique cited records from the selected area and its answer history, counting repeat
+citations once. Historical Who lives here share links open Compare areas.

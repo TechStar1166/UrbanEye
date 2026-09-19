@@ -449,3 +449,46 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 .segmentation .stat { margin: 10px 0 4px; }
 .segmentation table { width: 100%; border-collapse: collapse; font-size: 11px; }
 .segmentation th, .segmentation td { text-align: left; padding: 5px 6px; border-bottom: 1px solid #c9d6cd; }
+
+/* Keep questions in layout flow and answers alongside the map. */
+.map-workspace { display: flex; flex-direction: column; }
+.map-viewport { flex: 1; min-height: 180px; height: auto; }
+.map-workspace > .query-dock { position: static; transform: none; width: auto; max-width: none; max-height: none; flex: 0 0 auto; padding: 12px 16px; border: 0; border-top: 1px solid #c9d6cd; border-radius: 0; box-shadow: none; }
+.query-dock .query-heading { font-size: 15px; margin-bottom: 8px; }
+.query-dock form { flex-wrap: nowrap; }
+.query-dock form input { flex-basis: auto; }
+.query-dock .suggestions { gap: 4px; margin-bottom: 8px; }
+.query-dock .suggestions button { padding: 6px 9px; font-size: 13px; }
+.map-legend { top: auto; right: auto; bottom: 30px; left: 12px; width: 165px; max-height: 42%; overflow-y: auto; }
+.leaflet-top.leaflet-right { top: 75px; right: 5px; }
+.insights-panel .insight-content { flex: 1; min-height: 0; }
+.insight-tabs { flex-wrap: wrap; }
+.insight-tabs button { white-space: normal; min-width: 65px; }
+.answer-panel { background: #f6faf7; border-bottom: 2px solid #9abbab; }
+.answer-panel .user-question { margin: 0 0 14px; font-size: 14px; }
+.answer-panel .research-response { padding: 0; background: transparent; border: 0; }
+.answer-number { display: block; font: 700 clamp(40px, 4vw, 58px)/1.1 var(--heading); letter-spacing: -2px; color: #07533b; margin: 10px 0; }
+.answer-sentence { font-size: 17px; line-height: 1.5; margin: 0 0 12px; }
+.answer-scope { font-size: 14px; line-height: 1.55; padding: 10px 12px; border-left: 3px solid #8ca79a; background: #eaf1ec; margin: 12px 0; }
+.answer-source { min-width: 0; width: 100%; }
+.source-record { font-size: 12px; line-height: 1.5; color: #445d4e; overflow-wrap: anywhere; margin-top: 6px; }
+.answer-panel blockquote { border-left: 3px solid #9abbab; padding-left: 12px; margin: 12px 0; }
+.followup-heading { font-size: 14px; margin: 18px 0 8px; }
+.answer-panel .suggestions { display: grid; gap: 8px; border: 0; padding: 0; margin: 0; overflow: visible; }
+.answer-panel .suggestions button { display: flex; justify-content: space-between; align-items: center; gap: 8px; white-space: normal; text-align: left; font-size: 14px; line-height: 1.4; padding: 10px 12px; background: white; color: #164b33; border-color: #a3b9ab; }
+.answer-panel .suggestions .icon { flex-shrink: 0; }
+.answer-map-button { display: none; margin-top: 12px; }
+.application-footer { padding-top: 8px; }
+.application-card p { display: none; }
+@media (max-width: 760px) {
+  .map-workspace > .query-dock { padding: 8px 12px; }
+  .query-dock .query-heading { display: block; font-size: 14px; }
+  .map-legend { top: auto; bottom: 24px; left: 10px; right: auto; width: 150px; max-height: 35%; }
+  .answer-map-button { display: flex; }
+  .answer-number { font-size: 48px; }
+}
+
+.answer-panel .research-response p { font-size: 14px; line-height: 1.5; color: #284536; }
+.answer-panel .research-response .answer-sentence { font-size: 17px; margin: 8px 0 12px; }
+.answer-panel .research-response .source-record { font-size: 12px; line-height: 1.4; margin: 6px 0; }
+.answer-panel .research-response .count-outline-note { font-size: 12px; }

@@ -80,18 +80,18 @@ test('Data view and export remain functional', async ({ page }) => {
   expect((await download).suggestedFilename()).toBe('civiclens-2472450.json');
 });
 
-test('answer history restores sources and the bar can collapse', async ({ page }) => {
+test('answer history restores sources in the right panel with an empty input', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'How many homes are there?' }).click();
-  await expect(page.locator('.research-response')).toContainText('35,150');
-  await page.getByRole('button', { name: 'Collapse answer' }).click();
-  await expect(page.locator('.query-results')).toBeHidden();
-  expect((await page.locator('.query-dock').boundingBox())!.height).toBeLessThan(80);
-  await page.getByRole('tab', { name: 'Answer history' }).click();
+  await expect(page.locator('.answer-panel .research-response')).toContainText('35,150');
+  await expect(page.getByLabel('Ask about this area')).toHaveValue('');
+  await expect(page.getByRole('button', { name: 'Ask', exact: true })).toBeDisabled();
+  await page.getByRole('tab', { name: /Answer history/ }).click();
   await expect(page.locator('.history-entry')).toHaveCount(1);
   await page.getByRole('button', { name: 'Reopen answer & sources' }).click();
   await expect(page.locator('.research-response')).toContainText('35,150');
   await expect(page.locator('.source-chips')).toContainText('Census');
+  await expect(page.getByLabel('Ask about this area')).toHaveValue('');
 });
 
 for (const width of [1440, 390, 320]) {
@@ -107,8 +107,6 @@ for (const width of [1440, 390, 320]) {
     expect(legend.x + legend.width).toBeLessThanOrEqual(viewport.x + viewport.width);
     await suggestions.getByRole('button', { name: 'How many homes are there?' }).click();
     await expect(page.locator('.research-response')).toContainText('35,150');
-    await expect(suggestions).toHaveCount(0);
-    await page.getByRole('button', { name: 'Try another question' }).click();
     await expect(suggestions.getByRole('button')).toHaveCount(3);
     await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
     await expect(page).toHaveURL(/#sources$/);

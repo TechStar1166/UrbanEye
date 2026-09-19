@@ -282,6 +282,8 @@ export interface components {
             url: string;
             /** Date */
             date: string;
+            /** Retrieved At */
+            retrieved_at?: string | null;
             /** Geo Id */
             geo_id: string;
             /** Metric */

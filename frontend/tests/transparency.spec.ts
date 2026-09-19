@@ -80,7 +80,7 @@ test('the Overview states what the dataset cannot tell you', async ({ page }) =>
 });
 
 
-for (const tab of ['Who lives here', 'Answer history']) {
+for (const tab of ['Compare areas', 'Answer history']) {
   test(`sharing restores ${tab} and sources navigation preserves the selected view`, async ({ page }) => {
     await page.goto('/#area=240317025011&tab=' + encodeURIComponent(tab));
     await expect(page.getByRole('tab', { name: tab })).toHaveAttribute('aria-selected', 'true');

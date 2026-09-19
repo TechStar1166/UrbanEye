@@ -23,6 +23,6 @@ export async function mockAreas(page: Page, count: number, options: { cdp?: bool
 
 export async function openSegmentation(page: Page) {
   await page.goto('/');
-  await page.getByRole('tab', { name: 'Who lives here' }).click();
+  await page.getByRole('tab', { name: 'Compare areas' }).click();
   return page.getByRole('region', { name: 'Segmentation' });
 }

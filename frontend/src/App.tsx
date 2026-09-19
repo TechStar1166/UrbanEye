@@ -4,6 +4,7 @@ import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { MetricValue } from './evidence/MetricValue';
 import { colorScale, palettes } from './map/colors';
+import { AnswerCard } from './components/AnswerCard';
 import { SourcesPage } from './components/SourcesPage';
 import { StorefrontSummary } from './components/StorefrontSummary';
 import { ALL_GROUPS, GROUPS, groupOf, type GroupId } from './lib/storefronts';
@@ -13,9 +14,9 @@ import { readView, writeView } from './lib/urlState';
 import { SegmentationPanel } from './segmentation/SegmentationPanel';
 import { Icon } from './components/Icon';
 
-type Tab = 'Overview' | 'Who lives here' | 'Answer history' | 'Evidence';
+type Tab = 'Overview' | 'Compare areas' | 'Answer history' | 'Evidence';
 type MobilePane = 'layers' | 'map' | 'insights';
-const prompts = ['How many people live here?', 'How many homes are there?', 'What does the plan say about affordable housing?'];
+const prompts = ['How many people live here?', 'How many homes are there?', 'What does the Silver Spring plan say about affordable housing?'];
 const areaName = (area?: Area) => !area ? 'Choose an area' : area.geography_type === 'census_designated_place' ? 'Silver Spring area' : area.geo_id === '240317025011' ? 'Fenton study area A' : area.geo_id === '240317025021' ? 'Fenton study area B' : area.name;
 const planUrl = 'https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=104';
 
@@ -31,8 +32,7 @@ export default function App() {
   const [sourcesPage, setSourcesPage] = useState(location.hash === '#sources');
   const [places, setPlaces] = useState<Places>();
   const [placesError, setPlacesError] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
-  const [history, setHistory] = useState<{ area: Area; question: string; answer: Answer }[]>([]);
+  const [history, setHistory] = useState<{ area: Area; question: string; answer: Answer; regional: boolean }[]>([]);
   const [areas, setAreas] = useState<Areas>();
   const [selected, setSelected] = useState<Area>();
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ export default function App() {
   const [question, setQuestion] = useState('');
   const [submitted, setSubmitted] = useState('');
   const [answer, setAnswer] = useState<Answer>();
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [answerRegional, setAnswerRegional] = useState(false);
   const [busy, setBusy] = useState(false);
   const [queryError, setQueryError] = useState('');
   const queryVersion = useRef(0);
@@ -61,6 +61,7 @@ export default function App() {
   const [copied, setCopied] = useState('');
   const [highlightIds, setHighlightIds] = useState<string[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
+  const insightRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLInputElement>(null);
 
   async function load() {
@@ -88,26 +89,34 @@ export default function App() {
 
   const select = (id: string) => {
     queryVersion.current++;
-    setAnswer(undefined); setBusy(false); setQueryError(''); setShowSuggestions(true); setCollapsed(false);
+    setAnswer(undefined); setBusy(false); setQueryError(''); setAnswerRegional(false); setQuestion('');
     setSelected(areas?.features.find(f => f.id === id)?.properties);
     setSearch(''); setSearchOpen(false); setSubmitted(''); setTab('Overview');
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
   const reset = () => { setShowStorefronts(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
-  const ask = async (text = question) => {
+  const ask = async (text = question, regional = false) => {
     if (!text.trim() || !selected || busy) return;
     const version = ++queryVersion.current;
-    setCollapsed(false); setQuestion(text); setSubmitted(text.trim()); setShowSuggestions(false); setPane('map'); setView('map');
+    setSubmitted(text.trim()); setQuestion(''); setAnswerRegional(regional); setPane('insights'); setView('map'); setTab('Overview');
+    if (insightRef.current) insightRef.current.scrollTop = 0;
     setBusy(true); setAnswer(undefined); setQueryError('');
     try {
-      const result = await api.ask(selected.geo_id, text.trim());
-      if (version === queryVersion.current) { setAnswer(result); setHistory(previous => [{ area: selected, question: text.trim(), answer: result }, ...previous].slice(0, 20)); }
+      const result = await api.ask(regional ? '2472450' : selected.geo_id, text.trim());
+      if (version === queryVersion.current) { setAnswer(result); setQuestion(''); setHistory(previous => [{ area: selected, question: text.trim(), answer: result, regional }, ...previous].slice(0, 20)); }
     } catch {
       if (version === queryVersion.current) setQueryError('Unable to answer this question. Please try again.');
     } finally {
       if (version === queryVersion.current) setBusy(false);
     }
   };
+  const evidence = useMemo(() => [...new Map([
+    ...(selected?.evidence ?? []),
+    ...history.filter(entry => entry.area.geo_id === selected?.geo_id).flatMap(entry => entry.answer.evidence),
+    ...(answer?.evidence ?? []),
+  ].map(item => [item.evidence_id, item])).values()], [selected, history, answer]);
+  const evidenceCount = evidence.length + (evidence.some(item => item.type === 'document') ? 0 : 1);
+  const suggestions = <div className="suggestions" aria-label="Suggested questions">{prompts.map((prompt, i) => <button key={prompt} disabled={!selected || busy || (i === 2 && !areas?.features.some(f => f.id === '2472450'))} onClick={() => void ask(prompt, i === 2)}>{prompt}<Icon name="arrow" /></button>)}</div>;
   const visibleStorefronts = useMemo(() => showStorefronts && storefronts ? storefronts.storefronts.filter(item => groups.includes(groupOf(item))) : [], [showStorefronts, storefronts, groups]);
   const toggleGroup = (id: GroupId) => setGroups(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
   const number = (key: string) => <MetricValue area={selected} metric={key} />;
@@ -184,7 +193,7 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <div className="map-viewport">
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} answerGeoId={answer?.evidence.length ? selected?.geo_id : undefined} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} answerGeoId={answer?.mode === 'facts' && answer.evidence.length ? selected?.geo_id : undefined} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>Area you’re viewing</small><strong>{areaName(selected)}</strong></span></div><div className="map-actions"><button className="icon-button" aria-label="Copy link to this view" onClick={() => void copyLink()}><Icon name="external" /></button>{copied && <span role="status" className="micro-note">{copied}</span>}<button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div></div>
@@ -194,48 +203,42 @@ export default function App() {
             <div><i className="fb-dot" /><span>{places ? places.count : '…'} food &amp; drink places</span></div><p>From OpenStreetMap, may not be complete. Within the dashed 600 m study area.</p>
             {highlightIds.length > 0 && <div><i className="legend-swatch highlight" /><span>High in both compared layers</span></div>}
             {visibleStorefronts.length > 0 && <><p>OpenStreetMap-mapped storefronts</p>{GROUPS.filter(group => groups.includes(group.id)).map(group => <div key={group.id}><i className="legend-dot" style={{ background: group.color }} /><span>{group.label}</span></div>)}</>}
-            {answer?.evidence.length ? <div><i className="answer-swatch" /><span>Area in this answer</span></div> : null}
+            {answer?.mode === 'facts' && answer.evidence.length ? <div><i className="answer-swatch" /><span>Area in this answer</span></div> : null}
           </div>
         </div> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Homes</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{areaName(f.properties)}</button></td><td><MetricValue area={f.properties} metric="population" /></td><td><MetricValue area={f.properties} metric="housing_units" /></td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button><button className="secondary" disabled={!areas} onClick={exportCsv}><Icon name="download" />Export all areas (CSV)</button></div>}
-        {view === 'map' && <div className={'query-dock' + (collapsed ? ' collapsed' : '')}><div className="query-toolbar">{answer && <button className="text-button" onClick={() => setCollapsed(value => !value)}>{collapsed ? 'Show answer' : 'Collapse answer'}</button>}</div><label className="query-heading" hidden={collapsed} htmlFor="community-question">Ask about this community</label>
-          <div className="query-results" hidden={collapsed} aria-live="polite">
-            {busy && <p role="status">Finding an answer…</p>}
-            {queryError && <p role="alert">{queryError}</p>}
-            {!showSuggestions && submitted && <div className="user-question">{submitted}</div>}
-            {answer && <section className="research-response" aria-label="Answer" aria-live="polite">
-              <h3>{answer.mode === 'llm' ? 'AI explanation' : answer.mode === 'facts' ? 'Official count' : answer.mode === 'retrieval' ? 'From the plan' : 'Available evidence'}</h3>
-              {answer.mode === 'llm' && answer.claims?.length ? answer.claims.map((claim, i) => <div key={i}><p>{claim.text}</p><small>Sources: {claim.evidence_ids.map((id, j) => <span key={id}>{j > 0 && ', '}<a className="source-chip" href={answer.evidence.find(item => item.evidence_id === id)?.url} target="_blank" rel="noreferrer" title={answer.evidence.find(item => item.evidence_id === id)?.title}>{answer.evidence_ids.indexOf(id) + 1}</a></span>)}</small></div>) : <p className="answer">{answer.mode === 'facts' && answer.evidence[0]?.value != null ? `${areaName(selected)}: ${answer.evidence[0].value.toLocaleString()} ${answer.evidence[0].metric === 'housing_units' ? 'homes (occupied and vacant)' : 'people'}. Official 2020 count.` : answer.summary}</p>}
-              <div className="source-chips">{answer.evidence.map(item => <a className="source-chip" key={item.evidence_id} href={item.url} target="_blank" rel="noreferrer" title={item.title}>{item.source.includes('Census') ? 'U.S. Census' : item.source} · {item.date.slice(0, 4)}{item.page ? ` · p. ${item.page_label ?? item.page}` : ''}</a>)}</div>
-              {answer.evidence.length > 0 && <button className="secondary full-width" onClick={() => { setView('map'); setPane('map'); setResetKey(k => k + 1); }}>Show answer area on map</button>}
-              <p className="micro-note">The outline shows the area you asked about. The plan may cover a wider area.</p>
-              {answer.mode === 'retrieval' && answer.evidence.filter(item => item.excerpt).map(item => <blockquote key={item.evidence_id}>{item.excerpt}</blockquote>)}<details className="answer-details"><summary>See details</summary><EvidenceList items={answer.evidence} />
-              {answer.limitations?.length > 0 && <ul className="limitations">{answer.limitations.map(item => <li key={item}>{item}</li>)}</ul>}
-              </details>
-            </section>}
-            {showSuggestions ? <div className="suggestions" aria-label="Suggested questions">{prompts.filter(prompt => !prompt.includes('plan') || selected?.geo_id === '2472450').map(prompt => <button key={prompt} disabled={!selected || busy} onClick={() => void ask(prompt)}>{prompt}<Icon name="arrow" /></button>)}</div> : null}
-          </div>
-          {!collapsed && !showSuggestions && !busy && <button className="text-button try-another" onClick={() => { setShowSuggestions(true); setAnswer(undefined); setSubmitted(''); setQueryError(''); setQuestion(''); }}>Try another question</button>}
-          <form hidden={collapsed} onSubmit={event => { event.preventDefault(); void ask(); }}><span className="query-symbol"><Icon name="sparkles" /></span><input id="community-question" ref={questionRef} aria-label="Ask about this area" value={question} onChange={e => setQuestion(e.target.value)} placeholder="Or type your own question…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Ask'}<Icon name="arrow" /></button></form><span className="query-preview" hidden={collapsed}>Answers come with their sources.</span>
+        {view === 'map' && <div className="query-dock">
+          {!submitted && <><label className="query-heading" htmlFor="community-question">Ask about this community</label>{suggestions}</>}
+          {submitted && <button className="text-button" onClick={() => openTab('Overview')}>{busy ? 'Finding your answer…' : 'View answer & sources'}<Icon name="arrow" /></button>}
+          <form onSubmit={event => { event.preventDefault(); void ask(); }}><span className="query-symbol"><Icon name="sparkles" /></span><input id="community-question" ref={questionRef} aria-label="Ask about this area" disabled={busy} value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask another question…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Ask'}<Icon name="arrow" /></button></form>
         </div>}
+
       </section>
 
       <aside className="insights-panel" aria-label="Area facts and evidence">
         <div className="insight-heading"><div><Icon name="pin" /><h2>{areaName(selected)}</h2><span className="tag">Selected</span></div><p>{selected?.geography_type === 'census_designated_place' ? 'Whole Silver Spring Census area · not Fenton Village alone' : 'Whole Census block group · not the Fenton district total'} · <button className="text-button" onClick={() => openTab('Evidence')}>See details</button></p></div>
-        <div className="insight-tabs" role="tablist" aria-label="Community insights">{(['Overview', 'Who lives here', 'Answer history', 'Evidence'] as Tab[]).map(item => <button role="tab" aria-selected={tab === item} aria-controls="insight-content" id={'tab-' + item.replaceAll(' ', '-')} key={item} onClick={() => setTab(item)}>{item}{item === 'Evidence' && <span className="count-badge">{(selected?.evidence.length ?? 0) + 1}</span>}</button>)}</div>
-        <div className="panel-scroll insight-content" id="insight-content" role="tabpanel" aria-labelledby={'tab-' + tab.replaceAll(' ', '-')}>
+        <div className="insight-tabs" role="tablist" aria-label="Community insights">{(['Overview', 'Compare areas', 'Answer history', 'Evidence'] as Tab[]).map(item => <button role="tab" aria-selected={tab === item} aria-controls="insight-content" id={'tab-' + item.replaceAll(' ', '-')} key={item} onClick={() => setTab(item)}>{item}{item === 'Answer history' && history.length > 0 && <span className="count-badge">{history.length}</span>}{item === 'Evidence' && <span className="count-badge">{evidenceCount}</span>}</button>)}</div>
+        <div ref={insightRef} className="panel-scroll insight-content" id="insight-content" role="tabpanel" aria-labelledby={'tab-' + tab.replaceAll(' ', '-')}>
           {tab === 'Overview' && <>
+            {submitted && <section className="insight-section answer-panel" aria-label="Current answer">
+              <p className="user-question">{submitted}</p>
+              {busy && <p role="status">Finding an answer…</p>}
+              {queryError && <p role="alert">{queryError}<button className="secondary" onClick={() => void ask(submitted, answerRegional)}>Try again</button></p>}
+              {answer && selected && <AnswerCard answer={answer} area={selected} regional={answerRegional} />}
+              {!busy && <><h3 className="followup-heading">Keep exploring</h3>{suggestions}</>}
+              {answer && <button className="secondary full-width answer-map-button" onClick={() => setPane('map')}>Back to the map<Icon name="map" /></button>}
+            </section>}
             <section className="insight-section"><SectionHeading detail="Census 2020">Census counts</SectionHeading><div className="metrics-grid"><MetricCard label="Population" value={number('population')} detail="Everyone in this area" note="Census" /><MetricCard label="Homes" value={number('housing_units')} detail="Occupied and vacant homes" tone="blue" /></div></section>
             <section className="insight-section"><SectionHeading detail="Coming next">Extended community profile</SectionHeading><p className="body-muted">Income, age distribution and housing tenure will appear when sourced datasets are connected.</p></section>
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>See the original <Icon name="arrow" /></button></blockquote><p className="micro-note">The plan covers a different area than the Census count.</p></section>
             <section className="insight-section"><SectionHeading>Where this comes from</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>People and homes in this area.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
             {selected && <><StorefrontSummary area={selected} data={storefronts} failed={storefrontsFailed} shown={showStorefronts} onShow={() => setShowStorefronts(true)} /><DataCoverage area={selected} /></>}
           </>}
-          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Inspect the source behind each map metric.</p>{selected && <><details><summary>See details</summary><p>{selected.name} · {selected.geography_type.replaceAll('_', ' ')} · Geographic ID {selected.geo_id}</p><p>2020 Census TIGERweb: POP100 (people) and HU100 (housing units, occupied and vacant). These are decennial counts, not ACS sample estimates; a survey sampling margin of error does not apply. Counts can still have coverage and other errors. ACS estimates will show their published margins of error when added.</p><p>Map colors compare block groups using equal intervals; the larger CDP is neutral. Counts are not densities. Loaded areas: {areas?.features.length}. Age/income correlation: n = 0 paired areas; at least 3 comparable areas are required.</p></details><EvidenceList items={selected.evidence} /></>}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
-          {tab === 'Who lives here' && <section className="insight-section"><SectionHeading detail="Census 2020">Compare two things</SectionHeading><p className="body-muted">Compare people and homes across whole Census areas. Age and income data are coming next.</p><div className="info-note"><Icon name="info" /><span>This shows where two things appear together, not that one causes the other.</span></div>{areas && <SegmentationPanel areas={areas} onHighlight={setHighlightIds} />}</section>}
-          {tab === 'Answer history' && <section className="insight-section"><SectionHeading>Answer history</SectionHeading><p className="body-muted">This session only · {history.length} answers</p>{!history.length && <p>Ask a question on the map to start your history.</p>}{history.map((entry, i) => <article className="history-entry" key={i}><h3>{entry.question}</h3><p>{areaName(entry.area)}</p><p>{entry.answer.summary}</p><button className="secondary" onClick={() => { queryVersion.current++; setBusy(false); setSelected(entry.area); setAnswer(entry.answer); setSubmitted(entry.question); setQuestion(entry.question); setShowSuggestions(false); setCollapsed(false); setPane('map'); setView('map'); }}>Reopen answer &amp; sources</button></article>)}</section>}
+          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Sources for this area and its answers. Repeated citations are counted once.</p>{selected && <><details><summary>See details</summary><p>{selected.name} · {selected.geography_type.replaceAll('_', ' ')} · Geographic ID {selected.geo_id}</p><p>2020 Census TIGERweb: POP100 (people) and HU100 (housing units, occupied and vacant). These are decennial counts, not ACS sample estimates; a survey sampling margin of error does not apply. Counts can still have coverage and other errors. ACS estimates will show their published margins of error when added.</p><p>Map colors compare block groups using equal intervals; the larger CDP is neutral. Counts are not densities. Loaded areas: {areas?.features.length}. Age/income correlation: n = 0 paired areas; at least 3 comparable areas are required.</p></details><EvidenceList items={evidence} /></>}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
+          {tab === 'Compare areas' && <section className="insight-section"><SectionHeading detail="Census 2020">Compare two things</SectionHeading><p className="body-muted">Compare people and homes across whole Census areas. Age and income data are coming next.</p><div className="info-note"><Icon name="info" /><span>This shows where two things appear together, not that one causes the other.</span></div>{areas && <SegmentationPanel areas={areas} onHighlight={setHighlightIds} />}</section>}
+          {tab === 'Answer history' && <section className="insight-section"><SectionHeading>Answer history</SectionHeading><p className="body-muted">This session only · {history.length} answers</p>{!history.length && <p>Ask a question on the map to start your history.</p>}{history.map((entry, i) => <article className="history-entry" key={i}><h3>{entry.question}</h3><p>{areaName(entry.area)}</p><p>{entry.answer.summary}</p><button className="secondary" onClick={() => { queryVersion.current++; setBusy(false); setSelected(entry.area); setAnswer(entry.answer); setSubmitted(entry.question); setQuestion(''); setQueryError(''); setAnswerRegional(entry.regional); setTab('Overview'); setPane('insights'); if (insightRef.current) insightRef.current.scrollTop = 0; setView('map'); }}>Reopen answer &amp; sources</button></article>)}</section>}
 
-        </div>
         <footer className="application-footer"><div className="application-card"><div className="application-label"><span><Icon name="store" />Business planning tool</span><Preview /></div><h3>Plan a local business</h3><p>Explore commercial site viability with community context and neighborhood evidence.</p><button className="primary full-width" disabled>Is this a good spot for a business?<Icon name="arrow" /></button></div></footer>
+        </div>
       </aside>
     </main>
     <nav className="mobile-nav" aria-label="Workspace panels">{([['layers','layers','Layers'],['map','map','Map'],['insights','chart','Insights']] as const).map(([key,icon,label]) => <button key={key} aria-pressed={pane === key} onClick={() => setPane(key)}><Icon name={icon} />{label}</button>)}</nav>

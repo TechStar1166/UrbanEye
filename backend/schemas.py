@@ -23,6 +23,7 @@ class Evidence(Contract):
     source: str
     url: HttpUrl
     date: str
+    retrieved_at: str | None = None
     geo_id: str
     metric: str | None = None
     value: float | None = None

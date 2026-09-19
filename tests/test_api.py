@@ -129,3 +129,15 @@ def test_expanded_census_coverage_preserves_snapshot_and_place_provenance():
     sources = client.get('/sources').json()
     assert len(sources) == 6
     assert all(s['pulled'] for s in sources[:4])
+
+
+def test_census_answers_keep_the_actual_snapshot_retrieval_date():
+    manifests = {
+        "2472450": ("source.json", "retrieved_at"),
+        "240317025021": ("silver_spring_blockgroups_source.json", "downloaded_at"),
+    }
+    for geo_id, (filename, field) in manifests.items():
+        source = json.loads((ROOT / "data/raw" / filename).read_text())
+        result = client.post("/ask", json={"geo_id": geo_id, "question": "How many people live here?"}).json()
+        assert result["evidence"][0]["retrieved_at"] == source[field]
+        assert result["evidence"][0]["date"] == "2020-04-01"

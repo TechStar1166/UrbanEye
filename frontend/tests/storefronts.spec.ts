@@ -136,7 +136,8 @@ test('turning storefronts on zooms the map so the markers are spread out and vis
     const span = (values: number[]) => Math.max(...values) - Math.min(...values);
     return Math.max(span(boxes.map(box => box.x)), span(boxes.map(box => box.y)));
   });
-  expect(spread).toBeGreaterThan(300); // px; a clump at the default zoom is well under 100
+  const mapBounds = (await page.locator('.map').boundingBox())!;
+  expect(spread).toBeGreaterThan(Math.min(mapBounds.width, mapBounds.height) * 0.45); // Spread relative to the unobscured map viewport.
 });
 
 test('changing a category filter does not re-zoom the map', async ({ page }) => {

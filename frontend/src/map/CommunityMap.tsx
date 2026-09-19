@@ -56,7 +56,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   style.current = styleFor;
 
   useEffect(() => {
-    const instance = L.map(container.current!, { zoomControl: false }).setView([38.99487, -77.02489], 15);
+    const instance = L.map(container.current!, { zoomControl: false }).setView([38.99487, -77.02489], 16);
     map.current = instance;
     L.control.zoom({ position: 'topright' }).addTo(instance);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(instance);
@@ -105,12 +105,21 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   // Selection, metric and opacity only restyle the existing shapes.
   useEffect(() => { polygons.current?.setStyle(feature => style.current(feature as StyleFeature)); }, [metric, selectedId, opacity, areas, highlightIds, answerGeoId]);
 
+  // Answers live beside the map; bring the whole count geography into view when it changes.
+  useEffect(() => {
+    if (!answerGeoId || !map.current) return;
+    const feature = areas.features.find(item => item.id === answerGeoId);
+    if (!feature) return;
+    const bounds = L.geoJSON(feature as unknown as GeoJsonObject).getBounds();
+    if (bounds.isValid()) map.current.fitBounds(bounds, { paddingTopLeft: [35, 80], paddingBottomRight: [35, 35], maxZoom: 16, animate: false });
+  }, [areas, answerGeoId]);
+
   // Recenter on request (not on first render).
   const lastReset = useRef(resetKey);
   useEffect(() => {
     if (lastReset.current === resetKey) return;
     lastReset.current = resetKey;
-    map.current?.setView([38.99487, -77.02489], 15);
+    map.current?.setView([38.99487, -77.02489], 16);
   }, [resetKey]);
 
   // Storefront markers: rebuilt only when the visible set changes, never for selection or opacity.

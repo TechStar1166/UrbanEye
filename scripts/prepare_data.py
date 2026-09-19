@@ -31,6 +31,7 @@ def build_feature(props, geometry, source, geography_type, name):
             title=f"2020 Census {field} — {name}", source=source["dataset"],
             url=source["url"], date=source["data_date"], geo_id=geo_id,
             metric=metric, value=value, unit=unit,
+            retrieved_at=source.get("retrieved_at") or source.get("downloaded_at"),
         ))
     return Feature(id=geo_id, geometry=Geometry.model_validate(geometry),
         properties=Area(geo_id=geo_id, name=name, geography_type=geography_type,

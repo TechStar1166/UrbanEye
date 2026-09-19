@@ -540,6 +540,17 @@
             "type": "string",
             "title": "Date"
           },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
           "geo_id": {
             "type": "string",
             "title": "Geo Id"
