@@ -470,10 +470,15 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 .map-viewport { flex: 1; min-height: 180px; height: auto; }
 .map-workspace > .query-dock { position: static; transform: none; width: auto; max-width: none; max-height: none; flex: 0 0 auto; padding: 12px 16px; border: 0; border-top: 1px solid #c9d6cd; border-radius: 0; box-shadow: none; }
 .query-dock .query-heading { font-size: 15px; margin-bottom: 8px; }
-.query-dock form { flex-wrap: nowrap; }
-.query-dock form input { flex-basis: auto; }
-.query-dock .suggestions { gap: 4px; margin-bottom: 8px; }
-.query-dock .suggestions button { padding: 6px 9px; font-size: 13px; }
+.query-dock form { flex-wrap: nowrap; padding: 4px 8px; border: 1px solid #b8cdbf; border-radius: 8px; background: #f8fbf9; }
+.query-dock form:focus-within { border-color: var(--primary); box-shadow: 0 0 0 2px #00694818; }
+.query-dock form input { flex-basis: auto; min-height: 38px; }
+.query-dock form .primary { min-height: 36px; width: 36px; padding: 8px; flex-shrink: 0; }
+.query-dock .query-symbol { width: 24px; height: 24px; flex-shrink: 0; }
+.query-dock .suggestions { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; padding: 0; margin: 6px 0 0; border: 0; }
+.query-dock .suggestions button { display: inline-flex; width: auto; padding: 4px 6px; font-size: 12px; line-height: 1.5; white-space: nowrap; border-color: transparent; background: transparent; color: #245c40; }
+.query-dock .suggestions button:hover { background: #edf6f0; border-color: #bdd4c5; }
+.query-dock .suggestions button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 .map-legend { top: auto; right: auto; bottom: 30px; left: 12px; width: 165px; max-height: none; overflow: visible; }
 .leaflet-top.leaflet-right { top: 75px; right: 5px; }
 .insights-panel .insight-content { flex: 1; min-height: 0; }
