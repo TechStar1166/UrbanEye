@@ -12,7 +12,7 @@ test('real map polygon → area facts → cited answer → unsupported question'
   await expect(page.getByRole('heading', { name: 'Silver Spring CDP' })).toBeVisible();
   await expect(page.locator('dd').first()).toHaveText('81,015 people');
   await page.getByLabel('Map layer').selectOption('housing_units');
-  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('stroke', '#8f4bb8');
+  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('stroke', '#ffcc00');
   await page.getByRole('button', { name: 'Ask', exact: true }).click();
   const answer = page.getByRole('region', { name: 'Answer', exact: true });
   await expect(answer).toContainText('81,015');
