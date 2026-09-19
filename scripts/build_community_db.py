@@ -498,13 +498,6 @@ def round_metric(metric: str, value: float | None) -> float | None:
     return value
 
 
-def stable_moe(value: float | None) -> float | None:
-    """Normalize derived MOEs so JSON exports are stable across platforms."""
-    if value is None:
-        return None
-    return round(value, 12)
-
-
 def attach_acs_to_areas(db: sqlite3.Connection) -> None:
     """Write the 2024 ACS 5-year snapshot onto each /areas feature with matching evidence.
 
