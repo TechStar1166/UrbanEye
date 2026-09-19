@@ -81,6 +81,13 @@ for (const width of [1440, 390, 320]) {
     const suggestions = page.getByLabel('Suggested questions');
     await expect(suggestions.getByRole('button')).toHaveCount(3);
     expect(await suggestions.evaluate(el => el.scrollWidth <= el.clientWidth)).toBeTruthy();
+    const dock = page.locator('.query-dock');
+    const form = (await dock.locator('form').boundingBox())!;
+    const shortcuts = (await suggestions.boundingBox())!;
+    expect(shortcuts.y).toBeGreaterThanOrEqual(form.y + form.height);
+    expect((await dock.boundingBox())!.height).toBeLessThan(150);
+    await expect(suggestions).toContainText('Try:');
+    await expect(suggestions.getByRole('button').first()).toHaveText('Who lives here?');
     const legend = (await page.locator('.map-legend').boundingBox())!;
     const viewport = (await page.locator('.map').boundingBox())!;
     expect(legend.x).toBeGreaterThanOrEqual(viewport.x);

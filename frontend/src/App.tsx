@@ -19,6 +19,7 @@ import { containingArea, coverageBox } from './lib/geo';
 type Tab = 'Overview' | 'Compare areas' | 'Answer history' | 'Evidence';
 type MobilePane = 'layers' | 'map' | 'insights';
 const prompts = ['How many people live here?', 'How many homes are there?', 'What does the Silver Spring plan say about affordable housing?'];
+const promptLabels = ['Who lives here?', 'Homes', 'Housing plan'];
 const FENTON_STUDY: Record<string, string> = {
   '240317025011': 'Fenton study area A',
   '240317025021': 'Fenton study area B',
@@ -167,7 +168,7 @@ export default function App() {
     ...(answer?.evidence ?? []),
   ].map(item => [item.evidence_id, item])).values()], [selected, history, answer]);
   const evidenceCount = evidence.length + (evidence.some(item => item.type === 'document') ? 0 : 1);
-  const suggestions = <div className="suggestions" aria-label="Suggested questions">{prompts.map((prompt, i) => <button key={prompt} disabled={!selected || busy || (i === 2 && !areas?.features.some(f => f.id === '2472450'))} onClick={() => void ask(prompt, i === 2)}>{prompt}<Icon name="arrow" /></button>)}</div>;
+  const suggestions = (compact = false) => <div className="suggestions" aria-label="Suggested questions">{compact && <span>Try:</span>}{prompts.map((prompt, i) => <button key={prompt} aria-label={prompt} title={compact ? prompt : undefined} disabled={!selected || busy || (i === 2 && !areas?.features.some(f => f.id === '2472450'))} onClick={() => void ask(prompt, i === 2)}>{compact ? promptLabels[i] : <>{prompt}<Icon name="arrow" /></>}</button>)}</div>;
   const visibleStorefronts = useMemo(() => showStorefronts && storefronts ? storefronts.storefronts.filter(item => groups.includes(groupOf(item))) : [], [showStorefronts, storefronts, groups]);
   const toggleGroup = (id: GroupId) => setGroups(current => current.includes(id) ? current.filter(item => item !== id) : [...current, id]);
   const number = (key: string) => <MetricValue area={selected} metric={key} />;
@@ -298,9 +299,10 @@ export default function App() {
           </div>
         </div> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 and ACS 5-year · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th>{metricKeys.map(key => <th key={key}>{METRIC_LABELS[key] ?? key.replaceAll('_', ' ')}</th>)}</tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{areaName(f.properties)}</button></td>{metricKeys.map(key => <td key={key}><MetricValue area={f.properties} metric={key} /></td>)}</tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button><button className="secondary" disabled={!areas} onClick={exportCsv}><Icon name="download" />Export all areas (CSV)</button></div>}
         {view === 'map' && <div className="query-dock">
-          {!submitted && <><label className="query-heading" htmlFor="community-question">Ask about this community</label>{suggestions}</>}
+          {!submitted && <label className="query-heading" htmlFor="community-question">Ask about this community</label>}
           {submitted && <button className="text-button" onClick={() => openTab('Overview')}>{busy ? 'Finding your answer…' : 'View answer & sources'}<Icon name="arrow" /></button>}
-          <form onSubmit={event => { event.preventDefault(); void ask(); }}><span className="query-symbol"><Icon name="sparkles" /></span><input id="community-question" ref={questionRef} aria-label="Ask about this area" disabled={busy} value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask another question…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Ask'}<Icon name="arrow" /></button></form>
+          <form onSubmit={event => { event.preventDefault(); void ask(); }}><span className="query-symbol"><Icon name="sparkles" /></span><input id="community-question" ref={questionRef} aria-label="Ask about this area" disabled={busy} value={question} onChange={e => setQuestion(e.target.value)} placeholder={submitted ? 'Ask another question…' : 'Ask anything about Silver Spring…'} maxLength={1000} /><button className="primary" aria-label={busy ? 'Answering…' : 'Ask'} title="Ask" disabled={!question.trim() || !selected || busy} type="submit"><Icon name="arrow" /></button></form>
+          {!submitted && suggestions(true)}
         </div>}
 
       </section>
@@ -315,7 +317,7 @@ export default function App() {
               {busy && <p role="status">Finding an answer…</p>}
               {queryError && <p role="alert">{queryError}<button className="secondary" onClick={() => void ask(submitted, answerRegional)}>Try again</button></p>}
               {answer && selected && <AnswerCard answer={answer} area={selected} regional={answerRegional} />}
-              {!busy && <><h3 className="followup-heading">Keep exploring</h3>{suggestions}</>}
+              {!busy && <><h3 className="followup-heading">Keep exploring</h3>{suggestions()}</>}
               {answer && <button className="secondary full-width answer-map-button" onClick={() => setPane('map')}>Back to the map<Icon name="map" /></button>}
             </section>}
             {businessOpen && selected && <section className="insight-section" aria-label="Business planning">
