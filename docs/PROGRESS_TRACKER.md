@@ -50,9 +50,9 @@
 | --- | --- | --- | --- |
 | B1 | Confirm generated types are current: `npm run generate:types --prefix frontend` | `frontend/src/api.generated.ts` | `[ ]` |
 | B2 | Wire A's new finer-grained feature into `CommunityMap.tsx` (no hardcoded IDs) | `frontend/src/map/CommunityMap.tsx` | `[ ]` |
-| B3 | Maintain area selection state across layer switches | `frontend/src/App.tsx` | `[ ]` |
+| B3 | Maintain area selection state across layer switches | `frontend/src/App.tsx` | `[x]` |
 | B4 | Render metric value + source + date for A's feature in `EvidenceList.tsx` | `frontend/src/evidence/EvidenceList.tsx` | `[ ]` |
-| B5 | Handle missing-value areas distinctly (don't show `null` raw) | `frontend/src/` | `[ ]` |
+| B5 | Handle missing-value areas distinctly (don't show `null` raw) | `frontend/src/` | `[x]` |
 | B6 | Connect C's `/ask` evidence response to a visible UI panel | `frontend/src/App.tsx` | `[ ]` |
 | B7 | Keep keyboard area selection and error/loading states intact | `frontend/src/` | `[ ]` |
 | B8 | Open PR against `nt/dev`; run Playwright smoke test | `frontend/tests/demo.spec.ts` | `[ ]` |
