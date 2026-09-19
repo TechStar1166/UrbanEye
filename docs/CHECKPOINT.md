@@ -63,3 +63,15 @@ The following have been merged to `test` and pulled into `ag/dev`:
 - [x] E5: Business analysis narrative (`docs/plans/business-module.md` plan exists)
 - [x] Playwright smoke test updated for new UI (selectors changed significantly)
 - [x] Fresh-clone verification on `test` branch
+
+## Checkpoint: Sprint 4 (`checkpoint-sprint4`)
+
+The sprint 4 checkpoint requires all static placeholder features in the frontend to be replaced with dynamic, data-driven implementations.
+
+- [ ] F1: ACS demographic data (Income, Age, Tenure) added to dataset without fabricating values
+- [ ] F2: Overlap feature computes and highlights intersection areas correctly
+- [ ] F3: Address search resolves street names to block group polygons
+- [ ] F4: Transit & Zoning vectors display correctly as map overlay layers
+- [ ] F5: Business analysis module generates valid evidence-backed output
+- [ ] Playwright smoke test updated for new interactions (search, overlap, business module)
+- [ ] Fresh-clone verification passes

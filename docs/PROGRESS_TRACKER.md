@@ -171,6 +171,24 @@
 
 ---
 
+## Sprint 4 (Dynamic Features & Checkpoint)
+
+> **Goal:** Replace all static placeholders in the frontend with dynamic, data-driven features and tag `checkpoint-sprint4`.
+
+| # | Task | Owner | Status |
+| --- | --- | --- | --- |
+| F1 | Extended Community Profile: Fetch/derive ACS demographic data (Income, Age, Tenure) | Pujan | `[ ]` |
+| F2 | Overlap Feature: Implement multi-criteria spatial filtering in map view | Jackson | `[ ]` |
+| F3 | Address Search: Integrate Nominatim geocoding to resolve street addresses | Jackson | `[ ]` |
+| F4 | Transit & Zoning Layers: Add Purple Line and zoning overlay vectors | Pujan | `[ ]` |
+| F5 | Business Analysis: Implement backend `/evaluate` endpoint (Option B) | Nick | `[ ]` |
+
+> **Sprint 4 Notes:**
+> - F1: We must derive or download offline demographic data to fulfill the "Coming next" labels without fabricating data.
+> - F5: We will proceed with **Option B** (LLM-powered backend endpoint) for the Business Analysis module.
+
+---
+
 ## Key Constraints (Do Not Violate)
 
 - **Never** report a correlation with a single area or a constant variable.
