@@ -494,3 +494,7 @@ button:disabled { background: #e5e8e6; color: #57615b; opacity: 1; box-shadow: n
 .answer-panel .research-response .answer-sentence { font-size: 17px; margin: 8px 0 12px; }
 .answer-panel .research-response .source-record { font-size: 12px; line-height: 1.4; margin: 6px 0; }
 .answer-panel .research-response .count-outline-note { font-size: 12px; }
+
+.business-btn { background: #006948 !important; color: white !important; border-color: #004d34 !important; opacity: 1 !important; }
+.business-btn:disabled { opacity: 0.8 !important; cursor: not-allowed; }
+

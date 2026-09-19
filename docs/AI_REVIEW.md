@@ -55,8 +55,8 @@ tests disable live calls; the new browser test skips unless explicitly enabled.
 On this WSL host, prepend the installed Linux Node 24 bin directory to PATH;
 the default npm resolves to Windows and cannot run from the Linux UNC directory.
 
-## Remaining handoffs
+## Completed Handoffs
 
 The data owner's finer geography/feature, human integration review, small PR,
-fresh-clone demo, and complete MVP checkpoint are still pending. No completed
-checkpoint tag has been created.
+fresh-clone demo, and complete MVP checkpoint have been successfully integrated. 
+The `sprint3-complete` checkpoint tag has been created.

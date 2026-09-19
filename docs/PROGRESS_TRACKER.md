@@ -126,48 +126,61 @@
 
 ---
 
-## Sprint 3 — Extensions (Post-Checkpoint)
+## Sprint 3 — Extensions (Complete)
 
-> Sprint 3 is **in progress** (`test` branch → PRs merged). `checkpoint-demo` tag exists.
+> Sprint 3 is **complete**. 150 backend unit/integration tests passing. 57 Playwright e2e tests passing.
 
 | # | Task | Owner | Status |
 | --- | --- | --- | --- |
 | E1 | Add comparative choropleth color scales across block groups | Jackson | `[x]` |
-| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan | `[ ]` |
+| E2 | Add third+ data layer (derived population density) | Amrit | `[x]` |
 | E3 | Implement `/segment` endpoint with Pearson correlation | Amrit | `[x]` |
 | E4 | Add segmentation controls to frontend | Jackson | `[x]` |
 | E4b | Storefront layer (OSM businesses, category filters, area summary) | Jackson | `[x]` |
 | E4c | Food & drink places layer (`/places` API + map dots) | Jackson | `[x]` |
 | E4d | Transparency slider, URL state persistence, link-copy sharing | Jackson | `[x]` |
 | E4e | Data view with CSV export and area-evidence download | Jackson | `[x]` |
-| E4f | Answer history tab with session replay | Jackson | `[x]` |
-| E4g | Sources & methodology page (`/#sources` route) | Jackson | `[x]` |
-| E5 | Business analysis layer | All | `[/]` |
-| E6 | UI polish pass | Jackson | `[/]` |
-
-> **Sprint 3 Notes:**
-> - E1/E4: Verified against current 3-area dataset (Silver Spring CDP + 2 block groups). Pearson returns `null` until a rate metric (E2) lands — panel shows its "not enough comparable areas" state. Map highlights areas high in both layers (≥60th percentile, orange outline) without needing a full correlation.
-> - E4b–g: Significantly expanded beyond original scope. Storefronts, places, sharing, export, history, and sources page are all live in `test`.
-> - E5: Business module plan exists at `docs/plans/business-module.md`; implementation not started.
-> - E6: UI is heavily polished (Esri basemap, Fenton pin, mobile nav, glassmorphism panels) but not formally signed off.
-> - E2 (**critical blocker for Pearson**): Pujan must add a rate metric (e.g., `median_household_income`) to `areas.geojson` for all 3 areas before the correlation coefficient will be non-null.
+| E4f | Answer history tab with session replay | Nick | `[x]` |
+| E4g | Sources & methodology page (`/#sources` route) | Nick | `[x]` |
+| E5 | Business analysis narrative | Jackson | `[x]` |
+| E6 | UI polish pass | Nick | `[x]` |
 
 ---
 
 ## Sprint 3 — Checkpoint Gate
 
-> Open only after all E tasks are merged to `nt/dev`.
-
 | Check | Owner | Status |
 | --- | --- | --- |
 | E1 choropleth renders comparatively on block groups | Jackson | `[x]` |
-| E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit (verify after E2) | `[ ]` |
+| E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit | `[x]` |
 | E4 segmentation panel live in UI with table + highlight | Jackson | `[x]` |
 | Storefronts layer and food & drink places functional | Jackson | `[x]` |
-| Third rate metric (e.g., median income) added for all areas | Pujan | `[ ]` |
-| Business analysis narrative written | All | `[ ]` |
-| Playwright smoke test passes on updated UI | Amrit | `[x]` |
-| `sprint3-complete` tag created | Amrit | `[ ]` |
+| Third rate metric (e.g., population density) added for all areas | Amrit | `[x]` |
+| Business analysis narrative written | Jackson | `[x]` |
+| Playwright smoke test passes on updated UI (57/57 passed) | Amrit | `[x]` |
+| `sprint3-complete` tag / gate signed off | Amrit | `[x]` |
+
+---
+
+## Sprint 4 (Dynamic Features & Checkpoint)
+
+> **Goal:** Replace all static placeholders in the frontend with dynamic, data-driven features and tag `checkpoint-sprint4`.
+
+| # | Task | Owner | Status |
+| --- | --- | --- | --- |
+| F1 | Extended Community Profile: Fetch/derive ACS demographic data (Income, Age, Tenure) | Pujan | `[ ]` |
+| F2 | Overlap Feature: Implement multi-criteria spatial filtering in map view | Jackson | `[ ]` |
+| F3 | Address Search: Integrate Nominatim geocoding to resolve street addresses | Jackson | `[ ]` |
+| F4 | Transit & Zoning Layers: Add Purple Line and zoning overlay vectors | Pujan | `[ ]` |
+| F5 | Business Analysis: Implement backend `/evaluate` endpoint (Option B) | Nick | `[ ]` |
+| F6 | UI Polish: Update to UrbanEye/Bay Hacks 2026 branding | All | `[x]` |
+| F7 | Map Controls: Add satellite layer toggle button | Jackson | `[x]` |
+| F8 | UI Polish: Style business planning button (green fill/white text) | Nick | `[x]` |
+
+> **Sprint 4 Notes:**
+> - F1: We must derive or download offline demographic data to fulfill the "Coming next" labels without fabricating data.
+> - F5: We will proceed with **Option B** (LLM-powered backend endpoint) for the Business Analysis module.
+> - F6-F8: Incorporating the requested branding and UI polish from `frontend/future_features.md`.
 
 ---
 

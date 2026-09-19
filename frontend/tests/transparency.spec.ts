@@ -19,17 +19,24 @@ test('CSV export lists every area and metric with its source', async ({ page }) 
   const csv = await downloadCsv(page);
   const lines = csv.trim().split('\r\n');
   expect(lines[0]).toBe('geo_id,name,geography_type,boundary_vintage,metric,value,unit,source,data_date,source_url');
-  expect(lines.length).toBe(1 + 81 * 6); // 81 areas x Census 2020 and ACS snapshot metrics
+  expect(lines.length).toBe(1 + 81 * 3); // 81 areas x (population, housing_units, population_density)
   expect(lines.some(line => line.startsWith('2472450,Silver Spring CDP,census_designated_place,2020-01-01,population,81015,'))).toBe(true);
   expect(csv).toContain('tigerweb.geo.census.gov');
   expect(csv).toContain('240317025011');
 });
 
 test('CSV export quotes special characters and neutralizes spreadsheet formulas', async ({ page }) => {
-  await page.route('**/api/areas', route => route.fulfill({ json: { type: 'FeatureCollection', schema_version: '1.0', features: [{
-    type: 'Feature', id: 'x1', geometry: { type: 'Polygon', coordinates: [[[-77.03, 38.99], [-77.02, 38.99], [-77.02, 39.0], [-77.03, 39.0], [-77.03, 38.99]]] },
-    properties: { geo_id: 'x1', name: '=HYPERLINK("http://x")', geography_type: 'block_group', boundary_vintage: '2020-01-01', metrics: { population: 5 },
-      evidence: [{ evidence_id: 'e1', type: 'structured_data', title: 't', source: 'Source, Inc', date: '2020-04-01', url: 'https://example.test/a', geo_id: 'x1', metric: 'population', value: 5, unit: 'people' }] } }] } }));
+  await page.route('**/api/areas', route => route.fulfill({
+    json: {
+      type: 'FeatureCollection', schema_version: '1.0', features: [{
+        type: 'Feature', id: 'x1', geometry: { type: 'Polygon', coordinates: [[[-77.03, 38.99], [-77.02, 38.99], [-77.02, 39.0], [-77.03, 39.0], [-77.03, 38.99]]] },
+        properties: {
+          geo_id: 'x1', name: '=HYPERLINK("http://x")', geography_type: 'block_group', boundary_vintage: '2020-01-01', metrics: { population: 5 },
+          evidence: [{ evidence_id: 'e1', type: 'structured_data', title: 't', source: 'Source, Inc', date: '2020-04-01', url: 'https://example.test/a', geo_id: 'x1', metric: 'population', value: 5, unit: 'people' }]
+        }
+      }]
+    }
+  }));
   await page.goto('/');
   const csv = await downloadCsv(page);
   expect(csv).toContain(`"'=HYPERLINK(""http://x"")"`);
