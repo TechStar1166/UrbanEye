@@ -35,4 +35,3 @@ The Silver Spring CDP is broader than Fenton Village. The Fenton Village block g
 lie inside the Silver Spring CDP polygon; their counts must describe each block group,
 not the clipped study boundary, and should never be added to CDP totals. No within-area
 density or distribution is inferred. Rebuild anytime with `python -m scripts.prepare_data`.
-

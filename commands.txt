@@ -6,4 +6,3 @@ npm run generate:types --prefix frontend
 pytest
 npm run build --prefix frontend
 npx playwright test tests/demo.spec.ts --prefix frontend
-

@@ -29,4 +29,3 @@ export function EvidenceList({ items }: { items: Evidence[] }) {
     </ul>
   );
 }
-
