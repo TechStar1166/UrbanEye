@@ -1,0 +1,158 @@
+# UrbanEye — Progress Tracker
+
+> Last updated: 2026-09-18 | Branching: `ag/dev` → PR → `nt/dev` → `main`
+> 
+> Track all task status here. Statuses: `[ ]` TODO · `[/]` In Progress · `[x]` Done · `[-]` Blocked
+
+---
+
+## Foundation Baseline (Shared — Pre-Sprint)
+
+| Check | Status |
+| --- | --- |
+| Repository cloned and Docker compose boots cleanly | `[x]` |
+| `GET /health` → `{"status":"ok"}` | `[x]` |
+| Silver Spring CDP polygon renders on map | `[x]` |
+| Population + housing unit facts returned by `/ask` | `[x]` |
+| Unsupported question returns `insufficient_evidence` | `[x]` |
+| All 4 teammates confirm clone/run (`TEAM_HANDOFF.md`) | `[ ]` |
+
+---
+
+## Sprint 1 — First Real Geography + Evidence Path
+
+**Goal:** One finer-grained real area → visible on map → returns facts + a RAG-retrieved document passage. All four workstreams contribute one deliverable each.
+
+**Deadline:** TBD
+
+---
+
+### Workstream A — Data / GIS
+> Branch: own branch (TBD) or directly on `nt/dev` · Owner: **Pujan**
+
+| # | Task | File(s) | Status |
+| --- | --- | --- | --- |
+| A1 | Confirm Fenton Village study geography (CDP → tract/block-group boundary) | `data/README.md` | `[ ]` |
+| A2 | Download Fenton Village Census 2020 tract GeoJSON from Census TIGER | `data/raw/` | `[ ]` |
+| A3 | Run `scripts/prepare_data.py` to normalize → `data/processed/areas.geojson` | `scripts/prepare_data.py` | `[ ]` |
+| A4 | Add at least **one** metric (e.g., population or median income) with `geo_id`, `date`, `source_url` | `data/processed/areas.geojson` | `[ ]` |
+| A5 | Validate IDs, coordinates, and missing-value handling against `schemas.py` `Area` model | `backend/schemas.py` | `[ ]` |
+| A6 | Add a **second** metric after first feature renders end-to-end | `data/processed/` | `[ ]` |
+| A7 | Update `data/README.md` with provenance (source, vintage, transformation steps) | `data/README.md` | `[ ]` |
+| A8 | Open PR against `nt/dev`; tag B/C/D for review | — | `[ ]` |
+
+---
+
+### Workstream B — Map / Frontend
+> Branch: own branch (TBD) or directly on `nt/dev` · Owner: **Jackson**
+
+| # | Task | File(s) | Status |
+| --- | --- | --- | --- |
+| B1 | Confirm generated types are current: `npm run generate:types --prefix frontend` | `frontend/src/api.generated.ts` | `[ ]` |
+| B2 | Wire A's new finer-grained feature into `CommunityMap.tsx` (no hardcoded IDs) | `frontend/src/map/CommunityMap.tsx` | `[ ]` |
+| B3 | Maintain area selection state across layer switches | `frontend/src/App.tsx` | `[ ]` |
+| B4 | Render metric value + source + date for A's feature in `EvidenceList.tsx` | `frontend/src/evidence/EvidenceList.tsx` | `[ ]` |
+| B5 | Handle missing-value areas distinctly (don't show `null` raw) | `frontend/src/` | `[ ]` |
+| B6 | Connect C's `/ask` evidence response to a visible UI panel | `frontend/src/App.tsx` | `[ ]` |
+| B7 | Keep keyboard area selection and error/loading states intact | `frontend/src/` | `[ ]` |
+| B8 | Open PR against `nt/dev`; run Playwright smoke test | `frontend/tests/demo.spec.ts` | `[ ]` |
+
+---
+
+### Workstream C — Backend + RAG / AI
+> Branch: `nt/dev` · Owner: **Nick**
+
+#### Sprint 1 — Document Ingestion & Retrieval
+
+| # | Task | File(s) | Status |
+| --- | --- | --- | --- |
+| C1 | Identify one real public planning document for Fenton Village / Silver Spring (title, date, URL, exact scope) | `backend/llm/grounding.txt` | `[ ]` |
+| C2 | Download + parse the PDF/HTML into plain text; split into chunks with page/section metadata | `scripts/` or `documents/raw/` | `[ ]` |
+| C3 | Serialize chunks to `documents/processed/chunks.json` matching `Evidence` schema (`type="document"`, `geo_id`, `excerpt`, `page`/`section`) | `documents/processed/chunks.json` | `[ ]` |
+| C4 | Verify `backend/data.py` `load_chunks()` deserializes the new chunks without error | `backend/data.py` | `[ ]` |
+| C5 | Upgrade `backend/rag/retrieve.py` from lexical to **embedding-based** retrieval (e.g., `sentence-transformers` + FAISS or `chromadb`) | `backend/rag/retrieve.py`, `vector_store/` | `[ ]` |
+| C6 | Add `vector_store/` index build script; document in `vector_store/README.md` | `vector_store/`, `scripts/` | `[ ]` |
+| C7 | Manually verify: ask the candidate question → retrieval returns the correct passage **before** connecting any LLM | `backend/services.py` | `[ ]` |
+| C8 | Update `backend/requirements.lock` with new deps | `backend/requirements.lock` | `[ ]` |
+| C9 | Open PR against `nt/dev`; ensure `/health` still returns `"llm_enabled": false` | `backend/main.py` | `[ ]` |
+
+#### Sprint 2 — LLM Integration & Grounded Answers
+
+| # | Task | File(s) | Status |
+| --- | --- | --- | --- |
+| C10 | Design `backend/llm/` provider adapter interface (abstract base + concrete implementation) | `backend/llm/` | `[ ]` |
+| C11 | Implement first concrete adapter (Gemini or OpenAI); load API key from `.env` (never committed) | `backend/llm/` | `[ ]` |
+| C12 | Prompt: supply retrieved `Evidence` excerpts as the **only** context; instruct model to cite `evidence_id`s only | `backend/llm/` | `[ ]` |
+| C13 | Parse + validate structured model output against `Answer` schema; reject uncited claims | `backend/services.py`, `backend/schemas.py` | `[ ]` |
+| C14 | Update `answer()` in `services.py`: use `mode="llm"` when evidence exists and LLM is enabled; fall back gracefully on API error | `backend/services.py` | `[ ]` |
+| C15 | Flip `llm_enabled: True` in `/health` endpoint | `backend/main.py` | `[ ]` |
+| C16 | Cover no-key / API-error / hallucination-guard paths in `tests/test_api.py` | `tests/test_api.py` | `[ ]` |
+| C17 | Freeze candidate question (coordinate with D); document in `backend/llm/README.md` | `backend/llm/README.md` | `[ ]` |
+
+---
+
+### Workstream D — Analysis / Integration
+> Branch: `ag/dev` → PR → `nt/dev` · Owner: **Amrit**
+
+| # | Task | File(s) | Status |
+| --- | --- | --- | --- |
+| D1 | Run full smoke check from fresh clone after each A/B/C merge | — | `[ ]` |
+| D2 | Help A verify geographic joins are correct end-to-end | `data/processed/`, `backend/data.py` | `[ ]` |
+| D3 | Agree `/segment` contract with all owners; stub schema in `schemas.py` (no impl yet) | `backend/schemas.py` | `[x]` |
+| D4 | Ensure `tests/test_api.py` covers A's new area ID and the full `/ask` path | `tests/test_api.py` | `[x]` |
+| D5 | Track checkpoint completion in `docs/CHECKPOINT.md` | `docs/CHECKPOINT.md` | `[ ]` |
+| D6 | Once ≥2 comparable areas exist: implement two-variable thresholds in `backend/analysis/` | `backend/analysis/` | `[x]` |
+| D7 | Implement Pearson correlation with undefined/insufficient-data handling; association-only explanation | `backend/analysis/` | `[x]` |
+| D8 | Coordinate segmentation UI controls with B | — | `[ ]` |
+
+---
+
+## Sprint 2 — Checkpoint Gate
+
+> Open only after **all** Sprint 1 tasks are merged to `nt/dev`.
+
+| Check | Owner | Status |
+| --- | --- | --- |
+| Verified Fenton Village study geography | Pujan | `[ ]` |
+| Two real useful layers with dates + source metadata | Pujan | `[ ]` |
+| Planning document parsed/chunked/indexed | Nick | `[ ]` |
+| Retrieval returns relevant passage with exact source/page | Nick | `[ ]` |
+| Model receives evidence, produces validated grounded answer | Nick | `[ ]` |
+| Answer claims reviewed for geographic scope | Nick + Amrit | `[ ]` |
+| UI shows answer, passage, source, limitations | Jackson | `[ ]` |
+| Unsupported question & API failure cases work | Nick | `[ ]` |
+| Fresh-clone demo passes without code edits | Amrit | `[ ]` |
+| `checkpoint-demo` tag created | Amrit | `[ ]` |
+
+---
+
+## Sprint 3 — Extensions (Post-Checkpoint)
+
+> Do not start until `checkpoint-demo` tag is created and all Sprint 2 checks pass.
+
+| # | Task | Owner |
+| --- | --- | --- |
+| E1 | Add comparative color scales across multiple areas | Jackson |
+| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan |
+| E3 | Implement `/segment` endpoint with Pearson correlation | Amrit |
+| E4 | Add segmentation controls to frontend | Jackson |
+| E5 | Business analysis layer | All |
+| E6 | UI polish pass | Jackson |
+
+---
+
+## Key Constraints (Do Not Violate)
+
+- **Never** report a correlation with a single area or a constant variable.
+- **Never** commit `.env`, API keys, or secrets.
+- **Never** call the deterministic starter an AI/RAG demo.
+- **Never** tag `checkpoint-demo` before all checkpoint checks pass.
+- Any change to `backend/schemas.py` requires coordinating all owners + regenerating frontend types in the same PR.
+
+---
+
+## Integration Cadence
+
+- Push small, working increments every **30–60 minutes**; do not accumulate large diffs.
+- After each PR merge to `nt/dev`, D runs the full smoke check.
+- Do not start Sprint 3 work until `checkpoint-demo` is tagged.
