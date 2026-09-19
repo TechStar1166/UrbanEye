@@ -20,11 +20,11 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data/raw/acs"
 
 # Summary-level prefixes are part of the ACS GEO_ID and identify the geography type.
-GEOGRAPHIES = {
-    "1600000US2472450": "Silver Spring CDP",
-    "1500000US240317024022": "Block Group 2, Census Tract 7024.02",
-    "1500000US240317024023": "Block Group 3, Census Tract 7024.02",
-    "1500000US240317025021": "Block Group 1, Census Tract 7025.02",
+# 150 is a block group, 160 a place, 050 a county, 040 a state.
+SUMMARY_LEVEL = {"block_group": "1500000US", "census_designated_place": "1600000US"}
+
+# Comparison geographies that are not served as map areas.
+CONTEXT_GEOGRAPHIES = {
     "0500000US24031": "Montgomery County, Maryland",
     "0400000US24": "Maryland",
     "1600000US2407125": "Bethesda CDP",
@@ -32,6 +32,21 @@ GEOGRAPHIES = {
     "1600000US2431175": "Gaithersburg city",
     "1600000US2432025": "Germantown CDP",
 }
+
+
+def study_geographies() -> dict[str, str]:
+    """Every area the API serves, so no selected area is left without estimates."""
+    areas = json.loads((ROOT / "data/processed/areas.geojson").read_text())
+    geographies = dict(CONTEXT_GEOGRAPHIES)
+    for feature in areas["features"]:
+        properties = feature["properties"]
+        prefix = SUMMARY_LEVEL.get(properties["geography_type"])
+        if prefix:
+            geographies[prefix + properties["geo_id"]] = properties["name"]
+    return geographies
+
+
+GEOGRAPHIES = study_geographies()
 
 TABLES = ["b19013", "b19301", "b25003", "b17001", "b01002",
           # b01001 is fetched to derive an age 50+ share; b19083 (Gini) is published for

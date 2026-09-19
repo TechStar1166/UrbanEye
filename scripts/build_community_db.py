@@ -16,11 +16,19 @@ CENSUS_SENTINEL = 1_000_000_000
 CURRENCY_METRICS = {"median_household_income", "per_capita_income"}
 CPI_BASE_YEAR = 2024
 
-GEOGRAPHY_NAMES = {
-    "2472450": ("Silver Spring CDP", "census_designated_place"),
-    "240317024022": ("Block Group 2, Census Tract 7024.02", "block_group"),
-    "240317024023": ("Block Group 3, Census Tract 7024.02", "block_group"),
-    "240317025021": ("Block Group 1, Census Tract 7025.02", "block_group"),
+# Latest ACS 5-year snapshot joined onto /areas so choropleth and /segment stay
+# in the layers==metrics contract. 5-year is used for every map geography so
+# the CDP is comparable with block groups. Do not chart consecutive 5-year
+# vintages as annual change; /history keeps the 1-year place series.
+ACS_AREA_METRICS = {
+    "median_household_income": ("USD", "Median household income"),
+    "age_50_plus_pct": ("percent", "Share of residents age 50 and over"),
+    "avg_household_size": ("people per household", "Average household size"),
+    "renter_occupied_pct": ("percent", "Renter-occupied housing units"),
+}
+
+# Comparison geographies that are not served as map areas and so carry no geometry.
+CONTEXT_GEOGRAPHIES = {
     "24031": ("Montgomery County, Maryland", "county"),
     "24": ("Maryland", "state"),
     "2407125": ("Bethesda CDP", "census_designated_place"),
@@ -29,12 +37,27 @@ GEOGRAPHY_NAMES = {
     "2432025": ("Germantown CDP", "census_designated_place"),
 }
 
+
+def geography_names() -> dict[str, tuple[str, str]]:
+    """Served areas plus context geographies, so every map selection has estimates."""
+    areas = json.loads((ROOT / "data/processed/areas.geojson").read_text())
+    names = {geo_id: value for geo_id, value in CONTEXT_GEOGRAPHIES.items()}
+    for feature in areas["features"]:
+        properties = feature["properties"]
+        names[properties["geo_id"]] = (properties["name"], properties["geography_type"])
+    return names
+
+
+GEOGRAPHY_NAMES = geography_names()
+
+# Primary ZIP Code Tabulation Area for the Fenton Village study block groups.
 ZCTA_BY_GEO = {
     "240317024022": "20910",
     "240317024023": "20910",
     "240317025021": "20910",
     "2472450": "20910",
 }
+FENTON_STUDY_BLOCK_GROUPS = {"240317024022", "240317024023", "240317025021"}
 
 FOOD_AMENITIES = {"restaurant", "cafe", "bar", "pub", "fast_food"}
 
@@ -120,7 +143,8 @@ def parse_number(value) -> float | None:
         number = float(value)
     except (TypeError, ValueError):
         return None
-    if not math.isfinite(number) or abs(number) >= CENSUS_SENTINEL:
+    # Census/ACS missing-value sentinels are large |n| codes such as -666666666.
+    if not math.isfinite(number) or abs(number) >= 200_000_000:
         return None
     return number
 
@@ -464,6 +488,93 @@ def write_geometry_exports():
     return len(overlays["features"]), len(features)
 
 
+def round_metric(metric: str, value: float | None) -> float | None:
+    if value is None:
+        return None
+    if metric.endswith("_pct") or metric == "avg_household_size":
+        return round(value, 2)
+    if metric in CURRENCY_METRICS:
+        return round(value)
+    return value
+
+
+def attach_acs_to_areas(db: sqlite3.Connection) -> None:
+    """Write the 2024 ACS 5-year snapshot onto each /areas feature with matching evidence.
+
+    prepare_data.py only emits Census 2020 counts. Run this after load_acs so
+    GET /layers can list ACS indicators without breaking the layers==metrics test.
+    """
+    from backend.schemas import Areas
+
+    placeholders = ",".join("?" for _ in ACS_AREA_METRICS)
+    rows = db.execute(
+        f"""SELECT t.geo_id, t.metric, t.estimate, t.moe, t.unit, t.low_reliability,
+                   s.url, s.retrieved_at, s.dataset
+            FROM time_series t JOIN sources s ON s.id = t.source_id
+            WHERE t.year=2024 AND t.span=5 AND t.metric IN ({placeholders})""",
+        tuple(ACS_AREA_METRICS),
+    ).fetchall()
+    by_geo: dict[str, dict[str, sqlite3.Row]] = {}
+    for row in rows:
+        by_geo.setdefault(row[0], {})[row[1]] = row
+
+    path = ROOT / "data/processed/areas.geojson"
+    areas = json.loads(path.read_text())
+    fallback_url = "https://www.census.gov/programs-surveys/acs"
+    attached = 0
+    for feature in areas["features"]:
+        props = feature["properties"]
+        geo_id = props["geo_id"]
+        name = props["name"]
+        props["evidence"] = [
+            item for item in props["evidence"]
+            if not str(item.get("evidence_id", "")).startswith("acs5y2024:")
+        ]
+        geo_rows = by_geo.get(geo_id, {})
+        for metric, (unit, label) in ACS_AREA_METRICS.items():
+            row = geo_rows.get(metric)
+            estimate = None if row is None else round_metric(metric, row[2])
+            moe = None if row is None else round_metric(metric, row[3])
+            low = False if row is None else bool(row[5])
+            props["metrics"][metric] = estimate
+            if estimate is None:
+                excerpt = (
+                    f"No published ACS 5-year 2020-2024 {label.lower()} for this geography."
+                )
+            else:
+                moe_text = "not published" if moe is None else f"± {moe:,.2f}".replace(".00", "")
+                excerpt = (
+                    f"ACS 5-year 2020-2024 {label.lower()}: {estimate}. "
+                    f"90% margin of error {moe_text}. "
+                    "This describes the whole published Census unit, not the Fenton Village overlay."
+                )
+                if low:
+                    excerpt += " Flagged low reliability because the margin of error exceeds 30% of the estimate."
+            props["evidence"].append({
+                "evidence_id": f"acs5y2024:{geo_id}:{metric}",
+                "type": "structured_data",
+                "title": f"ACS 5-year 2020-2024 {label} — {name}",
+                "source": "U.S. Census Bureau, American Community Survey",
+                "url": (None if row is None else row[6]) or fallback_url,
+                "date": "2020-2024",
+                "retrieved_at": None if row is None else row[7],
+                "geo_id": geo_id,
+                "metric": metric,
+                "value": estimate,
+                "unit": unit if row is None else row[4] or unit,
+                "excerpt": excerpt,
+                "page": None,
+                "section": None,
+                "page_label": None,
+                "document_scope": None,
+            })
+            if estimate is not None:
+                attached += 1
+    Areas.model_validate(areas)
+    path.write_text(json.dumps(areas, indent=2) + "\n")
+    print(f"Attached {attached} ACS 5-year 2024 values to {len(areas['features'])} map areas")
+
+
 def write_json_exports(db):
     history = []
     for row in db.execute(
@@ -515,6 +626,7 @@ def build():
     load_geographies(db, areas_source_id)
     load_acs(db, cpi)
     pois = load_osm(db)
+    attach_acs_to_areas(db)
     write_json_exports(db)
     n_overlays, n_transit = write_geometry_exports()
     db.commit()

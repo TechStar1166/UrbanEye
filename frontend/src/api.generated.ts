@@ -72,7 +72,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/layers": {
+    "/areas/{geo_id}/history": {
         parameters: {
             query?: never;
             header?: never;
@@ -149,6 +149,40 @@ export interface paths {
         };
         /** Get Compare */
         get: operations["get_compare_compare_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/places": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Places */
+        get: operations["get_places_places_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Sources */
+        get: operations["get_sources_sources_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -808,6 +842,80 @@ export interface components {
             /** Storefronts */
             storefronts: components["schemas"]["Storefront"][];
         };
+        /** TransitFeature */
+        TransitFeature: {
+            /**
+             * Type
+             * @default Feature
+             * @constant
+             */
+            type: "Feature";
+            /** Id */
+            id: string;
+            geometry: components["schemas"]["MapLineGeometry"];
+            properties: components["schemas"]["TransitProperties"];
+        };
+        /** TransitProperties */
+        TransitProperties: {
+            /** Name */
+            name: string;
+            /** Status */
+            status: string;
+            /** Mode */
+            mode?: string | null;
+            /** Opening Date */
+            opening_date?: string | null;
+            /**
+             * Tunnel
+             * @default false
+             */
+            tunnel: boolean;
+            /**
+             * Bridge
+             * @default false
+             */
+            bridge: boolean;
+        };
+        /** TransitResponse */
+        TransitResponse: {
+            /**
+             * Type
+             * @default FeatureCollection
+             * @constant
+             */
+            type: "FeatureCollection";
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Name */
+            name: string;
+            /** Status */
+            status: string;
+            /** Attribution */
+            attribution: string;
+            /** License */
+            license: string;
+            /** Copyright Url */
+            copyright_url: string;
+            /** Retrieved At */
+            retrieved_at: string;
+            /** Routes */
+            routes: components["schemas"]["TransitRoute"][];
+            /** Limitations */
+            limitations: string[];
+            /** Features */
+            features: components["schemas"]["TransitFeature"][];
+        };
+        /** TransitRoute */
+        TransitRoute: {
+            /** Osm Id */
+            osm_id: number;
+            /** Name */
+            name?: string | null;
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -917,7 +1025,7 @@ export interface operations {
             };
         };
     };
-    get_layers_layers_get: {
+    get_area_history_areas__geo_id__history_get: {
         parameters: {
             query?: {
                 metric?: string;
@@ -1068,6 +1176,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_places_places_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    get_sources_sources_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
         };

@@ -18,7 +18,7 @@ export function AnswerCard({ answer, area, regional }: { answer: Answer; area: A
   const scope = area.geography_type === 'census_designated_place'
     ? 'This is the whole Silver Spring Census area, not Fenton Village alone.'
     : area.geography_type === 'block_group'
-      ? ['240317025011', '240317025021'].includes(area.geo_id)
+      ? ['240317024022', '240317024023', '240317025021'].includes(area.geo_id)
         ? 'This is one Census block group near Fenton Village, not the whole district.'
         : 'This is one Census block group in the Silver Spring study area, not the whole Fenton Village district.'
       : 'This is one Census tract, not the whole Fenton Village district.';

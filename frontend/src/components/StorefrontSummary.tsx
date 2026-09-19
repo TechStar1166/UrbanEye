@@ -11,10 +11,10 @@ export function StorefrontSummary({ area, data, failed, shown, onShow }: {
     return <section className="insight-section" aria-label="Storefronts">{head}
       <p className="body-muted">Storefront data covers the Fenton Village block groups. Select one to see its businesses.</p></section>;
   }
-  if (!['240317025011', '240317025021'].includes(area.geo_id)) {
-    return <section className="insight-section" aria-label="Storefronts">{head}<p className="body-muted">This block group is outside the storefront snapshot’s coverage. Counts are available for Fenton study areas A and B only.</p></section>;
-  }
   const { total, groups, top } = summarize(data.storefronts, area.geo_id);
+  if (total === 0) {
+    return <section className="insight-section" aria-label="Storefronts">{head}<p className="body-muted">No OpenStreetMap-mapped storefronts fall in this block group in the current snapshot.</p></section>;
+  }
   const max = Math.max(1, ...groups.map(group => group.count));
   return <section className="insight-section storefront-summary" aria-label="Storefronts">{head}
     <p className="storefront-total"><strong>{total}</strong> mapped businesses in this block group</p>

@@ -5,7 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
-from backend.data import ROOT, load_areas
+from backend.data import ROOT, load_areas, load_chunks
 from backend.main import app
 from backend.rag.retrieve import retrieve
 from backend.schemas import Answer, Areas, Evidence
@@ -112,6 +112,20 @@ def test_plain_language_plan_question_has_reviewed_evidence():
     passages = retrieve('What does the plan say about affordable housing?', GEO_ID, load_chunks())
     assert passages
     assert all(item.type == 'document' for item in passages)
+
+
+def test_acs_snapshot_is_on_every_area_with_matching_evidence():
+    expected = {
+        "population", "housing_units", "median_household_income",
+        "age_50_plus_pct", "avg_household_size", "renter_occupied_pct",
+    }
+    assert {layer["id"] for layer in client.get("/layers").json()} == expected
+    area = client.get(f"/areas/{GEO_ID}").json()
+    assert set(area["metrics"]) == expected
+    income = next(item for item in area["evidence"] if item["metric"] == "median_household_income")
+    assert "American Community Survey" in income["source"]
+    assert income["value"] == area["metrics"]["median_household_income"]
+    assert "margin of error" in (income.get("excerpt") or "").lower()
 
 
 def test_expanded_census_coverage_preserves_snapshot_and_place_provenance():

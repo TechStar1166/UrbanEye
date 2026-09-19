@@ -19,7 +19,7 @@ test('CSV export lists every area and metric with its source', async ({ page }) 
   const csv = await downloadCsv(page);
   const lines = csv.trim().split('\r\n');
   expect(lines[0]).toBe('geo_id,name,geography_type,boundary_vintage,metric,value,unit,source,data_date,source_url');
-  expect(lines.length).toBe(1 + 81 * 2); // 81 areas x (population, housing_units)
+  expect(lines.length).toBe(1 + 81 * 6); // 81 areas x Census 2020 and ACS snapshot metrics
   expect(lines.some(line => line.startsWith('2472450,Silver Spring CDP,census_designated_place,2020-01-01,population,81015,'))).toBe(true);
   expect(csv).toContain('tigerweb.geo.census.gov');
   expect(csv).toContain('240317025011');
@@ -76,7 +76,7 @@ test('the Overview states what the dataset cannot tell you', async ({ page }) =>
   for (const missing of ['Complete, verified competitor coverage', 'Rent and lease prices', 'Foot traffic', 'Business revenue']) {
     await expect(card).toContainText(missing);
   }
-  await expect(card).not.toContainText('Median household income'); // not claimed missing; it may be added
+  await expect(card).toContainText('median household income');
 });
 
 

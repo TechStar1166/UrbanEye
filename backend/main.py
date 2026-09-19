@@ -1,3 +1,5 @@
+import json
+
 from fastapi import Depends, FastAPI, HTTPException
 from dotenv import load_dotenv
 
@@ -87,6 +89,16 @@ def get_compare(geo_ids: str, year: int = 2024, metrics: str = "median_household
     if len(ids) < 2:
         raise HTTPException(422, "Provide at least two comma-separated geo_ids")
     return community_data.compare(ids, year, [item.strip() for item in metrics.split(",") if item.strip()], span)
+
+
+@app.get("/places")
+def get_places():
+    return json.loads((ROOT / "data/processed/places.json").read_text())
+
+
+@app.get("/sources")
+def get_sources():
+    return json.loads((ROOT / "data/processed/sources.json").read_text())
 
 
 @app.get("/overlays", response_model=OverlayResponse)

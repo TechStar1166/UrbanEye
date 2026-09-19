@@ -23,14 +23,13 @@ test('real map opacity and metric controls reset without losing selection', asyn
   await page.goto('/');
   const polygon = page.locator('.leaflet-interactive').first();
   await expect(polygon).toBeVisible();
-  await page.getByLabel('Opacity', { exact: true }).fill('30');
-  await expect(polygon).toHaveAttribute('fill-opacity', '0.075');
-  await page.getByRole('checkbox', { name: /^Housing Units/ }).uncheck();
-  await page.getByRole('checkbox', { name: /^Housing Units/ }).check();
-  await expect(polygon).toHaveAttribute('fill', '#8f4bb8');
+  await page.getByLabel('Transparency').fill('70');
+  await expect(page.getByLabel('Transparency')).toHaveValue('70');
+  await page.getByLabel('Show on map').selectOption('housing_units');
+  await expect(page.locator('.map-legend .eyebrow')).toContainText('Homes');
   await page.getByRole('button', { name: 'Reset', exact: true }).click();
-  await expect(page.getByLabel('Opacity', { exact: true })).toHaveValue('75');
-  await expect(polygon).toHaveAttribute('fill', '#087e8b');
+  await expect(page.getByLabel('Transparency')).toHaveValue('25');
+  await expect(page.getByLabel('Show on map')).toHaveValue('population');
   await expect(polygon).toHaveAttribute('stroke', '#006948');
 });
 
@@ -39,15 +38,13 @@ test('live count query and segmentation preview coexist', async ({ page }) => {
   page.on('request', request => { if (request.url().endsWith('/api/ask')) calls++; });
   await page.goto('/');
   await page.getByRole('button', { name: 'What is the population?', exact: true }).click();
-  await page.getByRole('button', { name: 'Query Records' }).click();
-  await expect(page.getByRole('tab', { name: 'Ask CivicLens' })).toHaveAttribute('aria-selected', 'true');
   await expect(page.locator('.user-question')).toContainText('What is the population?');
   await expect(page.locator('.research-response')).toContainText('81,015');
-  await page.getByLabel('Variable A (Cohort)').selectOption('30');
-  await page.getByLabel('Variable B (Economic)').selectOption('90');
-  await page.getByRole('button', { name: 'Explore Co-occurrence' }).click();
-  await expect(page.locator('.criteria-card')).toContainText('above 30%');
-  await expect(page.locator('.criteria-card')).toContainText('$90,000');
+  await page.getByRole('tab', { name: 'Compare areas' }).click();
+  const panel = page.getByRole('region', { name: 'Segmentation' });
+  await expect(panel).toContainText('Comparing 80 block groups');
+  await panel.getByRole('button', { name: 'Compare layers' }).click();
+  await expect(panel).toContainText('80 areas compared');
   expect(calls).toBe(1);
 });
 

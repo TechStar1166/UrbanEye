@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
-import type { Areas, Places, Storefront } from '../services/api';
+import type { Areas, OverlayResponse, Places, Storefront, TransitResponse } from '../services/api';
 import { groupColor, groupOf, nearbySame, prettyCategory } from '../lib/storefronts';
-import { areaColor, colorScale } from './colors';
+import { areaColor, colorScale, strokes } from './colors';
 import 'leaflet/dist/leaflet.css';
 
 type StyleFeature = { properties?: { geo_id?: string; geography_type?: string; metrics?: Record<string, number | null> } } | undefined;
@@ -22,9 +22,10 @@ function popupFor(item: Storefront, all: Storefront[]): HTMLElement {
   return root;
 }
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places }: {
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places, overlays, transit, showOverlay = false, showTransit = false }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
   opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[]; answerGeoId?: string; places?: Places;
+  overlays?: OverlayResponse; transit?: TransitResponse; showOverlay?: boolean; showTransit?: boolean;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
@@ -45,7 +46,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     const isFiner = feature?.properties?.geography_type === 'block_group';
     return {
       className: `census-area area-${feature?.properties?.geo_id}`,
-      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#c2410c' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
+      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#c2410c' : (strokes[metric] ?? '#087e8b'),
       weight: isSelected ? 3 : isHighlighted ? 4 : (isFiner ? 1.2 : 1),
       fillOpacity: hasData ? opacity * (isFiner ? 0.65 : 0) : 0.05,
       fillColor: isFiner ? areaColor(value, metric, scale) : '#d9dfdc',
@@ -60,11 +61,13 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     map.current = instance;
     L.control.zoom({ position: 'topright' }).addTo(instance);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(instance);
+    instance.createPane('zoning').style.zIndex = '430';
+    instance.createPane('transit').style.zIndex = '435';
     instance.createPane('storefronts').style.zIndex = '470'; // above area shapes and the food/drink dots
     const observer = new ResizeObserver(() => instance.invalidateSize());
     observer.observe(container.current!);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri, HERE, Garmin, GIS user community &middot; Places &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(instance);
     instance.createPane('places');
@@ -149,16 +152,41 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   }, [storefronts]);
 
   useEffect(() => {
-    if (!map.current || !pois) return;
-    const group = L.layerGroup().addTo(map.current);
-    for (const poi of pois.features) {
-      L.circleMarker([poi.lat, poi.lon], {
-        radius: 5, weight: 1, color: '#ffffff',
-        fillColor: CATEGORY_COLORS[poi.category] ?? CATEGORY_COLORS.other, fillOpacity: 0.9,
-      }).bindTooltip(`${poi.name ?? 'Unnamed'} — ${poi.subcategory ?? poi.category}`).addTo(group);
+    if (!map.current || !places) return;
+    const points = L.layerGroup().addTo(map.current);
+    for (const place of places.places) {
+      const dot = L.circleMarker([place.lat, place.lon], { className: 'food-place', pane: 'places', radius: 5, color: '#713100', weight: 1.5, fillColor: '#ed761c', fillOpacity: 0.95 }).addTo(points);
+      dot.bindTooltip(place.name);
+      const content = document.createElement('div');
+      const title = document.createElement('strong'); title.textContent = place.name; content.append(title);
+      const text = document.createElement('p'); text.textContent = place.kind.replaceAll('_', ' ') + ' · From OpenStreetMap, may not be complete'; content.append(text);
+      const link = document.createElement('a'); link.href = place.url; link.target = '_blank'; link.rel = 'noreferrer'; link.textContent = 'See this place on OpenStreetMap'; content.append(link);
+      dot.bindPopup(content);
     }
-    return () => { group.remove(); };
-  }, [pois]);
+    return () => { points.remove(); };
+  }, [places]);
+
+  useEffect(() => {
+    if (!map.current || !showOverlay || !overlays?.features.length) return;
+    const layer = L.geoJSON(overlays as unknown as GeoJsonObject, {
+      pane: 'zoning',
+      interactive: false,
+      style: { color: '#c2410c', weight: 2.5, dashArray: '4 3', fill: false },
+    }).addTo(map.current);
+    layer.bindTooltip('Fenton Village Overlay Zone · zoning boundary, not a count area');
+    return () => { layer.remove(); };
+  }, [overlays, showOverlay]);
+
+  useEffect(() => {
+    if (!map.current || !showTransit || !transit?.features.length) return;
+    const layer = L.geoJSON(transit as unknown as GeoJsonObject, {
+      pane: 'transit',
+      interactive: false,
+      style: { color: '#6b21a8', weight: 3, opacity: 0.85 },
+    }).addTo(map.current);
+    layer.bindTooltip('Purple Line · under construction, not operating service');
+    return () => { layer.remove(); };
+  }, [transit, showTransit]);
 
   return <div ref={container} className="map" aria-label="Interactive Silver Spring map" />;
 }

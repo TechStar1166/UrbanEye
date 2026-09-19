@@ -1,0 +1,51 @@
+[
+  {
+    "name": "2020 Census: Silver Spring boundary and counts",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/28/query?where=GEOID%3D%272472450%27&outFields=%2A&outSR=4326&returnGeometry=true&f=geojson",
+    "pulled": "2026-09-18T23:29:36.065805+00:00",
+    "vintage": "2020 Census",
+    "use": "Official POP100 population and HU100 housing counts; whole Silver Spring Census area.",
+    "note": "The unchanged official Census boundary is not a city limit or a local neighborhood boundary. It can differ from how residents describe Silver Spring."
+  },
+  {
+    "name": "2020 Census: all intersecting block groups",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query",
+    "pulled": "2026-09-19T05:38:33.805674+00:00",
+    "vintage": "2020 Census",
+    "use": "80 whole block groups shade the map; selected-area counts come from each group.",
+    "note": "Selected by polygon intersection with the CDP, including groups touching or crossing its boundary. No clipping or smoothing. Never add these counts to the larger CDP total."
+  },
+  {
+    "name": "OpenStreetMap food and drink places",
+    "url": "https://overpass-api.de/api/interpreter",
+    "pulled": "2026-09-19T05:38:35.086394+00:00",
+    "vintage": "2026-09-19T05:37:25Z",
+    "use": "90 mapped objects within 600 m of the challenge coordinate; restaurants, cafes, fast food, bars, pubs, ice cream, food courts and beer gardens.",
+    "note": "From OpenStreetMap, may not be complete. Object count, not a verified business census; duplicate businesses may exist across different OSM objects. Way/relation locations use centers. ODbL; \u00a9 OpenStreetMap contributors.",
+    "query": "[out:json][timeout:45];nwr[\"amenity\"~\"^(restaurant|cafe|fast_food|bar|pub|ice_cream|food_court|biergarten)$\"](around:600,38.99487,-77.02489);out center tags;"
+  },
+  {
+    "name": "Silver Spring Downtown and Adjacent Communities Plan",
+    "url": "https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf",
+    "pulled": "2026-09-19T00:30:07.795600+00:00",
+    "vintage": "2022-06",
+    "use": "Three reviewed housing passages support planning answers, with original page citations.",
+    "note": "Plan recommendations are regional context, not current conditions. Retrieval is limited to reviewed passages and their recorded geographic scope."
+  },
+  {
+    "name": "Fenton Village challenge location",
+    "url": null,
+    "pulled": null,
+    "vintage": "Challenge coordinate supplied by the team",
+    "use": "Pin at 38.99487, \u221277.02489; dashed 600 m study outline matches the food-and-drink query.",
+    "note": "The circle is a search radius, not an official district boundary. Census counts always cover the whole selected Census area."
+  },
+  {
+    "name": "Esri Light Gray basemap",
+    "url": "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer",
+    "pulled": null,
+    "vintage": "Tiles loaded live",
+    "use": "Muted street context under Census colors and orange food/drink dots.",
+    "note": "Tiles \u00a9 Esri, HERE, Garmin, OpenStreetMap contributors and the GIS user community. Places \u00a9 OpenStreetMap contributors. Tiles require a network connection; committed polygons and places do not."
+  }
+]
