@@ -1,2 +1,3 @@
 # Preserve byte-stable evidence hashes across Windows/macOS/Linux clones.
 /documents/processed/*.json text eol=lf
+/data/raw/storefronts_overpass.json text eol=lf

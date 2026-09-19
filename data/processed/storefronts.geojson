@@ -1,0 +1,4379 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.033589,
+     38.994759
+    ]
+   },
+   "properties": {
+    "osm_id": "node/10023233008",
+    "name": "Anagen Hair Restoration",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "8403 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027931,
+     38.996693
+    ]
+   },
+   "properties": {
+    "osm_id": "node/10110391437",
+    "name": "J. Hollinger's Waterman's Chophouse",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8606 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032241,
+     38.992439
+    ]
+   },
+   "properties": {
+    "osm_id": "node/10736129393",
+    "name": "Mamma Lucia",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "1302 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025907,
+     38.996585
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076953103",
+    "name": "Chipotle",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "907 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026077,
+     38.996425
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076953141",
+    "name": "McGinty's Public House",
+    "category_key": "amenity",
+    "category": "pub",
+    "address": "911 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025432,
+     38.997098
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076953149",
+    "name": "Chick-fil-A",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "825 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02568,
+     38.996795
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076971239",
+    "name": "Ben & Jerry's",
+    "category_key": "amenity",
+    "category": "ice_cream",
+    "address": "903 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024829,
+     38.993614
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076971248",
+    "name": "Noodles & Company",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026022,
+     38.996549
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076971257",
+    "name": "Michaels",
+    "category_key": "shop",
+    "category": "craft",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025263,
+     38.997298
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1076971275",
+    "name": "Cold Stone Creamery",
+    "category_key": "amenity",
+    "category": "ice_cream",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.028276,
+     38.989614
+    ]
+   },
+   "properties": {
+    "osm_id": "node/11524221870",
+    "name": "Laurence Hair Braiding",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "1133 East-West Hwy",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.033303,
+     38.993389
+    ]
+   },
+   "properties": {
+    "osm_id": "node/11653134970",
+    "name": "Leva Nails",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "8395 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025724,
+     38.996837
+    ]
+   },
+   "properties": {
+    "osm_id": "node/11660925005",
+    "name": "Five Below",
+    "category_key": "shop",
+    "category": "variety_store",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026454,
+     38.993553
+    ]
+   },
+   "properties": {
+    "osm_id": "node/11910531642",
+    "name": "Popeyes",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8401 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027383,
+     38.997526
+    ]
+   },
+   "properties": {
+    "osm_id": "node/11923819365",
+    "name": "Taco Bell Cantina",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8662 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02673,
+     38.99772
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12050368593",
+    "name": "Mattress Firm",
+    "category_key": "shop",
+    "category": "bed",
+    "address": "8701 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027035,
+     38.997145
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12064581327",
+    "name": "Ross",
+    "category_key": "shop",
+    "category": "department_store",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024998,
+     38.996016
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12064581328",
+    "name": "Ulta Beauty",
+    "category_key": "shop",
+    "category": "cosmetics",
+    "address": "8510 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027762,
+     38.989159
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12064581330",
+    "name": "Papa John's",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "1133 East West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02485,
+     38.98971
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12243104773",
+    "name": "Bump N Grind Analog Market Pop Up",
+    "category_key": "shop",
+    "category": "coffee",
+    "address": "Gist Avenue 923",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027707,
+     38.99406
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12405213536",
+    "name": "Java Nation",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "1010 Wayne Ave",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025137,
+     38.988258
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12625859579",
+    "name": "Hanagan's Auto Body",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023968,
+     38.993812
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12637047029",
+    "name": "Ivania Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "8315 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023956,
+     38.993631
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12637047031",
+    "name": "Anis Hair Studio",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "8307 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023953,
+     38.993582
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12637047032",
+    "name": "Tailoring & Alteration Center",
+    "category_key": "shop",
+    "category": "tailor",
+    "address": "8305 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023835,
+     38.993904
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12637047033",
+    "name": "Arat Kilo Market",
+    "category_key": "shop",
+    "category": "grocery",
+    "address": "818 Easley Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023763,
+     38.993889
+    ]
+   },
+   "properties": {
+    "osm_id": "node/12637047034",
+    "name": "Arat Kilo Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "818 Easley Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02421,
+     38.99535
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13021040594",
+    "name": "&pizza",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8455 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.033151,
+     38.993446
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13058308185",
+    "name": "Lenox Beer and Wine",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "8395 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026299,
+     38.992029
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13063944033",
+    "name": "The Big Greek Cafe",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8213 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026149,
+     38.994258
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13123538366",
+    "name": "Firepan Korean BBQ",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "962 Wayne Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027074,
+     38.994282
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1313335000",
+    "name": "Subway",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8484 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02778,
+     38.993715
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13144889774",
+    "name": "The Harbor Bank of Maryland",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "1010 Wayne Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026152,
+     38.99667
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13424698083",
+    "name": "Folks the Master Barber",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025704,
+     38.996889
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1343329329",
+    "name": "PNC Bank",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025398,
+     38.992888
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13607444768",
+    "name": "Prime Coffee and Bakery",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "930 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024826,
+     38.992907
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13607444769",
+    "name": "Lamoon Thai",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "906 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024886,
+     38.992902
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13607444770",
+    "name": "AW Beauty Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "908 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024959,
+     38.9929
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13607444771",
+    "name": "QT Nails",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "910 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024542,
+     38.983395
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1362229523",
+    "name": "Potter Violins",
+    "category_key": "shop",
+    "category": "musical_instrument",
+    "address": "7711 Eastern Avenue Northwest",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025395,
+     38.983939
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1363222508",
+    "name": "KFC/Taco Bell",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7720 Blair Road",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026887,
+     38.995939
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13825971963",
+    "name": "Chido's",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026521,
+     38.996193
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13825971964",
+    "name": "Matchbox",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026291,
+     38.995889
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13825971965",
+    "name": "Uniqlo",
+    "category_key": "shop",
+    "category": "clothes",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026081,
+     38.996085
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13825971966",
+    "name": "Nike Factory Store",
+    "category_key": "shop",
+    "category": "clothes",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024615,
+     38.996363
+    ]
+   },
+   "properties": {
+    "osm_id": "node/13825995738",
+    "name": "CVS Pharmacy",
+    "category_key": "shop",
+    "category": "chemist",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023885,
+     38.992192
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14077235902",
+    "name": "Sure-Fit Security",
+    "category_key": "shop",
+    "category": "doityourself",
+    "address": "8213 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031291,
+     38.994843
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14110342798",
+    "name": "Mojomala Books, Records & Cool Stuff",
+    "category_key": "shop",
+    "category": "books",
+    "address": "8401 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023949,
+     38.995497
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14110983601",
+    "name": "Easy Like Sunday",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8455 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026391,
+     38.997537
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14111099501",
+    "name": "Sushi Jin Next Door",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8555 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026488,
+     38.997571
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14111099601",
+    "name": "A Lil' Sumthin' Sweet",
+    "category_key": "amenity",
+    "category": "ice_cream",
+    "address": "8563 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.030949,
+     38.992564
+    ]
+   },
+   "properties": {
+    "osm_id": "node/14118971901",
+    "name": "'TIS Corner Cafe",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "1317 East-West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025173,
+     38.993798
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1417161166",
+    "name": "Mandalay Restaurant & Caf\u00e9",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "930 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02525,
+     38.993731
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1417180162",
+    "name": "Luisa's Hair Salon",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "934 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025347,
+     38.994106
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1419576666",
+    "name": "Kook Kais Thai Noodles",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "939 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025462,
+     38.994068
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1419577333",
+    "name": "Roger Miller",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "941 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02559,
+     38.994031
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1419579035",
+    "name": "Jaha Hair Studio",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "941 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025701,
+     38.993929
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1419669254",
+    "name": "Bonifant Theater Space",
+    "category_key": "shop",
+    "category": "art",
+    "address": "949 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025302,
+     38.993706
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1420112354",
+    "name": "Ebony Barbers",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "936 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02545,
+     38.993651
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1420112500",
+    "name": "Ambrotos Tattoo",
+    "category_key": "shop",
+    "category": "tattoo",
+    "address": "940 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024765,
+     38.992909
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1437389418",
+    "name": "Zeke Smoke Shop",
+    "category_key": "shop",
+    "category": "tobacco",
+    "address": "902 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026964,
+     38.993527
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1592076833",
+    "name": "The Republic Garden",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8402 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024375,
+     38.993363
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1592076838",
+    "name": "Safeway",
+    "category_key": "shop",
+    "category": "supermarket",
+    "address": "909 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024749,
+     38.996575
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1592078834",
+    "name": "CAVA",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8515 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024575,
+     38.996482
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1603830741",
+    "name": "CVS Pharmacy",
+    "category_key": "amenity",
+    "category": "pharmacy",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026951,
+     38.99359
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1671377421",
+    "name": "Charm Thai Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8408 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026603,
+     38.994897
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1671377426",
+    "name": "Bank of America",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8511 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025628,
+     38.99042
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1671380853",
+    "name": "Vicino Restaurante Italiano",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "959 Sligo Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032809,
+     38.993595
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1711361244",
+    "name": "Lenox Beer-Wine-Deli",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "1400 East-West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02775,
+     38.985647
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1786882054",
+    "name": "Tiramisu Caf\u00e9",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "7847 Eastern Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026907,
+     38.988467
+    ]
+   },
+   "properties": {
+    "osm_id": "node/1786883731",
+    "name": "Moorenko's Ice Cream & Caf\u00e9",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": null,
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023315,
+     38.997693
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2264542771",
+    "name": "Genie Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023473,
+     38.990409
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2612376412",
+    "name": "Ambassador Pet Hospital",
+    "category_key": "shop",
+    "category": "pet",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023968,
+     38.993841
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2786896445",
+    "name": "Pure Panic Comics and Games",
+    "category_key": "shop",
+    "category": "books",
+    "address": "8317 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023962,
+     38.993762
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2786896446",
+    "name": "Fenton Cafe",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8311 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026917,
+     38.992418
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2865573701",
+    "name": "Urban Butcher",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8226 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025615,
+     38.994551
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2902920188",
+    "name": "Bonanza Coins - Gold & Jewelry Buyers",
+    "category_key": "shop",
+    "category": "jewelry",
+    "address": "940 Wayne Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026219,
+     38.978398
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2986680651",
+    "name": "First Cash Jewelry and Loan",
+    "category_key": "shop",
+    "category": "jewelry",
+    "address": "7301 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026182,
+     38.97844
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2986680652",
+    "name": "Cheerz",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "7303 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026169,
+     38.978491
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2986680653",
+    "name": "Bryan Joseph Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7307 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026145,
+     38.9786
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2986680656",
+    "name": "Angelico",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7311 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026259,
+     38.978659
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827816",
+    "name": "Modern Mobler",
+    "category_key": "shop",
+    "category": "furniture",
+    "address": "7113 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02626,
+     38.978709
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827817",
+    "name": "The Washington Humane Society",
+    "category_key": "shop",
+    "category": "pet",
+    "address": "7115 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026171,
+     38.978768
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827820",
+    "name": "Luck Ginger Carryout",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7117 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026237,
+     38.978823
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827821",
+    "name": "The Humane Society",
+    "category_key": "shop",
+    "category": "pet",
+    "address": "7119 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026198,
+     38.979023
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827825",
+    "name": "D'carlo",
+    "category_key": "shop",
+    "category": "furniture",
+    "address": "7327 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026193,
+     38.979076
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989827827",
+    "name": "Demi Mode Hair Studio",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7329 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026691,
+     38.978563
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989905712",
+    "name": "Teddy's Roti Shop",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7304 Fern Place Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026708,
+     38.979083
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989905716",
+    "name": "Rex Cleaners",
+    "category_key": "shop",
+    "category": "dry_cleaning",
+    "address": "7342 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026707,
+     38.98004
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989905725",
+    "name": "Moh Moh...Licious",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "7414 Geranium Street Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026743,
+     38.983241
+    ]
+   },
+   "properties": {
+    "osm_id": "node/2989905845",
+    "name": "Shepherd Park Barber",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7716 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026839,
+     38.982066
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3063670533",
+    "name": "Sale's Hair Studio",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7600 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026389,
+     38.993083
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3234919918",
+    "name": "Lucy Ethiopian Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8301 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026186,
+     38.997476
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3333262565",
+    "name": "Visionworks",
+    "category_key": "shop",
+    "category": "optician",
+    "address": "8551 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026427,
+     38.997972
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3333263297",
+    "name": "Liquor & Wine",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027371,
+     38.997567
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3333263620",
+    "name": "T-Mobile",
+    "category_key": "shop",
+    "category": "mobile_phone",
+    "address": "8668 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025936,
+     38.979679
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3347849619",
+    "name": "7-Eleven",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "7401 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026031,
+     38.993752
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3492569211",
+    "name": "Kefa Cafe",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "963 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027308,
+     38.992663
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3492569215",
+    "name": "Sherwin-Williams",
+    "category_key": "shop",
+    "category": "paint",
+    "address": "8230 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027835,
+     38.996843
+    ]
+   },
+   "properties": {
+    "osm_id": "node/3956152096",
+    "name": "Abol Ethiopian Cuisine",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8626 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026955,
+     38.993658
+    ]
+   },
+   "properties": {
+    "osm_id": "node/4312150413",
+    "name": "Velatis Caramel Company",
+    "category_key": "shop",
+    "category": "confectionery",
+    "address": "8408 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024756,
+     38.995633
+    ]
+   },
+   "properties": {
+    "osm_id": "node/4494743768",
+    "name": "BurgerFi",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8504 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027947,
+     38.989182
+    ]
+   },
+   "properties": {
+    "osm_id": "node/459742268",
+    "name": "Veridian Market and Wine",
+    "category_key": "shop",
+    "category": "beverages",
+    "address": "8010 Blair Mill Way",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026659,
+     38.996157
+    ]
+   },
+   "properties": {
+    "osm_id": "node/459790883",
+    "name": "Thai at Silver Spring",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "921 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027663,
+     38.99629
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460203558",
+    "name": "Panera Bread",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8541 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027461,
+     38.996264
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460203778",
+    "name": "Roaming Rooster",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026311,
+     38.996241
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460207277",
+    "name": "Potbelly",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "917 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031655,
+     38.991893
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460211087",
+    "name": "Giant",
+    "category_key": "shop",
+    "category": "supermarket",
+    "address": "1280 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02969,
+     38.990991
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460211089",
+    "name": "Mamma Lucia",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "1302 East West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032093,
+     38.99234
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460211090",
+    "name": "CVS Pharmacy",
+    "category_key": "amenity",
+    "category": "pharmacy",
+    "address": "1290 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032164,
+     38.993993
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460237282",
+    "name": "Einstein Bros. Bagels",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8397 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.033065,
+     38.993506
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460273570",
+    "name": "Lenox Cleaners",
+    "category_key": "shop",
+    "category": "dry_cleaning",
+    "address": "1400 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032079,
+     38.992547
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460292996",
+    "name": "Kessler's Cleaners",
+    "category_key": "shop",
+    "category": "laundry",
+    "address": "1304 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.0322,
+     38.992847
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460292998",
+    "name": "Crisp & Juicy",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "1314 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032028,
+     38.99294
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460292999",
+    "name": "Starbucks",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "1316 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029487,
+     38.991179
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293000",
+    "name": "Ikko Sushi",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "1215 East West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.030818,
+     38.99244
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293015",
+    "name": "Metro Conv.",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "1315 East West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029874,
+     38.991693
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293018",
+    "name": "NOAA Gourmet Deli",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031916,
+     38.99264
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293021",
+    "name": "NIH Federal Credit Union",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "1308 East West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031153,
+     38.9933
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293053",
+    "name": "TS Grill",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "1329 East West Highway",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031161,
+     38.9932
+    ]
+   },
+   "properties": {
+    "osm_id": "node/460293055",
+    "name": "News & Valet",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": null,
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026787,
+     38.997353
+    ]
+   },
+   "properties": {
+    "osm_id": "node/4719278718",
+    "name": "Not Your Average Joe's",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029467,
+     38.997128
+    ]
+   },
+   "properties": {
+    "osm_id": "node/474429445",
+    "name": "EagleBank",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024385,
+     38.996697
+    ]
+   },
+   "properties": {
+    "osm_id": "node/480574125",
+    "name": "Silver Spring Ace Hardware",
+    "category_key": "shop",
+    "category": "doityourself",
+    "address": "815 Wayne Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026159,
+     38.994731
+    ]
+   },
+   "properties": {
+    "osm_id": "node/480598900",
+    "name": "Convenience Express",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": "948 Wayne Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025706,
+     38.994509
+    ]
+   },
+   "properties": {
+    "osm_id": "node/480598902",
+    "name": "Selam Garden Grill & Bar",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "944 Wayne Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.0293,
+     38.995702
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5244739305",
+    "name": "Bonjour Waffles",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8600 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026363,
+     38.996284
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5244757027",
+    "name": "Masa Hibachi Steakhouse & Sushi",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "921 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025789,
+     38.996859
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5244858729",
+    "name": "Kung Fu Tea",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02776,
+     38.992857
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5415556963",
+    "name": "Silver Cycles",
+    "category_key": "shop",
+    "category": "bicycle",
+    "address": "8307 Dixon Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023894,
+     38.992604
+    ]
+   },
+   "properties": {
+    "osm_id": "node/565295456",
+    "name": "Effoi Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8233 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023871,
+     38.992167
+    ]
+   },
+   "properties": {
+    "osm_id": "node/565295458",
+    "name": "Silver Spring Beer & Wine",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023609,
+     38.990704
+    ]
+   },
+   "properties": {
+    "osm_id": "node/565295460",
+    "name": "Manny & Olga's Pizza",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8107 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024344,
+     38.990084
+    ]
+   },
+   "properties": {
+    "osm_id": "node/565295463",
+    "name": "Dragon City",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "918 Sligo Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024947,
+     38.993937
+    ]
+   },
+   "properties": {
+    "osm_id": "node/565295467",
+    "name": "Ecology Health",
+    "category_key": "shop",
+    "category": "health",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031094,
+     38.994597
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5665038232",
+    "name": "Dunkin'",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8401 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025936,
+     38.997305
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5691358788",
+    "name": "Lebanese Taverna",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8535 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027519,
+     38.989349
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5744147021",
+    "name": "Bump \u2018n Grind",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "8030 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025736,
+     38.991503
+    ]
+   },
+   "properties": {
+    "osm_id": "node/5809054854",
+    "name": "Kaldi\u2019s Social House",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "918 Silver Spring Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026891,
+     38.985649
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6051565991",
+    "name": "Capitol Tattoo",
+    "category_key": "shop",
+    "category": "tattoo",
+    "address": "7920 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.031233,
+     38.994968
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6356743585",
+    "name": "Silver Branch Brewing Company",
+    "category_key": "amenity",
+    "category": "pub",
+    "address": "8401 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026376,
+     38.993587
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6515747106",
+    "name": "Quarry House Tavern",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8401 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024568,
+     38.996881
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304787",
+    "name": "European Wax Center",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "811 Wayne Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026238,
+     38.996691
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304788",
+    "name": "DMV Furniture Outlet",
+    "category_key": "shop",
+    "category": "furniture",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02635,
+     38.997038
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304789",
+    "name": "Marshalls",
+    "category_key": "shop",
+    "category": "department_store",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026983,
+     38.997295
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304791",
+    "name": "TD Bank",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026753,
+     38.997096
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304792",
+    "name": "Dave & Buster's",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025085,
+     38.996357
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304801",
+    "name": "Men's Wearhouse",
+    "category_key": "shop",
+    "category": "clothes",
+    "address": "8514 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026283,
+     38.996604
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551304802",
+    "name": "DSW",
+    "category_key": "shop",
+    "category": "shoes",
+    "address": "910 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026894,
+     38.984527
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6551399005",
+    "name": "Target",
+    "category_key": "shop",
+    "category": "department_store",
+    "address": "7828 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.030951,
+     38.994683
+    ]
+   },
+   "properties": {
+    "osm_id": "node/6766573605",
+    "name": "Sandy Spring Bank",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032448,
+     38.992748
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7150325598",
+    "name": "District Taco",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "1310 East-West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026338,
+     38.984119
+    ]
+   },
+   "properties": {
+    "osm_id": "node/739653647",
+    "name": "Nile Market & Kitchen",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "7815 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026748,
+     38.979009
+    ]
+   },
+   "properties": {
+    "osm_id": "node/750408661",
+    "name": "Mayfair Liquors",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": "7312 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026717,
+     38.979241
+    ]
+   },
+   "properties": {
+    "osm_id": "node/750408669",
+    "name": "Merry Pin",
+    "category_key": "shop",
+    "category": "craft",
+    "address": "7350 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027023,
+     38.984108
+    ]
+   },
+   "properties": {
+    "osm_id": "node/750408682",
+    "name": "Morris Miller Liquors",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": "7804 Alaska Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026254,
+     38.981685
+    ]
+   },
+   "properties": {
+    "osm_id": "node/751864711",
+    "name": "PNC Bank",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "7601 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026895,
+     38.98558
+    ]
+   },
+   "properties": {
+    "osm_id": "node/757577156",
+    "name": "Vivanti Hair Studio",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7892 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027211,
+     38.991721
+    ]
+   },
+   "properties": {
+    "osm_id": "node/757602118",
+    "name": "Golden House",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8200 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026309,
+     38.991839
+    ]
+   },
+   "properties": {
+    "osm_id": "node/757602123",
+    "name": "PLA-ZA",
+    "category_key": "shop",
+    "category": "artist_supply;frame",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026299,
+     38.992077
+    ]
+   },
+   "properties": {
+    "osm_id": "node/757602125",
+    "name": "Odalis",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8241 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026273,
+     38.99176
+    ]
+   },
+   "properties": {
+    "osm_id": "node/757602131",
+    "name": "Betseb Ethiopian Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8251 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027058,
+     38.99555
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068505",
+    "name": "BibBop",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "935 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.0268,
+     38.995464
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068506",
+    "name": "Copper Canyon Grill",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "928 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02697,
+     38.995277
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068508",
+    "name": "AT&T",
+    "category_key": "shop",
+    "category": "mobile_phone",
+    "address": "8519 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026613,
+     38.99564
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068510",
+    "name": "Nando's",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "924 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026526,
+     38.995718
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068513",
+    "name": "Loft",
+    "category_key": "shop",
+    "category": "clothes",
+    "address": "922 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025218,
+     38.994791
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068516",
+    "name": "Yu Noodles",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "930 Wayne Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026424,
+     38.994176
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068517",
+    "name": "Chase",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8435 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026513,
+     38.993985
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068518",
+    "name": "Orchid Nails",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026507,
+     38.993915
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068519",
+    "name": "Helen Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026399,
+     38.992812
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068521",
+    "name": "Moren",
+    "category_key": "shop",
+    "category": "repair",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02628,
+     38.991173
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068523",
+    "name": "Golf Ultra Lounge",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8123 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027014,
+     38.991271
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068527",
+    "name": "Nazret Market",
+    "category_key": "shop",
+    "category": "supermarket",
+    "address": null,
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026309,
+     38.992151
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068530",
+    "name": "Afrikutz",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026301,
+     38.991968
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068531",
+    "name": "Palisades Lounge",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8211 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026992,
+     38.993218
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068532",
+    "name": "Citizens",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8252 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032293,
+     38.992841
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7802068537",
+    "name": "Allure Nail Bar",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024631,
+     38.996819
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7821495143",
+    "name": "Locavino Wine Cafe",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8519 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02636,
+     38.992864
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144897",
+    "name": "Mix Bar and Grille",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8241 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025489,
+     38.993306
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144898",
+    "name": "Takoma Old Town Auto Service Center 2",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": "915 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02719,
+     38.991808
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144899",
+    "name": "7-Eleven",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024669,
+     38.994535
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144903",
+    "name": "Lewi Cafe",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "911 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025768,
+     38.996699
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144904",
+    "name": "Don Pollo",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "905 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024984,
+     38.996252
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144905",
+    "name": "Kusshi Sushi",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8512 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025963,
+     38.993092
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144909",
+    "name": "Negril The Jamaican Eatery",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "965 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026082,
+     38.993074
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144910",
+    "name": "Cortez Cigars",
+    "category_key": "shop",
+    "category": "tobacco",
+    "address": "971 Thayer Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026976,
+     38.992815
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7836144911",
+    "name": "Spice Street",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8242 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024682,
+     38.994444
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7847716993",
+    "name": "Salon Zoma",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "919 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024677,
+     38.994498
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7847716994",
+    "name": "Edible Arrangements",
+    "category_key": "shop",
+    "category": "gift",
+    "address": "915 Bonifant Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02809,
+     38.994426
+    ]
+   },
+   "properties": {
+    "osm_id": "node/7847716995",
+    "name": "Truist",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "1100 Wayne Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026101,
+     38.982824
+    ]
+   },
+   "properties": {
+    "osm_id": "node/846000793",
+    "name": "Premier Dry Cleaning",
+    "category_key": "shop",
+    "category": "dry_cleaning",
+    "address": "835 Juniper Street Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029552,
+     38.997909
+    ]
+   },
+   "properties": {
+    "osm_id": "node/8757368434",
+    "name": "Sculpt'd Body Studio",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027855,
+     38.985717
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9486254339",
+    "name": "Kedus Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "7851 Eastern Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027279,
+     38.985295
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9486254340",
+    "name": "Adulis Store",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "7825 Eastern Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027373,
+     38.985351
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9486254341",
+    "name": "Pizza Boli's",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7831 Eastern Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027328,
+     38.985327
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9486254343",
+    "name": "Beauty By Josey",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "7829 Eastern Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027705,
+     38.985603
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9486254345",
+    "name": "Woder Ethiopia",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024288,
+     38.992893
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9512604826",
+    "name": "Black Lion Cafe",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "8240 Fenton Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02683,
+     38.995773
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9558833155",
+    "name": "Dog Haus",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "933 Ellsworth Drive",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026854,
+     38.985202
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9712618451",
+    "name": "Cash Depot",
+    "category_key": "shop",
+    "category": "money_lender",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026884,
+     38.985506
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9712618452",
+    "name": "La Fonda Paisa",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026854,
+     38.9853
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9712618455",
+    "name": "7 Brothers Cleaners",
+    "category_key": "shop",
+    "category": "dry_cleaning",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026878,
+     38.985466
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9712618457",
+    "name": "Chez Aviole",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "7912 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026873,
+     38.985343
+    ]
+   },
+   "properties": {
+    "osm_id": "node/9712618460",
+    "name": "DMZ Hair Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026127,
+     38.99136
+    ]
+   },
+   "properties": {
+    "osm_id": "way/1028635371",
+    "name": "AAMCO",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": "8129 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024307,
+     38.991937
+    ]
+   },
+   "properties": {
+    "osm_id": "way/124560057",
+    "name": "Lesaac Ethiopian Cafe",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8200 Fenton Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023618,
+     38.990536
+    ]
+   },
+   "properties": {
+    "osm_id": "way/130507228",
+    "name": "7-Eleven",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "8101 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023836,
+     38.992873
+    ]
+   },
+   "properties": {
+    "osm_id": "way/130535708",
+    "name": "Silver Spring Beauty Supply",
+    "category_key": "shop",
+    "category": "beauty",
+    "address": "8237 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02993,
+     38.996475
+    ]
+   },
+   "properties": {
+    "osm_id": "way/145889133",
+    "name": "Mi Rancho",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8701 Ramsey Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.030219,
+     38.995133
+    ]
+   },
+   "properties": {
+    "osm_id": "way/224682806",
+    "name": "McDonald's",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "8507 Colesville Road",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.032708,
+     38.997063
+    ]
+   },
+   "properties": {
+    "osm_id": "way/256592811",
+    "name": "Fenwick Beer & Wine",
+    "category_key": "shop",
+    "category": "alcohol",
+    "address": "1327 Fenwick Lane",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026991,
+     38.992254
+    ]
+   },
+   "properties": {
+    "osm_id": "way/284043042",
+    "name": "Meineke",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": "8220 Georgia Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029,
+     38.993845
+    ]
+   },
+   "properties": {
+    "osm_id": "way/287649404",
+    "name": "Buena Vida Restaurant",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8407 Ramsey Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027402,
+     38.987971
+    ]
+   },
+   "properties": {
+    "osm_id": "way/38738900",
+    "name": "Sport Honda Service Center",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": "1006 East-West Highway",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027098,
+     38.987509
+    ]
+   },
+   "properties": {
+    "osm_id": "way/38738904",
+    "name": "Rayco",
+    "category_key": "shop",
+    "category": "car_repair",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024122,
+     38.996083
+    ]
+   },
+   "properties": {
+    "osm_id": "way/39994529",
+    "name": "Whole Foods Market",
+    "category_key": "shop",
+    "category": "supermarket",
+    "address": "833 Wayne Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.025421,
+     38.996436
+    ]
+   },
+   "properties": {
+    "osm_id": "way/697599575",
+    "name": "H&M",
+    "category_key": "shop",
+    "category": "clothes",
+    "address": "8518 Fenton Street",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026185,
+     38.980654
+    ]
+   },
+   "properties": {
+    "osm_id": "way/71000611",
+    "name": "McDonald's",
+    "category_key": "amenity",
+    "category": "fast_food",
+    "address": "7425 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026184,
+     38.980941
+    ]
+   },
+   "properties": {
+    "osm_id": "way/71001512",
+    "name": "Ledo Pizza",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "7435 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026851,
+     38.982517
+    ]
+   },
+   "properties": {
+    "osm_id": "way/71420719",
+    "name": "Taste Art Gallery",
+    "category_key": "shop",
+    "category": "art",
+    "address": "7610 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026828,
+     38.982655
+    ]
+   },
+   "properties": {
+    "osm_id": "way/71425439",
+    "name": "Melat Grocery",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": "7616 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026765,
+     38.979616
+    ]
+   },
+   "properties": {
+    "osm_id": "way/71426704",
+    "name": "McGuire Funeral Home",
+    "category_key": "shop",
+    "category": "funeral_directors",
+    "address": "7400 Georgia Avenue Northwest",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.029002,
+     38.993954
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729743633",
+    "name": "Tacos Tortas Tequila",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8407 Ramsey Avenue",
+    "block_group_id": "240317025011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026159,
+     38.99235
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729748493",
+    "name": "Abyssinia",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026288,
+     38.99241
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729748494",
+    "name": "The Big Greek Cafe",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "8213 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026292,
+     38.992464
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729748495",
+    "name": "Zed's Cafe",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "8225 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026174,
+     38.992595
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729748497",
+    "name": "The Society Lounge",
+    "category_key": "amenity",
+    "category": "bar",
+    "address": "8229 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02618,
+     38.992703
+    ]
+   },
+   "properties": {
+    "osm_id": "way/729748499",
+    "name": "Underground Pizza Company",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026899,
+     38.985037
+    ]
+   },
+   "properties": {
+    "osm_id": "way/80566123",
+    "name": "Vivanti Hair Studio",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027128,
+     38.985176
+    ]
+   },
+   "properties": {
+    "osm_id": "way/80566124",
+    "name": "Reggae Vibes",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": "7708 Georgia Avenue",
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.027077,
+     38.985732
+    ]
+   },
+   "properties": {
+    "osm_id": "way/80566181",
+    "name": "El Aguila",
+    "category_key": "amenity",
+    "category": "restaurant",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.0271,
+     38.985855
+    ]
+   },
+   "properties": {
+    "osm_id": "way/80566183",
+    "name": "Unity Barbers and Hair Braiding Salon",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026995,
+     38.985981
+    ]
+   },
+   "properties": {
+    "osm_id": "way/80566196",
+    "name": "7-Eleven",
+    "category_key": "shop",
+    "category": "convenience",
+    "address": null,
+    "block_group_id": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026321,
+     38.993293
+    ]
+   },
+   "properties": {
+    "osm_id": "way/845849619",
+    "name": "Capital One",
+    "category_key": "amenity",
+    "category": "bank",
+    "address": "8315 Georgia Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024424,
+     38.994806
+    ]
+   },
+   "properties": {
+    "osm_id": "way/845858454",
+    "name": "Bump N Grind",
+    "category_key": "amenity",
+    "category": "cafe",
+    "address": "900 Wayne Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.026155,
+     38.991491
+    ]
+   },
+   "properties": {
+    "osm_id": "way/88456611",
+    "name": "Fire Station 1 Restaurant & Brewing Co.",
+    "category_key": "amenity",
+    "category": "pub",
+    "address": "8131 Georgia Ave",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023484,
+     38.986039
+    ]
+   },
+   "properties": {
+    "osm_id": "way/88463031",
+    "name": "Extra Space Storage",
+    "category_key": "shop",
+    "category": "storage_rental",
+    "address": "7722 Fenton Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.023862,
+     38.987485
+    ]
+   },
+   "properties": {
+    "osm_id": "way/88463033",
+    "name": "Public Storage",
+    "category_key": "shop",
+    "category": "storage_rental",
+    "address": null,
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024327,
+     38.989755
+    ]
+   },
+   "properties": {
+    "osm_id": "way/90381353",
+    "name": "Tropicana Laundromat",
+    "category_key": "shop",
+    "category": "laundry",
+    "address": "8010 Fenton Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02426,
+     38.989327
+    ]
+   },
+   "properties": {
+    "osm_id": "way/90387244",
+    "name": "Shelton\u2019s Hair Gallery",
+    "category_key": "shop",
+    "category": "hairdresser",
+    "address": "910 Gist Avenue",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.024152,
+     38.98898
+    ]
+   },
+   "properties": {
+    "osm_id": "way/90387247",
+    "name": "RISE",
+    "category_key": "shop",
+    "category": "cannabis",
+    "address": "7900 Fenton Street",
+    "block_group_id": "240317025021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -77.02666,
+     38.99704
+    ]
+   },
+   "properties": {
+    "osm_id": "way/92879364",
+    "name": "Ellsworth Place",
+    "category_key": "shop",
+    "category": "mall",
+    "address": "8661 Colesville Road",
+    "block_group_id": null
+   }
+  }
+ ]
+}

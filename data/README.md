@@ -35,3 +35,21 @@ The Silver Spring CDP is broader than Fenton Village. The Fenton Village block g
 lie inside the Silver Spring CDP polygon; their counts must describe each block group,
 not the clipped study boundary, and should never be added to CDP totals. No within-area
 density or distribution is inferred. Rebuild anytime with `python -m scripts.prepare_data`.
+
+## Storefronts (OpenStreetMap)
+
+Named shops and food, drink, bank and pharmacy amenities around the Fenton Village block
+groups, for the storefront layer and competitor context. See
+[docs/plans/storefront-layer.md](../docs/plans/storefront-layer.md).
+
+- Source: OpenStreetMap via the Overpass API. Data (c) OpenStreetMap contributors, ODbL 1.0.
+- Query, bounding box (block groups plus about 200 m), retrieval time and OSM data timestamp:
+  `raw/storefronts_source.json`. Original response: `raw/storefronts_overpass.json`.
+- Processed points: `processed/storefronts.geojson`. Each has `category`, an address when OSM
+  has one, and the `block_group_id` it falls inside (`null` when only nearby context).
+  Provenance, counts and limitations: `processed/storefronts_manifest.json`.
+- Rebuild offline from the cached response with `python -m scripts.prepare_storefronts`.
+  `--refresh` downloads a new snapshot first; review the resulting diff. Never download at startup.
+- Limits: volunteer-mapped, incomplete, possibly stale, inconsistently categorized, and not an
+  official business registry. Counts describe mapped features, not all businesses, and do not
+  correspond to the challenge brief's 240+ figure (different boundary and source).
