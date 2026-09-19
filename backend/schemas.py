@@ -154,3 +154,115 @@ class SegmentResponse(Contract):
     sample_size: int
     explanation: str
     data_points: list[DataPoint]
+
+
+class HistoryPoint(Contract):
+    year: int
+    period: str
+    estimate: float | None
+    moe: float | None
+    estimate_2024_usd: float | None = None
+    moe_2024_usd: float | None = None
+    unit: str
+    low_reliability: bool = False
+
+
+class HistorySource(Contract):
+    dataset: str
+    url: str | None = None
+    attribution: str | None = None
+    license: str | None = None
+
+
+class HistoryResponse(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    geo_id: str
+    name: str
+    geography_type: str
+    zcta: str | None = None
+    metric: str
+    span: int
+    source: HistorySource | None = None
+    series: list[HistoryPoint]
+    limitations: list[str]
+
+
+class ChangeResponse(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    geo_id: str
+    name: str
+    geography_type: str
+    metric: str
+    span: int
+    from_year: int
+    to_year: int
+    from_estimate: float | None
+    to_estimate: float | None
+    absolute_change: float | None
+    percent_change: float | None
+    inflation_adjusted: bool = False
+    significant_90: bool | None = None
+    limitations: list[str]
+
+
+class CompareValue(Contract):
+    estimate: float | None
+    moe: float | None
+    unit: str
+    low_reliability: bool = False
+    span: int
+
+
+class CompareArea(Contract):
+    geo_id: str
+    name: str
+    geography_type: str
+    zcta: str | None = None
+    values: dict[str, CompareValue | None]
+
+
+class CompareResponse(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    year: int
+    metrics: list[str]
+    areas: list[CompareArea]
+    limitations: list[str]
+
+
+class BusinessPoi(Contract):
+    osm_id: str
+    name: str | None = None
+    category: str
+    subcategory: str | None = None
+    lat: float
+    lon: float
+    geo_id: str | None = None
+
+
+class BusinessResponse(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    geo_id: str | None = None
+    name: str | None = None
+    total: int
+    by_category: dict[str, int]
+    features: list[BusinessPoi]
+    attribution: str
+    license: str
+    copyright_url: str
+    source_date: str | None = None
+    limitations: list[str]
+
+
+class CommunityGeography(Contract):
+    geo_id: str
+    name: str
+    geography_type: str
+    zcta: str | None = None
+
+
+class CommunityCatalog(Contract):
+    schema_version: Literal["1.0"] = "1.0"
+    metrics: list[str]
+    years: list[int]
+    geographies: list[CommunityGeography]
+    businesses: int

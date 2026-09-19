@@ -55,6 +55,108 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/areas/{geo_id}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Area History */
+        get: operations["get_area_history_areas__geo_id__history_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/areas/{geo_id}/changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Area Changes */
+        get: operations["get_area_changes_areas__geo_id__changes_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/areas/{geo_id}/businesses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Area Businesses */
+        get: operations["get_area_businesses_areas__geo_id__businesses_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/pois": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Pois */
+        get: operations["get_pois_pois_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Compare */
+        get: operations["get_compare_compare_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/community": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Community Catalog */
+        get: operations["get_community_catalog_community_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/layers": {
         parameters: {
             query?: never;
@@ -178,12 +280,176 @@ export interface components {
             /** Geo Id */
             geo_id: string;
         };
+        /** BusinessPoi */
+        BusinessPoi: {
+            /** Osm Id */
+            osm_id: string;
+            /** Name */
+            name?: string | null;
+            /** Category */
+            category: string;
+            /** Subcategory */
+            subcategory?: string | null;
+            /** Lat */
+            lat: number;
+            /** Lon */
+            lon: number;
+            /** Geo Id */
+            geo_id?: string | null;
+        };
+        /** BusinessResponse */
+        BusinessResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Geo Id */
+            geo_id?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Total */
+            total: number;
+            /** By Category */
+            by_category: {
+                [key: string]: number;
+            };
+            /** Features */
+            features: components["schemas"]["BusinessPoi"][];
+            /** Attribution */
+            attribution: string;
+            /** License */
+            license: string;
+            /** Copyright Url */
+            copyright_url: string;
+            /** Source Date */
+            source_date?: string | null;
+            /** Limitations */
+            limitations: string[];
+        };
+        /** ChangeResponse */
+        ChangeResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Geo Id */
+            geo_id: string;
+            /** Name */
+            name: string;
+            /** Geography Type */
+            geography_type: string;
+            /** Metric */
+            metric: string;
+            /** Span */
+            span: number;
+            /** From Year */
+            from_year: number;
+            /** To Year */
+            to_year: number;
+            /** From Estimate */
+            from_estimate: number | null;
+            /** To Estimate */
+            to_estimate: number | null;
+            /** Absolute Change */
+            absolute_change: number | null;
+            /** Percent Change */
+            percent_change: number | null;
+            /**
+             * Inflation Adjusted
+             * @default false
+             */
+            inflation_adjusted: boolean;
+            /** Significant 90 */
+            significant_90?: boolean | null;
+            /** Limitations */
+            limitations: string[];
+        };
         /** Claim */
         Claim: {
             /** Text */
             text: string;
             /** Evidence Ids */
             evidence_ids: string[];
+        };
+        /** CommunityCatalog */
+        CommunityCatalog: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Metrics */
+            metrics: string[];
+            /** Years */
+            years: number[];
+            /** Geographies */
+            geographies: components["schemas"]["CommunityGeography"][];
+            /** Businesses */
+            businesses: number;
+        };
+        /** CommunityGeography */
+        CommunityGeography: {
+            /** Geo Id */
+            geo_id: string;
+            /** Name */
+            name: string;
+            /** Geography Type */
+            geography_type: string;
+            /** Zcta */
+            zcta?: string | null;
+        };
+        /** CompareArea */
+        CompareArea: {
+            /** Geo Id */
+            geo_id: string;
+            /** Name */
+            name: string;
+            /** Geography Type */
+            geography_type: string;
+            /** Zcta */
+            zcta?: string | null;
+            /** Values */
+            values: {
+                [key: string]: components["schemas"]["CompareValue"] | null;
+            };
+        };
+        /** CompareResponse */
+        CompareResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Year */
+            year: number;
+            /** Metrics */
+            metrics: string[];
+            /** Areas */
+            areas: components["schemas"]["CompareArea"][];
+            /** Limitations */
+            limitations: string[];
+        };
+        /** CompareValue */
+        CompareValue: {
+            /** Estimate */
+            estimate: number | null;
+            /** Moe */
+            moe: number | null;
+            /** Unit */
+            unit: string;
+            /**
+             * Low Reliability
+             * @default false
+             */
+            low_reliability: boolean;
+            /** Span */
+            span: number;
         };
         /** DataPoint */
         DataPoint: {
@@ -276,6 +542,65 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** HistoryPoint */
+        HistoryPoint: {
+            /** Year */
+            year: number;
+            /** Period */
+            period: string;
+            /** Estimate */
+            estimate: number | null;
+            /** Moe */
+            moe: number | null;
+            /** Estimate 2024 Usd */
+            estimate_2024_usd?: number | null;
+            /** Moe 2024 Usd */
+            moe_2024_usd?: number | null;
+            /** Unit */
+            unit: string;
+            /**
+             * Low Reliability
+             * @default false
+             */
+            low_reliability: boolean;
+        };
+        /** HistoryResponse */
+        HistoryResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Geo Id */
+            geo_id: string;
+            /** Name */
+            name: string;
+            /** Geography Type */
+            geography_type: string;
+            /** Zcta */
+            zcta?: string | null;
+            /** Metric */
+            metric: string;
+            /** Span */
+            span: number;
+            source?: components["schemas"]["HistorySource"] | null;
+            /** Series */
+            series: components["schemas"]["HistoryPoint"][];
+            /** Limitations */
+            limitations: string[];
+        };
+        /** HistorySource */
+        HistorySource: {
+            /** Dataset */
+            dataset: string;
+            /** Url */
+            url?: string | null;
+            /** Attribution */
+            attribution?: string | null;
+            /** License */
+            license?: string | null;
         };
         /** Layer */
         Layer: {
@@ -403,6 +728,181 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_area_history_areas__geo_id__history_get: {
+        parameters: {
+            query?: {
+                metric?: string;
+                span?: number | null;
+            };
+            header?: never;
+            path: {
+                geo_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HistoryResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_area_changes_areas__geo_id__changes_get: {
+        parameters: {
+            query?: {
+                metric?: string;
+                from_year?: number;
+                to_year?: number;
+                span?: number | null;
+            };
+            header?: never;
+            path: {
+                geo_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChangeResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_area_businesses_areas__geo_id__businesses_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                geo_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_pois_pois_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessResponse"];
+                };
+            };
+        };
+    };
+    get_compare_compare_get: {
+        parameters: {
+            query: {
+                geo_ids: string;
+                year?: number;
+                metrics?: string;
+                span?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompareResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_community_catalog_community_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommunityCatalog"];
                 };
             };
         };

@@ -12,25 +12,43 @@
     "housing_units": "HU100"
   },
   "transform": "scripts/prepare_data.py; no boundary simplification; negative counts become null",
+  "fenton_village_study_boundary": {
+    "url": "https://montgomeryplans.org/arcgis4/rest/services/Overlays/MCAtlas_Zoning/MapServer/3/query?where=CODE%3D%27FV%27&outFields=OBJECTID%2CCODE%2CNAME%2COVERLAY_NAME%2CBEGINDATE%2CENDDATE&outSR=4326&returnGeometry=true&f=geojson",
+    "retrieved_at": "2026-09-19T08:21:20.549486+00:00",
+    "dataset": "Montgomery County Planning Department - Digital Zoning Map, Overlay Zones",
+    "layer": "Overlays/MCAtlas_Zoning/MapServer/3 (Overlay Zones), CODE='FV'",
+    "boundary_name": "Fenton Village (FV) Overlay Zone",
+    "legal_definition": "Montgomery County Zoning Ordinance Section 4.9.8",
+    "purpose": "Documented Fenton Village study boundary; used only to select intersecting block groups",
+    "raw_sha256": "bd11167cf522c3f3bb211c4bd2f1575a63478dddb4919d1bcf5aed4eb67d9918",
+    "published_as_an_area": "No. The study boundary selects block groups; it carries no counts and is not served by /areas."
+  },
   "fenton_village_block_groups": {
-    "dataset": "U.S. Census Bureau \u2014 2020 Decennial Census (PL 94-171)",
-    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID+IN+%28%27240317025011%27%2C+%27240317025021%27%29&outFields=*&outSR=4326&f=geojson",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID%20IN%20('240317024022','240317024023','240317025021')&outFields=*&outSR=4326&returnGeometry=true&f=geojson",
+    "retrieved_at": "2026-09-19T08:21:20.549486+00:00",
+    "dataset": "U.S. Census Bureau TIGERweb Census 2020",
+    "boundary_vintage": "2020-01-01",
     "data_date": "2020-04-01",
-    "boundary_vintage": "Census 2020",
-    "source_name": "U.S. Census Bureau TIGERweb Census 2020",
-    "layer": "Census Block Groups",
-    "layer_id": 8,
-    "geoids": [
-      "240317025011",
-      "240317025021"
-    ],
-    "area_name": "Fenton Village",
-    "state": "Maryland",
-    "county": "Montgomery County",
-    "downloaded_at": "2026-09-19",
-    "crs": "EPSG:4326",
-    "raw_sha256": "798ff2d8874217abc59fc8e0b6060899b590cfdb2ccaae8d41cfd76b27bdeeb6",
-    "geography_scope": "Whole 2020 block groups covering the Fenton Village District; counts describe each block group, not the district boundary",
+    "study_area_boundary": "data/raw/fenton_village_overlay.geojson (Fenton Village (FV) Overlay Zone)",
+    "selection_method": "Whole 2020 Census block groups whose polygon intersects the adopted Fenton Village (FV) Overlay Zone. Spatial selection, joined by GEOID, never by name. These three cover 100% of the study area; no other block group intersects it.",
+    "selection_reproduction": "scripts/verify_geography.py (requires shapely; not run at build or startup)",
+    "overlap": {
+      "240317024022": {
+        "share_of_study_area_pct": 15.0,
+        "share_of_block_group_pct": 16.8
+      },
+      "240317024023": {
+        "share_of_study_area_pct": 16.6,
+        "share_of_block_group_pct": 5.7
+      },
+      "240317025021": {
+        "share_of_study_area_pct": 68.4,
+        "share_of_block_group_pct": 31.4
+      }
+    },
+    "counts_describe": "Each whole block group, not the Fenton Village study area. Only 5.7%-31.4% of each block group lies inside the study area, so these counts must never be summed into a Fenton Village total.",
+    "raw_sha256": "fa3ec43256897ef66bfdad68f45f57b3bdb895e9840e3263756bcf7e46c0cd9f",
+    "geography_scope": "Whole 2020 block groups intersecting the Fenton Village (FV) Overlay Zone; counts describe each block group, not the study boundary",
     "contains_cdp_overlap": "These block groups lie inside the Silver Spring CDP polygon. Never add their counts to the CDP totals."
   }
 }

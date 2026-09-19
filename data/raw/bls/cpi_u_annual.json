@@ -1,0 +1,26 @@
+{
+  "series_id": "CUUR0000SA0",
+  "series_name": "CPI-U, U.S. city average, all items, annual average",
+  "source": "U.S. Bureau of Labor Statistics",
+  "url": "https://www.bls.gov/cpi/tables/supplemental-files/",
+  "base": "1982-84=100",
+  "note": "Used only to express ACS dollar estimates in 2024 dollars. Percentages are not adjusted.",
+  "annual": {
+    "2009": 214.537,
+    "2010": 218.056,
+    "2011": 224.939,
+    "2012": 229.594,
+    "2013": 232.957,
+    "2014": 236.736,
+    "2015": 237.017,
+    "2016": 240.007,
+    "2017": 245.12,
+    "2018": 251.107,
+    "2019": 255.657,
+    "2020": 258.811,
+    "2021": 270.97,
+    "2022": 292.655,
+    "2023": 304.702,
+    "2024": 313.689
+  }
+}

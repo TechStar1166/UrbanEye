@@ -1,0 +1,18 @@
+{
+  "url": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:60];\n(\n  node[\"shop\"](38.9889,-77.0267,38.9959,-77.0229);\n  way[\"shop\"](38.9889,-77.0267,38.9959,-77.0229);\n  node[\"office\"](38.9889,-77.0267,38.9959,-77.0229);\n  way[\"office\"](38.9889,-77.0267,38.9959,-77.0229);\n  node[\"amenity\"~\"restaurant|cafe|bar|pub|fast_food|bank|pharmacy|clinic|dentist|marketplace\"](38.9889,-77.0267,38.9959,-77.0229);\n  way[\"amenity\"~\"restaurant|cafe|bar|pub|fast_food|bank|pharmacy|clinic|dentist|marketplace\"](38.9889,-77.0267,38.9959,-77.0229);\n);\nout center tags;\n",
+  "bbox": {
+    "south": 38.9889,
+    "west": -77.0267,
+    "north": 38.9959,
+    "east": -77.0229
+  },
+  "retrieved_at": "2026-09-19T08:28:45.877554+00:00",
+  "dataset": "OpenStreetMap Overpass API",
+  "license": "ODbL",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "copyright_url": "https://www.openstreetmap.org/copyright",
+  "note": "Crowd-sourced mapped storefronts, not a complete census of businesses.",
+  "element_count": 90,
+  "raw_sha256": "e3edf8a0d55b48949d6aa73687273310ae1e7ab5b00c0d8be049ab3cc381301f"
+}

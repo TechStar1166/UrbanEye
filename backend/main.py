@@ -3,7 +3,11 @@ from dotenv import load_dotenv
 
 from backend.analysis.correlation import calculate_pearson
 from backend.data import LAYERS, ROOT, load_areas, load_chunks
-from backend.schemas import Answer, Area, Areas, AskRequest, Layer, SegmentRequest, SegmentResponse, DataPoint
+from backend import community as community_data
+from backend.schemas import (
+    Answer, Area, Areas, AskRequest, BusinessResponse, ChangeResponse, CommunityCatalog,
+    CompareResponse, HistoryResponse, Layer, SegmentRequest, SegmentResponse, DataPoint,
+)
 from backend.services import answer
 from backend.rag.retrieve import DocumentIndex
 from backend.llm.gemini import Gemini, get_gemini
@@ -21,7 +25,8 @@ by_id = {f.properties.geo_id: f.properties for f in areas.features}
 def health(model: Gemini = Depends(get_gemini)):
     return {"status": "ok", "schema_version": "1.0", "areas": len(by_id),
             "document_chunks": len(chunks), "llm_enabled": model.enabled,
-            "llm_model": model.model, "retrieval": "bm25"}
+            "llm_model": model.model, "retrieval": "bm25",
+            "community_db": community_data.available()}
 
 
 @app.get("/areas", response_model=Areas)
@@ -35,6 +40,49 @@ def get_area(geo_id: str):
         raise HTTPException(404, "Unknown geographic ID")
     return by_id[geo_id]
 
+
+@app.get("/areas/{geo_id}/history", response_model=HistoryResponse)
+def get_area_history(geo_id: str, metric: str = "median_household_income", span: int | None = None):
+    payload = community_data.history(geo_id, metric, span)
+    if payload is None:
+        raise HTTPException(404, "Unknown geographic ID")
+    return payload
+
+
+@app.get("/areas/{geo_id}/changes", response_model=ChangeResponse)
+def get_area_changes(geo_id: str, metric: str = "median_household_income",
+                     from_year: int = 2021, to_year: int = 2024, span: int | None = None):
+    payload = community_data.changes(geo_id, metric, from_year, to_year, span)
+    if payload is None:
+        raise HTTPException(404, "Unknown geographic ID")
+    return payload
+
+
+@app.get("/areas/{geo_id}/businesses", response_model=BusinessResponse)
+def get_area_businesses(geo_id: str):
+    payload = community_data.businesses_for(geo_id)
+    if payload is None:
+        raise HTTPException(404, "Unknown geographic ID")
+    return payload
+
+
+@app.get("/pois", response_model=BusinessResponse)
+def get_pois():
+    return community_data.businesses_for()
+
+
+@app.get("/compare", response_model=CompareResponse)
+def get_compare(geo_ids: str, year: int = 2024, metrics: str = "median_household_income",
+                span: int | None = None):
+    ids = [item.strip() for item in geo_ids.split(",") if item.strip()]
+    if len(ids) < 2:
+        raise HTTPException(422, "Provide at least two comma-separated geo_ids")
+    return community_data.compare(ids, year, [item.strip() for item in metrics.split(",") if item.strip()], span)
+
+
+@app.get("/community", response_model=CommunityCatalog)
+def get_community_catalog():
+    return community_data.catalog()
 
 @app.get("/layers", response_model=list[Layer])
 def get_layers():

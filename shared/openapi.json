@@ -79,6 +79,306 @@
         }
       }
     },
+    "/areas/{geo_id}/history": {
+      "get": {
+        "summary": "Get Area History",
+        "operationId": "get_area_history_areas__geo_id__history_get",
+        "parameters": [
+          {
+            "name": "geo_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Geo Id"
+            }
+          },
+          {
+            "name": "metric",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "median_household_income",
+              "title": "Metric"
+            }
+          },
+          {
+            "name": "span",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/areas/{geo_id}/changes": {
+      "get": {
+        "summary": "Get Area Changes",
+        "operationId": "get_area_changes_areas__geo_id__changes_get",
+        "parameters": [
+          {
+            "name": "geo_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Geo Id"
+            }
+          },
+          {
+            "name": "metric",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "median_household_income",
+              "title": "Metric"
+            }
+          },
+          {
+            "name": "from_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 2021,
+              "title": "From Year"
+            }
+          },
+          {
+            "name": "to_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 2024,
+              "title": "To Year"
+            }
+          },
+          {
+            "name": "span",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/areas/{geo_id}/businesses": {
+      "get": {
+        "summary": "Get Area Businesses",
+        "operationId": "get_area_businesses_areas__geo_id__businesses_get",
+        "parameters": [
+          {
+            "name": "geo_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Geo Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pois": {
+      "get": {
+        "summary": "Get Pois",
+        "operationId": "get_pois_pois_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/compare": {
+      "get": {
+        "summary": "Get Compare",
+        "operationId": "get_compare_compare_get",
+        "parameters": [
+          {
+            "name": "geo_ids",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Geo Ids"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 2024,
+              "title": "Year"
+            }
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "median_household_income",
+              "title": "Metrics"
+            }
+          },
+          {
+            "name": "span",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Span"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/community": {
+      "get": {
+        "summary": "Get Community Catalog",
+        "operationId": "get_community_catalog_community_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommunityCatalog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/layers": {
       "get": {
         "summary": "Get Layers",
@@ -352,6 +652,282 @@
         ],
         "title": "AskRequest"
       },
+      "BusinessPoi": {
+        "properties": {
+          "osm_id": {
+            "type": "string",
+            "title": "Osm Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "subcategory": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subcategory"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "lon": {
+            "type": "number",
+            "title": "Lon"
+          },
+          "geo_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geo Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "osm_id",
+          "category",
+          "lat",
+          "lon"
+        ],
+        "title": "BusinessPoi"
+      },
+      "BusinessResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "geo_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geo Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "by_category": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "By Category"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/BusinessPoi"
+            },
+            "type": "array",
+            "title": "Features"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "copyright_url": {
+            "type": "string",
+            "title": "Copyright Url"
+          },
+          "source_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Date"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "by_category",
+          "features",
+          "attribution",
+          "license",
+          "copyright_url",
+          "limitations"
+        ],
+        "title": "BusinessResponse"
+      },
+      "ChangeResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "geography_type": {
+            "type": "string",
+            "title": "Geography Type"
+          },
+          "metric": {
+            "type": "string",
+            "title": "Metric"
+          },
+          "span": {
+            "type": "integer",
+            "title": "Span"
+          },
+          "from_year": {
+            "type": "integer",
+            "title": "From Year"
+          },
+          "to_year": {
+            "type": "integer",
+            "title": "To Year"
+          },
+          "from_estimate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From Estimate"
+          },
+          "to_estimate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Estimate"
+          },
+          "absolute_change": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Absolute Change"
+          },
+          "percent_change": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent Change"
+          },
+          "inflation_adjusted": {
+            "type": "boolean",
+            "title": "Inflation Adjusted",
+            "default": false
+          },
+          "significant_90": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Significant 90"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "name",
+          "geography_type",
+          "metric",
+          "span",
+          "from_year",
+          "to_year",
+          "from_estimate",
+          "to_estimate",
+          "absolute_change",
+          "percent_change",
+          "limitations"
+        ],
+        "title": "ChangeResponse"
+      },
       "Claim": {
         "properties": {
           "text": {
@@ -378,6 +954,227 @@
           "evidence_ids"
         ],
         "title": "Claim"
+      },
+      "CommunityCatalog": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "metrics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Metrics"
+          },
+          "years": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Years"
+          },
+          "geographies": {
+            "items": {
+              "$ref": "#/components/schemas/CommunityGeography"
+            },
+            "type": "array",
+            "title": "Geographies"
+          },
+          "businesses": {
+            "type": "integer",
+            "title": "Businesses"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "metrics",
+          "years",
+          "geographies",
+          "businesses"
+        ],
+        "title": "CommunityCatalog"
+      },
+      "CommunityGeography": {
+        "properties": {
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "geography_type": {
+            "type": "string",
+            "title": "Geography Type"
+          },
+          "zcta": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zcta"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "name",
+          "geography_type"
+        ],
+        "title": "CommunityGeography"
+      },
+      "CompareArea": {
+        "properties": {
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "geography_type": {
+            "type": "string",
+            "title": "Geography Type"
+          },
+          "zcta": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zcta"
+          },
+          "values": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/CompareValue"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Values"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "name",
+          "geography_type",
+          "values"
+        ],
+        "title": "CompareArea"
+      },
+      "CompareResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "metrics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Metrics"
+          },
+          "areas": {
+            "items": {
+              "$ref": "#/components/schemas/CompareArea"
+            },
+            "type": "array",
+            "title": "Areas"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "year",
+          "metrics",
+          "areas",
+          "limitations"
+        ],
+        "title": "CompareResponse"
+      },
+      "CompareValue": {
+        "properties": {
+          "estimate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimate"
+          },
+          "moe": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Moe"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "low_reliability": {
+            "type": "boolean",
+            "title": "Low Reliability",
+            "default": false
+          },
+          "span": {
+            "type": "integer",
+            "title": "Span"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "estimate",
+          "moe",
+          "unit",
+          "span"
+        ],
+        "title": "CompareValue"
       },
       "DataPoint": {
         "properties": {
@@ -660,6 +1457,205 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "HistoryPoint": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "period": {
+            "type": "string",
+            "title": "Period"
+          },
+          "estimate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimate"
+          },
+          "moe": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Moe"
+          },
+          "estimate_2024_usd": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimate 2024 Usd"
+          },
+          "moe_2024_usd": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Moe 2024 Usd"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "low_reliability": {
+            "type": "boolean",
+            "title": "Low Reliability",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "year",
+          "period",
+          "estimate",
+          "moe",
+          "unit"
+        ],
+        "title": "HistoryPoint"
+      },
+      "HistoryResponse": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "1.0",
+            "title": "Schema Version",
+            "default": "1.0"
+          },
+          "geo_id": {
+            "type": "string",
+            "title": "Geo Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "geography_type": {
+            "type": "string",
+            "title": "Geography Type"
+          },
+          "zcta": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zcta"
+          },
+          "metric": {
+            "type": "string",
+            "title": "Metric"
+          },
+          "span": {
+            "type": "integer",
+            "title": "Span"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HistorySource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "series": {
+            "items": {
+              "$ref": "#/components/schemas/HistoryPoint"
+            },
+            "type": "array",
+            "title": "Series"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "geo_id",
+          "name",
+          "geography_type",
+          "metric",
+          "span",
+          "series",
+          "limitations"
+        ],
+        "title": "HistoryResponse"
+      },
+      "HistorySource": {
+        "properties": {
+          "dataset": {
+            "type": "string",
+            "title": "Dataset"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "attribution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attribution"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dataset"
+        ],
+        "title": "HistorySource"
       },
       "Layer": {
         "properties": {

@@ -1,0 +1,9 @@
+{
+  "url": "https://montgomeryplans.org/arcgis4/rest/services/Overlays/MCAtlas_Zoning/MapServer/3/query?where=CODE%3D%27FV%27&outFields=OBJECTID%2CCODE%2CNAME%2COVERLAY_NAME%2CBEGINDATE%2CENDDATE&outSR=4326&returnGeometry=true&f=geojson",
+  "retrieved_at": "2026-09-19T08:21:20.549486+00:00",
+  "dataset": "Montgomery County Planning Department - Digital Zoning Map, Overlay Zones",
+  "layer": "Overlays/MCAtlas_Zoning/MapServer/3 (Overlay Zones), CODE='FV'",
+  "boundary_name": "Fenton Village (FV) Overlay Zone",
+  "legal_definition": "Montgomery County Zoning Ordinance Section 4.9.8",
+  "purpose": "Documented Fenton Village study boundary; used only to select intersecting block groups"
+}

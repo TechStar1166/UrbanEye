@@ -1,15 +1,25 @@
 {
-  "dataset": "U.S. Census Bureau — 2020 Decennial Census (PL 94-171)",
-  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID+IN+%28%27240317025011%27%2C+%27240317025021%27%29&outFields=*&outSR=4326&f=geojson",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID%20IN%20('240317024022','240317024023','240317025021')&outFields=*&outSR=4326&returnGeometry=true&f=geojson",
+  "retrieved_at": "2026-09-19T08:21:20.549486+00:00",
+  "dataset": "U.S. Census Bureau TIGERweb Census 2020",
+  "boundary_vintage": "2020-01-01",
   "data_date": "2020-04-01",
-  "boundary_vintage": "Census 2020",
-  "source_name": "U.S. Census Bureau TIGERweb Census 2020",
-  "layer": "Census Block Groups",
-  "layer_id": 8,
-  "geoids": ["240317025011", "240317025021"],
-  "area_name": "Fenton Village",
-  "state": "Maryland",
-  "county": "Montgomery County",
-  "downloaded_at": "2026-09-19",
-  "crs": "EPSG:4326"
+  "study_area_boundary": "data/raw/fenton_village_overlay.geojson (Fenton Village (FV) Overlay Zone)",
+  "selection_method": "Whole 2020 Census block groups whose polygon intersects the adopted Fenton Village (FV) Overlay Zone. Spatial selection, joined by GEOID, never by name. These three cover 100% of the study area; no other block group intersects it.",
+  "selection_reproduction": "scripts/verify_geography.py (requires shapely; not run at build or startup)",
+  "overlap": {
+    "240317024022": {
+      "share_of_study_area_pct": 15.0,
+      "share_of_block_group_pct": 16.8
+    },
+    "240317024023": {
+      "share_of_study_area_pct": 16.6,
+      "share_of_block_group_pct": 5.7
+    },
+    "240317025021": {
+      "share_of_study_area_pct": 68.4,
+      "share_of_block_group_pct": 31.4
+    }
+  },
+  "counts_describe": "Each whole block group, not the Fenton Village study area. Only 5.7%-31.4% of each block group lies inside the study area, so these counts must never be summed into a Fenton Village total."
 }
