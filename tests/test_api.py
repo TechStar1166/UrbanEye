@@ -97,3 +97,35 @@ def test_answer_cannot_cite_absent_evidence():
 
 def test_exported_contract_is_current():
     assert json.loads((ROOT / "shared/openapi.json").read_text()) == app.openapi()
+
+@pytest.mark.parametrize('question, metric', [
+    ('How many people live here?', 'population'),
+    ('How many homes are there?', 'housing_units'),
+])
+def test_plain_language_starter_questions_return_census_facts(question, metric):
+    result = client.post('/ask', json={'geo_id': GEO_ID, 'question': question}).json()
+    assert result['mode'] == 'facts'
+    assert result['evidence'][0]['metric'] == metric
+
+
+def test_plain_language_plan_question_has_reviewed_evidence():
+    passages = retrieve('What does the plan say about affordable housing?', GEO_ID, load_chunks())
+    assert passages
+    assert all(item.type == 'document' for item in passages)
+
+
+def test_expanded_census_coverage_preserves_snapshot_and_place_provenance():
+    raw = json.loads((ROOT / 'data/raw/silver_spring_blockgroups_census2020.geojson').read_text())
+    by_id = {f.properties.geo_id: f for f in loaded_areas.features}
+    assert len(raw['features']) > 50
+    for feature in raw['features']:
+        normalized = by_id[feature['properties']['GEOID']]
+        assert normalized.geometry.model_dump() == feature['geometry']
+        assert normalized.properties.metrics['population'] == feature['properties']['POP100']
+    places = client.get('/places').json()
+    assert places['count'] == len(places['places']) > 0
+    assert len({p['id'] for p in places['places']}) == places['count']
+    assert all(p['url'].startswith('https://www.openstreetmap.org/') for p in places['places'])
+    sources = client.get('/sources').json()
+    assert len(sources) == 6
+    assert all(s['pulled'] for s in sources[:4])

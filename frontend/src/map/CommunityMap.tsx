@@ -1,106 +1,152 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
-import type { Areas, Businesses, Overlays, Transit } from '../services/api';
+import type { Areas, Places, Storefront } from '../services/api';
+import { groupColor, groupOf, nearbySame, prettyCategory } from '../lib/storefronts';
+import { areaColor, colorScale } from './colors';
 import 'leaflet/dist/leaflet.css';
 
-const CATEGORY_COLORS: Record<string, string> = {
-  food: '#d1495b', retail: '#0b7285', service: '#8f4bb8', office: '#5c6b73', other: '#8a8f98',
-};
+type StyleFeature = { properties?: { geo_id?: string; geography_type?: string; metrics?: Record<string, number | null> } } | undefined;
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0,
-  overlays, transit, pois }: {
+function popupFor(item: Storefront, all: Storefront[]): HTMLElement {
+  // Built only when a marker is opened (lazy), and only from text nodes.
+  const root = document.createElement('div');
+  const title = document.createElement('strong'); title.textContent = item.name;
+  const kind = document.createElement('div'); kind.textContent = prettyCategory(item.category);
+  root.append(title, kind);
+  if (item.address) { const line = document.createElement('div'); line.textContent = item.address; root.append(line); }
+  const near = document.createElement('div');
+  const n = nearbySame(all, item);
+  near.textContent = `${n} other ${prettyCategory(item.category)} within 300 m (OpenStreetMap-mapped)`;
+  root.append(near);
+  return root;
+}
+
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [], answerGeoId, places }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
-  opacity?: number; resetKey?: number;
-  overlays?: Overlays; transit?: Transit; pois?: Businesses;
+  opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[]; answerGeoId?: string; places?: Places;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
+  const polygons = useRef<L.GeoJSON | null>(null);
+  const markers = useRef<L.FeatureGroup | null>(null);
+  const hadMarkers = useRef(false);
   const select = useRef(onSelect);
   select.current = onSelect;
+
+  const scale = useMemo(() => colorScale(areas, metric), [areas, metric]);
+
+  // The style depends on props but is applied in place; shapes are never rebuilt for it.
+  const styleFor = (feature: StyleFeature): L.PathOptions => {
+    const value = metric ? feature?.properties?.metrics?.[metric] : null;
+    const hasData = value != null;
+    const isHighlighted = highlightIds.includes(feature?.properties?.geo_id ?? '');
+    const isSelected = feature?.properties?.geo_id === selectedId;
+    const isFiner = feature?.properties?.geography_type === 'block_group';
+    return {
+      className: `census-area area-${feature?.properties?.geo_id}`,
+      color: feature?.properties?.geo_id === answerGeoId ? '#b43b73' : isSelected ? '#006948' : isHighlighted ? '#c2410c' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
+      weight: isSelected ? 3 : isHighlighted ? 4 : (isFiner ? 1.2 : 1),
+      fillOpacity: hasData ? opacity * (isFiner ? 0.65 : 0) : 0.05,
+      fillColor: isFiner ? areaColor(value, metric, scale) : '#d9dfdc',
+      dashArray: !isFiner ? '6 6' : hasData ? '' : '5, 5',
+    };
+  };
+  const style = useRef(styleFor);
+  style.current = styleFor;
+
   useEffect(() => {
-    const instance = L.map(container.current!, { zoomControl: false }).setView([39.0024, -77.0208], 12);
+    const instance = L.map(container.current!, { zoomControl: false }).setView([38.99487, -77.02489], 16);
     map.current = instance;
     L.control.zoom({ position: 'topright' }).addTo(instance);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(instance);
+    instance.createPane('storefronts').style.zIndex = '470'; // above area shapes and the food/drink dots
     const observer = new ResizeObserver(() => instance.invalidateSize());
     observer.observe(container.current!);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(instance);
-    return () => { observer.disconnect(); instance.remove(); map.current = null; };
+    instance.createPane('places');
+    instance.getPane('places')!.style.zIndex = '460';
+    instance.createPane('fenton');
+    instance.getPane('fenton')!.style.zIndex = '450';
+    const outline = L.circle([38.99487, -77.02489], { radius: 600, pane: 'fenton', color: '#25479b', weight: 2, dashArray: '7 6', fill: false, interactive: false }).addTo(instance);
+    const pin = L.marker([38.99487, -77.02489], { title: 'Fenton Village', icon: L.divIcon({ className: 'fenton-pin', html: '<span aria-hidden="true">●</span>', iconSize: [24, 24], iconAnchor: [12, 12] }) }).addTo(instance);
+    pin.bindTooltip('Fenton Village', { permanent: true, direction: 'top', className: 'fenton-label' });
+    pin.bindPopup('Fenton Village · challenge location. Dashed outline: 600 m study area, not an official district boundary.');
+    return () => { outline.remove(); pin.remove(); observer.disconnect(); instance.remove(); map.current = null; polygons.current = null; markers.current = null; };
   }, []);
-  const lastAreas = useRef<Areas | null>(null);
-  const lastReset = useRef(resetKey);
-  
+
+  // Build the area shapes once per dataset.
   useEffect(() => {
     if (!map.current) return;
-    const polygons = L.geoJSON(areas as unknown as GeoJsonObject, {
-      style: (feature) => {
-        const hasData = metric && feature?.properties?.metrics?.[metric] != null;
-        const isSelected = feature?.properties?.geo_id === selectedId;
-        const isFiner = feature?.properties?.geography_type === 'block_group';
-        return {
-          color: isSelected ? '#006948' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
-          weight: isSelected ? 5 : (isFiner ? 2.5 : 3),
-          fillOpacity: hasData ? opacity * (isFiner ? 0.45 : 0.25) : 0.05,
-          fillColor: metric === 'housing_units' ? '#8f4bb8' : '#087e8b',
-          dashArray: hasData ? '' : '5, 5'
-        };
-      },
-      onEachFeature: (feature, layer) => {
+    const layer = L.geoJSON(areas as unknown as GeoJsonObject, {
+      style: feature => style.current(feature as StyleFeature),
+      onEachFeature: (feature, shape) => {
         const name = document.createElement('span');
         name.textContent = `${feature.properties.name} (${feature.properties.geography_type.replaceAll('_', ' ')})`;
-        layer.bindTooltip(name);
-        layer.on('click', (event) => {
+        shape.bindTooltip(name);
+        shape.on('click', event => {
           L.DomEvent.stopPropagation(event);
           select.current(feature.properties.geo_id);
         });
       },
     }).addTo(map.current);
-
     // Keep smaller areas clickable even when the encompassing CDP is selected.
-    polygons.eachLayer(layer => {
-      if (layer instanceof L.Path && 'feature' in layer) {
-        const feature = (layer as L.Polygon & { feature: { properties: { geography_type: string } } }).feature;
-        if (feature.properties.geography_type === 'block_group') layer.bringToFront();
-      }
+    layer.eachLayer(shape => {
+      const feature = (shape as L.Polygon & { feature?: { properties: { geography_type: string } } }).feature;
+      if (shape instanceof L.Path && feature?.properties.geography_type === 'block_group') shape.bringToFront();
     });
-    
-    if (lastAreas.current !== areas || lastReset.current !== resetKey) {
-      const bounds = polygons.getBounds();
-      if (bounds.isValid()) map.current.fitBounds(bounds, { padding: [25, 25] });
-      lastAreas.current = areas;
-      lastReset.current = resetKey;
+    polygons.current = layer;
+    return () => { layer.remove(); polygons.current = null; };
+  }, [areas]);
+
+  // Selection, metric and opacity only restyle the existing shapes.
+  useEffect(() => { polygons.current?.setStyle(feature => style.current(feature as StyleFeature)); }, [metric, selectedId, opacity, areas, highlightIds, answerGeoId]);
+
+  // Answers live beside the map; bring the whole count geography into view when it changes.
+  useEffect(() => {
+    if (!answerGeoId || !map.current) return;
+    const feature = areas.features.find(item => item.id === answerGeoId);
+    if (!feature) return;
+    const bounds = L.geoJSON(feature as unknown as GeoJsonObject).getBounds();
+    if (bounds.isValid()) map.current.fitBounds(bounds, { paddingTopLeft: [35, 80], paddingBottomRight: [35, 35], maxZoom: 16, animate: false });
+  }, [areas, answerGeoId]);
+
+  // Recenter on request (not on first render).
+  const lastReset = useRef(resetKey);
+  useEffect(() => {
+    if (lastReset.current === resetKey) return;
+    lastReset.current = resetKey;
+    map.current?.setView([38.99487, -77.02489], 16);
+  }, [resetKey]);
+
+  // Storefront markers: rebuilt only when the visible set changes, never for selection or opacity.
+  useEffect(() => {
+    if (!map.current) return;
+    if (storefronts.length === 0) { hadMarkers.current = false; return; }
+    const group = L.featureGroup();
+    for (const item of storefronts) {
+      const color = groupColor(groupOf(item));
+      const dot = L.circleMarker([item.lat, item.lon], { pane: 'storefronts', radius: 5, weight: 1.5, color: '#ffffff', fillColor: color, fillOpacity: 0.95 });
+      const label = document.createElement('span'); label.textContent = `${item.name} · ${prettyCategory(item.category)}`;
+      dot.bindTooltip(label);
+      dot.bindPopup(() => popupFor(item, storefronts));
+      group.addLayer(dot);
     }
-    
-    return () => { polygons.remove(); };
-  }, [areas, metric, selectedId, opacity, resetKey]);
-
-  // The zoning boundary is a selection device, so it is drawn as an outline only and
-  // is deliberately not clickable: it carries no statistics of its own.
-  useEffect(() => {
-    if (!map.current || !overlays) return;
-    const layer = L.geoJSON(overlays as unknown as GeoJsonObject, {
-      interactive: false,
-      style: { color: '#c77700', weight: 3, dashArray: '6, 4', fill: false },
-    }).addTo(map.current);
-    return () => { layer.remove(); };
-  }, [overlays]);
-
-  useEffect(() => {
-    if (!map.current || !transit) return;
-    const layer = L.geoJSON(transit as unknown as GeoJsonObject, {
-      style: { color: '#6d28d9', weight: 4, opacity: 0.85, dashArray: '10, 6' },
-      onEachFeature: (feature, target) => {
-        const properties = feature.properties as { name?: string; opening_date?: string };
-        target.bindTooltip(`${properties.name ?? 'Purple Line'} — under construction`
-          + (properties.opening_date ? ` (opening ${properties.opening_date})` : ''));
-      },
-    }).addTo(map.current);
-    return () => { layer.remove(); };
-  }, [transit]);
+    group.addTo(map.current);
+    markers.current = group;
+    // At the default zoom the markers would be a tiny clump; zoom in when the layer first appears.
+    // Not animated: Leaflet silently drops an animated fitBounds while another zoom animation is running.
+    if (!hadMarkers.current) {
+      const bounds = group.getBounds();
+      map.current.invalidateSize();
+      if (bounds.isValid()) map.current.fitBounds(bounds, { padding: [40, 40], maxZoom: 17, animate: false });
+    }
+    hadMarkers.current = true;
+    return () => { group.remove(); markers.current = null; };
+  }, [storefronts]);
 
   useEffect(() => {
     if (!map.current || !pois) return;

@@ -55,7 +55,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/areas/{geo_id}/history": {
+    "/storefronts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Storefronts */
+        get: operations["get_storefronts_storefronts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/layers": {
         parameters: {
             query?: never;
             header?: never;
@@ -531,6 +548,8 @@ export interface components {
             url: string;
             /** Date */
             date: string;
+            /** Retrieved At */
+            retrieved_at?: string | null;
             /** Geo Id */
             geo_id: string;
             /** Metric */
@@ -741,79 +760,53 @@ export interface components {
             /** Data Points */
             data_points: components["schemas"]["DataPoint"][];
         };
-        /** TransitFeature */
-        TransitFeature: {
-            /**
-             * Type
-             * @default Feature
-             * @constant
-             */
-            type: "Feature";
-            /** Id */
-            id: string;
-            geometry: components["schemas"]["MapLineGeometry"];
-            properties: components["schemas"]["TransitProperties"];
-        };
-        /** TransitProperties */
-        TransitProperties: {
+        /** Storefront */
+        Storefront: {
+            /** Osm Id */
+            osm_id: string;
             /** Name */
             name: string;
-            /** Status */
-            status: string;
-            /** Mode */
-            mode?: string | null;
-            /** Opening Date */
-            opening_date?: string | null;
             /**
-             * Tunnel
-             * @default false
+             * Category Key
+             * @enum {string}
              */
-            tunnel: boolean;
-            /**
-             * Bridge
-             * @default false
-             */
-            bridge: boolean;
+            category_key: "shop" | "amenity";
+            /** Category */
+            category: string;
+            /** Address */
+            address: string | null;
+            /** Block Group Id */
+            block_group_id: string | null;
+            /** Lon */
+            lon: number;
+            /** Lat */
+            lat: number;
         };
-        /** TransitResponse */
-        TransitResponse: {
-            /**
-             * Type
-             * @default FeatureCollection
-             * @constant
-             */
-            type: "FeatureCollection";
+        /**
+         * Storefronts
+         * @description OpenStreetMap-mapped businesses. Volunteer-mapped: not a business registry.
+         */
+        Storefronts: {
             /**
              * Schema Version
              * @default 1.0
              * @constant
              */
             schema_version: "1.0";
-            /** Name */
-            name: string;
-            /** Status */
-            status: string;
-            /** Attribution */
-            attribution: string;
+            /** Source */
+            source: string;
             /** License */
             license: string;
-            /** Copyright Url */
-            copyright_url: string;
+            /** Attribution */
+            attribution: string;
             /** Retrieved At */
             retrieved_at: string;
-            /** Routes */
-            routes: components["schemas"]["TransitRoute"][];
+            /** Osm Data Timestamp */
+            osm_data_timestamp: string | null;
             /** Limitations */
-            limitations: string[];
-            /** Features */
-            features: components["schemas"]["TransitFeature"][];
-        };
-        /** TransitRoute */
-        TransitRoute: {
-            /** Osm Id */
-            osm_id: number;
-            /** Name */
-            name?: string | null;
+            limitations: string;
+            /** Storefronts */
+            storefronts: components["schemas"]["Storefront"][];
         };
         /** ValidationError */
         ValidationError: {
@@ -904,7 +897,27 @@ export interface operations {
             };
         };
     };
-    get_area_history_areas__geo_id__history_get: {
+    get_storefronts_storefronts_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Storefronts"];
+                };
+            };
+        };
+    };
+    get_layers_layers_get: {
         parameters: {
             query?: {
                 metric?: string;

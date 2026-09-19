@@ -79,7 +79,7 @@
         }
       }
     },
-    "/areas/{geo_id}/history": {
+    "/layers": {
       "get": {
         "summary": "Get Area History",
         "operationId": "get_area_history_areas__geo_id__history_get",
@@ -1323,6 +1323,17 @@
             "type": "string",
             "title": "Date"
           },
+          "retrieved_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieved At"
+          },
           "geo_id": {
             "type": "string",
             "title": "Geo Id"
@@ -1950,185 +1961,6 @@
           "data_points"
         ],
         "title": "SegmentResponse"
-      },
-      "TransitFeature": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "Feature",
-            "title": "Type",
-            "default": "Feature"
-          },
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/MapLineGeometry"
-          },
-          "properties": {
-            "$ref": "#/components/schemas/TransitProperties"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "geometry",
-          "properties"
-        ],
-        "title": "TransitFeature"
-      },
-      "TransitProperties": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "status": {
-            "type": "string",
-            "title": "Status"
-          },
-          "mode": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mode"
-          },
-          "opening_date": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Opening Date"
-          },
-          "tunnel": {
-            "type": "boolean",
-            "title": "Tunnel",
-            "default": false
-          },
-          "bridge": {
-            "type": "boolean",
-            "title": "Bridge",
-            "default": false
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "name",
-          "status"
-        ],
-        "title": "TransitProperties"
-      },
-      "TransitResponse": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "FeatureCollection",
-            "title": "Type",
-            "default": "FeatureCollection"
-          },
-          "schema_version": {
-            "type": "string",
-            "const": "1.0",
-            "title": "Schema Version",
-            "default": "1.0"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "status": {
-            "type": "string",
-            "title": "Status"
-          },
-          "attribution": {
-            "type": "string",
-            "title": "Attribution"
-          },
-          "license": {
-            "type": "string",
-            "title": "License"
-          },
-          "copyright_url": {
-            "type": "string",
-            "title": "Copyright Url"
-          },
-          "retrieved_at": {
-            "type": "string",
-            "title": "Retrieved At"
-          },
-          "routes": {
-            "items": {
-              "$ref": "#/components/schemas/TransitRoute"
-            },
-            "type": "array",
-            "title": "Routes"
-          },
-          "limitations": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Limitations"
-          },
-          "features": {
-            "items": {
-              "$ref": "#/components/schemas/TransitFeature"
-            },
-            "type": "array",
-            "title": "Features"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "name",
-          "status",
-          "attribution",
-          "license",
-          "copyright_url",
-          "retrieved_at",
-          "routes",
-          "limitations",
-          "features"
-        ],
-        "title": "TransitResponse"
-      },
-      "TransitRoute": {
-        "properties": {
-          "osm_id": {
-            "type": "integer",
-            "title": "Osm Id"
-          },
-          "name": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Name"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "osm_id"
-        ],
-        "title": "TransitRoute"
       },
       "ValidationError": {
         "properties": {

@@ -61,16 +61,52 @@ test('data view, export, search, and methodology retain accurate source context'
   const download = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export selected area' }).click();
   expect((await download).suggestedFilename()).toBe('civiclens-2472450.json');
-  await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
-  await expect(page.getByRole('dialog')).toContainText('margins of error');
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('dialog')).toHaveCount(0);
-  await page.getByRole('textbox', { name: 'Search addresses or areas' }).fill('2472450');
-  await page.getByRole('textbox', { name: 'Search addresses or areas' }).press('Enter');
-  await expect(page.locator('.insight-heading')).toContainText('Silver Spring CDP');
 });
 
-test('map data error exposes retry and recovers', async ({ page }) => {
+test('answer history restores sources and the bar can collapse', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'How many homes are there?' }).click();
+  await expect(page.locator('.research-response')).toContainText('35,150');
+  await page.getByRole('button', { name: 'Collapse answer' }).click();
+  await expect(page.locator('.query-results')).toBeHidden();
+  expect((await page.locator('.query-dock').boundingBox())!.height).toBeLessThan(80);
+  await page.getByRole('tab', { name: 'Answer history' }).click();
+  await expect(page.locator('.history-entry')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Reopen answer & sources' }).click();
+  await expect(page.locator('.research-response')).toContainText('35,150');
+  await expect(page.locator('.source-chips')).toContainText('Census');
+});
+
+for (const width of [1440, 390, 320]) {
+  test(`sources page and wrapped questions fit ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/');
+    const suggestions = page.getByLabel('Suggested questions');
+    await expect(suggestions.getByRole('button')).toHaveCount(3);
+    expect(await suggestions.evaluate(el => el.scrollWidth <= el.clientWidth)).toBeTruthy();
+    const legend = (await page.locator('.map-legend').boundingBox())!;
+    const viewport = (await page.locator('.map').boundingBox())!;
+    expect(legend.x).toBeGreaterThanOrEqual(viewport.x);
+    expect(legend.x + legend.width).toBeLessThanOrEqual(viewport.x + viewport.width);
+    await suggestions.getByRole('button', { name: 'How many homes are there?' }).click();
+    await expect(page.locator('.research-response')).toContainText('35,150');
+    await expect(suggestions).toHaveCount(0);
+    await page.getByRole('button', { name: 'Try another question' }).click();
+    await expect(suggestions.getByRole('button')).toHaveCount(3);
+    await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
+    await expect(page).toHaveURL(/#sources$/);
+    await expect(page.getByRole('heading', { name: 'Data sources & methodology' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'OpenStreetMap food and drink places' })).toBeVisible();
+    await expect(page.locator('.sources-page')).toContainText('Downloaded:');
+    expect(await page.locator('body').evaluate(el => el.scrollWidth <= innerWidth)).toBeTruthy();
+    await page.reload();
+    await expect(page.getByRole('heading', { name: 'Data sources & methodology' })).toBeVisible();
+    await page.getByRole('link', { name: 'Back to the map' }).click();
+    await expect(page.locator('.fenton-pin')).toBeVisible();
+  });
+}
+
+test('map data error offers a working retry', async ({ page }) => {
   await page.route('**/api/areas', route => route.fulfill({ status: 503, body: '{}' }));
   await page.goto('/');
   await expect(page.getByRole('alert')).toContainText('Unable to load');

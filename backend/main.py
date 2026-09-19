@@ -9,6 +9,8 @@ from backend.schemas import (
     CompareResponse, HistoryResponse, Layer, OverlayResponse, SegmentRequest, SegmentResponse,
     DataPoint, TransitResponse,
 )
+from backend.data import LAYERS, ROOT, load_areas, load_chunks, load_storefronts
+from backend.schemas import Answer, Area, Areas, AskRequest, Layer, SegmentRequest, SegmentResponse, DataPoint, Storefronts
 from backend.services import answer
 from backend.rag.retrieve import DocumentIndex
 from backend.llm.gemini import Gemini, get_gemini
@@ -20,6 +22,7 @@ areas = load_areas()
 chunks = load_chunks()
 document_index = DocumentIndex(chunks)
 by_id = {f.properties.geo_id: f.properties for f in areas.features}
+storefronts = load_storefronts(set(by_id))
 
 
 @app.get("/health")
@@ -40,6 +43,11 @@ def get_area(geo_id: str):
     if geo_id not in by_id:
         raise HTTPException(404, "Unknown geographic ID")
     return by_id[geo_id]
+
+
+@app.get("/storefronts", response_model=Storefronts)
+def get_storefronts():
+    return storefronts
 
 
 @app.get("/areas/{geo_id}/history", response_model=HistoryResponse)
