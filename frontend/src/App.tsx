@@ -13,6 +13,8 @@ import { areasToCsv } from './lib/csv';
 import { readView, writeView } from './lib/urlState';
 import { SegmentationPanel } from './segmentation/SegmentationPanel';
 import { Icon } from './components/Icon';
+import { geocode, type GeoResult } from './lib/geocode';
+import { containingArea, coverageBox } from './lib/geo';
 
 type Tab = 'Overview' | 'Compare areas' | 'Answer history' | 'Evidence';
 type MobilePane = 'layers' | 'map' | 'insights';
@@ -60,6 +62,10 @@ export default function App() {
   const [view, setView] = useState<'map' | 'data'>('map');
   const [search, setSearch] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [geo, setGeo] = useState<{ state: 'idle' | 'loading' | 'done' | 'empty' | 'error'; results: GeoResult[] }>({ state: 'idle', results: [] });
+  const [pin, setPin] = useState<{ lat: number; lon: number; label: string }>();
+  const [addressNote, setAddressNote] = useState('');
+  const geoVersion = useRef(0);
   const [question, setQuestion] = useState('');
   const [submitted, setSubmitted] = useState('');
   const [answer, setAnswer] = useState<Answer>();
@@ -119,8 +125,26 @@ export default function App() {
     setSelected(areas?.features.find(f => f.id === id)?.properties);
     setSearch(''); setSearchOpen(false); setSubmitted(''); setTab('Overview');
   };
+  const runAddressSearch = async () => {
+    const query = search.trim();
+    if (query.length < 3 || !areas) return;
+    const version = ++geoVersion.current;
+    setGeo({ state: 'loading', results: [] });
+    try {
+      const results = await geocode(query, coverageBox(areas));
+      if (version === geoVersion.current) setGeo({ state: results.length ? 'done' : 'empty', results });
+    } catch { if (version === geoVersion.current) setGeo({ state: 'error', results: [] }); }
+  };
+  const goToAddress = (result: GeoResult) => {
+    if (!areas) return;
+    const area = containingArea(areas, result.lon, result.lat);
+    setPin({ lat: result.lat, lon: result.lon, label: result.label });
+    setGeo({ state: 'idle', results: [] });
+    if (area) { setAddressNote(''); select(area.properties.geo_id); }
+    else { setAddressNote('That address is outside the Census coverage on this map, so no area was selected.'); setSearch(''); setSearchOpen(false); }
+  };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
-  const reset = () => { setShowStorefronts(false); setShowOverlay(false); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setResetKey(k => k + 1); };
+  const reset = () => { setPin(undefined); setAddressNote(''); setShowStorefronts(false); setShowOverlay(false); setShowTransit(false); setGroups(ALL_GROUPS); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setOverlapOn(false); setBusinessOpen(false); setResetKey(k => k + 1); };
   const ask = async (text = question, regional = false) => {
     if (!text.trim() || !selected || busy) return;
     const version = ++queryVersion.current;
@@ -186,8 +210,17 @@ export default function App() {
     <header className="app-header">
       <a className="brand" href="/" aria-label="UrbanEye home"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="9" fill="#006948" /><path d="M24 36a12 12 0 1 1 12-12M32 32l7 7" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" /><circle cx="24" cy="24" r="5" fill="#85f8c4" /><path d="M16 24h4m4-8v4" stroke="white" strokeWidth="2" /></svg><span>UrbanEye</span></a>
       <div className="pilot"><i className="status-dot" /><span>Bay Hacks 2026</span></div>
-      <div className="global-search"><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter' && searchResults[0]) select(searchResults[0].id); }} onBlur={() => setTimeout(() => setSearchOpen(false), 150)} />
-        {searchOpen && <div className="search-results"><span className="eyebrow">Places on this map</span>{searchResults.length ? searchResults.map(f => <button key={f.id} onClick={() => select(f.id)}><Icon name="pin" /><span>{areaName(f.properties)}</span><Icon name="arrow" /></button>) : <p>No matching place. Address search is coming next.</p>}</div>}
+      <div className="global-search"><Icon name="search" /><input ref={searchRef} aria-label="Search for a place" placeholder="Search for a place…" value={search} onChange={e => { setSearch(e.target.value); setSearchOpen(true); geoVersion.current++; setGeo({ state: 'idle', results: [] }); }} onFocus={() => setSearchOpen(true)} onKeyDown={e => { if (e.key === 'Enter') { if (searchResults[0]) select(searchResults[0].id); else void runAddressSearch(); } }} onBlur={() => setTimeout(() => setSearchOpen(false), 150)} />
+        {searchOpen && <div className="search-results"><span className="eyebrow">Places on this map</span>{searchResults.length ? searchResults.map(f => <button key={f.id} onClick={() => select(f.id)}><Icon name="pin" /><span>{areaName(f.properties)}</span><Icon name="arrow" /></button>) : <p>No matching place on the map.</p>}
+          {search.trim().length >= 3 && <div className="address-search">
+            <span className="eyebrow">Addresses</span>
+            {geo.state === 'idle' && <button className="address-row" onClick={() => void runAddressSearch()}><Icon name="search" /><span>Search address for “{search.trim()}”<small>Sends your text to OpenStreetMap’s Nominatim service. Press Enter or click.</small></span><Icon name="arrow" /></button>}
+            {geo.state === 'loading' && <p role="status">Searching for that address…</p>}
+            {geo.state === 'empty' && <p role="status">No matching address in the Silver Spring area.</p>}
+            {geo.state === 'error' && <p role="alert">Address search is unavailable right now. Area search still works.</p>}
+            {geo.state === 'done' && geo.results.map(result => <button key={result.label + result.lat} className="address-row" onClick={() => goToAddress(result)}><Icon name="pin" /><span className="address-label">{result.label}</span><Icon name="arrow" /></button>)}
+            <small className="micro-note">Address search © OpenStreetMap contributors (Nominatim).</small>
+          </div>}</div>}
       </div>
       <div className="view-switch" aria-label="Workspace view"><button aria-pressed={view === 'map'} onClick={() => setView('map')}><Icon name="map" />Map View</button><button aria-pressed={view === 'data'} onClick={() => setView('data')}><Icon name="table" />Data</button></div>
       <button className="methodology-button" aria-label="Data Sources & Methodology" onClick={() => { location.hash = 'sources'; }}><Icon name="shield" /><span>Data Sources & Methodology</span></button>
@@ -237,9 +270,11 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <div className="map-viewport">
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} answerGeoId={answer?.mode === 'facts' && answer.evidence.length ? selected?.geo_id : undefined} overlays={overlays} transit={transit} showOverlay={showOverlay} showTransit={showTransit} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} places={places} storefronts={visibleStorefronts} highlightIds={highlightIds} pin={pin} answerGeoId={answer?.mode === 'facts' && answer.evidence.length ? selected?.geo_id : undefined} overlays={overlays} transit={transit} showOverlay={showOverlay} showTransit={showTransit} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
+          {pin && <div className="address-note" role="status"><span>{addressNote || 'Pinned: ' + pin.label.split(',').slice(0, 2).join(',')}</span>
+            <button className="text-button" onClick={() => { setPin(undefined); setAddressNote(''); }}>Clear pin</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>Area you’re viewing</small><strong>{areaName(selected)}</strong></span></div><div className="map-actions"><button className="icon-button" aria-label="Copy link to this view" onClick={() => void copyLink()}><Icon name="external" /></button>{copied && <span role="status" className="micro-note">{copied}</span>}<button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div></div>
           <div className="map-legend"><span className="eyebrow">{metric ? (METRIC_LABELS[metric] ?? metric) : 'Boundaries only'}</span>
             {metric && palettes[metric] && <><div className="choropleth-ramp">{palettes[metric].map(color => <i key={color} style={{ background: color }} />)}</div><div className="gradient-labels"><span>{formatMetric(metric, scale.min)}</span><span>{formatMetric(metric, scale.max)}</span></div><p>{scale.n >= 2 && scale.max > scale.min ? 'Darker = higher values within block groups. The larger Census place stays neutral.' : 'Color identifies the layer; not a comparative scale.'}</p></>}
