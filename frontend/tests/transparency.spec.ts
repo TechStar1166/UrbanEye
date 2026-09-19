@@ -19,7 +19,7 @@ test('CSV export lists every area and metric with its source', async ({ page }) 
   const csv = await downloadCsv(page);
   const lines = csv.trim().split('\r\n');
   expect(lines[0]).toBe('geo_id,name,geography_type,boundary_vintage,metric,value,unit,source,data_date,source_url');
-  expect(lines.length).toBe(1 + 81 * 3); // 81 areas x (population, housing_units, population_density)
+  expect(lines.length).toBe(1 + 81 * 7); // 81 areas x 7 metrics
   expect(lines.some(line => line.startsWith('2472450,Silver Spring CDP,census_designated_place,2020-01-01,population,81015,'))).toBe(true);
   expect(csv).toContain('tigerweb.geo.census.gov');
   expect(csv).toContain('240317025011');
