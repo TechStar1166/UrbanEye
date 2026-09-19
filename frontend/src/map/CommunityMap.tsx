@@ -68,10 +68,12 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     observer.observe(container.current!);
     const basemapLight = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri, HERE, Garmin, GIS user community &middot; Places &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxNativeZoom: 16,
       maxZoom: 19,
     });
     const basemapSatellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+      maxNativeZoom: 18,
       maxZoom: 19,
     });
     basemapLight.addTo(instance);
