@@ -37,9 +37,8 @@ test('live count query and segmentation preview coexist', async ({ page }) => {
   let calls = 0;
   page.on('request', request => { if (request.url().endsWith('/api/ask')) calls++; });
   await page.goto('/');
-  await page.getByRole('button', { name: 'What is the population?', exact: true }).click();
-  await expect(page.locator('.user-question')).toContainText('What is the population?');
-  await expect(page.locator('.research-response')).toContainText('81,015');
+  await page.getByRole('button', { name: 'How many people live here?', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Answer', exact: true })).toContainText('81,015');
   await page.getByRole('tab', { name: 'Compare areas' }).click();
   const panel = page.getByRole('region', { name: 'Segmentation' });
   await expect(panel).toContainText('Comparing 80 block groups');

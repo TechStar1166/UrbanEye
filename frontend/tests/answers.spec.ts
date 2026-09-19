@@ -30,7 +30,7 @@ test('Census answer leads with the count, scope and visible record provenance', 
   await expect(page.getByRole('tab', { name: /Answer history/ })).toContainText('1');
   await page.getByRole('tab', { name: /Evidence/ }).click();
   // The existing Census sources are already counted; the answer must not duplicate them.
-  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(3);
+  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(area.evidence.length); // one per Census record, none duplicated by the answer
 });
 
 test('homes answer states occupied and vacant units', async ({ page }) => {
@@ -45,6 +45,7 @@ test('homes answer states occupied and vacant units', async ({ page }) => {
 test('a plan follow-up is available for block groups, keeps regional scope and adds its evidence', async ({ page, request }) => {
   // Use deterministic reviewed passages, without calling a live model.
   const sources = await (await request.get('/api/sources')).json();
+  const area = await (await request.get('/api/areas/240317025021')).json();
   const planSource = sources.find((item: { name: string }) => item.name.includes('Plan'));
   await page.route('**/api/ask', async route => {
     expect(route.request().postDataJSON().geo_id).toBe('2472450');
@@ -57,7 +58,7 @@ test('a plan follow-up is available for block groups, keeps regional scope and a
   await expect(page.locator('.insight-heading')).toContainText('Fenton study area B');
   await expect(page.locator('.area-240317025021')).not.toHaveAttribute('stroke', '#b43b73');
   await page.getByRole('tab', { name: /Evidence/ }).click();
-  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(4);
+  await expect(page.getByRole('tabpanel').locator('.evidence li')).toHaveCount(area.evidence.length + 1); // the Census records plus the plan passage
   await expect(page.getByRole('tabpanel')).toContainText('Silver Spring housing preservation');
 });
 

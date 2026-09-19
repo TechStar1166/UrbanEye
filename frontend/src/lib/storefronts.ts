@@ -9,6 +9,11 @@ export const GROUPS = [
 export type GroupId = typeof GROUPS[number]['id'];
 export const ALL_GROUPS: GroupId[] = GROUPS.map(group => group.id);
 
+// The storefront snapshot only queried the area around these two block groups. Any other block group is
+// not covered, which is different from having zero businesses. Mirrors STUDY_AREA_IDS in
+// scripts/prepare_storefronts.py; tests/test_storefronts.py fails if the two lists drift apart.
+export const STOREFRONT_STUDY_AREAS = ['240317025011', '240317025021'];
+
 const FOOD = new Set(['amenity=restaurant', 'amenity=cafe', 'amenity=fast_food', 'amenity=bar', 'amenity=pub',
   'amenity=ice_cream', 'amenity=food_court', 'shop=coffee', 'shop=bakery', 'shop=deli', 'shop=confectionery', 'shop=pastry', 'shop=tea']);
 const FINANCE = new Set(['amenity=bank', 'amenity=pharmacy', 'shop=chemist']);
