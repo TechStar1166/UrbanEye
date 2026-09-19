@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { api, type Answer, type Area, type Areas } from './services/api';
+import { api, type Answer, type Area, type Areas, type Businesses, type History,
+  type HistoryPoint, type Overlays, type Transit } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { Icon } from './components/Icon';
@@ -10,6 +11,18 @@ const defaultLayers = { population: true, age: true, household: false, income: t
 type LayerKey = keyof typeof defaultLayers;
 const prompts = ['What is the population?', 'How many housing units are there?', 'How does the plan preserve affordable housing?', 'What do planning documents say about housing in this area?'];
 const planUrl = 'https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=104';
+
+const PROFILE_METRICS = ['median_household_income', 'gini_index', 'age_50_plus_pct',
+  'avg_household_size', 'renter_occupied_pct'] as const;
+type ProfileMetric = typeof PROFILE_METRICS[number];
+type Profile = Partial<Record<ProfileMetric, History>>;
+
+const latest = (series?: History): HistoryPoint | undefined => series?.series.at(-1);
+const money = (value?: number | null) => value == null ? '—' : '$' + Math.round(value).toLocaleString();
+const percent = (value?: number | null, digits = 1) => value == null ? '—' : value.toFixed(digits) + '%';
+/** Margins of error are shown wherever an estimate is, so uncertainty is never hidden. */
+const plusMinus = (point?: HistoryPoint, format: (v?: number | null) => string = money) =>
+  point?.moe == null ? '' : ' ±' + format(point.moe).replace('$', '$');
 
 function SectionHeading({ children, detail }: { children: ReactNode; detail?: string }) {
   return <div className="section-heading"><h3>{children}</h3>{detail && <span>{detail}</span>}</div>;
@@ -46,6 +59,11 @@ export default function App() {
   const [siteType, setSiteType] = useState('Café & bakery');
   const [siteSaved, setSiteSaved] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+  const [profile, setProfile] = useState<Profile>({});
+  const [overlays, setOverlays] = useState<Overlays>();
+  const [transit, setTransit] = useState<Transit>();
+  const [pois, setPois] = useState<Businesses>();
+  const [areaBusinesses, setAreaBusinesses] = useState<Businesses>();
   const searchRef = useRef<HTMLInputElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const questionRef = useRef<HTMLInputElement>(null);
@@ -61,6 +79,31 @@ export default function App() {
     finally { setLoading(false); }
   }
   useEffect(() => { void load(); }, []);
+
+  // The extended profile comes from the community database rather than /areas, because
+  // those series are per-year and have their own spans and margins of error.
+  useEffect(() => {
+    if (!selected) { setProfile({}); setAreaBusinesses(undefined); return; }
+    let current = true;
+    const geoId = selected.geo_id;
+    void Promise.all(PROFILE_METRICS.map(async metric => {
+      try { return [metric, await api.history(geoId, metric)] as const; }
+      catch { return [metric, undefined] as const; }
+    })).then(entries => {
+      if (!current) return;
+      setProfile(Object.fromEntries(entries.filter(([, value]) => value)) as Profile);
+    });
+    api.businesses(geoId).then(data => { if (current) setAreaBusinesses(data); }).catch(() => {});
+    return () => { current = false; };
+  }, [selected?.geo_id]);
+
+  // Map overlays are fetched once the matching layer is switched on.
+  useEffect(() => {
+    if (layers.zoning && !overlays) api.overlays().then(setOverlays).catch(() => {});
+    if (layers.transit && !transit) api.transit().then(setTransit).catch(() => {});
+    if (layers.storefronts && !pois) api.pois().then(setPois).catch(() => {});
+  }, [layers.zoning, layers.transit, layers.storefronts, overlays, transit, pois]);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); searchRef.current?.focus(); setSearchOpen(true); }
@@ -106,6 +149,15 @@ export default function App() {
   };
   const number = (key: string) => selected?.metrics[key] == null ? '—' : selected.metrics[key]!.toLocaleString();
   const activeCount = Object.values(layers).filter(Boolean).length;
+  const incomeSeries = profile.median_household_income;
+  const incomePoint = latest(incomeSeries);
+  const giniPoint = latest(profile.gini_index);
+  const agePoint = latest(profile.age_50_plus_pct);
+  const householdPoint = latest(profile.avg_household_size);
+  const renterPoint = latest(profile.renter_occupied_pct);
+  const renterPct = renterPoint?.estimate ?? null;
+  const spanLabel = (series?: History) =>
+    series ? `ACS ${series.span}-year · ${latest(series)?.period ?? ''}` : 'ACS';
   const searchResults = areas?.features.filter(f => (f.properties.name + ' ' + f.id).toLowerCase().includes(search.toLowerCase())) ?? [];
   const exportData = () => {
     if (!selected) return;
@@ -135,21 +187,21 @@ export default function App() {
           <section className="control-section">
             <SectionHeading detail="Census 2020">Demographic Layers</SectionHeading>
             <div className="layer-box tinted">{layerRow('population', 'Total Population', 'Choropleth')}<div className="range-line"><label htmlFor="opacity">Opacity</label><input id="opacity" type="range" min="0" max="100" value={opacity} onChange={e => setOpacity(Number(e.target.value))} /><output>{opacity}%</output></div></div>
-            <div className="layer-box">{layerRow('age', 'Age 50+ Population Cohort', undefined, '', true)}<div className="age-gradient" /><div className="gradient-labels"><span>&lt;15%</span><span>20%</span><span>25%</span><span>&gt;35%</span></div></div>
-            {layerRow('household', 'Average Household Size', undefined, '', true)}
+            <div className="layer-box">{layerRow('age', 'Age 50+ Population Cohort', percent(agePoint?.estimate))}<div className="age-gradient" /><div className="gradient-labels"><span>&lt;15%</span><span>20%</span><span>25%</span><span>&gt;35%</span></div></div>
+            {layerRow('household', 'Average Household Size', householdPoint?.estimate == null ? '—' : householdPoint.estimate.toFixed(2))}
           </section>
           <section className="control-section">
-            <SectionHeading detail="Preview">Economic Indicators</SectionHeading>
-            <div className="layer-box tinted">{layerRow('income', 'Median Household Income', '$68,400')}<div className="income-labels"><span>$45,000</span><output>Below ${income}k</output><span>$160,000+</span></div><input aria-label="Income threshold" className="full-range" type="range" min="45" max="160" step="5" value={income} onChange={e => setIncome(Number(e.target.value))} /></div>
-            {layerRow('gini', 'Income Disparity Gini Index', '0.44')}
+            <SectionHeading detail={spanLabel(incomeSeries)}>Economic Indicators</SectionHeading>
+            <div className="layer-box tinted">{layerRow('income', 'Median Household Income', money(incomePoint?.estimate))}<div className="income-labels"><span>$45,000</span><output>Below ${income}k</output><span>$160,000+</span></div><input aria-label="Income threshold" className="full-range" type="range" min="45" max="160" step="5" value={income} onChange={e => setIncome(Number(e.target.value))} /></div>
+            {layerRow('gini', 'Income Disparity Gini Index', giniPoint?.estimate == null ? 'Place level only' : giniPoint.estimate.toFixed(4))}
           </section>
           <section className="control-section">
             <SectionHeading detail="Layer catalog">Housing & Commercial</SectionHeading>
             {layerRow('housing', 'Housing Units', 'Census 2020', 'blue')}
-            {layerRow('zoning', 'Fenton Overlay Zoning', undefined, 'amber', true)}
-            {layerRow('storefronts', 'Storefront Locations', undefined, '', true)}
-            {layerRow('transit', 'Purple Line Alignment', undefined, 'blue', true)}
-            <p className="micro-note">Preview layers are not plotted on the map.</p>
+            {layerRow('zoning', 'Fenton Overlay Zoning', 'Zoning boundary', 'amber')}
+            {layerRow('storefronts', 'Storefront Locations', pois ? pois.total + ' OSM points' : 'OpenStreetMap')}
+            {layerRow('transit', 'Purple Line Alignment', 'Under construction', 'blue')}
+            <p className="micro-note">The zoning boundary and rail alignment carry no statistics. Storefronts are © OpenStreetMap contributors (ODbL) and record mapped businesses, not a complete census.</p>
           </section>
           <section className="control-section overlap-section">
             <SectionHeading detail="2-Var Tool"><span className="inline-icon"><Icon name="overlap" />Community Overlap</span></SectionHeading>
@@ -164,7 +216,8 @@ export default function App() {
 
       <section className="map-workspace" aria-label="Map and layers">
         {view === 'map' ? <>
-          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey} />}
+          {areas && <CommunityMap areas={areas} metric={metric} selectedId={selected?.geo_id} onSelect={select} opacity={opacity / 100} resetKey={resetKey}
+            overlays={layers.zoning ? overlays : undefined} transit={layers.transit ? transit : undefined} pois={layers.storefronts ? pois : undefined} />}
           {loading && <div className="map-state" role="status"><span className="loading-ring" />Loading community map…</div>}
           {error && <div className="map-state" role="alert"><Icon name="map" /><p>{error}</p><button className="primary" onClick={() => void load()}>Retry</button></div>}
           <div className="map-topbar"><div className="map-location"><Icon name="pin" /><span><small>GEOGRAPHIC FOCUS</small><strong>{selected?.name ?? 'Select an area'}</strong></span></div><button className="icon-button center-map" aria-label="Recenter map" onClick={() => setResetKey(k => k + 1)}><Icon name="focus" /></button></div>
@@ -179,9 +232,29 @@ export default function App() {
         <div className="insight-tabs" role="tablist" aria-label="Community insights">{(['Overview', 'Segmentation', 'Ask CivicLens', 'Evidence'] as Tab[]).map(item => <button role="tab" aria-selected={tab === item} aria-controls="insight-content" id={'tab-' + item.replaceAll(' ', '-')} key={item} onClick={() => setTab(item)}>{item}{item === 'Evidence' && <span className="count-badge">{(selected?.evidence.length ?? 0) + 1}</span>}</button>)}</div>
         <div className="panel-scroll insight-content" id="insight-content" role="tabpanel" aria-labelledby={'tab-' + tab.replaceAll(' ', '-')}>
           {tab === 'Overview' && <>
-            <section className="insight-section"><SectionHeading detail="Census 2020">Ground-Truth Core Metrics</SectionHeading><div className="metrics-grid"><MetricCard label="POPULATION" value={number('population')} detail="Whole selected geography" note="Census" /><MetricCard label="HOUSING UNITS" value={number('housing_units')} detail="Sourced Census count" tone="blue" /></div><div className="sample-heading"><span>Extended community profile</span><Preview /></div><div className="metrics-grid"><MetricCard label="MEDIAN HH INCOME" value="$68,400" detail="58% of County median" tone="green" /><MetricCard label="AGE 50+ COHORT" value="27.1%" detail="Illustrative mature-age share" tone="amber" /></div></section>
-            <section className="insight-section"><SectionHeading detail="Preview">Housing Tenure Structure</SectionHeading><div className="tenure-bar" aria-label="Sample housing tenure: 74 percent renter, 26 percent owner"><span /><span /></div><div className="chart-legend"><span><i className="blue-dot" />Renter Occupied: <b>74%</b></span><span><i className="green-dot" />Owner: <b>26%</b></span></div></section>
-            <section className="insight-section"><SectionHeading detail="Preview">Age Cohort Distribution</SectionHeading><div className="age-chart">{[['0–19',18.2],['20–34',33.4],['35–49',21.3],['50–64',16.8],['65+',10.3]].map(([label, value], i) => <div key={label} className={i > 2 ? 'amber' : ''}><span>{label}</span><div className="bar-track"><i style={{ width: value + '%', opacity: i === 0 ? .45 : i === 2 ? .7 : 1 }} /></div><b>{value}%</b></div>)}</div></section>
+            <section className="insight-section"><SectionHeading detail="Census 2020">Ground-Truth Core Metrics</SectionHeading><div className="metrics-grid"><MetricCard label="POPULATION" value={number('population')} detail="Whole selected geography" note="Census" /><MetricCard label="HOUSING UNITS" value={number('housing_units')} detail="Sourced Census count" tone="blue" /></div>
+              <div className="sample-heading"><span>Extended community profile</span><span className="source-date">{spanLabel(incomeSeries)}</span></div>
+              <div className="metrics-grid">
+                <MetricCard label="MEDIAN HH INCOME" value={money(incomePoint?.estimate)} detail={incomePoint?.moe == null ? 'American Community Survey' : `±${money(incomePoint.moe)} at 90% confidence`} tone="green" note={incomePoint?.low_reliability ? 'Low precision' : undefined} />
+                <MetricCard label="AGE 50+ SHARE" value={percent(agePoint?.estimate)} detail={agePoint?.moe == null ? 'American Community Survey' : `±${percent(agePoint.moe)} at 90% confidence`} tone="amber" note={agePoint?.low_reliability ? 'Low precision' : undefined} />
+              </div>
+              <div className="metrics-grid">
+                <MetricCard label="AVG HOUSEHOLD SIZE" value={householdPoint?.estimate == null ? '—' : householdPoint.estimate.toFixed(2)} detail="People per occupied unit" />
+                <MetricCard label="GINI INDEX" value={giniPoint?.estimate == null ? 'Not published' : giniPoint.estimate.toFixed(4)} detail={giniPoint?.estimate == null ? 'Not available below place level' : 'Income inequality, 0 to 1'} tone="blue" />
+              </div></section>
+            {renterPct != null && <section className="insight-section"><SectionHeading detail={spanLabel(profile.renter_occupied_pct)}>Housing Tenure Structure</SectionHeading><div className="tenure-bar" aria-label={`Housing tenure: ${renterPct.toFixed(1)} percent renter, ${(100 - renterPct).toFixed(1)} percent owner`}><span style={{ flex: renterPct }} /><span style={{ flex: 100 - renterPct }} /></div><div className="chart-legend"><span><i className="blue-dot" />Renter Occupied: <b>{percent(renterPct)}</b></span><span><i className="green-dot" />Owner: <b>{percent(100 - renterPct)}</b></span></div>{renterPoint?.moe != null && <p className="micro-note">±{percent(renterPoint.moe)} at 90% confidence.</p>}</section>}
+            {incomeSeries && incomeSeries.series.length > 1 && (() => {
+              const points = incomeSeries.series;
+              const peak = Math.max(...points.map(p => p.estimate_2024_usd ?? p.estimate ?? 0));
+              return <section className="insight-section"><SectionHeading detail={`ACS ${incomeSeries.span}-year`}>Median Household Income Trend</SectionHeading>
+                <div className="age-chart">{points.map(point => {
+                  const value = point.estimate_2024_usd ?? point.estimate;
+                  return <div key={point.year} className={point.low_reliability ? 'amber' : ''}><span>{point.year}</span><div className="bar-track"><i style={{ width: (peak ? (value ?? 0) / peak * 100 : 0) + '%' }} /></div><b>{money(value)}</b></div>;
+                })}</div>
+                <p className="micro-note">Shown in 2024 dollars so years are comparable. {incomeSeries.limitations[0]}</p>
+              </section>;
+            })()}
+            {areaBusinesses && areaBusinesses.total > 0 && <section className="insight-section"><SectionHeading detail="OpenStreetMap">Mapped Storefronts</SectionHeading><div className="chart-legend">{Object.entries(areaBusinesses.by_category).map(([category, count]) => <span key={category}>{category}: <b>{count}</b></span>)}</div><p className="micro-note">{areaBusinesses.total} mapped businesses in this whole block group. {areaBusinesses.attribution} ({areaBusinesses.license}). Crowd-sourced, not a complete business census.</p></section>}
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>Inspect source <Icon name="arrow" /></button></blockquote><p className="micro-note">Planning-area context; the plan boundary is not the Silver Spring CDP boundary.</p></section>
             <section className="insight-section"><SectionHeading detail="Source-linked">Data Provenance</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>Population and housing units for the selected geography.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
           </>}
@@ -211,6 +284,6 @@ export default function App() {
       const first = nodes[0], last = nodes[nodes.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
-    }}><button ref={closeRef} className="icon-button modal-close" aria-label="Close dialog" onClick={() => { setMethodology(false); setBusiness(false); }}><Icon name="close" /></button><span className="eyebrow">CivicLens · Silver Spring Pilot</span><h2 id="modal-title">{methodology ? 'Sources you can inspect.' : 'Explore your next location.'}</h2>{methodology ? <><p>The map uses the existing geographic dataset and interactive Leaflet engine. Population and housing counts come from the 2020 Census; evidence is available for every selected area.</p><div className="info-note"><Icon name="info" /><span>Income, age and tenure charts are illustrative design previews. Commercial layers and site analysis are not yet connected.</span></div><p>Silver Spring CDP totals do not describe Fenton Village alone. Planning documents also have their own geographic boundaries and dates.</p><button className="primary" onClick={() => { setMethodology(false); openTab('Evidence'); }}>Inspect evidence<Icon name="arrow" /></button></> : <><p>Build a site brief using the community you’re exploring.</p><label className="field-label" htmlFor="site">Street or location</label><input id="site" value={site} onChange={e => { setSite(e.target.value); setSiteSaved(false); }} /><label className="field-label" htmlFor="site-type">Business type</label><select id="site-type" value={siteType} onChange={e => { setSiteType(e.target.value); setSiteSaved(false); }}><option>Café & bakery</option><option>Neighborhood retail</option><option>Professional services</option></select><button className="primary full-width" disabled={!site.trim()} onClick={() => setSiteSaved(true)}>Prepare site brief<Icon name="arrow" /></button>{siteSaved && <div className="info-note" role="status"><Icon name="check" /><span>Brief prepared for {siteType.toLowerCase()} on {site}. This preview stays in your current session; viability analysis will be available after data integration.</span></div>}</>}</section></div>}
+    }}><button ref={closeRef} className="icon-button modal-close" aria-label="Close dialog" onClick={() => { setMethodology(false); setBusiness(false); }}><Icon name="close" /></button><span className="eyebrow">CivicLens · Silver Spring Pilot</span><h2 id="modal-title">{methodology ? 'Sources you can inspect.' : 'Explore your next location.'}</h2>{methodology ? <><p>The map uses the existing geographic dataset and interactive Leaflet engine. Population and housing counts come from the 2020 Census; evidence is available for every selected area.</p><div className="info-note"><Icon name="info" /><span>Income, age, household size and tenure are American Community Survey estimates shown with their 90% margins of error. Dollar trends are expressed in 2024 dollars. The Gini index and poverty rate are published for places and larger only, never for block groups. Storefronts and the Purple Line alignment come from OpenStreetMap (ODbL); the alignment is under construction and is not operating service. Site analysis is not yet connected.</span></div><p>Silver Spring CDP totals do not describe Fenton Village alone. Planning documents also have their own geographic boundaries and dates.</p><button className="primary" onClick={() => { setMethodology(false); openTab('Evidence'); }}>Inspect evidence<Icon name="arrow" /></button></> : <><p>Build a site brief using the community you’re exploring.</p><label className="field-label" htmlFor="site">Street or location</label><input id="site" value={site} onChange={e => { setSite(e.target.value); setSiteSaved(false); }} /><label className="field-label" htmlFor="site-type">Business type</label><select id="site-type" value={siteType} onChange={e => { setSiteType(e.target.value); setSiteSaved(false); }}><option>Café & bakery</option><option>Neighborhood retail</option><option>Professional services</option></select><button className="primary full-width" disabled={!site.trim()} onClick={() => setSiteSaved(true)}>Prepare site brief<Icon name="arrow" /></button>{siteSaved && <div className="info-note" role="status"><Icon name="check" /><span>Brief prepared for {siteType.toLowerCase()} on {site}. This preview stays in your current session; viability analysis will be available after data integration.</span></div>}</>}</section></div>}
   </div>;
 }

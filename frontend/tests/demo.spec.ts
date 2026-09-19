@@ -62,7 +62,7 @@ test('data view, export, search, and methodology retain accurate source context'
   await page.getByRole('button', { name: 'Export selected area' }).click();
   expect((await download).suggestedFilename()).toBe('civiclens-2472450.json');
   await page.getByRole('button', { name: 'Data Sources & Methodology' }).click();
-  await expect(page.getByRole('dialog')).toContainText('illustrative design previews');
+  await expect(page.getByRole('dialog')).toContainText('margins of error');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await page.getByRole('textbox', { name: 'Search addresses or areas' }).fill('2472450');

@@ -1,12 +1,18 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
-import type { Areas } from '../services/api';
+import type { Areas, Businesses, Overlays, Transit } from '../services/api';
 import 'leaflet/dist/leaflet.css';
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0 }: {
+const CATEGORY_COLORS: Record<string, string> = {
+  food: '#d1495b', retail: '#0b7285', service: '#8f4bb8', office: '#5c6b73', other: '#8a8f98',
+};
+
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0,
+  overlays, transit, pois }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
   opacity?: number; resetKey?: number;
+  overlays?: Overlays; transit?: Transit; pois?: Businesses;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
@@ -71,5 +77,42 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
     
     return () => { polygons.remove(); };
   }, [areas, metric, selectedId, opacity, resetKey]);
+
+  // The zoning boundary is a selection device, so it is drawn as an outline only and
+  // is deliberately not clickable: it carries no statistics of its own.
+  useEffect(() => {
+    if (!map.current || !overlays) return;
+    const layer = L.geoJSON(overlays as unknown as GeoJsonObject, {
+      interactive: false,
+      style: { color: '#c77700', weight: 3, dashArray: '6, 4', fill: false },
+    }).addTo(map.current);
+    return () => { layer.remove(); };
+  }, [overlays]);
+
+  useEffect(() => {
+    if (!map.current || !transit) return;
+    const layer = L.geoJSON(transit as unknown as GeoJsonObject, {
+      style: { color: '#6d28d9', weight: 4, opacity: 0.85, dashArray: '10, 6' },
+      onEachFeature: (feature, target) => {
+        const properties = feature.properties as { name?: string; opening_date?: string };
+        target.bindTooltip(`${properties.name ?? 'Purple Line'} — under construction`
+          + (properties.opening_date ? ` (opening ${properties.opening_date})` : ''));
+      },
+    }).addTo(map.current);
+    return () => { layer.remove(); };
+  }, [transit]);
+
+  useEffect(() => {
+    if (!map.current || !pois) return;
+    const group = L.layerGroup().addTo(map.current);
+    for (const poi of pois.features) {
+      L.circleMarker([poi.lat, poi.lon], {
+        radius: 5, weight: 1, color: '#ffffff',
+        fillColor: CATEGORY_COLORS[poi.category] ?? CATEGORY_COLORS.other, fillOpacity: 0.9,
+      }).bindTooltip(`${poi.name ?? 'Unnamed'} — ${poi.subcategory ?? poi.category}`).addTo(group);
+    }
+    return () => { group.remove(); };
+  }, [pois]);
+
   return <div ref={container} className="map" aria-label="Interactive Silver Spring map" />;
 }
