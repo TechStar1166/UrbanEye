@@ -166,7 +166,7 @@
 | Storefronts layer and food & drink places functional | Jackson | `[x]` |
 | Third rate metric (e.g., median income) added for all areas | Pujan | `[ ]` |
 | Business analysis narrative written | All | `[ ]` |
-| Playwright smoke test passes on updated UI | Amrit | `[ ]` |
+| Playwright smoke test passes on updated UI | Amrit | `[x]` |
 | `sprint3-complete` tag created | Amrit | `[ ]` |
 
 ---

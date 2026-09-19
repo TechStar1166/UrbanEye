@@ -15,7 +15,7 @@ vector_store/*
 graphify-out/
 .DS_Store
 
-/frontend/features.md
+/frontend/future_features.md
 
 # Local role checklists (not shared through Git).
 /docs/role-checklists/
