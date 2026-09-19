@@ -7,12 +7,12 @@ test.beforeEach(async ({ page }) => {
 
 test('real map polygon → area facts → cited answer → unsupported question', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.leaflet-interactive')).toBeVisible();
-  await page.locator('.leaflet-interactive').click({ force: true });
+  await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
+  await page.locator('.leaflet-interactive').first().click({ force: true });
   await expect(page.getByRole('heading', { name: 'Silver Spring CDP' })).toBeVisible();
   await expect(page.locator('dd').first()).toHaveText('81,015 people');
   await page.getByLabel('Map layer').selectOption('housing_units');
-  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('stroke', '#ffcc00');
+  await expect(page.locator('.leaflet-interactive').first()).toHaveAttribute('stroke', '#ffcc00');
   await page.getByRole('button', { name: 'Ask', exact: true }).click();
   const answer = page.getByRole('region', { name: 'Answer', exact: true });
   await expect(answer).toContainText('81,015');
@@ -28,7 +28,7 @@ test('keyboard area selection and boundaries-only layer work', async ({ page }) 
   await page.getByLabel('Select area').selectOption('2472450');
   await expect(page.locator('dd').last()).toHaveText('35,150 units');
   await page.getByLabel('Map layer').selectOption('');
-  await expect(page.locator('.leaflet-interactive')).toHaveAttribute('fill-opacity', '0.05');
+  await expect(page.locator('.leaflet-interactive').first()).toHaveAttribute('fill-opacity', '0.05');
 });
 
 test('API failure exposes retry and recovers', async ({ page }) => {
@@ -37,7 +37,7 @@ test('API failure exposes retry and recovers', async ({ page }) => {
   await expect(page.getByRole('alert')).toContainText('Unable to load');
   await page.unroute('**/api/areas');
   await page.getByRole('button', { name: 'Retry' }).click();
-  await expect(page.locator('.leaflet-interactive')).toBeVisible();
+  await expect(page.locator('.leaflet-interactive').first()).toBeVisible();
 });
 
 test('selected area → real planning passage → page citation and geographic limitation', async ({ page }) => {
