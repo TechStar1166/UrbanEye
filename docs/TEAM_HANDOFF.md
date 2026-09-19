@@ -85,7 +85,7 @@ explanation. Coordinate the controls with B.
 
 | Slot | GitHub username | Can clone | Starter smoke passes | Commit tested |
 | --- | --- | --- | --- | --- |
-| A | Pujan | Pending | Pending | Pending |
-| B | Jackson | Pending | Pending | Pending |
-| C | Nick | Pending | Pending | Pending |
+| A | Pujan | Yes | Yes | Yes |
+| B | Jackson | Yes | Yes | Yes |
+| C | Nick | Yes | Yes | Yes |
 | D | Amrit | Yes | Yes | Yes |
