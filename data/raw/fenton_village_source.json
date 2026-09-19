@@ -1,0 +1,15 @@
+{
+  "dataset": "U.S. Census Bureau — 2020 Decennial Census (PL 94-171)",
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID+IN+%28%27240317025011%27%2C+%27240317025021%27%29&outFields=*&outSR=4326&f=geojson",
+  "data_date": "2020-04-01",
+  "boundary_vintage": "Census 2020",
+  "source_name": "U.S. Census Bureau TIGERweb Census 2020",
+  "layer": "Census Block Groups",
+  "layer_id": 8,
+  "geoids": ["240317025011", "240317025021"],
+  "area_name": "Fenton Village",
+  "state": "Maryland",
+  "county": "Montgomery County",
+  "downloaded_at": "2026-09-19",
+  "crs": "EPSG:4326"
+}

@@ -9,6 +9,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 METRIC_FIELDS = [("population", "POP100", "people"), ("housing_units", "HU100", "units")]
 
+
+def tract_label(props: dict) -> str:
+    """Format a 6-digit TIGER TRACT code as a human-readable label (e.g. '702501' → '7025.01')."""
+    raw = str(props["TRACT"])
+    if len(raw) == 6:
+        return f"{raw[:4]}.{raw[4:]}"
+    return raw
+
 def build_feature(props, geometry, source, geography_type, name):
     """One validated feature. Counts always describe the whole unit, never a clipped area."""
     geo_id = str(props["GEOID"])
@@ -38,7 +46,6 @@ def prepare():
     features = []
     for feature in raw["features"]:
         props = feature["properties"]
-        ge
         if str(props["GEOID"]) != "2472450":
             raise ValueError("Unexpected geographic ID")
         features.append(build_feature(props, feature["geometry"], source,
@@ -80,3 +87,6 @@ def prepare():
     levels = {f.properties.geography_type for f in features}
     print(f"Validated {len(features)} real area(s) across {len(levels)} geographic level(s), "
           "two sourced metrics each.")
+
+if __name__ == "__main__":
+    prepare()

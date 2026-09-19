@@ -311,3 +311,10 @@ td small { display: block; font: 8px var(--mono); color: var(--muted); margin-to
 }
 @media (max-height: 740px) { .map-selection-card { top: 19%; } .map-legend { display: none; } .application-card p { display: none; } .application-card h3 { margin: 7px 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Shared evidence and answer styling retained from the integrated data workflow. */
+.evidence-meta { color: var(--muted); }
+.evidence-metric { margin: 6px 0; }
+.answer { white-space: pre-wrap; line-height: 1.5; }
+.limitations { font-size: 11px; line-height: 1.6; color: #596b60; background: #fffbe6; padding: 12px 12px 12px 26px; border-radius: 4px; border: 1px solid #ffe58f; overflow-wrap: anywhere; }
+.research-response h3 { font: 600 15px var(--heading); margin-bottom: 12px; }

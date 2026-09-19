@@ -34,21 +34,33 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
       style: (feature) => {
         const hasData = metric && feature?.properties?.metrics?.[metric] != null;
         const isSelected = feature?.properties?.geo_id === selectedId;
+        const isFiner = feature?.properties?.geography_type === 'block_group';
         return {
           color: isSelected ? '#006948' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
-          weight: isSelected ? 5 : 3,
-          fillOpacity: hasData ? opacity * 0.45 : 0.05,
+          weight: isSelected ? 5 : (isFiner ? 2.5 : 3),
+          fillOpacity: hasData ? opacity * (isFiner ? 0.45 : 0.25) : 0.05,
           fillColor: metric === 'housing_units' ? '#8f4bb8' : '#087e8b',
           dashArray: hasData ? '' : '5, 5'
         };
       },
       onEachFeature: (feature, layer) => {
         const name = document.createElement('span');
-        name.textContent = feature.properties.name;
+        name.textContent = `${feature.properties.name} (${feature.properties.geography_type.replaceAll('_', ' ')})`;
         layer.bindTooltip(name);
-        layer.on('click', () => select.current(feature.properties.geo_id));
+        layer.on('click', (event) => {
+          L.DomEvent.stopPropagation(event);
+          select.current(feature.properties.geo_id);
+        });
       },
     }).addTo(map.current);
+
+    // Keep smaller areas clickable even when the encompassing CDP is selected.
+    polygons.eachLayer(layer => {
+      if (layer instanceof L.Path && 'feature' in layer) {
+        const feature = (layer as L.Polygon & { feature: { properties: { geography_type: string } } }).feature;
+        if (feature.properties.geography_type === 'block_group') layer.bringToFront();
+      }
+    });
     
     if (lastAreas.current !== areas || lastReset.current !== resetKey) {
       const bounds = polygons.getBounds();

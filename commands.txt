@@ -1,0 +1,8 @@
+# UrbanEye Command Ledger
+
+# 2026-09-19: Data pipeline & Frontend wiring
+python -m scripts.prepare_data
+npm run generate:types --prefix frontend
+pytest
+npm run build --prefix frontend
+npx playwright test tests/demo.spec.ts --prefix frontend

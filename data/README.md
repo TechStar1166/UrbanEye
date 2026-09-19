@@ -18,16 +18,20 @@ values. To deliberately refresh the raw snapshot, download the exact manifest UR
 verify the payload and update the retrieval timestamp; review the resulting diff.
 Do not add a live download to application startup.
 
+## Fenton Village Study Geography (Block Groups)
+
+Fenton Village is represented by whole 2020 Census Block Groups:
+- **Block Group 1, Census Tract 7025.01** (GEOID `240317025011`): Population 2,866, Housing Units 1,924.
+- **Block Group 1, Census Tract 7025.02** (GEOID `240317025021`): Population 1,731, Housing Units 1,316.
+
+- Official source: U.S. Census Bureau TIGERweb Census 2020, Layer 8 (`Census Block Groups`).
+- Source metadata and query URL: `data/raw/fenton_village_source.json`.
+- Cached raw boundaries: `data/raw/fenton_village_blockgroups_census2020.geojson`.
+- Processed output: `data/processed/areas.geojson` and `data/processed/manifest.json`.
+
 ## Geographic limitations and next handoff
 
-The CDP is broader than Fenton Village. Its counts must not be presented as
-neighborhood or selected viewport counts. No within-area density or distribution
-is inferred. This starter cannot support geographic correlation with one feature.
-
-The data owner should next confirm a documented Fenton Village study boundary,
-select intersecting Census tracts/block groups, record the geographic selection
-method, and join ACS estimates using the same geographic IDs/vintage. Keep full
-tract counts labeled as tract counts even if the study area covers only part of a
-tract. Preserve estimate year, units, source, missing-value sentinels and margins
-of error where available. Integrate the first valid feature immediately, before
-expanding coverage. Never use synthetic counts to fill data gaps.
+The Silver Spring CDP is broader than Fenton Village. The Fenton Village block groups
+lie inside the Silver Spring CDP polygon; their counts must describe each block group,
+not the clipped study boundary, and should never be added to CDP totals. No within-area
+density or distribution is inferred. Rebuild anytime with `python -m scripts.prepare_data`.

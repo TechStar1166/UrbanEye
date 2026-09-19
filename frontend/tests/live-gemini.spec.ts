@@ -1,8 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-// CivicLens research panels are currently a UI preview. This opt-in check keeps
-// validating the existing provider through the API until the new UI is wired.
-test('live Gemini API retains grounded answers behind the CivicLens preview', async ({ request }) => {
+// This opt-in provider check complements the browser tests for research answers.
+test('live Gemini API returns grounded answers for CivicLens research', async ({ request }) => {
   test.skip(process.env.LIVE_GEMINI !== '1', 'Set LIVE_GEMINI=1 with a configured running backend.');
   test.setTimeout(60_000);
   const health = await request.get('/api/health');

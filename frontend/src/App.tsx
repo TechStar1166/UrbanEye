@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import { api, type Area, type Areas } from './services/api';
+import { api, type Answer, type Area, type Areas } from './services/api';
 import { CommunityMap } from './map/CommunityMap';
 import { EvidenceList } from './evidence/EvidenceList';
 import { Icon } from './components/Icon';
@@ -8,7 +8,7 @@ type Tab = 'Overview' | 'Segmentation' | 'Ask CivicLens' | 'Evidence';
 type MobilePane = 'layers' | 'map' | 'insights';
 const defaultLayers = { population: true, age: true, household: false, income: true, gini: false, housing: true, zoning: false, storefronts: false, transit: false };
 type LayerKey = keyof typeof defaultLayers;
-const prompts = ['What do planning documents say about housing?', 'Where are older residents concentrated?', 'Explore housing near transit'];
+const prompts = ['What is the population?', 'How many housing units are there?', 'How does the plan preserve affordable housing?', 'What do planning documents say about housing in this area?'];
 const planUrl = 'https://montgomeryplanning.org/wp-content/uploads/2022/11/Silver-Spring-DAC-Approved-Adopted-web.pdf#page=104';
 
 function SectionHeading({ children, detail }: { children: ReactNode; detail?: string }) {
@@ -36,6 +36,10 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [submitted, setSubmitted] = useState('');
+  const [answer, setAnswer] = useState<Answer>();
+  const [busy, setBusy] = useState(false);
+  const [queryError, setQueryError] = useState('');
+  const queryVersion = useRef(0);
   const [methodology, setMethodology] = useState(false);
   const [business, setBusiness] = useState(false);
   const [site, setSite] = useState('Bonifant Street');
@@ -78,15 +82,27 @@ export default function App() {
     if (key === 'housing') setMetric(layers.housing ? (layers.population ? 'population' : '') : 'housing_units');
   };
   const select = (id: string) => {
+    queryVersion.current++;
+    setAnswer(undefined); setBusy(false); setQueryError('');
     setSelected(areas?.features.find(f => f.id === id)?.properties);
     setSearch(''); setSearchOpen(false); setSubmitted(''); setTab('Overview');
   };
   const openTab = (next: Tab) => { setTab(next); setPane('insights'); };
   const reset = () => { setLayers(defaultLayers); setMetric('population'); setOpacity(75); setIncome(75); setCohort('25'); setResetKey(k => k + 1); };
-  const ask = (event: FormEvent) => {
+  const ask = async (event: FormEvent) => {
     event.preventDefault();
-    if (!question.trim()) return;
+    if (!question.trim() || !selected || busy) return;
+    const version = ++queryVersion.current;
     setSubmitted(question.trim()); openTab('Ask CivicLens');
+    setBusy(true); setAnswer(undefined); setQueryError('');
+    try {
+      const result = await api.ask(selected.geo_id, question.trim());
+      if (version === queryVersion.current) setAnswer(result);
+    } catch {
+      if (version === queryVersion.current) setQueryError('Unable to answer this question. Please try again.');
+    } finally {
+      if (version === queryVersion.current) setBusy(false);
+    }
   };
   const number = (key: string) => selected?.metrics[key] == null ? '—' : selected.metrics[key]!.toLocaleString();
   const activeCount = Object.values(layers).filter(Boolean).length;
@@ -155,7 +171,7 @@ export default function App() {
           {selected && <div className="map-selection-card"><div className="selection-title"><i className="status-dot" /><strong>{selected.name}</strong><span className="tag">Selected</span></div><div className="selection-metrics"><div><span>POPULATION</span><strong>{number('population')}</strong></div><div><span>HOUSING UNITS</span><strong>{number('housing_units')}</strong></div></div><div className="selection-footer"><span>2020 Census · {selected.geo_id}</span><button onClick={() => openTab('Evidence')}>View sources <Icon name="arrow" /></button></div></div>}
           <div className="map-legend"><span className="eyebrow">Map Legend</span><div><i className={'legend-swatch ' + (metric === 'housing_units' ? 'purple' : '')} /><span>{metric === 'population' ? 'Population' : metric === 'housing_units' ? 'Housing units' : 'Geographic boundaries'}</span></div><div><i className="legend-swatch selected" /><span>Selected geography</span></div><p>Color identifies the layer; not a comparative scale.</p></div>
         </> : <div className="data-view"><div className="data-view-heading"><span className="eyebrow">Census 2020 · Source data</span><h2>Community data</h2><p>The same geographic areas and sourced values shown on your map.</p></div><div className="table-scroll"><table><thead><tr><th>Geography</th><th>Population</th><th>Housing units</th></tr></thead><tbody>{areas?.features.map(f => <tr key={f.id} className={selected?.geo_id === f.id ? 'selected-row' : ''}><td><button onClick={() => select(f.id)}>{f.properties.name}<small>{f.id}</small></button></td><td>{f.properties.metrics.population?.toLocaleString() ?? 'No data'}</td><td>{f.properties.metrics.housing_units?.toLocaleString() ?? 'No data'}</td></tr>)}</tbody></table></div><button className="secondary" disabled={!selected} onClick={exportData}><Icon name="download" />Export selected area</button></div>}
-        <div className="query-dock"><form onSubmit={ask}><span className="query-symbol"><Icon name="sparkles" /></span><input ref={questionRef} aria-label="Ask about this area" value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask about planning, housing, or community data…" maxLength={1000} /><button className="primary" disabled={!question.trim()} type="submit">Query Records<Icon name="arrow" /></button></form><div className="suggestions"><span>Suggested:</span>{prompts.map(prompt => <button key={prompt} onClick={() => { setQuestion(prompt); questionRef.current?.focus(); }}>{prompt}</button>)}</div><span className="query-preview">Research workspace preview · model connection coming next</span></div>
+        <div className="query-dock"><form onSubmit={ask}><span className="query-symbol"><Icon name="sparkles" /></span><input ref={questionRef} aria-label="Ask about this area" value={question} onChange={e => setQuestion(e.target.value)} placeholder="Ask about planning, housing, or community data…" maxLength={1000} /><button className="primary" disabled={!question.trim() || !selected || busy} type="submit">{busy ? 'Answering…' : 'Query Records'}<Icon name="arrow" /></button></form><div className="suggestions"><span>Suggested:</span>{prompts.map(prompt => <button key={prompt} onClick={() => { setQuestion(prompt); questionRef.current?.focus(); }}>{prompt}</button>)}</div><span className="query-preview">Evidence-backed research · selected geographic area</span></div>
       </section>
 
       <aside className="insights-panel" aria-label="Area facts and evidence">
@@ -169,9 +185,21 @@ export default function App() {
             <section className="insight-section"><SectionHeading><span className="inline-icon blue"><Icon name="book" />Planning Context</span></SectionHeading><blockquote className="planning-excerpt">“This Plan aims to balance the preservation of existing naturally occurring affordable housing with the production of new housing…”<cite>— Silver Spring Downtown & Adjacent Communities Plan, 2022 · printed p. 92</cite><button className="text-button" onClick={() => openTab('Evidence')}>Inspect source <Icon name="arrow" /></button></blockquote><p className="micro-note">Planning-area context; the plan boundary is not the Silver Spring CDP boundary.</p></section>
             <section className="insight-section"><SectionHeading detail="Source-linked">Data Provenance</SectionHeading><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>U.S. Census Bureau</strong><small>Population and housing units for the selected geography.</small></span><span className="source-date">2020</span></button><button className="source-card" onClick={() => openTab('Evidence')}><span><strong>Montgomery Planning</strong><small>Silver Spring Downtown & Adjacent Communities Plan.</small></span><span className="source-date blue">2022 PDF</span></button></section>
           </>}
-          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Inspect the source behind each map metric.</p>{selected && <EvidenceList items={selected.evidence} />}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning boundary partially overlaps the selected CDP. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
+          {tab === 'Evidence' && <section className="insight-section evidence-tab"><SectionHeading detail="Original records">Evidence & Sources</SectionHeading><p className="body-muted">Inspect the source behind each map metric.</p>{selected && <EvidenceList items={selected.evidence} />}<article className="document-source"><Icon name="book" /><h3>Silver Spring Downtown & Adjacent Communities Plan</h3><span className="source-date">Approved & adopted · June 2022</span><p>Housing preservation · printed page 92 · PDF page 104.</p><p>The planning document has its own boundary. This is regional context, not a claim that it applies to every selected location. Recommendations do not establish current conditions.</p><a className="source-link" href={planUrl} target="_blank" rel="noreferrer">Open original document <Icon name="external" /></a></article><button className="secondary full-width" disabled={!selected} onClick={exportData}><Icon name="download" />Download area evidence</button></section>}
           {tab === 'Segmentation' && <section className="insight-section"><SectionHeading detail="Preview">Community Overlap</SectionHeading><div className="tab-hero"><Icon name="overlap" /><h3>Find the common ground.</h3><p>Explore how demographic and economic characteristics overlap across communities.</p></div><div className="criteria-card"><span>COHORT</span><strong>Age 50+ share above {cohort}%</strong><span>ECONOMIC</span><strong>Household income below ${income},000</strong></div><p className="body-muted">Your comparison is ready. Matched areas and correlation results will appear here when these datasets are connected.</p><div className="info-note"><Icon name="info" /><span>Whole Census areas are the unit of comparison. Association does not establish causation.</span></div></section>}
-          {tab === 'Ask CivicLens' && <section className="insight-section"><SectionHeading detail="Preview">Community Research</SectionHeading><div className="tab-hero"><Icon name="sparkles" /><h3>Ask your community.</h3><p>Planning documents and public data, in one conversation.</p></div>{submitted ? <><div className="user-question">{submitted}</div><div className="research-response"><span className="tag">Workspace preview</span><p>Your question is ready for the research workflow. Live answers will appear here once this interface is connected.</p><button className="text-button" onClick={() => openTab('Evidence')}>Explore the available evidence <Icon name="arrow" /></button></div></> : <><p className="body-muted">Choose a starting point, or ask your own question below the map.</p>{prompts.map(prompt => <button className="prompt-card" key={prompt} onClick={() => { setQuestion(prompt); setSubmitted(prompt); }}>{prompt}<Icon name="arrow" /></button>)}</>}</section>}
+          {tab === 'Ask CivicLens' && <section className="insight-section"><SectionHeading detail="Source-linked">Community Research</SectionHeading><div className="tab-hero"><Icon name="sparkles" /><h3>Ask your community.</h3><p>Planning documents and public data, in one conversation.</p></div>
+            {submitted && <div className="user-question">{submitted}</div>}
+            {busy && <p role="status">Retrieving grounded evidence…</p>}
+            {queryError && <p role="alert">{queryError}</p>}
+            {answer && <section className="research-response" aria-label="Answer" aria-live="polite">
+              <h3>{answer.mode === 'llm' ? 'AI explanation' : answer.mode === 'facts' ? 'Cited data answer' : answer.mode === 'retrieval' ? 'Retrieved passages' : 'Available evidence'}</h3>
+              {answer.mode === 'llm' && answer.claims?.length ? answer.claims.map((claim, i) => <div key={i}><p>{claim.text}</p><small>Sources: {claim.evidence_ids.map((id, j) => <span key={id}>{j > 0 && ', '}<a href={`#evidence-${id}`}>{answer.evidence_ids.indexOf(id) + 1}</a></span>)}</small></div>) : <p className="answer">{answer.summary}</p>}
+              <EvidenceList items={answer.evidence} />
+              {answer.limitations?.length > 0 && <ul className="limitations">{answer.limitations.map(item => <li key={item}>{item}</li>)}</ul>}
+            </section>}
+            {!submitted && <p className="body-muted">Choose a starting point, then submit your question below the map.</p>}
+            {prompts.map(prompt => <button className="prompt-card" key={prompt} onClick={() => { setQuestion(prompt); questionRef.current?.focus(); }}>{prompt}<Icon name="arrow" /></button>)}
+          </section>}
         </div>
         <footer className="application-footer"><div className="application-card"><div className="application-label"><span><Icon name="store" />Extensible Application</span><Preview /></div><h3>Launch Business Planning Module</h3><p>Explore commercial site viability with community context and neighborhood evidence.</p><button className="primary full-width" onClick={() => { setBusiness(true); setSiteSaved(false); }}>Evaluate Site Viability<Icon name="arrow" /></button></div></footer>
       </aside>
@@ -183,6 +211,6 @@ export default function App() {
       const first = nodes[0], last = nodes[nodes.length - 1];
       if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
-    }}><button ref={closeRef} className="icon-button modal-close" aria-label="Close dialog" onClick={() => { setMethodology(false); setBusiness(false); }}><Icon name="close" /></button><span className="eyebrow">CivicLens · Silver Spring Pilot</span><h2 id="modal-title">{methodology ? 'Sources you can inspect.' : 'Explore your next location.'}</h2>{methodology ? <><p>The map uses the existing geographic dataset and interactive Leaflet engine. Population and housing counts come from the 2020 Census; evidence is available for every selected area.</p><div className="info-note"><Icon name="info" /><span>Income, age and tenure charts are illustrative design previews. Research, commercial layers, and site analysis are not yet connected.</span></div><p>Silver Spring CDP totals do not describe Fenton Village alone. Planning documents also have their own geographic boundaries and dates.</p><button className="primary" onClick={() => { setMethodology(false); openTab('Evidence'); }}>Inspect evidence<Icon name="arrow" /></button></> : <><p>Build a site brief using the community you’re exploring.</p><label className="field-label" htmlFor="site">Street or location</label><input id="site" value={site} onChange={e => { setSite(e.target.value); setSiteSaved(false); }} /><label className="field-label" htmlFor="site-type">Business type</label><select id="site-type" value={siteType} onChange={e => { setSiteType(e.target.value); setSiteSaved(false); }}><option>Café & bakery</option><option>Neighborhood retail</option><option>Professional services</option></select><button className="primary full-width" disabled={!site.trim()} onClick={() => setSiteSaved(true)}>Prepare site brief<Icon name="arrow" /></button>{siteSaved && <div className="info-note" role="status"><Icon name="check" /><span>Brief prepared for {siteType.toLowerCase()} on {site}. This preview stays in your current session; viability analysis will be available after data integration.</span></div>}</>}</section></div>}
+    }}><button ref={closeRef} className="icon-button modal-close" aria-label="Close dialog" onClick={() => { setMethodology(false); setBusiness(false); }}><Icon name="close" /></button><span className="eyebrow">CivicLens · Silver Spring Pilot</span><h2 id="modal-title">{methodology ? 'Sources you can inspect.' : 'Explore your next location.'}</h2>{methodology ? <><p>The map uses the existing geographic dataset and interactive Leaflet engine. Population and housing counts come from the 2020 Census; evidence is available for every selected area.</p><div className="info-note"><Icon name="info" /><span>Income, age and tenure charts are illustrative design previews. Commercial layers and site analysis are not yet connected.</span></div><p>Silver Spring CDP totals do not describe Fenton Village alone. Planning documents also have their own geographic boundaries and dates.</p><button className="primary" onClick={() => { setMethodology(false); openTab('Evidence'); }}>Inspect evidence<Icon name="arrow" /></button></> : <><p>Build a site brief using the community you’re exploring.</p><label className="field-label" htmlFor="site">Street or location</label><input id="site" value={site} onChange={e => { setSite(e.target.value); setSiteSaved(false); }} /><label className="field-label" htmlFor="site-type">Business type</label><select id="site-type" value={siteType} onChange={e => { setSiteType(e.target.value); setSiteSaved(false); }}><option>Café & bakery</option><option>Neighborhood retail</option><option>Professional services</option></select><button className="primary full-width" disabled={!site.trim()} onClick={() => setSiteSaved(true)}>Prepare site brief<Icon name="arrow" /></button>{siteSaved && <div className="info-note" role="status"><Icon name="check" /><span>Brief prepared for {siteType.toLowerCase()} on {site}. This preview stays in your current session; viability analysis will be available after data integration.</span></div>}</>}</section></div>}
   </div>;
 }

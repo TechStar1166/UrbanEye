@@ -11,5 +11,26 @@
     "population": "POP100",
     "housing_units": "HU100"
   },
-  "transform": "scripts/prepare_data.py; no boundary simplification; negative counts become null"
+  "transform": "scripts/prepare_data.py; no boundary simplification; negative counts become null",
+  "fenton_village_block_groups": {
+    "dataset": "U.S. Census Bureau \u2014 2020 Decennial Census (PL 94-171)",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/8/query?where=GEOID+IN+%28%27240317025011%27%2C+%27240317025021%27%29&outFields=*&outSR=4326&f=geojson",
+    "data_date": "2020-04-01",
+    "boundary_vintage": "Census 2020",
+    "source_name": "U.S. Census Bureau TIGERweb Census 2020",
+    "layer": "Census Block Groups",
+    "layer_id": 8,
+    "geoids": [
+      "240317025011",
+      "240317025021"
+    ],
+    "area_name": "Fenton Village",
+    "state": "Maryland",
+    "county": "Montgomery County",
+    "downloaded_at": "2026-09-19",
+    "crs": "EPSG:4326",
+    "raw_sha256": "798ff2d8874217abc59fc8e0b6060899b590cfdb2ccaae8d41cfd76b27bdeeb6",
+    "geography_scope": "Whole 2020 block groups covering the Fenton Village District; counts describe each block group, not the district boundary",
+    "contains_cdp_overlap": "These block groups lie inside the Silver Spring CDP polygon. Never add their counts to the CDP totals."
+  }
 }
