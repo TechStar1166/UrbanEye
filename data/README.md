@@ -53,4 +53,3 @@ groups, for the storefront layer and competitor context. See
 - Limits: volunteer-mapped, incomplete, possibly stale, inconsistently categorized, and not an
   official business registry. Counts describe mapped features, not all businesses, and do not
   correspond to the challenge brief's 240+ figure (different boundary and source).
-

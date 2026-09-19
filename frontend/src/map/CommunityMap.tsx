@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import L from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
 import type { Areas, Storefront } from '../services/api';
 import { groupColor, groupOf, nearbySame, prettyCategory } from '../lib/storefronts';
+import { scalesByType } from './scale';
 import 'leaflet/dist/leaflet.css';
 
 type StyleFeature = { properties?: { geo_id?: string; geography_type?: string; metrics?: Record<string, number | null> } } | undefined;
@@ -21,9 +22,9 @@ function popupFor(item: Storefront, all: Storefront[]): HTMLElement {
   return root;
 }
 
-export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [] }: {
+export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.75, resetKey = 0, storefronts = [], highlightIds = [] }: {
   areas: Areas; metric: string; selectedId?: string; onSelect: (id: string) => void;
-  opacity?: number; resetKey?: number; storefronts?: Storefront[];
+  opacity?: number; resetKey?: number; storefronts?: Storefront[]; highlightIds?: string[];
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
@@ -33,15 +34,20 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   const select = useRef(onSelect);
   select.current = onSelect;
 
+  const scales = useMemo(() => scalesByType(areas.features, metric), [areas, metric]);
+
   // The style depends on props but is applied in place; shapes are never rebuilt for it.
   const styleFor = (feature: StyleFeature): L.PathOptions => {
-    const hasData = !!metric && feature?.properties?.metrics?.[metric] != null;
+    const value = metric ? feature?.properties?.metrics?.[metric] : null;
+    const hasData = value != null;
+    const scale = scales.get(feature?.properties?.geography_type ?? '');
+    const isHighlighted = highlightIds.includes(feature?.properties?.geo_id ?? '');
     const isSelected = feature?.properties?.geo_id === selectedId;
     const isFiner = feature?.properties?.geography_type === 'block_group';
     return {
-      color: isSelected ? '#006948' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
-      weight: isSelected ? 5 : (isFiner ? 2.5 : 3),
-      fillOpacity: hasData ? opacity * (isFiner ? 0.45 : 0.25) : 0.05,
+      color: isSelected ? '#006948' : isHighlighted ? '#c2410c' : (metric === 'housing_units' ? '#8f4bb8' : '#087e8b'),
+      weight: isSelected ? 5 : isHighlighted ? 4 : (isFiner ? 2.5 : 3),
+      fillOpacity: hasData ? opacity * (scale?.comparative ? scale.opacity(value) : (isFiner ? 0.45 : 0.25)) : 0.05,
       fillColor: metric === 'housing_units' ? '#8f4bb8' : '#087e8b',
       dashArray: hasData ? '' : '5, 5',
     };
@@ -93,7 +99,7 @@ export function CommunityMap({ areas, metric, selectedId, onSelect, opacity = 0.
   }, [areas]);
 
   // Selection, metric and opacity only restyle the existing shapes.
-  useEffect(() => { polygons.current?.setStyle(feature => style.current(feature as StyleFeature)); }, [metric, selectedId, opacity, areas]);
+  useEffect(() => { polygons.current?.setStyle(feature => style.current(feature as StyleFeature)); }, [metric, selectedId, opacity, areas, highlightIds]);
 
   // Recenter on request (not on first render).
   const lastReset = useRef(resetKey);

@@ -139,6 +139,13 @@
 | E5 | Business analysis layer | All |
 | E6 | UI polish pass | Jackson |
 
+> **Status (Jackson, PR #7 into `test`):** E1 comparative fill scale and E4 segmentation
+> controls with a "high in both layers" outline are implemented; see
+> [plans/segmentation-and-scale.md](plans/segmentation-and-scale.md). They are verified only
+> against mocked multi-area data. The committed dataset had 2 block groups, below the
+> 3-area minimum, so the panel shows its "not enough comparable areas" state until more
+> block groups (and a rate metric such as median income, E2) land. E6 not started.
+
 ---
 
 ## Key Constraints (Do Not Violate)

@@ -330,3 +330,14 @@ td small { display: block; font: 8px var(--mono); color: var(--muted); margin-to
 .store-bars b { text-align: right; }
 .store-bars .bar-track { height: 8px; background: #e3ebe6; border-radius: 4px; overflow: hidden; }
 .store-bars .bar-track i { display: block; height: 100%; border-radius: 4px; }
+
+.map-actions { display: flex; align-items: center; gap: 8px; }
+.data-coverage ul { font-size: 12px; line-height: 1.5; padding-left: 18px; margin: 6px 0 10px; }
+.legend-swatch.highlight { background: #c2410c22; border: 2px solid #c2410c; }
+.segmentation { margin-top: 18px; padding-top: 14px; border-top: 1px solid #c9d6cd; }
+.segmentation h3 { margin: 0 0 8px; }
+.segmentation select { width: 100%; }
+.segmentation .check { display: flex; gap: 8px; align-items: center; font-weight: 400; margin: 10px 0; font-size: 12px; }
+.segmentation .stat { margin: 10px 0 4px; }
+.segmentation table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.segmentation th, .segmentation td { text-align: left; padding: 5px 6px; border-bottom: 1px solid #c9d6cd; }
