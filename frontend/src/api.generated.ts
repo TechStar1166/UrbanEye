@@ -293,6 +293,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/evaluate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Evaluate
+         * @description Business site evaluation: LLM-generated strengths/concerns grounded in public evidence.
+         */
+        post: operations["evaluate_evaluate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -561,6 +581,68 @@ export interface components {
             relationship: "partial_overlap" | "broader_context";
             /** Note */
             note: string;
+        };
+        /**
+         * EvaluateFinding
+         * @description A single cited finding from the business-site evaluation.
+         */
+        EvaluateFinding: {
+            /** Text */
+            text: string;
+            /** Evidence Ids */
+            evidence_ids: string[];
+        };
+        /**
+         * EvaluateRequest
+         * @description Business site evaluation request. business_type is a short user-supplied label.
+         */
+        EvaluateRequest: {
+            /** Geo Id */
+            geo_id: string;
+            /**
+             * Business Type
+             * @description Type of business being considered, e.g. 'coffee shop'.
+             */
+            business_type: string;
+        };
+        /**
+         * EvaluateResponse
+         * @description LLM-powered business site brief. Every claim cites supplied evidence.
+         */
+        EvaluateResponse: {
+            /**
+             * Schema Version
+             * @default 1.0
+             * @constant
+             */
+            schema_version: "1.0";
+            /** Geo Id */
+            geo_id: string;
+            /** Area Name */
+            area_name: string;
+            /** Business Type */
+            business_type: string;
+            /**
+             * Mode
+             * @enum {string}
+             */
+            mode: "evaluated" | "insufficient_evidence" | "llm_unavailable";
+            /** Summary */
+            summary: string;
+            /** Strengths */
+            strengths?: components["schemas"]["EvaluateFinding"][];
+            /** Concerns */
+            concerns?: components["schemas"]["EvaluateFinding"][];
+            /** Customer Context */
+            customer_context?: string | null;
+            /** Competition Context */
+            competition_context?: string | null;
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Evidence */
+            evidence: components["schemas"]["Evidence"][];
+            /** Limitations */
+            limitations: string[];
         };
         /** Evidence */
         Evidence: {
@@ -1353,6 +1435,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SegmentResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    evaluate_evaluate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EvaluateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvaluateResponse"];
                 };
             };
             /** @description Validation Error */

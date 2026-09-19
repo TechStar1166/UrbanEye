@@ -218,6 +218,19 @@ select { width: 100%; border: 1px solid #c4d0c8; background: white; border-radiu
 .application-card p { font-size: 12px; color: #66736b; line-height: 1.5; margin-bottom: 10px; }
 .application-card .primary { padding: 7px; font-size: 12px; }
 .body-muted { font-size: 12px; color: #6d7a72; line-height: 1.8; margin: 12px 0; }
+.evaluate-form { margin-top: 16px; }
+.evaluate-form .eyebrow { display: block; font: 12px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+.evaluate-input-row { display: flex; gap: 8px; align-items: center; }
+.evaluate-input { flex: 1; padding: 8px 10px; border: 1px solid #c4d4ca; border-radius: 4px; font: 13px var(--body); background: white; color: var(--text); outline: none; }
+.evaluate-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,105,72,.15); }
+.evaluate-input:disabled { opacity: 0.6; }
+.eval-error { font-size: 12px; color: #b94a2c; margin: 8px 0; display: flex; gap: 8px; align-items: center; }
+.eval-result { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.eval-summary { margin-top: 0; }
+.eval-heading { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 12px 0 5px; }
+.eval-list { margin: 0; padding-left: 18px; }
+.eval-list li { font-size: 12px; color: var(--text); line-height: 1.7; margin-bottom: 4px; }
+.eval-disclaimer { margin-top: 12px; color: #888; }
 .tab-hero { padding: 24px 6px; border-bottom: 1px solid var(--line); }
 .tab-hero > .icon { width: 30px; height: 30px; color: var(--primary); margin-bottom: 18px; }
 .tab-hero h3 { font: 600 22px var(--heading); letter-spacing: -.6px; margin-bottom: 10px; }

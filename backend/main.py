@@ -8,8 +8,8 @@ from backend.data import LAYERS, ROOT, load_areas, load_chunks
 from backend import community as community_data
 from backend.schemas import (
     Answer, Area, Areas, AskRequest, BusinessResponse, ChangeResponse, CommunityCatalog,
-    CompareResponse, HistoryResponse, Layer, OverlayResponse, SegmentRequest, SegmentResponse,
-    DataPoint, TransitResponse,
+    CompareResponse, EvaluateRequest, EvaluateResponse, HistoryResponse, Layer, OverlayResponse,
+    SegmentRequest, SegmentResponse, DataPoint, TransitResponse,
 )
 from backend.data import LAYERS, ROOT, load_areas, load_chunks, load_storefronts
 from backend.schemas import Answer, Area, Areas, AskRequest, Layer, SegmentRequest, SegmentResponse, DataPoint, Storefronts
@@ -167,3 +167,13 @@ def segment(request: SegmentRequest):
         explanation=explanation,
         data_points=data_points
     )
+
+
+@app.post("/evaluate", response_model=EvaluateResponse)
+async def evaluate(request: EvaluateRequest, model: Gemini = Depends(get_gemini)):
+    """Business site evaluation: LLM-generated strengths/concerns grounded in public evidence."""
+    area = get_area(request.geo_id)
+    # Pull relevant planning passages using the business type as the query
+    query = f"What does the plan say relevant to a {request.business_type}?"
+    retrieved = document_index.retrieve(query, request.geo_id)
+    return await model.evaluate(request.geo_id, request.business_type, area, retrieved)

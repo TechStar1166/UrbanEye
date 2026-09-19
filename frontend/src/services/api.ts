@@ -11,6 +11,7 @@ export type SegmentResponse = components['schemas']['SegmentResponse'];
 export type OverlayResponse = components['schemas']['OverlayResponse'];
 export type TransitResponse = components['schemas']['TransitResponse'];
 export type BusinessResponse = components['schemas']['BusinessResponse'];
+export type EvaluateResponse = components['schemas']['EvaluateResponse'];
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`/api${path}`, { ...options, signal: AbortSignal.timeout(15000) });
@@ -37,4 +38,7 @@ export const api = {
   overlays: () => request<OverlayResponse>('/overlays'),
   transit: () => request<TransitResponse>('/transit'),
   businesses: (geo_id: string) => request<BusinessResponse>(`/areas/${encodeURIComponent(geo_id)}/businesses`),
+  evaluate: (geo_id: string, business_type: string) => request<EvaluateResponse>('/evaluate', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ geo_id, business_type }),
+  }),
 };
