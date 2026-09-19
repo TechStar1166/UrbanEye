@@ -1,6 +1,6 @@
 # UrbanEye — Progress Tracker
 
-> Last updated: 2026-09-18 | Branching: `ag/dev` → PR → `nt/dev` → `main`
+> Last updated: 2026-09-19 | Branching: `ag/dev` → PR → `test` → `nt/dev` → `main`
 > 
 > Track all task status here. Statuses: `[ ]` TODO · `[/]` In Progress · `[x]` Done · `[-]` Blocked
 
@@ -103,7 +103,7 @@
 | D5 | Track checkpoint completion in `docs/CHECKPOINT.md` | `docs/CHECKPOINT.md` | `[x]` |
 | D6 | Once ≥2 comparable areas exist: implement two-variable thresholds in `backend/analysis/` | `backend/analysis/` | `[x]` |
 | D7 | Implement Pearson correlation with undefined/insufficient-data handling; association-only explanation | `backend/analysis/` | `[x]` |
-| D8 | Coordinate segmentation UI controls with B | — | `[ ]` |
+| D8 | Coordinate segmentation UI controls with B | `frontend/src/segmentation/SegmentationPanel.tsx` | `[x]` |
 
 ---
 
@@ -128,23 +128,46 @@
 
 ## Sprint 3 — Extensions (Post-Checkpoint)
 
-> Do not start until `checkpoint-demo` tag is created and all Sprint 2 checks pass.
+> Sprint 3 is **in progress** (`test` branch → PRs merged). `checkpoint-demo` tag exists.
 
-| # | Task | Owner |
+| # | Task | Owner | Status |
+| --- | --- | --- | --- |
+| E1 | Add comparative choropleth color scales across block groups | Jackson | `[x]` |
+| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan | `[ ]` |
+| E3 | Implement `/segment` endpoint with Pearson correlation | Amrit | `[x]` |
+| E4 | Add segmentation controls to frontend | Jackson | `[x]` |
+| E4b | Storefront layer (OSM businesses, category filters, area summary) | Jackson | `[x]` |
+| E4c | Food & drink places layer (`/places` API + map dots) | Jackson | `[x]` |
+| E4d | Transparency slider, URL state persistence, link-copy sharing | Jackson | `[x]` |
+| E4e | Data view with CSV export and area-evidence download | Jackson | `[x]` |
+| E4f | Answer history tab with session replay | Jackson | `[x]` |
+| E4g | Sources & methodology page (`/#sources` route) | Jackson | `[x]` |
+| E5 | Business analysis layer | All | `[/]` |
+| E6 | UI polish pass | Jackson | `[/]` |
+
+> **Sprint 3 Notes:**
+> - E1/E4: Verified against current 3-area dataset (Silver Spring CDP + 2 block groups). Pearson returns `null` until a rate metric (E2) lands — panel shows its "not enough comparable areas" state. Map highlights areas high in both layers (≥60th percentile, orange outline) without needing a full correlation.
+> - E4b–g: Significantly expanded beyond original scope. Storefronts, places, sharing, export, history, and sources page are all live in `test`.
+> - E5: Business module plan exists at `docs/plans/business-module.md`; implementation not started.
+> - E6: UI is heavily polished (Esri basemap, Fenton pin, mobile nav, glassmorphism panels) but not formally signed off.
+> - E2 (**critical blocker for Pearson**): Pujan must add a rate metric (e.g., `median_household_income`) to `areas.geojson` for all 3 areas before the correlation coefficient will be non-null.
+
+---
+
+## Sprint 3 — Checkpoint Gate
+
+> Open only after all E tasks are merged to `nt/dev`.
+
+| Check | Owner | Status |
 | --- | --- | --- |
-| E1 | Add comparative color scales across multiple areas | Jackson |
-| E2 | Add third+ data layer (e.g., median income, race/ethnicity) | Pujan |
-| E3 | Implement `/segment` endpoint with Pearson correlation | Amrit |
-| E4 | Add segmentation controls to frontend | Jackson |
-| E5 | Business analysis layer | All |
-| E6 | UI polish pass | Jackson |
-
-> **Status (Jackson, PR #7 into `test`):** E1 comparative fill scale and E4 segmentation
-> controls with a "high in both layers" outline are implemented; see
-> [plans/segmentation-and-scale.md](plans/segmentation-and-scale.md). They are verified only
-> against mocked multi-area data. The committed dataset had 2 block groups, below the
-> 3-area minimum, so the panel shows its "not enough comparable areas" state until more
-> block groups (and a rate metric such as median income, E2) land. E6 not started.
+| E1 choropleth renders comparatively on block groups | Jackson | `[x]` |
+| E3 `/segment` returns non-null `r` when ≥3 areas have both metrics | Amrit (verify after E2) | `[ ]` |
+| E4 segmentation panel live in UI with table + highlight | Jackson | `[x]` |
+| Storefronts layer and food & drink places functional | Jackson | `[x]` |
+| Third rate metric (e.g., median income) added for all areas | Pujan | `[ ]` |
+| Business analysis narrative written | All | `[ ]` |
+| Playwright smoke test passes on updated UI | Amrit | `[ ]` |
+| `sprint3-complete` tag created | Amrit | `[ ]` |
 
 ---
 
