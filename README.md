@@ -1,14 +1,62 @@
 # UrbanEye
 
-Evidence-first community intelligence for Silver Spring, Maryland. This repository
-is the shared starter for the [MVP plan](BayHacks_Full_MVP_Plan.md).
+Community intelligence for Silver Spring, Maryland, with Fenton Village as the focus. Every number on
+screen links to its source. Built at Bay Hacks 2026 for the UX University Challenge.
 
-## Clone and run the same starter
+Public information about a neighborhood is scattered across Census tables, county planning
+documents and business listings, on different boundaries and dates. UrbanEye puts it on one
+interactive map and shows the source, date and limits next to every fact. When an AI model is used,
+it may only explain evidence the platform retrieved, and it must cite it.
 
-Prerequisites: Git and Docker with Compose v2. No API keys or data downloads are
-needed at runtime; the real Census snapshot is committed. Image/dependency pulls
-need internet on the first build. Basemap tiles are online; polygons and facts still
-work when tiles are unavailable.
+## What it does
+
+- Real Census geography: the 2020 Census Silver Spring area and its 80 block groups (population,
+  housing units, population density).
+- Community profile: American Community Survey 5-year estimates (2020 to 2024) for median household income,
+  share of residents 50 and older, average household size, renter-occupied share. Values with a large
+  margin of error are flagged "low reliability".
+- Cited answers: ask about a selected area. BM25 retrieval over the 2022 Silver Spring plan finds
+  passages, and Gemini 3.6 Flash (optional) explains only those, with page-level citations. If the
+  evidence does not support a question, it says so instead of guessing.
+- Real businesses: OpenStreetMap-mapped storefronts and food and drink places around the Fenton
+  study area, labeled as volunteer-mapped data, not an official registry.
+- Compare layers: compare any two Census layers across block groups, with sample size and a
+  reminder that association is not causation.
+- Business site brief and address search: community context for an area (not a recommendation),
+  and a street address that pins the map and selects its Census block group. An experimental AI site
+  evaluation is included; it is grounded in supplied evidence and is not a professional or investment
+  recommendation.
+- Transparency: a data-coverage card, a Data Sources and Methodology page, shareable links, and CSV
+  export with sources.
+
+Every dataset is a committed snapshot with a provenance manifest (source URL, retrieval time, SHA-256,
+transformation, limitations). The app never downloads data at startup.
+
+Limits: counts are for Census units, not for Fenton Village alone. Survey estimates
+carry a margin of error. OpenStreetMap data is incomplete. Rent, foot traffic and revenue are not in
+the data. The planning document has its own boundary. See [data provenance](data/README.md) and
+[document provenance](documents/README.md).
+
+## Screenshots
+
+![Fenton Village on the map](docs/screenshots/01-fenton-village-map.png)
+
+![A block group with Census counts and the ACS community profile](docs/screenshots/02-block-group-profile.png)
+
+![Business site brief: community context and mapped storefronts](docs/screenshots/03-business-site-brief.png)
+
+## Data credits
+
+U.S. Census Bureau 2020 Decennial Census and American Community Survey 2020 to 2024 (public domain).
+Silver Spring Downtown and Adjacent Communities Plan, Montgomery Planning (2022). Businesses, food and
+drink places and address search: (c) OpenStreetMap contributors, ODbL 1.0 (address search sends the
+typed text to OpenStreetMap's Nominatim only when the user asks).
+
+## Run it
+
+Prerequisites: Git and Docker with Compose v2. No API key or data download is needed at runtime.
+The first build needs internet for image and dependency pulls; basemap tiles are online, and polygons
+and facts still work when tiles are unavailable.
 
 ```bash
 git clone https://github.com/TechStar1166/UrbanEye.git
@@ -16,42 +64,23 @@ cd UrbanEye
 docker compose up --build
 ```
 
-Open **http://localhost:5173**. API docs: **http://localhost:8000/docs**.
-Stop with `docker compose down`. These containers run the development starter;
-they are not a production deployment.
+Open **http://localhost:5173**. API docs: **http://localhost:8000/docs**. Stop with
+`docker compose down`. These containers run the development setup, not a production deployment.
 
 If your Compose installation panics inside `doBuildBake`, run
-`COMPOSE_BAKE=false docker compose up --build` (PowerShell: set
-`$env:COMPOSE_BAKE='false'` before the Compose command). This works around an issue
-in the host's Compose builder; the native setup below is another option.
+`COMPOSE_BAKE=false docker compose up --build` (PowerShell: set `$env:COMPOSE_BAKE='false'` first).
 
-Repository members can also use `git@github.com:TechStar1166/UrbanEye.git`.
-For a private repository, its owner must give each teammate access before cloning.
-After access is granted, every teammate should run the smoke check below and record
-their result in the team handoff. Do not commit secrets or local `.env` files.
+## Try it
 
-## First integrated demo
+1. Click **Zoom to Fenton Village**, then a block group. Read the Census counts and the community
+   profile, and open a source link.
+2. Type an address such as `7720 Blair Road` in the search box and press Enter.
+3. Ask **What does the Silver Spring plan say about affordable housing?** and open the cited page.
+4. Ask **Will population double next year?** and see it decline.
+5. Tick **Storefront Locations**, or open **Compare areas** and compare income with age 50+.
 
-1. Select **Population** and click the Silver Spring polygon (or use Select area).
-2. Inspect **81,015 people**, **35,150 housing units**, the source link and 2020 date.
-3. Ask **“What is the population?”** and inspect the returned evidence.
-4. Switch to **Housing units**; ask **“How many housing units are there?”**.
-5. Ask **“Will population double next year?”** and confirm insufficient evidence.
-
-These are official **2020 Census totals for Silver Spring CDP**, not Fenton Village
-statistics, present-day estimates, or ACS values. The map displays the complete CDP
-boundary. One area cannot support correlation or comparison. See [data provenance](data/README.md).
-
-The data → map → area → cited-answer path is implemented. You can also ask
-**“What do planning documents say about housing in this area?”** to retrieve
-reviewed passages from the approved 2022 Silver Spring plan. Evidence cards show
-the actual document, printed/PDF page, and the difference between its planning
-boundary and the selected CDP. See [document provenance](documents/README.md).
-
-Without a model key, results are deterministic facts or retrieved excerpts. With
-Gemini configured, document questions receive a cited **Gemini 3.6 Flash** explanation.
-Three housing passages are indexed, not the entire plan. Finer Fenton Village
-geography and a reviewed live AI demo are still required for the full checkpoint.
+Without a model key you get deterministic facts and the retrieved, cited passages. With Gemini
+configured, document questions also get a cited explanation.
 
 ## Enable Gemini 3.6 Flash
 
@@ -113,12 +142,13 @@ CORS configuration or hardcoded browser backend address to keep in sync.
 | `frontend/src/map`, `evidence`, `services` | Map, source display, typed API client |
 | `backend/main.py`, `schemas.py` | FastAPI routes and authoritative Pydantic contracts |
 | `backend/data.py`, `services.py` | Validated facts, evidence assembly, answer orchestration |
-| `backend/rag`, `backend/llm` | Geographic retrieval baseline; future model adapter boundary |
+| `backend/rag`, `backend/llm` | BM25 retrieval over the planning document; Gemini adapter for cited explanations |
 | `backend/analysis` | Segmentation/correlation workstream interface and constraints |
 | `data/raw`, `data/processed` | Cached official source and normalized GeoJSON |
 | `documents/raw`, `documents/processed` | Public documents and source-bearing chunks |
 | `shared/openapi.json` | Generated API contract; frontend types derive from it |
 | `scripts`, `tests` | Reproducible normalization, contract export and integration checks |
+| `docs` | Feature plans (`docs/plans`), demo script, progress tracker, original MVP plan (`docs/planning`) |
 
 The [shared data contract](shared/README.md) explains how these pieces connect.
 
@@ -143,17 +173,13 @@ npm run test:e2e
 ```
 
 Linux machines missing browser libraries can use `npx playwright install --with-deps chromium`.
-The browser tests exercise the actual API, not mocked success responses. CI checks
+Most browser tests run against the actual API; third-party services (map tiles, address search) are mocked. CI checks
 normalized data and generated types for drift and runs the same demo path.
 
-## Parallel team work
+## Contributing
 
-Start from the published starter and use [the four workstream briefs](docs/TEAM_HANDOFF.md).
-Each person opens a small PR as soon as one increment integrates. The integration
-owner runs the shared demo after each merge. Agree changes to `schemas.py` together,
-regenerate types in the same PR, and retain evidence and geographic scope end to end.
-
-The next checkpoint is **finer real geography + a grounded AI response using the
-indexed public document**. Once all [checkpoint checks](docs/CHECKPOINT.md) pass, preserve it with
-`checkpoint-demo`. More layers and analysis follow; business analysis and UI polish
-stay behind that gate.
+Work happens on branches cut from `test` and merged by pull request into `test`. Agree changes to
+`schemas.py` together and regenerate the contract and types in the same PR. Write a short plan in
+`docs/plans/` before a new feature and update the docs with each change. Task history is in
+[docs/PROGRESS_TRACKER.md](docs/PROGRESS_TRACKER.md) and the original workstream briefs in
+[docs/TEAM_HANDOFF.md](docs/TEAM_HANDOFF.md).
